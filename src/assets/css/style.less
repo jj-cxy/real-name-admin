@@ -37,6 +37,17 @@ body {
   color: #fff;
 }
 
+.ant-table-scroll {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.ant-table-pagination.ant-pagination {
+  margin-bottom: 0
+}
+
 @media (max-width: 767px) {
   .ant-modal {
     width: auto !important;
@@ -116,14 +127,6 @@ li {
 
 .ant-menu-sub .ant-menu-item i {
   display: none;
-}
-
-.ant-table-scroll {
-  overflow-x: auto;
-}
-
-.ant-table-pagination.ant-pagination {
-  margin-bottom: 0
 }
 
 .ant-pro-multi-tab .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
@@ -455,6 +458,10 @@ li {
 //  详情表格
 .detail-table {
   margin: 8px 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
 }
 
 .detail-table table {
@@ -467,17 +474,13 @@ li {
   padding: 8px;
   border-bottom: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
-  
+
 }
 
 .detail-table table tr .tit {
   background-color: #fafafa;
   text-align: center;
   width: 150px;
-}
-
-.ant-table-small>.ant-table-content>.ant-table-body>table>.ant-table-thead>tr>th {
-  background: #fafafa;
 }
 
 // 附件

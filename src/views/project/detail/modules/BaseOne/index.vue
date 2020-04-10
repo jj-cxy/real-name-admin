@@ -1,5 +1,5 @@
 <template>
-  <a-form :form="form" class="detail-form">
+  <a-form class="detail-form">
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目名称">
       <span>某某某有限公司</span>
     </a-form-item>
@@ -88,41 +88,16 @@
 </template>
 
 <script>
+import modalMixin from '@/components/Mixins/modal'
+import indexMixin from './modules/index'
+import viewer from '@/views/modules/viewer'
+
 export default {
   name: 'BaseOne',
-  components: {},
-  data() {
-    return {
-      labelCol: {
-        xl: {
-          span: 3
-        },
-        lg: {
-          span: 5
-        },
-        md: {
-          span: 24
-        }
-      },
-      wrapperCol: {
-        xl: {
-          span: 19
-        },
-
-        lg: {
-          span: 17
-        },
-        md: {
-          span: 24
-        }
-      }
-    }
-  },
-  computed: {},
-  watch: {},
-  methods: {},
-  created() {},
-  mounted() {}
+  mixins: [modalMixin, indexMixin],
+  components: {
+    viewer
+  }
 }
 </script>
 <style lang='scss' scoped>
