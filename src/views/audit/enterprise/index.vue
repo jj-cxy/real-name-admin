@@ -7,7 +7,7 @@
   >
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="15">
-        <a-form :form="form" class="detail-form">
+        <a-form :form="form" class="detail-form detail-left">
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="企业名称">
             <span>贵阳市金阳建设数据服务有限公司</span>
           </a-form-item>

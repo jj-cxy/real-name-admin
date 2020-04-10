@@ -62,6 +62,16 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           },
+          {
+            path: '/audit/project',
+            name: 'AuditProject',
+            component: () => import('@/views/audit/project/index'),
+            meta: {
+              title: '项目备案审核',
+              icon: 'build',
+              keepAlive: true
+            }
+          },
         ]
       },
 

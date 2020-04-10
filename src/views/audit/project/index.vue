@@ -2,22 +2,25 @@
   <a-card
     :body-style="{'padding': '12px 24px 24px'}"
     :bordered="false"
-    title="单位备案审核"
+    title="项目备案审核"
     :headStyle="{'textAlign':'center'}"
   >
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="15">
-        <a-form :form="form" class="detail-form">
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="企业名称">
-            <span>贵阳市金阳建设数据服务有限公司</span>
+        <a-form :form="form" class="detail-form detail-left">
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目名称">
+            <span>金朱西路站城市轨道交通综合体项目</span>
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="统一社会信用代码">
-            <span>91520115314263671W</span>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="关联单位信息">
+            <a-tabs defaultActiveKey="1" type="card" class="card-tabs" size="small">
+              <a-tab-pane tab="建设单位" key="1">
+                <TabCon />
+              </a-tab-pane>
+              <a-tab-pane tab="施工单位" key="2" forceRender>Content of Tab Pane 2</a-tab-pane>
+              <a-tab-pane tab="监理单位" key="3">Content of Tab Pane 3</a-tab-pane>
+            </a-tabs>
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="主要业务类型">
-            <span>监理（监理单位由质监站审核）</span>
-          </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="单位信息">
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目信息">
             <div class="detail-table">
               <table>
                 <tbody>
@@ -61,41 +64,49 @@
               </table>
             </div>
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="单位资质">
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="工资专户信息">
             <div class="detail-table">
               <table>
                 <tbody>
                   <tr>
-                    <td class="tit">资格类型</td>
-                    <td>工程监理</td>
-                    <td class="tit">专业类别</td>
-                    <td>工程监理</td>
+                    <td class="tit">专户帐号</td>
+                    <td>5435643654654654</td>
+                    <td class="tit">银行种类</td>
+                    <td>招商银行</td>
                   </tr>
                   <tr>
-                    <td class="tit">资格等级</td>
-                    <td>甲级</td>
-                    <td class="tit">证书编号</td>
-                    <td>452589458439</td>
+                    <td class="tit">专户帐号名称</td>
+                    <td>某某某专户</td>
+                    <td class="tit">账户余额</td>
+                    <td>812,343.24元</td>
                   </tr>
                   <tr>
-                    <td class="tit">首次批准日期</td>
-                    <td>2020-03-26</td>
-                    <td class="tit">取得方式</td>
-                    <td>升级</td>
-                  </tr>
-                  <tr>
-                    <td class="tit">资格状态</td>
+                    <td class="tit">开户行名称</td>
+                    <td>贵阳银行支行</td>
+                    <td class="tit">账户状态</td>
                     <td>已备案</td>
-                    <td class="tit"></td>
-                    <td></td>
                   </tr>
                   <tr>
-                    <td class="tit">批准资质资格内容</td>
-                    <td colspan="3">是</td>
+                    <td class="tit">所属银行编码</td>
+                    <td>5435643654654654</td>
+                    <td class="tit">每月发薪日期</td>
+                    <td>15号</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
+            <span>贵阳市金阳建设数据服务有限公司</span>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目简介">
+            <span>贵阳经济技术开发区建设管理局</span>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
+            <span>贵州省贵阳经济技术开发区场坝村三江口</span>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分配监督员">
+            <span>金朱西路站城市轨道交通综合体项目</span>
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
             <a-textarea :rows="3" v-decorator="['remark',validatorRules.must]" placeholder="..." />
@@ -122,12 +133,14 @@
 import modalMixin from '@/components/Mixins/modal'
 import indexMixin from './modules/index'
 import viewer from '@/views/modules/viewer'
+import TabCon from './modules/TabCon/index'
 
 export default {
   name: 'EnterpriseAudit',
   mixins: [modalMixin, indexMixin],
   components: {
-    viewer
+    viewer,
+    TabCon
   }
 }
 </script>
