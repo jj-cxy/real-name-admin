@@ -5,13 +5,18 @@
     title="项目备案审核"
     :headStyle="{'textAlign':'center'}"
   >
-    <a-row :gutter="24">
+    <a-row :gutter="15">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="15">
         <a-form :form="form" class="detail-form detail-left">
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目名称">
             <span>金朱西路站城市轨道交通综合体项目</span>
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="关联单位信息">
+          <a-form-item
+            :labelCol="labelCol"
+            :wrapperCol="wrapperCol"
+            label="关联单位信息"
+            style="margin-top: 8px"
+          >
             <a-tabs defaultActiveKey="1" type="card" class="card-tabs" size="small">
               <a-tab-pane tab="建设单位" key="1">
                 <TabCon />
@@ -103,7 +108,9 @@
             <span>贵阳经济技术开发区建设管理局</span>
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
-            <span>贵州省贵阳经济技术开发区场坝村三江口</span>
+            <div class="map-box">
+              <div id="allmap"></div>
+            </div>
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分配监督员">
             <span>金朱西路站城市轨道交通综合体项目</span>

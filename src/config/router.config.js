@@ -28,7 +28,7 @@ export const asyncRouterMap = [{
         children: [{
             path: '/workplace/index',
             name: 'index',
-            component: () => import('@/views/business/workbench/index'),
+            component: () => import('@/views/workplace/index'),
             meta: {
               title: '首页',
               keepAlive: false
