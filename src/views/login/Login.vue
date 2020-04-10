@@ -1,0 +1,308 @@
+<template>
+  <div class="main">
+    <div class="top">
+      <div class="header">
+        <!-- <img src="~@/assets/logo.png" class="logo" alt="logo" /> -->
+        <span class="title">贵阳市建筑工程从业人员 | 实名制管理系统</span>
+        <!-- <span class="title">贵阳市建筑工程从业人员</span> -->
+        <!-- <div class="childTitle">实名制管理系统</div> -->
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="user-layout-slogan">
+        <img src="/slogan.png" width="90%"/>
+      </div>
+      <a-form
+        id="formLogin"
+        class="user-layout-login"
+        ref="formLogin"
+        :form="form"
+        @submit="handleSubmit"
+      >
+        <h2>欢迎使用</h2>
+        <a-form-item>
+          <a-input
+            size="large"
+            type="text"
+            placeholder="用户名/手机号"
+            v-decorator="['username',validatorRules.username]"
+          >
+            <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
+          </a-input>
+        </a-form-item>
+
+        <a-form-item>
+          <a-input
+            size="large"
+            type="password"
+            autocomplete="false"
+            placeholder="登录密码"
+            v-decorator="['password',validatorRules.password]"
+          >
+            <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }" />
+          </a-input>
+        </a-form-item>
+
+        <a-row :gutter="12">
+          <a-col :span="14">
+            <a-form-item style="margin-bottom: 6px">
+              <a-input
+                v-decorator="['verifyCode',validatorRules.verifyCode]"
+                size="large"
+                type="text"
+                placeholder="验证码"
+              >
+                <a-icon slot="prefix" type="smile" :style="{ color: 'rgba(0,0,0,.25)' }" />
+              </a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="10">
+            <div class="captcha">
+              <img :src="captchaImg" alt />
+            </div>
+          </a-col>
+        </a-row>
+
+        <a-form-item>
+          <a-checkbox v-decorator="['rememberMe']">记住账号</a-checkbox>
+        </a-form-item>
+
+        <a-form-item style="margin-bottom: 10px">
+          <a-button
+            size="large"
+            type="primary"
+            htmlType="submit"
+            class="login-button"
+            :loading="state.loginBtn"
+            :disabled="state.loginBtn"
+          >登 录</a-button>
+        </a-form-item>
+
+        <a-form-item style="margin-bottom: 0">
+          <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">忘记密码</router-link>
+        </a-form-item>
+      </a-form>
+    </div>
+  </div>
+</template>
+
+<script>
+import md5 from 'md5'
+import { mapActions } from 'vuex'
+import { timeFix } from '@/utils/util'
+import { axios } from '@/utils/request'
+import { getImgCaptcha } from '@/api/login'
+
+export default {
+  data() {
+    return {
+      loginBtn: false,
+      form: this.$form.createForm(this),
+      validatorRules: {
+        username: { rules: [{ required: true, message: '请输入用户名或者手机号', validator: 'click' }] },
+        password: { rules: [{ required: true, message: '请输入密码', validator: 'click' }] },
+        verifyCode: { rule: [{ required: true, message: '请输入验证码' }] }
+      },
+      state: {
+        time: 60,
+        loginBtn: false
+      },
+      Urls: {
+        captchaUrl: '/auth/api/captcha/get'
+      },
+      captchaImg: '',
+      showImg: false
+    }
+  },
+  created() {
+    this.getCaptcha()
+
+    this.$nextTick(() => {
+      this.form.setFieldsValue({
+        username: localStorage.getItem('in-username') || ''
+      })
+    })
+  },
+  methods: {
+    ...mapActions(['Login', 'Logout']),
+    getCaptcha() {
+      getImgCaptcha().then(res => {
+        if (res.code == 0) {
+          this.captchaImg = res.data.image
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      })
+    },
+    handleSubmit(e) {
+      e.preventDefault()
+      const {
+        form: { validateFields },
+        state,
+        Login
+      } = this
+
+      state.loginBtn = true
+      validateFields((err, values) => {
+        if (!err) {
+          const loginParams = {
+            ...values
+          }
+          loginParams.scope = 'INSIDE'
+          loginParams.loginType = 'login'
+          Login(loginParams)
+            .then(res => {
+              if (values.rememberMe) {
+                localStorage.setItem('in-username', values.username)
+              } else {
+                localStorage.removeItem('in-username')
+              }
+              this.loginSuccess(res)
+            })
+            .catch(err => this.requestFailed(err))
+            .finally(() => {
+              state.loginBtn = false
+            })
+        } else {
+          setTimeout(() => {
+            state.loginBtn = false
+          }, 600)
+        }
+      })
+    },
+    requestFailed(err) {
+      this.$notification['error']({
+        message: '错误',
+        description: err.msg || '请求出现错误，请稍后再试',
+        duration: 4
+      })
+      this.getCaptcha()
+    },
+    loginSuccess(res) {
+      if (res.data.user.defaultPwd) {
+        this.$router.push('/account/set/base')
+      } else {
+        this.$router.push({ path: '/' })
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.wrapper {
+  display: flex;
+  width: 920px;
+  align-items: center;
+  padding: 48px 48px 24px 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  .user-layout-slogan {
+    padding: 24px 0 24px;
+  }
+}
+.top {
+  .header {
+    margin-bottom: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 74px;
+      vertical-align: top;
+      border-style: none;
+    }
+
+    .title {
+      font-size: 32px;
+      margin-left: 12px;
+      color: #fff;
+      font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      position: relative;
+    }
+
+    .childTitle {
+      font-size: 22px;
+    }
+  }
+
+  .desc {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+    margin-top: 12px;
+    margin-bottom: 30px;
+  }
+}
+
+canvas {
+  background: rgb(226, 225, 225);
+  opacity: 0.3;
+}
+
+.user-layout-login {
+  max-width: 420px;
+  min-width: 365px;
+  background-color: #fff;
+  border-radius: 8px;
+  .captcha {
+    width: 100%;
+    height: 40px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  h2 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .getCaptcha {
+    display: block;
+    width: 100%;
+    height: 40px;
+  }
+
+  .forge-password {
+    font-size: 14px;
+  }
+
+  button.login-button {
+    padding: 0 15px;
+    font-size: 16px;
+    height: 40px;
+    width: 100%;
+  }
+
+  .user-login-other {
+    text-align: left;
+    margin-top: 24px;
+    line-height: 22px;
+
+    .item-icon {
+      font-size: 24px;
+      color: rgba(0, 0, 0, 0.2);
+      margin-left: 16px;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+
+    .register {
+      float: right;
+    }
+  }
+}
+</style>
