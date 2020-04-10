@@ -88,17 +88,6 @@
       </a-card-grid>
     </a-card>
     <a-card
-      title="超期工单"
-      :headStyle="{marginBottom: 0}"
-      :bodyStyle="{padding: 0}"
-      style="margin-top: 24px"
-    >
-      <a href="#" slot="extra" @click="$router.push('/order/overdue')">查看更多</a>
-      <!-- 表格 -->
-      <overdue :paging="false"></overdue>
-    </a-card>
-
-    <a-card
       :bordered="false"
       title="通知通告"
       :headStyle="{marginBottom: 0}"
@@ -108,6 +97,16 @@
       <a href="javascript:;" slot="extra" @click="$router.push('/order/history')">查看更多</a>
       <!-- 表格 -->
       <history :paging="false"></history>
+    </a-card>
+    <a-card
+      title="超期工单"
+      :headStyle="{marginBottom: 0}"
+      :bodyStyle="{padding: 0}"
+      style="margin-top: 24px"
+    >
+      <a href="#" slot="extra" @click="$router.push('/order/overdue')">查看更多</a>
+      <!-- 表格 -->
+      <overdue :paging="false"></overdue>
     </a-card>
   </div>
 </template>
