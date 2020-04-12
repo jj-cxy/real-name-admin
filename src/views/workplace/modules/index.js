@@ -8,7 +8,20 @@ var indexMixin = {
       Urls: {
         noticeCountUrl: '/biz/oaTask/noticeCount'
       },
-      count: {}
+      count: {},
+      noticeData: [{
+          title: '武汉解封后第一个周末',
+        },
+        {
+          title: '印度5000节车厢改为隔离病房',
+        },
+        {
+          title: '鲍某明姐姐:弟弟和女孩非养父女',
+        },
+        {
+          title: '武汉的哥说最头疼的堵车成了幸福',
+        },
+      ]
     }
   },
   filters: {},

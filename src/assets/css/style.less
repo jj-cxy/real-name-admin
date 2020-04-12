@@ -181,39 +181,25 @@ li {
 }
 
 /*工作台*/
-.work-info {
-  width: 100%;
-  padding: 12px 24px;
-  background-color: #fff;
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e8e8e8;
-  position: relative;
-  cursor: pointer;
-}
-
-.work-info-item {
+.grid-list {
   text-align: center;
+  padding: 24px 12px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
-.work-info:hover {
-  box-shadow: 1px 3px 12px #ddd;
-}
-
-.work-info:hover .work-info-item>p {
-  color: @primary-color;
-}
-
-.work-info .work-info-item i {
+.grid-list .gridIcon {
+  vertical-align: middle;
   font-size: 32px;
+  color: rgba(0, 0, 0, 0.65);
 }
 
-.work-info .work-info-item>p {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 0;
+.grid-list .gridSpan {
+  width: 65px;
+  height: 38px;
+  margin: 0 auto;
+  margin-top: 10px;
+  line-height: 20px;
 }
 
 .bsIcon {
