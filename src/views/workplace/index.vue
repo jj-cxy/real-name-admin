@@ -18,7 +18,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <router-link :to="{path:'/home'}">
-                  <a-badge :count="2" :offset="[0,5]">
+                  <a-badge :count="3" :offset="[0,5]">
                     <a-icon type="audit" class="gridIcon" />
                   </a-badge>
                 </router-link>
