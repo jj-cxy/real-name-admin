@@ -3,6 +3,7 @@
     <!-- SideMenu -->
     <a-drawer
       v-if="isMobile()"
+      width="216"
       placement="left"
       :wrapClassName="`drawer-sider ${navTheme}`"
       :closable="false"

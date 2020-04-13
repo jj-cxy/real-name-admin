@@ -63,8 +63,6 @@
         rowKey="id"
         :pagination="pagination"
         size="middle"
-        bordered
-        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange, fixed: true}"
       >
         <span slot="action" slot-scope="text, record">
           <a-button
@@ -78,16 +76,6 @@
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>
       </a-table>
-      <div class="table-operations" v-if="listData.length > 0">
-        <a-button type="primary" @click="allSelect">全选</a-button>
-        <a-button @click="reverseSelect">反选</a-button>
-        <a-dropdown-button>
-          更多操作
-          <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="download">批量导出</a-menu-item>
-          </a-menu>
-        </a-dropdown-button>
-      </div>
     </a-card>
     <form-drawer ref="detailForm"></form-drawer>
   </div>

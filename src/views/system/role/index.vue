@@ -11,19 +11,14 @@
             </a-col>
             <a-col :md="5" :sm="24">
               <a-form-item>
-                <a-select
+                <a-tree-select
                   allowClear
-                  showSearch
+                  :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+                  :treeData="orgList"
                   placeholder="选择机构"
-                  optionFilterProp="children"
+                  treeDefaultExpandAll
                   v-model="listQuery.condition.orgId"
-                >
-                  <a-select-option
-                    v-for="(item,index) in orgList"
-                    :key="index"
-                    :value="item.id"
-                  >{{item.name}}</a-select-option>
-                </a-select>
+                ></a-tree-select>
               </a-form-item>
             </a-col>
             <a-col :md="4 || 24" :sm="24">

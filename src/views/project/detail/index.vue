@@ -1,6 +1,6 @@
 <template>
   <a-card :body-style="{padding: '24px'}" :bordered="false">
-    <a-tabs defaultActiveKey="1" type="card" class="card-tabs" size="small">
+    <a-tabs defaultActiveKey="1" class="card-tabs" size="small">
       <a-tab-pane tab="项目信息" key="1">
         <base-one></base-one>
       </a-tab-pane>

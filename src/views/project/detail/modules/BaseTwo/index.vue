@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 搜索 -->
-    <div class="table-page-search-wrapper" style="margin-top: 24px">
+    <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="15">
           <a-col :md="8" :sm="24">
@@ -36,7 +36,6 @@
       rowKey="id"
       :pagination="pagination"
       size="middle"
-      bordered
     >
       <span slot="action" slot-scope="text, record">
         <a-button

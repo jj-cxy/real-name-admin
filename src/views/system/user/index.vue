@@ -17,7 +17,7 @@
                   :treeData="orgList"
                   placeholder="请选择"
                   treeDefaultExpandAll
-                  v-decorator="['orgId', {rules: [{required: true, message: '此字段为必填'}]}]"
+                  v-model="listQuery.condition.orgId"
                 ></a-tree-select>
               </a-form-item>
             </a-col>

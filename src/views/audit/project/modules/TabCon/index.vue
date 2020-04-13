@@ -1,5 +1,5 @@
 <template>
-  <a-form class="detail-form" style="margin-top: -16px">
+  <a-form class="detail-form" style="margin-top: -24px">
     <div class="detail-top">
       <ul>
         <li>
