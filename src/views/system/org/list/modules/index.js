@@ -12,21 +12,22 @@ var indexMixin = {
       },
       // 查询参数
       listQuery: {
-        condition: {}
+        condition: {
+          parentId: '0'
+        }
       },
       // 表头
       columns: [{
         title: '机构名称',
         dataIndex: 'name'
       }, {
-        title: '所属地区',
-        dataIndex: 'areaName'
-      }, {
         title: '成员数量',
-        dataIndex: 'userCount'
+        dataIndex: 'userCount',
+        align: 'center'
       }, {
-        title: '机构描述',
-        dataIndex: 'remark'
+        title: '所属地区',
+        dataIndex: 'areaName',
+        align: 'center'
       }, {
         title: '操作',
         dataIndex: 'action',
@@ -42,7 +43,7 @@ var indexMixin = {
           span: 24
         },
         sm: {
-          span: 4
+          span: 3
         }
       },
       wrapperCol: {
@@ -50,7 +51,7 @@ var indexMixin = {
           span: 24
         },
         sm: {
-          span: 20
+          span: 21
         }
       },
       Urls: {
@@ -58,21 +59,16 @@ var indexMixin = {
         addUrl: '/auth/api/org/insert',
         editUrl: '/auth/api/org/update/',
         getByIdUrl: '/auth/api/org/get/',
-        delUrl: '/auth/api/org/remove/',
-        lockPartUrl: '/auth/api/org/changeStatus',
-        batchLockPartUrl: '/auth/api/org/changeStatus',
-        downloadExcelUrl: '/auth/api/org/export/ids',
-        batchDelUrl: '/auth/api/org/removes',
-        outputTempUrl: '/auth/api/org/template',
-        importExcelUrl: '/auth/api/org/import'
+        delUrl: '/auth/api/org/delete/',
+        subListUrl: '/auth/api/org/children/',
+        treeListUrl: '/auth/api/org/tree'
       },
       provinceList: [],
       cityList: [],
       districtList: [],
       orgTypeList: [],
       treeData: [],
-      isDisabledd: false,
-      downloadFileName: '机构列表'
+      isDisabled: false
     }
   },
   filters: {},
@@ -80,99 +76,84 @@ var indexMixin = {
     this.getList()
   },
   methods: {
-
-    // 禁启部门
-    handleLock(record) {
-      var _this = this;
-      let tip = record.orgStatus == 'DISABLE' ? "启用" : '禁用'
-      this.$confirm({
-        title: "确定要" + tip + record.name + "么",
-        centered: true,
-        okType: 'danger',
-        class: 'test',
-        onOk() {
-          axios({
-            url: _this.Urls.lockPartUrl,
-            method: 'post',
-            params: {
-              status: record.orgStatus == 'DISABLE' ? "ENABLED" : 'DISABLE'
-            },
-            data: {
-              ids: record.id.split(),
-            }
-          }).then(res => {
-            if (res.code == 0) {
-              _this.$notification.success({
-                message: tip + '成功',
-                duration: 4
-              })
-              _this.getList();
-            } else {
-              _this.$notification.error({
-                message: res.msg,
-                duration: 4
-              })
-            }
-          })
-        }
-      })
+    resetForm() {
+      this.getArea('100000', 'provinceList')
+      this.getArea('520000', 'cityList')
+      this.getArea('520100', 'districtList')
+      this.isDisabled = false
+      this.getTreeData()
+      this.cityList = []
+      this.districtList = []
     },
-
-    // 更多操作
-    selfMenuClick(e) {
-      switch (e.key) {
-        case '2':
-          this.handleBatchLock('DISABLE')
-          break;
-        case '3':
-          this.handleBatchLock('ENABLED')
-      }
-    },
-
-    // 批量禁启部门
-    handleBatchLock(status) {
-      var _this = this;
-      let tip = status == 'DISABLE' ? "禁用" : '启用'
-      this.$confirm({
-        title: "确定要" + tip + "您选择的部门么",
-        centered: true,
-        okType: 'danger',
-        class: 'test',
-        onOk() {
-          axios({
-            url: _this.Urls.batchLockPartUrl,
-            method: 'post',
-            params: {
-              status: status
-            },
-            data: {
-              ids: _this.selectedRowKeys
-            }
-          }).then(res => {
-            if (res.code == 0) {
-              _this.$notification.success({
-                message: tip + '成功',
-                duration: 4
-              })
-              _this.getList();
-            } else {
-              _this.$notification.error({
-                message: res.msg,
-                duration: 4
-              })
-            }
-          })
-        }
+    getTreeData() {
+      axios({
+        url: this.Urls.treeListUrl,
+        method: 'get'
+      }).then(res => {
+        let resData = res.data.records
+        this.treeData = resData.map(item => this.mapTree(item))
       })
     },
     setForm(res) {
       this.mdl.id = res.data.id
+      let areaArr = res.data.area.parentIds.split(',')
+      if (areaArr[2]) {
+        this.getArea(areaArr[1], 1)
+        this.getArea(areaArr[2], 2)
+      } else {
+        this.getArea(areaArr[1], 1)
+      }
       this.$nextTick(() => {
         this.form.setFieldsValue({
-          remark: res.data.remark,
+          parentId: res.data.parentId,
           name: res.data.name,
+          level: res.data.level.toString(),
+          type: res.data.type,
+          proviceId: areaArr[1],
+          cityId: (areaArr[1] && !areaArr[2]) ? res.data.area.id : areaArr[2],
+          districtId: areaArr[2] ? res.data.area.id : ''
         })
       })
+    },
+    beforeSubmit(form) {
+      /* if (form.proviceId && !form.cityId) {
+        form.areaId = form.proviceId
+      } else if (form.cityId && !form.districtId) {
+        form.areaId = form.cityId
+      } else {
+        form.areaId = form.districtId
+      } */
+      form.orgStatus = "ENABLED"
+      if (!form.parentId || form.parentId == '') {
+        form.parentId = 0
+      }
+      return form
+    },
+    handleSub(record) {
+      this.mdl = {}
+      this.form.resetFields()
+      this.resetForm()
+      this.visible = true
+      this.dialogStatus = 'add'
+      this.isDisabled = true
+      this.$nextTick(() => {
+        this.form.setFieldsValue({
+          parentId: record.id
+        })
+      })
+    },
+    // 省市区级联
+    handleProvinceChange(val) {
+      this.form.resetFields('cityId', '')
+      this.form.resetFields('districtId', '')
+      this.cityList = []
+      this.districtList = []
+      this.getArea(val, 'cityList')
+    },
+    handleCityChange(val) {
+      this.form.resetFields('districtId', '')
+      this.districtList = []
+      this.getArea(val, 'districtList')
     }
   }
 }

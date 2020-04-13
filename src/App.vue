@@ -1,7 +1,9 @@
 <template>
   <a-locale-provider :locale="locale">
     <div id="app">
-      <router-view/>
+      <a-config-provider>
+        <router-view />
+      </a-config-provider>
     </div>
   </a-locale-provider>
 </template>
@@ -12,18 +14,16 @@ import { AppDeviceEnquire } from '@/utils/mixin'
 
 export default {
   mixins: [AppDeviceEnquire],
-  data () {
+  data() {
     return {
       locale: zhCN
     }
   },
-  mounted () {
-
-  }
+  mounted() {}
 }
 </script>
 <style>
-  #app {
-    height: 100%;
-  }
+#app {
+  height: 100%;
+}
 </style>

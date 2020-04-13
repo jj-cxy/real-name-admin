@@ -67,7 +67,8 @@ var indexMixin = {
         downloadExcelUrl: '/auth/api/org/export/ids',
         batchDelUrl: '/auth/api/org/removes',
         outputTempUrl: '/auth/api/org/template',
-        importExcelUrl: '/auth/api/org/import'
+        importExcelUrl: '/auth/api/org/import',
+        enterpriseListUrl: ''
       },
       provinceList: [],
       cityList: [],
@@ -75,15 +76,34 @@ var indexMixin = {
       orgTypeList: [],
       treeData: [],
       isDisabledd: false,
-      downloadFileName: '机构列表'
+      downloadFileName: '第三方列表',
+      enterpriseList: []
     }
   },
   filters: {},
   created() {
     this.getList()
+    this.getEnterpriseList()
   },
   methods: {
-
+    dateChange(date, dateString) {
+      console.log(date, dateString)
+    },
+    // 第三方列表
+    getEnterpriseList() {
+      axios({
+        url: this.Urls.enterpriseListUrl,
+        method: 'get'
+      }).then(res => {
+        if (res.code == 0) {
+          this.orgList = res.data.records
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      })
+    },
     // 禁启部门
     handleLock(record) {
       var _this = this;

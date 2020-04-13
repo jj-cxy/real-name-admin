@@ -112,16 +112,15 @@
           />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属机构">
-          <a-select
-            placeholder="请选择"
-            v-decorator="['orgId', { rules: [{required: true, message: '此字段为必填'}]}]"
-          >
-            <a-select-option
-              v-for="(item,index) in orgList"
-              :key="index"
-              :value="item.id"
-            >{{item.name}}</a-select-option>
-          </a-select>
+          <a-tree-select
+            allowClear
+            :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+            :treeData="orgList"
+            placeholder="请选择，默认是根节点"
+            treeDefaultExpandAll
+            v-decorator="['orgId']"
+            :disabled="isDisabled"
+          ></a-tree-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色标识">
           <a-input

@@ -56,7 +56,8 @@ var baseMixin = {
         dictTypeUrl: '/dict/typeList/',
         batchDelUrl: '',
         downloadExcelUrl: '',
-        childrenMenusUrl: '/auth/api/resource/typeChildren/'
+        childrenMenusUrl: '/auth/api/resource/typeChildren/',
+        areaListUrl: '/auth/api/area/children/'
       },
       auth: {},
       categorys: [],
@@ -64,7 +65,10 @@ var baseMixin = {
       defaultExpandAllRows: false,
       selectedRowKeys: [],
       downloadFileName: '',
-      uploading: false
+      uploading: false,
+      provinceList: [],
+      cityList: [],
+      districtList: []
     }
   },
   mounted() {
@@ -533,7 +537,17 @@ var baseMixin = {
     // 下载所有模板
     handleOutput() {
       window.open(process.env.VUE_APP_BASE_API + this.Urls.outputTempUrl)
-    }
+    },
+
+    // 地区
+    getArea(id, data) {
+      axios({
+        url: this.Urls.areaListUrl + id,
+        method: 'get'
+      }).then(res => {
+        this[data] = res.data.records
+      })
+    },
   }
 }
 export default baseMixin

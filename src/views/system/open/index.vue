@@ -81,16 +81,30 @@
       >
         <a-form :form="form">
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="第三方名称">
-            <a-input
-              placeholder="请输入机构名称"
+            <a-select
+              placeholder="请选择"
+              v-decorator="['orgId', { rules: [{required: true, message: '此字段为必填'}]}]"
+            >
+              <a-select-option
+                v-for="(item,index) in enterpriseList"
+                :key="index"
+                :value="item.id"
+              >{{item.name}}</a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="过期时间">
+            <a-date-picker
+              @change="dateChange"
               v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
             />
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="过期时间">
-            <a-textarea :rows="3" v-decorator="['remark']" placeholder="..." />
-          </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="状态">
-            <a-textarea :rows="3" v-decorator="['remark']" placeholder="..." />
+            <a-switch
+              checkedChildren="开"
+              unCheckedChildren="关"
+              defaultChecked
+              v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
+            />
           </a-form-item>
         </a-form>
       </a-modal>

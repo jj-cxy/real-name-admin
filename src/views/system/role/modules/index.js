@@ -86,7 +86,7 @@ var indexMixin = {
     resetForm() {
       this.getOrgList()
     },
-    // 部门列表
+    // 机构列表
     getOrgList() {
       axios({
         url: this.Urls.orgListurl,
