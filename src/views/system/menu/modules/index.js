@@ -1,7 +1,7 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
+import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
@@ -151,20 +151,9 @@ var indexMixin = {
       form.mark = form.mark.join()
       return form
     },
-    setForm(res) {
-      this.mdl.id = res.data.id
+    setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue({
-          parentId: res.data.parentId,
-          type: res.data.type.toString(),
-          name: res.data.name,
-          path: res.data.path,
-          url: res.data.url,
-          icon: res.data.icon,
-          mark: res.data.mark.split(),
-          sort: res.data.sort,
-          remark: res.data.remark
-        })
+        this.form.setFieldsValue(pick(data, 'parentId', 'type', 'name', 'path', 'url', 'icon', 'mark', 'sort', 'remark'))
       })
     },
     handleSub(record) {

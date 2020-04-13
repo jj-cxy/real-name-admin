@@ -9,11 +9,8 @@
                 <a-input v-model="listQuery.condition.name" placeholder="第三方名称" />
               </a-form-item>
             </a-col>
-            <a-col :md="!advanced && 4 || 24" :sm="24">
-              <span
-                class="table-page-search-submitButtons"
-                :style="advanced && { float: 'right', overflow: 'hidden' } || {} "
-              >
+            <a-col :md="4" :sm="24">
+              <span class="table-page-search-submitButtons">
                 <a-button type="primary" @click="handleSearch">查询</a-button>
                 <a-button style="margin-left: 8px" @click="searchReset">重置</a-button>
               </span>
@@ -83,7 +80,7 @@
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="第三方名称">
             <a-select
               placeholder="请选择"
-              v-decorator="['orgId', { rules: [{required: true, message: '此字段为必填'}]}]"
+              v-decorator="['enterpriseId', { rules: [{required: true, message: '此字段为必填'}]}]"
             >
               <a-select-option
                 v-for="(item,index) in enterpriseList"
@@ -95,7 +92,7 @@
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="过期时间">
             <a-date-picker
               @change="dateChange"
-              v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
+              v-decorator="['expiredTime', {rules: [{required: true, message: '此字段为必填'}]}]"
             />
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="状态">
@@ -103,7 +100,7 @@
               checkedChildren="开"
               unCheckedChildren="关"
               defaultChecked
-              v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
+              v-decorator="['keyStatus', {rules: [{required: true, message: '此字段为必填'}]}]"
             />
           </a-form-item>
         </a-form>

@@ -4,7 +4,7 @@
       <div class="table-page-search-wrapper">
         <a-form layout="inline">
           <a-row :gutter="15">
-            <a-col :md="8" :sm="24">
+            <a-col :md="10" :sm="24">
               <a-form-item>
                 <a-input v-model="listQuery.condition.name" placeholder="角色名称" />
               </a-form-item>
@@ -26,11 +26,8 @@
                 </a-select>
               </a-form-item>
             </a-col>
-            <a-col :md="!advanced && 4 || 24" :sm="24">
-              <span
-                class="table-page-search-submitButtons"
-                :style="advanced && { float: 'right', overflow: 'hidden' } || {} "
-              >
+            <a-col :md="4 || 24" :sm="24">
+              <span class="table-page-search-submitButtons">
                 <a-button type="primary" @click="handleSearch">查询</a-button>
                 <a-button style="margin-left: 8px" @click="searchReset">重置</a-button>
               </span>
@@ -116,10 +113,9 @@
             allowClear
             :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
             :treeData="orgList"
-            placeholder="请选择，默认是根节点"
+            placeholder="请选择"
             treeDefaultExpandAll
-            v-decorator="['orgId']"
-            :disabled="isDisabled"
+            v-decorator="['orgId', {rules: [{required: true, message: '此字段为必填'}]}]"
           ></a-tree-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色标识">

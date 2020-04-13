@@ -1,7 +1,7 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
+import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
@@ -27,7 +27,7 @@ var indexMixin = {
           title: '成员数量',
           align: 'center',
           dataIndex: 'userCount',
-          customRender: (text,record,index) => `${text}人`
+          customRender: (text, record, index) => `${text}人`
         },
         {
           title: '操作',
@@ -62,7 +62,7 @@ var indexMixin = {
         editUrl: '/auth/api/role/update/',
         getByIdUrl: '/auth/api/role/get/',
         delUrl: '/auth/api/role/remove/',
-        orgListurl: '/auth/api/org/list',
+        orgListurl: '/auth/api/org/tree',
         downloadExcelUrl: '/auth/api/role/export/ids',
         lockRoleUrl: '/auth/api/role/changeStatus',
         batchLockRoleUrl: '/auth/api/role/changeStatus',
@@ -92,13 +92,8 @@ var indexMixin = {
         url: this.Urls.orgListurl,
         method: 'get'
       }).then(res => {
-        if (res.code == 0) {
-          this.orgList = res.data.records
-        } else {
-          this.$notification.error({
-            message: res.msg
-          })
-        }
+        let resData = res.data.records
+        this.orgList = resData.map(item => this.mapTree(item))
       })
     },
     handleAddUser(record) {
@@ -192,15 +187,9 @@ var indexMixin = {
         }
       })
     },
-    setForm(res) {
-      this.mdl.id = res.data.id
+    setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue({
-          name: res.data.name,
-          remark: res.data.remark,
-          orgId: res.data.orgId,
-          mark: res.data.mark,
-        })
+        this.form.setFieldsValue(pick(data, 'name', 'orgId', 'mark', 'remark'))
       })
     }
   }

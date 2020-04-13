@@ -1,7 +1,7 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
+import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
@@ -18,10 +18,10 @@ var indexMixin = {
       },
       // 表头
       columns: [{
-        title: '字典名称',
-        dataIndex: 'name',
-        key: 'name'
-      },
+          title: '字典名称',
+          dataIndex: 'name',
+          key: 'name'
+        },
         {
           title: '键名',
           dataIndex: 'key',
@@ -134,19 +134,9 @@ var indexMixin = {
         children: haveChildren ? item.children.map(i => this.mapTree(i)) : []
       }
     },
-    setForm(res) {
-      this.mdl.id = res.data.id
+    setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue({
-          parentId: res.data.parentId,
-          key: res.data.key,
-          value: res.data.value,
-          name: res.data.name,
-          type: res.data.type,
-          sort: res.data.sort,
-          category: res.data.category,
-          remark: res.data.remark
-        })
+        this.form.setFieldsValue(pick(data, 'parentId', 'key', 'value', 'name', 'type', 'sort', 'category', 'remark'))
       })
     },
     beforeSubmit(form) {

@@ -1,7 +1,7 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
+import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
@@ -67,8 +67,12 @@ var indexMixin = {
       cityList: [],
       districtList: [],
       orgTypeList: [],
-      treeData: [],
-      isDisabled: false
+      treeData: [{
+        title: '根节点',
+        key: '0',
+        value: '0',
+        children: []
+      }]
     }
   },
   filters: {},
@@ -78,12 +82,8 @@ var indexMixin = {
   methods: {
     resetForm() {
       this.getArea('100000', 'provinceList')
-      this.getArea('520000', 'cityList')
-      this.getArea('520100', 'districtList')
-      this.isDisabled = false
       this.getTreeData()
-      this.cityList = []
-      this.districtList = []
+      this.isDisabled = false
     },
     getTreeData() {
       axios({
@@ -92,38 +92,22 @@ var indexMixin = {
       }).then(res => {
         let resData = res.data.records
         this.treeData = resData.map(item => this.mapTree(item))
-      })
-    },
-    setForm(res) {
-      this.mdl.id = res.data.id
-      let areaArr = res.data.area.parentIds.split(',')
-      if (areaArr[2]) {
-        this.getArea(areaArr[1], 1)
-        this.getArea(areaArr[2], 2)
-      } else {
-        this.getArea(areaArr[1], 1)
-      }
-      this.$nextTick(() => {
-        this.form.setFieldsValue({
-          parentId: res.data.parentId,
-          name: res.data.name,
-          level: res.data.level.toString(),
-          type: res.data.type,
-          proviceId: areaArr[1],
-          cityId: (areaArr[1] && !areaArr[2]) ? res.data.area.id : areaArr[2],
-          districtId: areaArr[2] ? res.data.area.id : ''
+        this.treeData.unshift({
+          title: '根节点',
+          key: '0',
+          value: '0',
+          children: []
         })
       })
     },
+    setForm(data) {
+      this.getArea(data.provinceId, 'cityList')
+      this.getArea(data.cityId, 'districtList')
+      this.$nextTick(() => {
+        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'proviceId', 'cityId', 'areaId', 'remark'))
+      })
+    },
     beforeSubmit(form) {
-      /* if (form.proviceId && !form.cityId) {
-        form.areaId = form.proviceId
-      } else if (form.cityId && !form.districtId) {
-        form.areaId = form.cityId
-      } else {
-        form.areaId = form.districtId
-      } */
-      form.orgStatus = "ENABLED"
       if (!form.parentId || form.parentId == '') {
         form.parentId = 0
       }
@@ -144,15 +128,9 @@ var indexMixin = {
     },
     // 省市区级联
     handleProvinceChange(val) {
-      this.form.resetFields('cityId', '')
-      this.form.resetFields('districtId', '')
-      this.cityList = []
-      this.districtList = []
       this.getArea(val, 'cityList')
     },
     handleCityChange(val) {
-      this.form.resetFields('districtId', '')
-      this.districtList = []
       this.getArea(val, 'districtList')
     }
   }

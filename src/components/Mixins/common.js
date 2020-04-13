@@ -68,7 +68,8 @@ var baseMixin = {
       uploading: false,
       provinceList: [],
       cityList: [],
-      districtList: []
+      districtList: [],
+      isDisabled: false
     }
   },
   mounted() {
@@ -299,7 +300,8 @@ var baseMixin = {
         method: 'get'
       }).then(res => {
         if (res.code == 0) {
-          this.setForm(res)
+          this.mdl = res.data
+          this.setForm(res.data)
         } else {
           this.$notification.error({
             message: res.msg
@@ -307,7 +309,7 @@ var baseMixin = {
         }
       })
     },
-    setForm(res) {},
+    setForm(data) {},
     // 删除数据
     handleDel(record) {
       var _this = this

@@ -36,7 +36,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #70D2DB" />
+                  <a-icon type="audit" class="gridIcon" style="color: #00bcd4" />
                 </a-badge>
                 <div class="gridSpan">劳务人员数据异常</div>
               </div>
@@ -52,7 +52,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #a59fdb" />
+                  <a-icon type="audit" class="gridIcon" style="color: #ff8a80" />
                 </a-badge>
                 <div class="gridSpan">工资数据异常</div>
               </div>
@@ -60,7 +60,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #FEBD55" />
+                  <a-icon type="audit" class="gridIcon" style="color: #1890FF" />
                 </a-badge>
                 <div class="gridSpan">项目备案</div>
               </div>

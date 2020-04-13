@@ -89,14 +89,14 @@
               allowClear
               :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
               :treeData="treeData"
-              placeholder="请选择，默认是根节点"
+              placeholder="请选择"
               treeDefaultExpandAll
-              v-decorator="['parentId']"
+              v-decorator="['parentId', {rules: [{required: true, message: '请选择上级机构'}]}]"
               :disabled="isDisabled"
             ></a-tree-select>
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构名称">
-            <a-input v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]" />
+            <a-input v-decorator="['name', {rules: [{required: true, message: '请输入机构名称'}]}]" />
           </a-form-item>
           <a-form-item
             :labelCol="labelCol"
@@ -112,9 +112,8 @@
                     showSearch
                     optionFilterProp="children"
                     placeholder="选择省"
-                    disabled
                     @change="handleProvinceChange"
-                    v-decorator="['proviceId',{ initialValue: '520000' }, {rules: [{required: true, message: '请选择'}]}]"
+                    v-decorator="['proviceId', {rules: [{required: true, message: '请选择'}]}]"
                   >
                     <a-select-option
                       v-for="item in provinceList"
@@ -130,9 +129,8 @@
                     showSearch
                     optionFilterProp="children"
                     placeholder="选择市"
-                    disabled
                     @change="handleCityChange"
-                    v-decorator="['cityId',{ initialValue: '520100' },]"
+                    v-decorator="['cityId']"
                   >
                     <a-select-option
                       v-for="item in cityList"
@@ -147,8 +145,8 @@
                   <a-select
                     showSearch
                     optionFilterProp="children"
-                    placeholder="选择区/县"
-                    v-decorator="['districtId']"
+                    placeholder="选择区县"
+                    v-decorator="['areaId']"
                   >
                     <a-select-option
                       v-for="item in districtList"
@@ -159,6 +157,9 @@
                 </a-form-item>
               </a-col>
             </a-row>
+          </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构描述">
+            <a-textarea :rows="3" v-decorator="['remark']" placeholder="..." />
           </a-form-item>
         </a-form>
       </a-modal>

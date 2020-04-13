@@ -12,8 +12,12 @@ var indexMixin = {
       },
       // 表头
       columns: [{
-          title: '人员姓名',
+          title: '真实姓名',
           dataIndex: 'name'
+        },
+        {
+          title: '用户名',
+          dataIndex: 'username'
         },
         {
           title: '手机号码',
@@ -60,7 +64,7 @@ var indexMixin = {
         lockUserUrl: '/auth/api/account/change/',
         batchLockUserUrl: '/auth/api/account/changeStatus',
         roleListurl: '/auth/api/role/list',
-        orgListurl: '/auth/api/org/list',
+        orgListurl: '/auth/api/org/tree',
         downloadExcelUrl: '/auth/api/user/export/ids',
         batchDelUrl: '/auth/api/user/removes',
         defaultPassUrl: '/auth/api/account/defaultPwd',
@@ -98,19 +102,14 @@ var indexMixin = {
       })
     },
 
-    // 部门列表
+    // 机构列表
     getOrgList() {
       axios({
         url: this.Urls.orgListurl,
         method: 'get'
       }).then(res => {
-        if (res.code == 0) {
-          this.orgList = res.data.records
-        } else {
-          this.$notification.error({
-            message: res.msg
-          })
-        }
+        let resData = res.data.records
+        this.orgList = resData.map(item => this.mapTree(item))
       })
     },
 

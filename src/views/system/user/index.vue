@@ -9,21 +9,16 @@
                 <a-input v-model="listQuery.condition.keyWord" placeholder="用户名/手机号" />
               </a-form-item>
             </a-col>
-            <a-col :md="4" :sm="24">
+            <a-col :md="5" :sm="24">
               <a-form-item>
-                <a-select
-                  placeholder="机构"
+                <a-tree-select
                   allowClear
-                  showSearch
-                  optionFilterProp="children"
-                  v-model="listQuery.condition.orgId"
-                >
-                  <a-select-option
-                    v-for="(item,index) in orgList"
-                    :key="index"
-                    :value="item.id"
-                  >{{item.name}}</a-select-option>
-                </a-select>
+                  :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+                  :treeData="orgList"
+                  placeholder="请选择"
+                  treeDefaultExpandAll
+                  v-decorator="['orgId', {rules: [{required: true, message: '此字段为必填'}]}]"
+                ></a-tree-select>
               </a-form-item>
             </a-col>
             <a-col :md="4" :sm="24">
@@ -57,11 +52,8 @@
                 </a-select>
               </a-form-item>
             </a-col>
-            <a-col :md="!advanced && 4 || 24" :sm="24">
-              <span
-                class="table-page-search-submitButtons"
-                :style="advanced && { float: 'right', overflow: 'hidden' } || {} "
-              >
+            <a-col :md="3" :sm="24">
+              <span class="table-page-search-submitButtons">
                 <a-button type="primary" @click="handleSearch">查询</a-button>
                 <a-button style="margin-left: 8px" @click="searchReset">重置</a-button>
               </span>

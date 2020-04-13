@@ -11,27 +11,30 @@
   >
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="人员姓名">
-          <a-input placeholder="请输入人员姓名" v-decorator="['name', validatorRules.must]" />
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="用户名">
+          <a-input placeholder="请输入用户名" v-decorator="['username', validatorRules.must]" />
+        </a-form-item>
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="真实姓名">
+          <a-input placeholder="请输入真实姓名" v-decorator="['name', validatorRules.must]" />
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="手机号码">
-          <a-input maxlength ="11" placeholder="请输入手机号码" v-decorator="['phone', validatorRules.phone]" />
+          <a-input
+            maxlength="11"
+            placeholder="请输入手机号码"
+            v-decorator="['phone', validatorRules.phone]"
+          />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属部门">
-          <a-select
-            showSearch
-            optionFilterProp="children"
-            v-decorator="['orgId', validatorRules.must]"
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属机构">
+          <a-tree-select
+            allowClear
+            :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+            :treeData="orgList"
             placeholder="请选择"
-          >
-            <a-select-option
-              v-for="(item,index) in orgList"
-              :key="index"
-              :value="item.id"
-            >{{item.name}}</a-select-option>
-          </a-select>
+            treeDefaultExpandAll
+            v-decorator="['orgId', {rules: [{required: true, message: '此字段为必填'}]}]"
+          ></a-tree-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属职务">
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属角色">
           <a-select
             showSearch
             optionFilterProp="children"
@@ -68,11 +71,11 @@ export default {
         editUrl: '/auth/api/user/update/',
         getByIdUrl: '/auth/api/user/get/',
         roleListurl: '/auth/api/role/list',
-        orgListurl: '/auth/api/org/list'
+        orgListurl: '/auth/api/org/tree'
       },
       textMap: {
-        add: '新增账户',
-        edit: '编辑账户'
+        add: '新增用户',
+        edit: '编辑用户'
       },
       labelCol: {
         xs: { span: 24 },
@@ -128,13 +131,8 @@ export default {
         url: this.Urls.orgListurl,
         method: 'get'
       }).then(res => {
-        if (res.code == 0) {
-          this.orgList = res.data.records
-        } else {
-          this.$notification.error({
-            message: res.msg
-          })
-        }
+        let resData = res.data.records
+        this.orgList = resData.map(item => this.mapTree(item))
       })
     },
 

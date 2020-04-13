@@ -1,7 +1,7 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
+import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
@@ -26,10 +26,10 @@ var indexMixin = {
         dataIndex: 'userCount'
       }, {
         title: '创建时间',
-        dataIndex: 'remark'
+        dataIndex: 'createTime'
       }, {
         title: '状态',
-        dataIndex: 'remark'
+        dataIndex: 'keyStatus'
       }, {
         title: '操作',
         dataIndex: 'action',
@@ -57,18 +57,18 @@ var indexMixin = {
         }
       },
       Urls: {
-        listUrl: '/auth/api/org/page',
-        addUrl: '/auth/api/org/insert',
-        editUrl: '/auth/api/org/update/',
-        getByIdUrl: '/auth/api/org/get/',
-        delUrl: '/auth/api/org/remove/',
-        lockPartUrl: '/auth/api/org/changeStatus',
-        batchLockPartUrl: '/auth/api/org/changeStatus',
-        downloadExcelUrl: '/auth/api/org/export/ids',
-        batchDelUrl: '/auth/api/org/removes',
-        outputTempUrl: '/auth/api/org/template',
-        importExcelUrl: '/auth/api/org/import',
-        enterpriseListUrl: ''
+        listUrl: '/ida/api/open/auth/page',
+        addUrl: '/ida/api/open/auth/insert',
+        editUrl: '/ida/api/open/auth/update/',
+        getByIdUrl: '/ida/api/open/auth/get/',
+        delUrl: '/ida/api/open/auth/remove/',
+        lockPartUrl: '/ida/api/open/auth/changeStatus',
+        batchLockPartUrl: '/ida/api/open/auth/changeStatus',
+        downloadExcelUrl: '/ida/api/open/auth/export/ids',
+        batchDelUrl: '/ida/api/open/auth/removes',
+        outputTempUrl: '/ida/api/open/auth/template',
+        importExcelUrl: '/ida/api/open/auth/import',
+        enterpriseListUrl: '/ida/api/enterprise/list'
       },
       provinceList: [],
       cityList: [],
@@ -83,9 +83,11 @@ var indexMixin = {
   filters: {},
   created() {
     this.getList()
-    this.getEnterpriseList()
   },
   methods: {
+    resetForm() {
+      this.getEnterpriseList()
+    },
     dateChange(date, dateString) {
       console.log(date, dateString)
     },
@@ -188,13 +190,9 @@ var indexMixin = {
         }
       })
     },
-    setForm(res) {
-      this.mdl.id = res.data.id
+    setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue({
-          remark: res.data.remark,
-          name: res.data.name,
-        })
+        this.form.setFieldsValue(pick(data, 'enterpriseId', 'expiredTime', 'keyStatus'))
       })
     }
   }

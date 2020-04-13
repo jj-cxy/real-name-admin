@@ -186,7 +186,7 @@ export const asyncRouterMap = [{
         children: [{
             path: '/system/user',
             name: 'user',
-            component: () => import('@/views/system/user/list/index'),
+            component: () => import('@/views/system/user/index'),
             meta: {
               title: '用户管理',
               keepAlive: true
@@ -195,7 +195,7 @@ export const asyncRouterMap = [{
           {
             path: '/system/org',
             name: 'part',
-            component: () => import('@/views/system/org/list/index'),
+            component: () => import('@/views/system/org/index'),
             meta: {
               title: '机构管理',
               keepAlive: true
