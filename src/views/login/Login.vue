@@ -10,7 +10,7 @@
     </div>
     <div class="wrapper">
       <div class="user-layout-slogan">
-        <img src="/slogan.png" width="90%"/>
+        <img src="/slogan.png" width="90%" />
       </div>
       <a-form
         id="formLogin"
@@ -19,7 +19,7 @@
         :form="form"
         @submit="handleSubmit"
       >
-        <h2>欢迎使用</h2>
+        <h2>欢迎登录</h2>
         <a-form-item>
           <a-input
             size="large"
@@ -58,7 +58,7 @@
           </a-col>
           <a-col :span="10">
             <div class="captcha">
-              <img :src="captchaImg" alt />
+              <img :src="captchaImg" alt @click="getCaptcha"/>
             </div>
           </a-col>
         </a-row>
@@ -67,7 +67,7 @@
           <a-checkbox v-decorator="['rememberMe']">记住账号</a-checkbox>
         </a-form-item>
 
-        <a-form-item style="margin-bottom: 10px">
+        <a-form-item style="margin-bottom: 0">
           <a-button
             size="large"
             type="primary"
@@ -79,7 +79,7 @@
         </a-form-item>
 
         <a-form-item style="margin-bottom: 0">
-          <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">忘记密码</router-link>
+          <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">忘记密码？</router-link>
         </a-form-item>
       </a-form>
     </div>
@@ -194,15 +194,12 @@ export default {
 <style lang="less" scoped>
 .wrapper {
   display: flex;
-  width: 920px;
+  width: 860px;
   align-items: center;
-  padding: 48px 48px 24px 24px;
+  padding: 24px 32px 24px 32px;
   background-color: #fff;
   border-radius: 8px;
   box-sizing: border-box;
-  .user-layout-slogan {
-    padding: 24px 0 24px;
-  }
 }
 .top {
   .header {
@@ -218,8 +215,8 @@ export default {
     }
 
     .title {
-      font-size: 32px;
-      margin-left: 12px;
+      font-size: 30px;
+      letter-spacing: 2px;
       color: #fff;
       font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
       position: relative;
@@ -254,11 +251,15 @@ canvas {
     img {
       width: 100%;
       height: 100%;
+      cursor: pointer;
     }
   }
   h2 {
     text-align: center;
     font-size: 18px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
   }
 
   label {

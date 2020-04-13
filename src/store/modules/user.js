@@ -55,9 +55,9 @@ const user = {
             const result = res.data;
             Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000);
             commit('SET_TOKEN', result.token);
-            localStorage.setItem('in-trueName', result.user.name)
+            localStorage.setItem('in-trueName', result.user.name || "未知")
             localStorage.setItem('in-userId', result.user.userId)
-            if (result.user.roles.length > 0) {
+            if (result.user.roles && result.user.roles.length > 0) {
               localStorage.setItem('in-mark', result.user.roles[0].mark)
             }
             resolve(res);

@@ -19,37 +19,16 @@ NProgress.configure({
 const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {
-  NProgress.start() // start progress bar
-  to.meta && (typeof to.meta.title !== 'undefined' && setDocumentTitle(`${to.meta.title} - ${domTitle}`))
+  NProgress.start()
   if (Vue.ls.get(ACCESS_TOKEN)) {
-    /* has token */
+    // has token
     if (to.path === '/user/login') {
       next({
-        path: defaultRoutePath
+        path: '/user/login'
       })
       NProgress.done()
     } else {
-      if (store.getters.roles.length === 0) {
-        const roles = {
-          permissionList: ['home', 'table', 'form', 'order', 'permission', 'user']
-        }
-        store.dispatch('GenerateRoutes', {
-          roles
-        }).then(() => {})
-        // 请求带有 redirect 重定向时，登录自动重定向到该地址
-        /* const redirect = decodeURIComponent(from.query.redirect || to.path)
-        if (to.path === redirect) {
-          console.log(redirect, to.path)
-          // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-          // next({ ...to, replace: true })
-        } else {
-          // 跳转到目的路由
-          next({ path: redirect })
-        } */
-        next()
-      } else {
-        next()
-      }
+      next()
     }
   } else {
     if (whiteList.includes(to.name)) {
