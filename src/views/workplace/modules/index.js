@@ -26,7 +26,7 @@ var indexMixin = {
   },
   filters: {},
   created() {
-    this.getNoticeCount();
+    // this.getNoticeCount();
   },
   methods: {
     // 获取角标数

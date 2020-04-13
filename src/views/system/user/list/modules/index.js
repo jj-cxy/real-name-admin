@@ -7,8 +7,8 @@ var indexMixin = {
     return {
       mdl: {},
       textMap: {
-        add: '新增账户',
-        edit: '编辑账户'
+        add: '新增用户',
+        edit: '编辑用户'
       },
       // 表头
       columns: [{
@@ -21,15 +21,15 @@ var indexMixin = {
           align: 'center',
         },
         {
-          title: '所属部门',
+          title: '所属机构',
           dataIndex: 'orgName'
         },
         {
-          title: '当前职务',
+          title: '所属角色',
           dataIndex: 'roleName'
         },
         {
-          title: '账号状态',
+          title: '状态',
           dataIndex: 'accountStatusDesc',
           align: 'center'
         },
@@ -69,7 +69,7 @@ var indexMixin = {
       },
       roleList: [],
       orgList: [],
-      downloadFileName: '账户列表',
+      downloadFileName: '用户列表',
       defaultPass: '123456'
     }
   },

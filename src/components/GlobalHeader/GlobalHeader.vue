@@ -128,6 +128,6 @@
 
   .header-title {
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
   }
 </style>

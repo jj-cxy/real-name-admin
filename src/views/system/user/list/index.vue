@@ -12,7 +12,7 @@
             <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select
-                  placeholder="部门"
+                  placeholder="机构"
                   allowClear
                   showSearch
                   optionFilterProp="children"
@@ -29,7 +29,7 @@
             <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select
-                  placeholder="职务"
+                  placeholder="角色"
                   allowClear
                   showSearch
                   optionFilterProp="children"
@@ -72,18 +72,7 @@
     </a-card>
     <a-card :bordered="false">
       <div class="table-operator">
-        <a-button type="primary" icon="plus" @click="handleAdd">增加</a-button>
-        <a-upload
-          name="file"
-          :beforeUpload="beforeUpload"
-          :showUploadList="false"
-          style="display: inline-block"
-        >
-          <a-button :loading="uploading">
-            <a-icon type="upload" />导 入
-          </a-button>
-        </a-upload>
-        <a href="javascript:;" @click="handleOutput">下载导入模板</a>
+        <a-button type="primary" icon="plus" @click="handleAdd">新增</a-button>
       </div>
       <!-- 表格 -->
       <a-table
@@ -133,20 +122,6 @@
           ></a-button>
         </span>
       </a-table>
-      <div class="table-operations" v-if="listData.length > 0">
-        <a-button type="primary" @click="allSelect">全选</a-button>
-        <a-button @click="reverseSelect">反选</a-button>
-        <a-dropdown-button>
-          更多操作
-          <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="download">批量导出</a-menu-item>
-            <a-menu-item key="1">重置密码</a-menu-item>
-            <a-menu-item key="2">停用账号</a-menu-item>
-            <a-menu-item key="3">启用账号</a-menu-item>
-            <a-menu-item key="del">删除账号</a-menu-item>
-          </a-menu>
-        </a-dropdown-button>
-      </div>
     </a-card>
     <form-modal ref="modalForm" @ok="afterSubmit"></form-modal>
   </div>

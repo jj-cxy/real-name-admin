@@ -7,39 +7,36 @@ var indexMixin = {
   data() {
     return {
       textMap: {
-        add: '新增角色',
-        edit: '编辑角色'
+        add: '新增机构',
+        edit: '编辑机构'
+      },
+      // 查询参数
+      listQuery: {
+        condition: {}
       },
       // 表头
       columns: [{
-          title: '角色名称',
-          dataIndex: 'name',
-        },
-        {
-          title: '所属机构',
-          dataIndex: 'orgName',
-        },
-        {
-          title: '职务描述',
-          dataIndex: 'remark',
-        },
-        {
-          title: '成员数量',
-          align: 'center',
-          dataIndex: 'userCount',
-          customRender: (text,record,index) => `${text}人`
-        },
-        {
-          title: '操作',
-          dataIndex: 'action',
-          align: 'center',
-          fixed: 'right',
-          width: '290px',
-          scopedSlots: {
-            customRender: 'action'
-          }
+        title: '机构名称',
+        dataIndex: 'name'
+      }, {
+        title: '所属地区',
+        dataIndex: 'areaName'
+      }, {
+        title: '成员数量',
+        dataIndex: 'userCount'
+      }, {
+        title: '机构描述',
+        dataIndex: 'remark'
+      }, {
+        title: '操作',
+        dataIndex: 'action',
+        align: 'center',
+        width: '140px',
+        fixed: 'right',
+        scopedSlots: {
+          customRender: 'action'
         }
-      ],
+      }],
       labelCol: {
         xs: {
           span: 24
@@ -57,61 +54,37 @@ var indexMixin = {
         }
       },
       Urls: {
-        listUrl: '/auth/api/role/page',
-        addUrl: '/auth/api/role/insert',
-        editUrl: '/auth/api/role/update/',
-        getByIdUrl: '/auth/api/role/get/',
-        delUrl: '/auth/api/role/remove/',
-        orgListurl: '/auth/api/org/list',
-        downloadExcelUrl: '/auth/api/role/export/ids',
-        lockRoleUrl: '/auth/api/role/changeStatus',
-        batchLockRoleUrl: '/auth/api/role/changeStatus',
-        addUserUrl: '/auth/api/role/addUser/',
-        setMenuUrl: '/auth/api/role/update/',
-        batchDelUrl: '/auth/api/role/removes',
-        outputTempUrl: '/auth/api/role/template',
-        importExcelUrl: '/auth/api/role/import'
-
+        listUrl: '/auth/api/org/page',
+        addUrl: '/auth/api/org/insert',
+        editUrl: '/auth/api/org/update/',
+        getByIdUrl: '/auth/api/org/get/',
+        delUrl: '/auth/api/org/remove/',
+        lockPartUrl: '/auth/api/org/changeStatus',
+        batchLockPartUrl: '/auth/api/org/changeStatus',
+        downloadExcelUrl: '/auth/api/org/export/ids',
+        batchDelUrl: '/auth/api/org/removes',
+        outputTempUrl: '/auth/api/org/template',
+        importExcelUrl: '/auth/api/org/import'
       },
-      orgList: [],
-      downloadFileName: '角色列表'
+      provinceList: [],
+      cityList: [],
+      districtList: [],
+      orgTypeList: [],
+      treeData: [],
+      isDisabledd: false,
+      downloadFileName: '机构列表'
     }
   },
   filters: {},
   created() {
     this.getList()
-    this.getOrgList()
   },
   methods: {
-    resetForm() {
-      this.getOrgList()
-    },
-    // 部门列表
-    getOrgList() {
-      axios({
-        url: this.Urls.orgListurl,
-        method: 'get'
-      }).then(res => {
-        if (res.code == 0) {
-          this.orgList = res.data.records
-        } else {
-          this.$notification.error({
-            message: res.msg
-          })
-        }
-      })
-    },
-    handleAddUser(record) {
-      this.$refs.addUserModal.edit(record)
-    },
-    handleSetMenu(record) {
-      this.$refs.menuModal.detail(record)
-    },
 
     // 禁启部门
     handleLock(record) {
       var _this = this;
-      let tip = record.roleStatus == 'DISABLE' ? "启用" : '禁用'
+      let tip = record.orgStatus == 'DISABLE' ? "启用" : '禁用'
       this.$confirm({
         title: "确定要" + tip + record.name + "么",
         centered: true,
@@ -119,13 +92,13 @@ var indexMixin = {
         class: 'test',
         onOk() {
           axios({
-            url: _this.Urls.lockRoleUrl,
+            url: _this.Urls.lockPartUrl,
             method: 'post',
             params: {
-              status: record.roleStatus == 'DISABLE' ? "ENABLED" : 'DISABLE'
+              status: record.orgStatus == 'DISABLE' ? "ENABLED" : 'DISABLE'
             },
             data: {
-              ids: record.id.split()
+              ids: record.id.split(),
             }
           }).then(res => {
             if (res.code == 0) {
@@ -156,18 +129,18 @@ var indexMixin = {
       }
     },
 
-    // 批量禁启职务
+    // 批量禁启部门
     handleBatchLock(status) {
       var _this = this;
       let tip = status == 'DISABLE' ? "禁用" : '启用'
       this.$confirm({
-        title: "确定要" + tip + "您选择的职务么",
+        title: "确定要" + tip + "您选择的部门么",
         centered: true,
         okType: 'danger',
         class: 'test',
         onOk() {
           axios({
-            url: _this.Urls.batchLockRoleUrl,
+            url: _this.Urls.batchLockPartUrl,
             method: 'post',
             params: {
               status: status
@@ -196,10 +169,8 @@ var indexMixin = {
       this.mdl.id = res.data.id
       this.$nextTick(() => {
         this.form.setFieldsValue({
-          name: res.data.name,
           remark: res.data.remark,
-          orgId: res.data.orgId,
-          mark: res.data.mark,
+          name: res.data.name,
         })
       })
     }

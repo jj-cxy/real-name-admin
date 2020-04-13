@@ -35,9 +35,18 @@ export const asyncRouterMap = [{
             }
           },
           {
+            path: '/order/todo',
+            name: 'OrderTodo',
+            component: () => import('@/views/modules/Order/todo/index'),
+            meta: {
+              title: '待办事项',
+              keepAlive: true
+            }
+          },
+          /* {
             path: '/order/overdue',
-            name: 'orderOverdue',
-            component: () => import('@/views/modules/order/overdue/index'),
+            name: 'OrderOverdue',
+            component: () => import('@/views/modules/Order/overdue/index'),
             meta: {
               title: '超期工单',
               keepAlive: true
@@ -46,12 +55,12 @@ export const asyncRouterMap = [{
           {
             path: '/order/history',
             name: 'orderHistory',
-            component: () => import('@/views/modules/order/history/index'),
+            component: () => import('@/views/modules/Order/history/index'),
             meta: {
               title: '已办工单',
               keepAlive: true
             }
-          },
+          }, */
           {
             path: '/audit/enterprise',
             name: 'AuditEnterprise',
@@ -177,18 +186,18 @@ export const asyncRouterMap = [{
         children: [{
             path: '/system/user',
             name: 'user',
-            component: () => import('@/views/system/user/index'),
+            component: () => import('@/views/system/user/list/index'),
             meta: {
-              title: '账户管理',
+              title: '用户管理',
               keepAlive: true
             }
           },
           {
-            path: '/system/part',
+            path: '/system/org',
             name: 'part',
-            component: () => import('@/views/system/part/index'),
+            component: () => import('@/views/system/org/list/index'),
             meta: {
-              title: '部门管理',
+              title: '机构管理',
               keepAlive: true
             }
           },
@@ -197,7 +206,7 @@ export const asyncRouterMap = [{
             name: 'role',
             component: () => import('@/views/system/role/index'),
             meta: {
-              title: '职务管理',
+              title: '角色管理',
               keepAlive: true
             }
           },
@@ -209,7 +218,17 @@ export const asyncRouterMap = [{
               title: '菜单管理',
               keepAlive: true
             }
-          }, {
+          },
+          {
+            path: '/system/open/auth',
+            name: 'OpenAuth',
+            component: () => import('@/views/system/open/index'),
+            meta: {
+              title: '第三方授权管理',
+              keepAlive: true
+            }
+          },
+          {
             path: '/system/dict',
             name: 'dict',
             component: () => import('@/views/system/dict/index'),
@@ -218,7 +237,7 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           },
-          {
+          /* {
             path: '/system/log',
             name: 'log',
             component: () => import('@/views/system/log/index'),
@@ -226,7 +245,7 @@ export const asyncRouterMap = [{
               title: '操作日志管理',
               keepAlive: true
             }
-          }
+          } */
         ]
       },
       // account

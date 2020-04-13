@@ -118,9 +118,8 @@ export default {
     }
   },
   created() {
-    console.log('菜单', this.mainMenu)
-    this.menus = this.mainMenu.find(item => item.path === '/').children
-    // this.menus = asyncRouterMap.find(item => item.path === '/').children
+    // this.menus = this.mainMenu.find(item => item.path === '/').children
+    this.menus = asyncRouterMap.find(item => item.path === '/').children
     // this.getMenu()
     this.collapsed = !this.sidebarOpened
   },

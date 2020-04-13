@@ -7,8 +7,8 @@ var indexMixin = {
   data() {
     return {
       textMap: {
-        add: '新增部门',
-        edit: '编辑部门'
+        add: '新增第三方授权',
+        edit: '编辑第三方授权'
       },
       // 查询参数
       listQuery: {
@@ -16,24 +16,20 @@ var indexMixin = {
       },
       // 表头
       columns: [{
-        title: '部门名称',
+        title: '秘钥',
         dataIndex: 'name'
       }, {
-        title: '部门描述',
+        title: '第三方名称',
+        dataIndex: 'areaName'
+      }, {
+        title: '过期时间',
+        dataIndex: 'userCount'
+      }, {
+        title: '创建时间',
         dataIndex: 'remark'
       }, {
-        title: '成员数量',
-        align: 'center',
-        dataIndex: 'userCount',
-        customRender:(text,record,index)=> `${text}人`
-      }, {
-        title: '部门状态',
-        align: 'center',
-        dataIndex: 'orgStatusDesc'
-      }, {
-        title: '更新时间',
-        align: 'center',
-        dataIndex: 'modifyTime'
+        title: '状态',
+        dataIndex: 'remark'
       }, {
         title: '操作',
         dataIndex: 'action',
@@ -79,7 +75,7 @@ var indexMixin = {
       orgTypeList: [],
       treeData: [],
       isDisabledd: false,
-      downloadFileName: '部门列表'
+      downloadFileName: '机构列表'
     }
   },
   filters: {},

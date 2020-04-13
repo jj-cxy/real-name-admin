@@ -6,7 +6,7 @@
           <a-row :gutter="15">
             <a-col :md="8" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="职务名称" />
+                <a-input v-model="listQuery.condition.name" placeholder="角色名称" />
               </a-form-item>
             </a-col>
             <a-col :md="5" :sm="24">
@@ -14,7 +14,7 @@
                 <a-select
                   allowClear
                   showSearch
-                  placeholder="选择部门"
+                  placeholder="选择机构"
                   optionFilterProp="children"
                   v-model="listQuery.condition.orgId"
                 >
@@ -23,14 +23,6 @@
                     :key="index"
                     :value="item.id"
                   >{{item.name}}</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="3" :sm="24">
-              <a-form-item>
-                <a-select allowClear placeholder="职务状态" v-model="listQuery.condition.roleStatus">
-                  <a-select-option value="ENABLED">启用</a-select-option>
-                  <a-select-option value="DISABLE">停用</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -49,18 +41,7 @@
     </a-card>
     <a-card :bordered="false">
       <div class="table-operator">
-        <a-button type="primary" icon="plus" @click="handleAdd">新增职务</a-button>
-        <a-upload
-          name="file"
-          :beforeUpload="beforeUpload"
-          :showUploadList="false"
-          style="display: inline-block"
-        >
-          <a-button :loading="uploading">
-            <a-icon type="upload" />导 入
-          </a-button>
-        </a-upload>
-        <a href="javascript:;" @click="handleOutput">下载导入模板</a>
+        <a-button type="primary" icon="plus" @click="handleAdd">新增</a-button>
       </div>
 
       <!-- 表格 -->
@@ -73,7 +54,6 @@
         :pagination="pagination"
         size="middle"
         @change="handleTableChange"
-        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange, fixed: true}"
       >
         <span slot="action" slot-scope="text, record">
           <a href="javascript:;" @click="handleAddUser(record)">添加人员</a>
@@ -108,20 +88,6 @@
           ></a-button>
         </span>
       </a-table>
-
-      <div class="table-operations" v-if="listData.length > 0">
-        <a-button type="primary" @click="allSelect">全选</a-button>
-        <a-button @click="reverseSelect">反选</a-button>
-        <a-dropdown-button>
-          更多操作
-          <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="download">批量导出</a-menu-item>
-            <a-menu-item key="2">停用职务</a-menu-item>
-            <a-menu-item key="3">启用职务</a-menu-item>
-            <a-menu-item key="del">删除职务</a-menu-item>
-          </a-menu>
-        </a-dropdown-button>
-      </div>
     </a-card>
 
     <add-user-modal ref="addUserModal" @ok="afterSubmit"></add-user-modal>
@@ -139,13 +105,13 @@
       :maskClosable="false"
     >
       <a-form :form="form">
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="职务名称">
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色名称">
           <a-input
-            placeholder="请输入职务名称"
+            placeholder="请输入角色名称"
             v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
           />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属部门">
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属机构">
           <a-select
             placeholder="请选择"
             v-decorator="['orgId', { rules: [{required: true, message: '此字段为必填'}]}]"
@@ -157,16 +123,16 @@
             >{{item.name}}</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="职务标识">
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色标识">
           <a-input
-            placeholder="请输入职务标识"
+            placeholder="请输入角色标识"
             v-decorator="['mark', {rules: [{required: true, message: '此字段为必填'}]}]"
           />
         </a-form-item>
         <a-form-item>
           <a-alert message="职务标识不能随意更改，如需更改请联系相关开发人员" type="warning" showIcon />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="职务描述">
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色描述">
           <a-textarea :rows="3" v-decorator="['remark']" placeholder="..." />
         </a-form-item>
       </a-form>

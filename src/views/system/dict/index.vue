@@ -29,7 +29,7 @@
     <a-card :bordered="false">
       <!-- 表格操作 -->
       <div class="table-operator">
-        <a-button type="primary" icon="plus" @click="handleAdd">新增字典</a-button>
+        <a-button type="primary" icon="plus" @click="handleAdd">新增</a-button>
       </div>
 
       <!-- 表格 -->
