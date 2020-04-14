@@ -143,7 +143,7 @@ import viewer from '@/views/modules/viewer'
 import TabCon from './modules/TabCon/index'
 
 export default {
-  name: 'EnterpriseAudit',
+  name: 'Auditproject',
   mixins: [modalMixin, indexMixin],
   components: {
     viewer,

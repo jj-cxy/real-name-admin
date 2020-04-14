@@ -7,26 +7,26 @@ var indexMixin = {
     return {
       // 表头
       columns: [{
-        title: '项目编码',
+        title: '单位名称',
         dataIndex: 'projectId'
       }, {
-        title: '项目名称',
+        title: '统一社会信用代码',
         dataIndex: 'projectName'
       }, {
-        title: '管理机构',
+        title: '所属地区',
         dataIndex: 'orgCodeDesc'
       }, {
-        title: '项目地区',
+        title: '主要业务类型',
         dataIndex: 'district'
       }, {
-        title: '项目类型',
+        title: '参与项目数量',
         dataIndex: 'projectType'
       }, {
-        title: '项目状态',
+        title: '备案审核状态',
         align: 'center',
         dataIndex: 'projectStatusDesc'
       }, {
-        title: '项目开始时间',
+        title: '创建时间',
         align: 'center',
         dataIndex: 'createTime'
       }, {
@@ -34,15 +34,15 @@ var indexMixin = {
         dataIndex: 'action',
         align: 'center',
         fixed: 'right',
-        width: '230px',
+        width: '70px',
         scopedSlots: {
           customRender: 'action'
         }
       }],
       Urls: {
-        listUrl: '/ida/api/project/page',
-        delUrl: '/ida/api/project/remove/',
-        downloadExcelUrl: '/ida/api/project/export/ids'
+        listUrl: '/ida/api/enterprise/page',
+        delUrl: '/ida/api/enterprise/remove/',
+        downloadExcelUrl: '/ida/api/enterprise/export/ids'
       },
       districtList: [],
       projectStatusList: [{
@@ -61,7 +61,7 @@ var indexMixin = {
         name: '项目完成',
         value: 'FINISH'
       }],
-      downloadFileName: '项目列表',
+      downloadFileName: '单位列表',
     }
   },
   filters: {},

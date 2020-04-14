@@ -66,10 +66,6 @@
       >
         <span slot="action" slot-scope="text, record">
           <a href="javascript:;" @click="handleDetail(record)">查看</a>
-          <a-divider type="vertical" />
-          <a href="javascript:;" @click="handleSetMenu(record)">修改状态</a>
-          <a-divider type="vertical" />
-          <a href="javascript:;" @click="handleSetMenu(record)">发起修改工单</a>
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>
       </a-table>
@@ -85,7 +81,7 @@ import formDrawer from './modules/formDrawer'
 import JDate from '@/components/JDate/index'
 
 export default {
-  name: 'project',
+  name: 'enterprise',
   mixins: [baseMixin, indexMixin],
   components: {
     formDrawer,

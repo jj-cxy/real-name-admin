@@ -121,7 +121,7 @@ export default {
   created() {
     // this.menus = this.mainMenu.find(item => item.path === '/').children
     this.menus = asyncRouterMap.find(item => item.path === '/').children
-    // this.getMenu()
+    this.getMenu()
     this.collapsed = !this.sidebarOpened
   },
   mounted() {
@@ -143,7 +143,7 @@ export default {
         params: { type: 'MENU' }
       }).then(res => {
         if (res.code == 0) {
-          if (res.data.records) {
+          if (res.data.records && res.data.records.length > 0) {
             this.menus = res.data.records.map(item => this.mapTree(item))
           }
         } else {

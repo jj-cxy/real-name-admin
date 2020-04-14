@@ -113,6 +113,7 @@ export const asyncRouterMap = [{
         path: '/project',
         name: 'project',
         redirect: '/project/list',
+        hideChildrenInMenu: true,
         component: PageView,
         meta: {
           title: '项目管理',
@@ -138,16 +139,35 @@ export const asyncRouterMap = [{
         }]
       },
 
-      // customer
+      // enterprise
       {
-        path: '/customer',
-        name: 'customer',
-        component: () => import('@/views/customer/index'),
+        path: '/enterprise',
+        name: 'enterprise',
+        redirect: '/enterprise/list',
+        hideChildrenInMenu: true,
+        component: PageView,
         meta: {
           title: '单位管理',
           icon: 'solution',
           keepAlive: true
-        }
+        },
+        children: [{
+          path: '/enterprise/list',
+          name: 'EnterpriseList',
+          component: () => import('@/views/enterprise/list/index'),
+          meta: {
+            title: '单位管理',
+            keepAlive: false
+          }
+        }, {
+          path: '/enterprise/detail',
+          name: 'EnterpriseDetail',
+          component: () => import('@/views/project/detail/index'),
+          meta: {
+            title: '单位详情',
+            keepAlive: false
+          }
+        }]
       },
 
       // chart
