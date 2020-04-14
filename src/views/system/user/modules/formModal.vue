@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :title="textMap[dialogStatus]"
-    :width="520"
+    :width="600"
     centered
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -36,9 +36,12 @@
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="所属角色">
           <a-select
+            mode="multiple"
+            labelInValue
             showSearch
             optionFilterProp="children"
-            v-decorator="['roleId', validatorRules.must]"
+            v-decorator="['roles', validatorRules.must]"
+            @change="handleRoleChange"
             placeholder="请选择"
           >
             <a-select-option
@@ -57,8 +60,8 @@
 </template>
 
 <script>
-import modalMixin from '@/components/Mixins/modal'
 import { axios } from '@/utils/request'
+import modalMixin from '@/components/Mixins/modal'
 import pick from 'lodash.pick'
 
 export default {
@@ -126,6 +129,19 @@ export default {
       })
     },
 
+    handleRoleChange(value) {
+      let roleArr = []
+      if (value.length > 0) {
+        value.map((item, index) => {
+          roleArr[index] = {
+            id: item.key,
+            name: item.label
+          }
+        })
+      }
+      this.$set(this.model, 'roles', roleArr)
+    },
+
     // 机构列表
     getOrgList() {
       axios({
@@ -136,10 +152,26 @@ export default {
         this.orgList = resData.map(item => this.mapTree(item))
       })
     },
-
+    beforeSubmit(form) {
+      form.roles = this.model.roles
+      return form
+    },
     setForm(data) {
+      this.model = data
+      let roleArr = []
+      if (data.roles && data.roles.length > 0) {
+        data.roles.map((item, index) => {
+          roleArr[index] = {
+            key: item.id,
+            label: item.name
+          }
+        })
+      }
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'name', 'username', 'phone', 'orgId', 'roleId', 'remark'))
+        this.form.setFieldsValue({
+          roles: roleArr
+        })
+        this.form.setFieldsValue(pick(data, 'name', 'username', 'phone', 'orgId', 'remark'))
       })
     }
   }

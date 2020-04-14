@@ -115,7 +115,7 @@
           </a-form-item>
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="字典类型">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="字典分类">
                 <a-select
                   v-decorator="['category', {rules: [{required: true, message: '此字段为必填'}]}]"
                   placeholder="请选择"
@@ -126,7 +126,7 @@
               </a-form-item>
             </a-col>
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分类">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="字典类型">
                 <a-input
                   :disabled="isDisabled"
                   v-decorator="['type', {rules: [{required: true, message: '此字段为必填'}]}]"

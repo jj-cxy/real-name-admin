@@ -4,7 +4,7 @@
       <div class="table-page-search-wrapper">
         <a-form layout="inline">
           <a-row :gutter="15">
-            <a-col :md="8" :sm="24">
+            <a-col :md="10" :sm="24">
               <a-form-item>
                 <a-input v-model="listQuery.condition.keyWord" placeholder="用户名/手机号" />
               </a-form-item>
@@ -24,28 +24,11 @@
             <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select
-                  placeholder="选择角色"
-                  allowClear
-                  showSearch
-                  optionFilterProp="children"
-                  v-model="listQuery.condition.roleId"
-                >
-                  <a-select-option
-                    v-for="(item,index) in roleList"
-                    :key="index"
-                    :value="item.id"
-                  >{{item.name}}</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="3" :sm="24">
-              <a-form-item>
-                <a-select
                   allowClear
                   showSearch
                   placeholder="账号状态"
                   optionFilterProp="children"
-                  v-model="listQuery.condition.accountStatus"
+                  v-model="listQuery.condition.userStatus"
                 >
                   <a-select-option value="ENABLED">启用</a-select-option>
                   <a-select-option value="DISABLE">停用</a-select-option>
@@ -74,7 +57,6 @@
         rowKey="id"
         :pagination="pagination"
         size="middle"
-        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange, fixed: true}"
       >
         <span slot="action" slot-scope="text, record">
           <a-tooltip placement="top">

@@ -4,7 +4,7 @@
       <div class="table-page-search-wrapper">
         <a-form layout="inline">
           <a-row :gutter="15">
-            <a-col :md="8" :sm="24">
+            <a-col :md="10" :sm="24">
               <a-form-item>
                 <a-input v-model="listQuery.condition.name" placeholder="第三方名称" />
               </a-form-item>
@@ -20,49 +20,21 @@
       </div>
     </a-card>
     <a-card :bordered="false">
-      <div class="table-operator">
-        <a-button type="primary" icon="plus" @click="handleAdd">增加</a-button>
-      </div>
-
       <!-- 表格 -->
       <a-table
         :columns="columns"
         :dataSource="listData"
         :loading="localLoading"
-        rowKey="id"
+        :rowKey="(record,index)=>`${index}`"
         @expand="handleExpand"
         :pagination="pagination"
         size="middle"
         @change="handleTableChange"
       >
-        <span slot="action" slot-scope="text, record">
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="edit"
-            title="修改"
-            @click.native="handleEdit(record)"
-          ></a-button>
-          <a-divider type="vertical" />
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            :icon="record.orgStatus=='DISABLE'?'unlock':'lock'"
-            :title="record.orgStatus=='DISABLE'?'启用':'禁用'"
-            @click.native="handleLock(record)"
-          ></a-button>
-          <a-divider type="vertical" />
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="delete"
-            title="删除"
-            @click.native="handleDel(record)"
-          ></a-button>
-        </span>
+        <div slot="expandedRowRender" slot-scope="record" class="row-render-box">
+          <p>公钥：{{ record.publicKey }}</p>
+          <p>私钥：{{ record.privateKey }}</p>
+        </div>
       </a-table>
 
       <!-- 表单 -->

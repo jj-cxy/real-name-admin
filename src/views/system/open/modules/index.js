@@ -16,29 +16,17 @@ var indexMixin = {
       },
       // 表头
       columns: [{
-        title: '秘钥',
-        dataIndex: 'name'
-      }, {
         title: '第三方名称',
-        dataIndex: 'areaName'
+        dataIndex: 'enterpriseName'
       }, {
         title: '过期时间',
-        dataIndex: 'userCount'
+        dataIndex: 'expiredTime'
       }, {
         title: '创建时间',
         dataIndex: 'createTime'
       }, {
         title: '状态',
         dataIndex: 'keyStatus'
-      }, {
-        title: '操作',
-        dataIndex: 'action',
-        align: 'center',
-        width: '140px',
-        fixed: 'right',
-        scopedSlots: {
-          customRender: 'action'
-        }
       }],
       labelCol: {
         xs: {

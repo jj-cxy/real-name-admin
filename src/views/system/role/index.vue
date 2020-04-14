@@ -88,14 +88,34 @@
             v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
           />
         </a-form-item>
-        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色标识">
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="角色标识"
+          style="margin-bottom: 10px"
+        >
           <a-input
             placeholder="请输入角色标识"
             v-decorator="['mark', {rules: [{required: true, message: '此字段为必填'}]}]"
           />
         </a-form-item>
         <a-form-item>
-          <a-alert message="职务标识不能随意更改，如需更改请联系相关开发人员" type="warning" showIcon />
+          <a-alert message="角色标识不能随意更改，如需更改请联系相关开发人员" type="warning" showIcon />
+        </a-form-item>
+        <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="数据权限">
+          <a-select
+            placeholder="数据权限"
+            allowClear
+            showSearch
+            optionFilterProp="children"
+            v-decorator="['dataRole', {rules: [{required: true, message: '此字段为必填'}]}]"
+          >
+            <a-select-option
+              v-for="(item,index) in dataRoleList"
+              :key="index"
+              :value="item.key"
+            >{{item.name}}</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="角色描述">
           <a-textarea :rows="3" v-decorator="['remark']" placeholder="..." />

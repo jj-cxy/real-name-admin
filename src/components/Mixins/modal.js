@@ -119,7 +119,7 @@ var modalMixin = {
       this.fillForm(record)
     },
 
-    setForm() {},
+    setForm(data) {},
 
     // 详情表单
     fillForm(record) {

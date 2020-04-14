@@ -138,7 +138,7 @@ export default {
   methods: {
     getMenu() {
       axios({
-        url: '/auth/api/account/getResource',
+        url: '/auth/api/resource/getResource',
         method: 'get',
         params: { type: 'MENU' }
       }).then(res => {

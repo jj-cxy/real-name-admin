@@ -72,7 +72,29 @@ var indexMixin = {
         importExcelUrl: '/auth/api/role/import'
 
       },
-      downloadFileName: '角色列表'
+      downloadFileName: '角色列表',
+      dataRoleList: [{
+        key: "NONE",
+        name: "无"
+      }, {
+        key: "CREATE",
+        name: "创建者"
+      }, {
+        key: "ORG",
+        name: "平级(机构)"
+      }, {
+        key: "ORG_S",
+        name: "平级及子集(机构)"
+      }, {
+        key: "AREA",
+        name: "平级(区域)"
+      }, {
+        key: "AREA_S",
+        name: "平级和子集(区域)"
+      }, {
+        key: "ALL",
+        name: "所有"
+      }]
     }
   },
   filters: {},

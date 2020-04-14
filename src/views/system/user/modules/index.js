@@ -12,17 +12,18 @@ var indexMixin = {
       },
       // 表头
       columns: [{
-          title: '真实姓名',
-          dataIndex: 'name'
-        },
-        {
           title: '用户名',
           dataIndex: 'username'
         },
         {
-          title: '手机号码',
-          dataIndex: 'phone',
+          title: '真实姓名',
           align: 'center',
+          dataIndex: 'name'
+        },
+        {
+          title: '手机号码',
+          align: 'center',
+          dataIndex: 'phone'
         },
         {
           title: '所属机构',
@@ -30,11 +31,11 @@ var indexMixin = {
         },
         {
           title: '所属角色',
-          dataIndex: 'roleName'
+          dataIndex: 'roleNames'
         },
         {
           title: '状态',
-          dataIndex: 'accountStatusDesc',
+          dataIndex: 'userStatusDesc',
           align: 'center'
         },
         {
@@ -120,7 +121,6 @@ var indexMixin = {
       this.$confirm({
         title: "确定要" + tip + record.name + "么",
         centered: true,
-        okType: 'danger',
         class: 'test',
         onOk() {
           axios({
@@ -151,7 +151,6 @@ var indexMixin = {
         title: "确定要重置" + record.name + "的密码么",
         content: h => `初始密码：${_this.defaultPass}`,
         centered: true,
-        okType: 'danger',
         class: 'test',
         onOk() {
           axios({
