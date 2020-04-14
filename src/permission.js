@@ -22,9 +22,9 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Vue.ls.get(ACCESS_TOKEN)) {
     // has token
-    if (to.path === '/user/login') {
+    if (to.path === '/login/login') {
       next({
-        path: '/user/login'
+        path: '/login/login'
       })
       NProgress.done()
     } else {
@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({
-        path: '/user/login'
+        path: '/login/login'
       })
       NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
     }

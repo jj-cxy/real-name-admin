@@ -113,7 +113,7 @@
                     optionFilterProp="children"
                     placeholder="选择省"
                     @change="handleProvinceChange"
-                    v-decorator="['proviceId', {rules: [{required: true, message: '请选择'}]}]"
+                    v-decorator="['provinceId', {rules: [{required: true, message: '请选择'}]}]"
                   >
                     <a-select-option
                       v-for="item in provinceList"

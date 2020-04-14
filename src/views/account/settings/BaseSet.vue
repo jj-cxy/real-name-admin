@@ -80,7 +80,7 @@ export default {
               })
               setTimeout(() => {
                 Vue.ls.remove(ACCESS_TOKEN)
-                this.$router.push('/user/login')
+                this.$router.push('/login/login')
               }, 2000)
             } else {
               this.$notification.error({

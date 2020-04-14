@@ -144,7 +144,7 @@ export default {
       var _this = this
       setTimeout(() => {
         Vue.ls.remove(ACCESS_TOKEN)
-        _this.$router.push('/user/login')
+        _this.$router.push('/login/login')
       }, 2000)
     }
   }

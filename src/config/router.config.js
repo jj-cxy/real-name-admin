@@ -153,8 +153,8 @@ export const asyncRouterMap = [{
 
       // chart
       {
-        path: '/chart/list',
-        name: 'chartList',
+        path: '/chart',
+        name: 'chart',
         component: () => import('@/views/chart/index'),
         meta: {
           title: '数据统计',
@@ -194,7 +194,7 @@ export const asyncRouterMap = [{
           },
           {
             path: '/system/org',
-            name: 'part',
+            name: 'org',
             component: () => import('@/views/system/org/index'),
             meta: {
               title: '机构管理',
@@ -221,7 +221,7 @@ export const asyncRouterMap = [{
           },
           {
             path: '/system/open/auth',
-            name: 'OpenAuth',
+            name: 'auth',
             component: () => import('@/views/system/open/index'),
             meta: {
               title: '第三方授权管理',
@@ -304,9 +304,9 @@ export const asyncRouterMap = [{
  * @type { *[] }
  */
 export const constantRouterMap = [{
-    path: '/user',
+    path: '/login',
     component: UserLayout,
-    redirect: '/user/login',
+    redirect: '/login/login',
     hidden: true,
     children: [{
         path: 'login',

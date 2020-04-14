@@ -3,7 +3,7 @@
     <!-- SideMenu -->
     <a-drawer
       v-if="isMobile()"
-      width="216"
+      width="200"
       placement="left"
       :wrapClassName="`drawer-sider ${navTheme}`"
       :closable="false"
@@ -45,9 +45,9 @@
 
       <!-- layout content -->
       <a-layout-content
-        :style="{ height: '100%', margin: multiTab ? '24px 24px' : '24px 24px', paddingTop: fixedHeader ? '60px' : '0' }"
+        :style="{ height: '100%', margin: multiTab ? '12px' : '12px', paddingTop: fixedHeader ? '60px' : '0' }"
       >
-        <multi-tab v-if="multiTab" style="margin: -24px -24px 24px;"></multi-tab>
+        <multi-tab v-if="multiTab" style="margin: -12px -12px 12px;"></multi-tab>
         <transition name="page-transition">
           <route-view />
         </transition>
@@ -108,7 +108,7 @@ export default {
         return '0'
       }
       if (this.sidebarOpened) {
-        return '216px'
+        return '200px'
       }
       return '80px'
     }
@@ -190,7 +190,7 @@ export default {
     paddingCalc() {
       let left = ''
       if (this.sidebarOpened) {
-        left = this.isDesktop() ? '216px' : '80px'
+        left = this.isDesktop() ? '200px' : '80px'
       } else {
         left = (this.isMobile() && '0') || (this.fixSidebar && '80px') || '0'
       }

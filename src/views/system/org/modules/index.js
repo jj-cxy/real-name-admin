@@ -104,7 +104,7 @@ var indexMixin = {
       this.getArea(data.provinceId, 'cityList')
       this.getArea(data.cityId, 'districtList')
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'proviceId', 'cityId', 'areaId', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'provinceId', 'cityId', 'areaId', 'remark'))
       })
     },
     beforeSubmit(form) {
