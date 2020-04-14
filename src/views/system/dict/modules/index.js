@@ -90,20 +90,24 @@ var indexMixin = {
         }
       },
       Urls: {
-        listUrl: '/auth/api/dict/page',
-        addUrl: '/auth/api/dict/insert',
-        editUrl: '/auth/api/dict/update/',
-        getByIdUrl: '/auth/api/dict/get/',
-        delUrl: '/auth/api/dict/delete/',
-        typeListUrl: '/auth/api/dict/typeList/',
-        subListUrl: '/auth/api/dict/children/',
-        dictTreeUrl: '/auth/api/dict/typeTree'
+        listUrl: '/ida/api/dict/page',
+        addUrl: '/ida/api/dict/insert',
+        editUrl: '/ida/api/dict/update/',
+        getByIdUrl: '/ida/api/dict/get/',
+        delUrl: '/ida/api/dict/delete/',
+        typeListUrl: '/ida/api/dict/typeList/',
+        subListUrl: '/ida/api/dict/children/',
+        dictTreeUrl: '/ida/api/dict/typeTree'
       },
       expandedKeys: [],
       selectedKeys: [],
       dictTypeData: [],
-      treeData: [],
-      isDisabled: false
+      treeData: [{
+        title: '根节点',
+        key: '0',
+        value: '0',
+        children: []
+      }]
     }
   },
   filters: {},
@@ -122,6 +126,12 @@ var indexMixin = {
       }).then(res => {
         let resData = res.data.records
         this.treeData = resData.map(item => this.mapTree(item))
+        this.treeData.unshift({
+          title: '根节点',
+          key: '0',
+          value: '0',
+          children: []
+        })
       })
     },
     // 格式化树结构
@@ -142,11 +152,13 @@ var indexMixin = {
     beforeSubmit(form) {
       return form
     },
+    // 增加子节点
     handleSub(record) {
       this.mdl = {}
       this.form.resetFields()
       this.visible = true
       this.resetForm()
+      this.isDisabled = true
       this.dialogStatus = 'add'
       this.form.resetFields()
       this.$nextTick(() => {

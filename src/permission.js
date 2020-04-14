@@ -24,11 +24,23 @@ router.beforeEach((to, from, next) => {
     // has token
     if (to.path === '/login/login') {
       next({
-        path: '/login/login'
+        path: '/'
       })
       NProgress.done()
     } else {
-      next()
+      if (store.getters.roles.length === 0) {
+        const redirect = decodeURIComponent(from.query.redirect || to.path)
+        if (to.path === redirect) {
+          next()
+        } else {
+          // 跳转到目的路由
+          next({
+            path: redirect
+          })
+        }
+      } else {
+        next()
+      }
     }
   } else {
     if (whiteList.includes(to.name)) {
@@ -36,9 +48,12 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       next({
-        path: '/login/login'
+        path: '/login/login',
+        query: {
+          redirect: to.fullPath
+        }
       })
-      NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
+      NProgress.done();
     }
   }
 })

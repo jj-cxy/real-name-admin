@@ -62,7 +62,7 @@ import { axios } from '@/utils/request'
 import pick from 'lodash.pick'
 
 export default {
-  name: 'userModel',
+  name: 'UserModel',
   mixins: [modalMixin],
   data() {
     return {
@@ -109,7 +109,8 @@ export default {
       this.getRoleList()
       this.getOrgList()
     },
-    // 职务列表
+
+    // 角色列表
     getRoleList() {
       axios({
         url: this.Urls.roleListurl,
@@ -125,7 +126,7 @@ export default {
       })
     },
 
-    // 部门列表
+    // 机构列表
     getOrgList() {
       axios({
         url: this.Urls.orgListurl,
@@ -138,7 +139,7 @@ export default {
 
     setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'name', 'phone', 'orgId', 'roleId', 'remark'))
+        this.form.setFieldsValue(pick(data, 'name', 'username', 'phone', 'orgId', 'roleId', 'remark'))
       })
     }
   }

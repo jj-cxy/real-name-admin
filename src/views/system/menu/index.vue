@@ -54,31 +54,48 @@
           <a-icon :type="text || 'smile'" />
         </span>
         <span slot="action" slot-scope="text, record">
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="edit"
-            @click.native="handleEdit(record)"
-          ></a-button>
-          <a-divider type="vertical" />
-          <template v-if="record.isLeaf == 1">
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>编辑</span>
+            </template>
             <a-button
               type="dashed"
               size="small"
               shape="circle"
-              icon="delete"
-              @click.native="handleDel(record)"
+              icon="edit"
+              @click.native="handleEdit(record)"
             ></a-button>
+          </a-tooltip>
+
+          <a-divider type="vertical" />
+
+          <template v-if="record.isLeaf == 1">
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>删除</span>
+              </template>
+              <a-button
+                type="dashed"
+                size="small"
+                shape="circle"
+                icon="delete"
+                @click.native="handleDel(record)"
+              ></a-button>
+            </a-tooltip>
             <a-divider type="vertical" />
           </template>
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="plus-square"
-            @click.native="handleSub(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>新增子菜单</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              icon="plus-square"
+              @click.native="handleSub(record)"
+            ></a-button>
+          </a-tooltip>
         </span>
       </a-table>
 
@@ -94,15 +111,15 @@
         :maskClosable="false"
       >
         <a-form :form="form">
-          <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="上级目录">
+          <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="上级菜单">
             <a-tree-select
               allowClear
               :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
               :treeData="treeData"
-              placeholder="请选择，默认根目录"
+              placeholder="请选择"
               treeDefaultExpandAll
-              v-decorator="['parentId']"
-              :disabled="isDisabledd"
+              v-decorator="['parentId', {rules: [{required: true, message: '请选择上级菜单'}]}]"
+              :disabled="isDisabled"
             ></a-tree-select>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="类型">
@@ -112,12 +129,15 @@
             </a-radio-group>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="名称">
-            <a-input placeholder="请输入名称" v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]" />
+            <a-input
+              placeholder="请输入名称"
+              v-decorator="['title', {rules: [{required: true, message: '此字段为必填'}]}]"
+            />
           </a-form-item>
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端路径">
-                <a-input placeholder="请输入前端路径" v-decorator="['url']" />
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="菜单路径">
+                <a-input placeholder="请输入菜单路径" v-decorator="['url']" />
               </a-form-item>
             </a-col>
             <a-col :md="12" :sm="24">
@@ -126,10 +146,14 @@
               </a-form-item>
             </a-col>
           </a-row>
+          <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="菜单标识">
+            <a-input placeholder="请输入菜单标识" v-decorator="['name']" />
+          </a-form-item>
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="后端路径">
-                <a-input placeholder="请输入后端路径"
+                <a-input
+                  placeholder="请输入后端路径"
                   v-decorator="['path', {rules: [{required: true, message: '此字段为必填'}],initialValue:'/**'}]"
                 />
               </a-form-item>

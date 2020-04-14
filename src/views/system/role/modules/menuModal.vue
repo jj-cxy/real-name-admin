@@ -1,7 +1,7 @@
 <template>
   <a-modal
     title="设置权限"
-    :width="520"
+    :width="600"
     :visible="visible"
     :confirmLoading="confirmLoading"
     @ok="handleSubmit"
@@ -105,7 +105,17 @@ export default {
       checkedKey(resData)
       this.checkedKeys = keys
       this.checkedArr = keyIds
-    }
+    },
+    // 格式化树结构
+    mapTree(item) {
+      const haveChildren = Array.isArray(item.children) && item.children.length > 0
+      return {
+        title: item.title,
+        key: item.id,
+        value: item.id,
+        children: haveChildren ? item.children.map(i => this.mapTree(i)) : []
+      }
+    },
   }
 }
 </script>

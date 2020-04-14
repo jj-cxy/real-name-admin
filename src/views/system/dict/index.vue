@@ -92,9 +92,9 @@
               allowClear
               :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
               :treeData="treeData"
-              placeholder="请选择，默认根节点"
+              placeholder="请选择"
               treeDefaultExpandAll
-              v-decorator="['parentId']"
+              v-decorator="['parentId', {rules: [{required: true, message: '请选择上级字典'}]}]"
               :disabled="isDisabled"
             ></a-tree-select>
           </a-form-item>
@@ -127,7 +127,10 @@
             </a-col>
             <a-col :md="12" :sm="24">
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分类">
-                <a-input v-decorator="['type', {rules: [{required: true, message: '此字段为必填'}]}]" />
+                <a-input
+                  :disabled="isDisabled"
+                  v-decorator="['type', {rules: [{required: true, message: '此字段为必填'}]}]"
+                />
               </a-form-item>
             </a-col>
           </a-row>
@@ -148,7 +151,7 @@ import baseMixin from '@/components/Mixins/common'
 import indexMixin from './modules/index'
 
 export default {
-  name: 'dictList',
+  name: 'dict',
   mixins: [baseMixin, indexMixin]
 }
 </script>

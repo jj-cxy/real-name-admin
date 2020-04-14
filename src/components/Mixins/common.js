@@ -206,6 +206,7 @@ var baseMixin = {
       this.listQuery.pageIndex = 1
       this.defaultExpandAllRows = false
       this.updateForce()
+      this.listQuery.condition.parentId ? this.listQuery.condition.parentId = "" : ''
       this.getList()
     },
     searchReset() {
@@ -310,6 +311,20 @@ var baseMixin = {
       })
     },
     setForm(data) {},
+    // 增加子节点
+    handleSub(record) {
+      this.mdl = {}
+      this.form.resetFields()
+      this.resetForm()
+      this.visible = true
+      this.dialogStatus = 'add'
+      this.isDisabled = true
+      this.$nextTick(() => {
+        this.form.setFieldsValue({
+          parentId: record.id
+        })
+      })
+    },
     // 删除数据
     handleDel(record) {
       var _this = this

@@ -66,16 +66,8 @@ var indexMixin = {
         batchLockPartUrl: '/ida/api/open/auth/changeStatus',
         downloadExcelUrl: '/ida/api/open/auth/export/ids',
         batchDelUrl: '/ida/api/open/auth/removes',
-        outputTempUrl: '/ida/api/open/auth/template',
-        importExcelUrl: '/ida/api/open/auth/import',
         enterpriseListUrl: '/ida/api/enterprise/list'
       },
-      provinceList: [],
-      cityList: [],
-      districtList: [],
-      orgTypeList: [],
-      treeData: [],
-      isDisabledd: false,
       downloadFileName: '第三方列表',
       enterpriseList: []
     }
@@ -106,7 +98,7 @@ var indexMixin = {
         }
       })
     },
-    // 禁启部门
+    // 禁启
     handleLock(record) {
       var _this = this;
       let tip = record.orgStatus == 'DISABLE' ? "启用" : '禁用'
@@ -154,7 +146,7 @@ var indexMixin = {
       }
     },
 
-    // 批量禁启部门
+    // 批量禁启
     handleBatchLock(status) {
       var _this = this;
       let tip = status == 'DISABLE' ? "禁用" : '启用'

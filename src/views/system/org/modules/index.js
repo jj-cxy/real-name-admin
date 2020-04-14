@@ -63,10 +63,6 @@ var indexMixin = {
         subListUrl: '/auth/api/org/children/',
         treeListUrl: '/auth/api/org/tree'
       },
-      provinceList: [],
-      cityList: [],
-      districtList: [],
-      orgTypeList: [],
       treeData: [{
         title: '根节点',
         key: '0',
@@ -85,6 +81,7 @@ var indexMixin = {
       this.getTreeData()
       this.isDisabled = false
     },
+    // 上级
     getTreeData() {
       axios({
         url: this.Urls.treeListUrl,
@@ -112,19 +109,6 @@ var indexMixin = {
         form.parentId = 0
       }
       return form
-    },
-    handleSub(record) {
-      this.mdl = {}
-      this.form.resetFields()
-      this.resetForm()
-      this.visible = true
-      this.dialogStatus = 'add'
-      this.isDisabled = true
-      this.$nextTick(() => {
-        this.form.setFieldsValue({
-          parentId: record.id
-        })
-      })
     },
     // 省市区级联
     handleProvinceChange(val) {

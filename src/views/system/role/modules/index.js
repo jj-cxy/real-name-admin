@@ -16,12 +16,13 @@ var indexMixin = {
           dataIndex: 'name',
         },
         {
-          title: '所属机构',
-          dataIndex: 'orgName',
+          title: '角色描述',
+          dataIndex: 'remark',
         },
         {
-          title: '职务描述',
-          dataIndex: 'remark',
+          title: '角色标识',
+          align: 'center',
+          dataIndex: 'mark',
         },
         {
           title: '成员数量',
@@ -34,7 +35,7 @@ var indexMixin = {
           dataIndex: 'action',
           align: 'center',
           fixed: 'right',
-          width: '290px',
+          width: '170px',
           scopedSlots: {
             customRender: 'action'
           }
@@ -62,43 +63,25 @@ var indexMixin = {
         editUrl: '/auth/api/role/update/',
         getByIdUrl: '/auth/api/role/get/',
         delUrl: '/auth/api/role/remove/',
-        orgListurl: '/auth/api/org/tree',
         downloadExcelUrl: '/auth/api/role/export/ids',
         lockRoleUrl: '/auth/api/role/changeStatus',
         batchLockRoleUrl: '/auth/api/role/changeStatus',
-        addUserUrl: '/auth/api/role/addUser/',
         setMenuUrl: '/auth/api/role/update/',
         batchDelUrl: '/auth/api/role/removes',
         outputTempUrl: '/auth/api/role/template',
         importExcelUrl: '/auth/api/role/import'
 
       },
-      orgList: [],
       downloadFileName: '角色列表'
     }
   },
   filters: {},
   created() {
     this.getList()
-    this.getOrgList()
   },
   methods: {
-    resetForm() {
-      this.getOrgList()
-    },
-    // 机构列表
-    getOrgList() {
-      axios({
-        url: this.Urls.orgListurl,
-        method: 'get'
-      }).then(res => {
-        let resData = res.data.records
-        this.orgList = resData.map(item => this.mapTree(item))
-      })
-    },
-    handleAddUser(record) {
-      this.$refs.addUserModal.edit(record)
-    },
+    resetForm() {},
+    // 设置权限
     handleSetMenu(record) {
       this.$refs.menuModal.detail(record)
     },
@@ -189,7 +172,7 @@ var indexMixin = {
     },
     setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'name', 'orgId', 'mark', 'remark'))
+        this.form.setFieldsValue(pick(data, 'name', 'mark', 'remark'))
       })
     }
   }

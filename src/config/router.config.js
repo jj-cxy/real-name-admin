@@ -84,11 +84,10 @@ export const asyncRouterMap = [{
         ]
       },
 
-      // 系统
       // agree
       {
-        path: '/agree/temp',
-        name: 'agreeTemp',
+        path: '/agree',
+        name: 'agree',
         component: () => import('@/views/systemi/agree/temp/index'),
         meta: {
           title: '协议模板管理',
@@ -99,8 +98,8 @@ export const asyncRouterMap = [{
 
       // assets
       {
-        path: '/assets/list',
-        name: 'assetsList',
+        path: '/assets',
+        name: 'assets',
         component: () => import('@/views/systemi/assets/list/index'),
         meta: {
           title: '资产库管理',
@@ -141,8 +140,8 @@ export const asyncRouterMap = [{
 
       // customer
       {
-        path: '/customer/list',
-        name: 'CustomerList',
+        path: '/customer',
+        name: 'customer',
         component: () => import('@/views/customer/index'),
         meta: {
           title: '单位管理',
@@ -177,10 +176,11 @@ export const asyncRouterMap = [{
       // system
       {
         path: '/system',
+        name: "system",
         redirect: '/system/user',
         component: RouteView,
         meta: {
-          title: '系统设置',
+          title: '系统配置',
           icon: 'setting'
         },
         children: [{

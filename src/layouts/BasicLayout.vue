@@ -157,34 +157,15 @@ export default {
       this.setSidebar(!this.collapsed)
       triggerWindowResizeEvent()
     },
-    // 查找对象
-    getCurrentPart(tree, path) {
-      var isGet = false
-      var retNode = null
-      function deepSearch(tree, path) {
-        for (var i = 0; i < tree.length; i++) {
-          if (tree[i].children && tree[i].children.length > 0) {
-            deepSearch(tree[i].children, path)
-          }
-          if (path === tree[i].path || isGet) {
-            isGet || (retNode = tree[i].name)
-            isGet = true
-            break
-          }
-        }
-      }
-      deepSearch(tree, path)
-      return retNode
-    },
     // 格式化树
     mapTree(item) {
       const haveChildren = Array.isArray(item.children) && item.children.length > 0
       return {
         id: item.id,
         path: item.url,
-        meta: { title: item.name, icon: item.icon || 'smile' },
+        meta: { title: item.title, icon: item.icon || 'smile' },
         children: haveChildren ? item.children.map(i => this.mapTree(i)) : null,
-        name: this.getCurrentPart(this.menuData, item.url)
+        name: item.name
       }
     },
     paddingCalc() {

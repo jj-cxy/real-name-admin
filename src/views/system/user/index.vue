@@ -15,7 +15,7 @@
                   allowClear
                   :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
                   :treeData="orgList"
-                  placeholder="请选择"
+                  placeholder="选择机构"
                   treeDefaultExpandAll
                   v-model="listQuery.condition.orgId"
                 ></a-tree-select>
@@ -24,7 +24,7 @@
             <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select
-                  placeholder="角色"
+                  placeholder="选择角色"
                   allowClear
                   showSearch
                   optionFilterProp="children"
@@ -77,41 +77,57 @@
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange, fixed: true}"
       >
         <span slot="action" slot-scope="text, record">
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="edit"
-            title="修改"
-            @click.native="handleEdit(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>编辑</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              icon="edit"
+              @click.native="handleEdit(record)"
+            ></a-button>
+          </a-tooltip>
           <a-divider type="vertical" />
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="key"
-            title="初始化密码"
-            @click.native="handleInitPass(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>初始化密码</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              icon="key"
+              @click.native="handleInitPass(record)"
+            ></a-button>
+          </a-tooltip>
           <a-divider type="vertical" />
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            :icon="record.accountStatus=='DISABLE'?'unlock':'lock'"
-            :title="record.accountStatus=='DISABLE'?'启用':'禁用'"
-            @click.native="handleLock(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>{{record.accountStatus=='DISABLE'?'启用':'禁用'}}</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              :icon="record.accountStatus=='DISABLE'?'unlock':'lock'"
+              @click.native="handleLock(record)"
+            ></a-button>
+          </a-tooltip>
           <a-divider type="vertical" />
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="delete"
-            title="删除"
-            @click.native="handleDel(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>删除</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              icon="delete"
+              @click.native="handleDel(record)"
+            ></a-button>
+          </a-tooltip>
         </span>
       </a-table>
     </a-card>

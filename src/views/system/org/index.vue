@@ -44,31 +44,48 @@
         @change="handleTableChange"
       >
         <span slot="action" slot-scope="text, record">
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="edit"
-            @click.native="handleEdit(record)"
-          ></a-button>
-          <a-divider type="vertical" />
-          <template v-if="record.isLeaf == 1">
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>编辑</span>
+            </template>
             <a-button
               type="dashed"
               size="small"
               shape="circle"
-              icon="delete"
-              @click.native="handleDel(record)"
+              icon="edit"
+              @click.native="handleEdit(record)"
             ></a-button>
+          </a-tooltip>
+
+          <a-divider type="vertical" />
+
+          <template v-if="record.isLeaf == 1">
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>删除</span>
+              </template>
+              <a-button
+                type="dashed"
+                size="small"
+                shape="circle"
+                icon="delete"
+                @click.native="handleDel(record)"
+              ></a-button>
+            </a-tooltip>
             <a-divider type="vertical" />
           </template>
-          <a-button
-            type="dashed"
-            size="small"
-            shape="circle"
-            icon="plus-square"
-            @click.native="handleSub(record)"
-          ></a-button>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>新增子机构</span>
+            </template>
+            <a-button
+              type="dashed"
+              size="small"
+              shape="circle"
+              icon="plus-square"
+              @click.native="handleSub(record)"
+            ></a-button>
+          </a-tooltip>
         </span>
       </a-table>
 

@@ -19,15 +19,16 @@ var indexMixin = {
       // 表头
       columns: [{
           title: '菜单名称',
-          dataIndex: 'name'
+          dataIndex: 'title'
         },
         {
           title: '类型',
-          dataIndex: 'typeDesc',
-          align: 'center'
+          dataIndex: 'type',
+          align: 'center',
+          customRender: (text, record) => `${text=="MENU"?"菜单":""}`
         },
         {
-          title: '前端路径',
+          title: '菜单路径',
           dataIndex: 'url',
           align: 'center'
         },
@@ -109,32 +110,18 @@ var indexMixin = {
         resourceListUrl: '/auth/api/resource/tree',
         subListUrl: '/auth/api/resource/children/'
       },
-      provinceList: [],
-      cityList: [],
-      districtList: [],
-      treeData: [],
-      isDisabledd: false,
+      treeData: [{
+        title: '根节点',
+        key: '0',
+        value: '0',
+        children: []
+      }],
       typeArr: [{
         value: 'MENU',
         name: '菜单'
       }, {
         value: 'BUTTON',
         name: '按钮'
-      }, {
-        value: 'PATH',
-        name: '访问路径'
-      }, {
-        value: 'TAB',
-        name: '标签页'
-      }, {
-        value: 'PAGE',
-        name: '页面'
-      }, {
-        value: 'FUNCTION',
-        name: '功能'
-      }, {
-        value: 'SERVER',
-        name: '服务'
       }]
     }
   },
@@ -144,40 +131,34 @@ var indexMixin = {
   },
   methods: {
     resetForm() {
-      this.getResource()
-      this.isDisabledd = false
+      this.getTreeData()
+      this.isDisabled = false
     },
     beforeSubmit(form) {
       form.mark = form.mark.join()
+      if (!form.parentId || form.parentId == '') {
+        form.parentId = 0
+      }
       return form
     },
     setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'type', 'name', 'path', 'url', 'icon', 'mark', 'sort', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'icon', 'mark', 'sort', 'remark'))
       })
     },
-    handleSub(record) {
-      this.mdl = {}
-      this.form.resetFields()
-      this.resetForm()
-      this.getResource()
-      this.visible = true
-      this.dialogStatus = 'add'
-      this.isDisabledd = true
-      this.mdl.parentId = record.id
-      this.$nextTick(() => {
-        this.form.setFieldsValue({
-          parentId: record.id
-        })
-      })
-    },
-    getResource() {
+    getTreeData() {
       axios({
         url: this.Urls.resourceListUrl,
         method: 'get'
       }).then(res => {
         let resData = res.data.records || []
         this.treeData = resData.map(item => this.mapTree(item))
+        this.treeData.unshift({
+          title: '根节点',
+          key: '0',
+          value: '0',
+          children: []
+        })
       })
     }
   }
