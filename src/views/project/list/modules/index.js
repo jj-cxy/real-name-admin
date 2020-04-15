@@ -42,7 +42,8 @@ var indexMixin = {
       Urls: {
         listUrl: '/ida/api/project/page',
         delUrl: '/ida/api/project/remove/',
-        downloadExcelUrl: '/ida/api/project/export/ids'
+        downloadExcelUrl: '/ida/api/project/export/ids',
+        orgListurl: '/auth/api/org/tree',
       },
       districtList: [],
       projectStatusList: [{
@@ -62,12 +63,14 @@ var indexMixin = {
         value: 'FINISH'
       }],
       downloadFileName: '项目列表',
+      orgList: []
     }
   },
   filters: {},
   created() {
     this.getList()
     this.getArea('520100', 'districtList')
+    this.getOrgList();
   },
   methods: {
     handleDetail(record) {
@@ -76,6 +79,16 @@ var indexMixin = {
         query: {
           id: record.id
         }
+      })
+    },
+    // 机构列表
+    getOrgList() {
+      axios({
+        url: this.Urls.orgListurl,
+        method: 'get'
+      }).then(res => {
+        let resData = res.data.records
+        this.orgList = resData.map(item => this.mapTree(item))
       })
     },
   }

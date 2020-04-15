@@ -5,12 +5,12 @@
       <div class="table-page-search-wrapper">
         <a-form layout="inline">
           <a-row :gutter="15">
-            <a-col :md="8" :sm="24">
+            <a-col :md="10" :sm="24">
               <a-form-item>
                 <a-input v-model="listQuery.condition.name" placeholder="项目名称" />
               </a-form-item>
             </a-col>
-            <!-- <a-col :md="6" :sm="24">
+            <a-col :md="5" :sm="24">
               <a-form-item>
                 <a-select
                   allowClear
@@ -26,27 +26,77 @@
                   >{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>
-            </a-col>-->
-            <a-col :md="4" :sm="24">
+            </a-col>
+            <a-col :md="5" :sm="24">
               <a-form-item>
-                <a-select allowClear v-model="listQuery.condition.projectStatus" placeholder="项目节点">
-                  <a-select-option
-                    v-for="(item,index) in projectStatusList"
-                    :key="index"
-                    :value="item.value"
-                  >{{item.name}}</a-select-option>
-                </a-select>
+                <a-tree-select
+                  allowClear
+                  :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
+                  :treeData="orgList"
+                  placeholder="管理机构"
+                  treeDefaultExpandAll
+                  v-model="listQuery.condition.orgId"
+                ></a-tree-select>
               </a-form-item>
             </a-col>
-            <a-col :md="9" :sm="24">
-              <a-form-item label="发起时间" class="date-picker-box">
-                <j-date @start="handleStartTime" @end="handleEndTime" v-if="isShowDate"></j-date>
-              </a-form-item>
-            </a-col>
-            <a-col :md="3 || 24" :sm="24">
-              <span class="table-page-search-submitButtons">
+            <template v-if="advanced">
+              <a-col :md="4" :sm="24">
+                <a-form-item>
+                  <a-select
+                    allowClear
+                    v-model="listQuery.condition.projectStatus"
+                    placeholder="项目类型"
+                  >
+                    <a-select-option
+                      v-for="(item,index) in projectStatusList"
+                      :key="index"
+                      :value="item.value"
+                    >{{item.name}}</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :md="4" :sm="24">
+                <a-form-item>
+                  <a-select
+                    allowClear
+                    v-model="listQuery.condition.projectStatus"
+                    placeholder="项目状态"
+                  >
+                    <a-select-option
+                      v-for="(item,index) in projectStatusList"
+                      :key="index"
+                      :value="item.value"
+                    >{{item.name}}</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :md="6" :sm="24">
+                <a-form-item>
+                  <a-select
+                    allowClear
+                    v-model="listQuery.condition.projectStatus"
+                    placeholder="前端软件公司"
+                  >
+                    <a-select-option
+                      v-for="(item,index) in projectStatusList"
+                      :key="index"
+                      :value="item.value"
+                    >{{item.name}}</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+            </template>
+            <a-col :md="4" :sm="24">
+              <span
+                class="table-page-search-submitButtons"
+                :style="advanced && { float: 'left', overflow: 'hidden' } || {} "
+              >
                 <a-button type="primary" @click="handleSearch">查询</a-button>
                 <a-button style="margin-left: 8px" @click="searchReset">重置</a-button>
+                <a @click="toggleAdvanced" style="margin-left: 8px">
+                  {{ advanced ? '收起' : '展开' }}
+                  <a-icon :type="advanced ? 'up' : 'down'" />
+                </a>
               </span>
             </a-col>
           </a-row>

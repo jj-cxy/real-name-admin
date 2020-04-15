@@ -1,6 +1,9 @@
 <template>
-  <div v-if="ids">
-    <ul class="file-list">
+  <div>
+    <div class="attachment-btn">
+      <a-button type="dashed" size="small" icon="search" @click="handleView('slogan.png')">查看附件</a-button>
+    </div>
+    <!-- <ul class="file-list">
       <li v-for="(item,index) in fileList" :key="index">
         <a
           href="javascript:;"
@@ -13,14 +16,8 @@
           v-if="fileFormat[item.ext]"
         >{{item.name}}</a>
       </li>
-    </ul>
-    <a-modal
-      :visible="previewVisible"
-      :footer="null"
-      :closable="false"
-      @cancel="handleCancel"
-      class="img-modal"
-    >
+    </ul>-->
+    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel" class="img-modal">
       <img alt="example" @load="loadImage" :src="previewImage" v-show="imgShow" />
     </a-modal>
   </div>

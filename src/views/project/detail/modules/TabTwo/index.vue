@@ -4,20 +4,9 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="15">
-          <a-col :md="8" :sm="24">
+          <a-col :md="10" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="企业名称" />
-            </a-form-item>
-          </a-col>
-          <a-col :md="4" :sm="24">
-            <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="企业类型">
-                <a-select-option
-                  v-for="(item,index) in assetsStatusList"
-                  :key="index"
-                  :value="item.value"
-                >{{item.name}}</a-select-option>
-              </a-select>
+              <a-input allowClear v-model="listQuery.condition.name" placeholder="分包项目名称" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
@@ -36,11 +25,7 @@
       rowKey="id"
       :pagination="pagination"
       size="middle"
-    >
-      <span slot="action" slot-scope="text, record">
-        <a href="javascript:;" @click="handleDetail(record)">查看</a>
-      </span>
-    </a-table>
+    ></a-table>
 
     <!-- 表单 -->
     <form-drawer ref="detailForm"></form-drawer>
@@ -53,7 +38,7 @@ import indexMixin from './modules/index'
 import formDrawer from './modules/formDrawer'
 
 export default {
-  name: 'five',
+  name: 'sub',
   mixins: [baseMixin, indexMixin],
   components: {
     formDrawer

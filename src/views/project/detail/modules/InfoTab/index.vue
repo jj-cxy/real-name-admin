@@ -70,19 +70,10 @@
               <td class="tit">施工许可证号</td>
               <td>{{model.constructionPermitNumber}}</td>
               <td class="tit">施工许可证</td>
-              <td>{{model.constructionPermitNumberUrl}}</td>
-            </tr>
-            <tr>
-              <td class="tit">安全生产许可证号</td>
-              <td>{{model.constructionPermitNumber}}</td>
-              <td class="tit">有效期</td>
-              <td>{{model.endTime}}</td>
-            </tr>
-            <tr>
-              <td class="tit">安全生产许可证</td>
-              <td>{{model.constructionPermitNumberUrl}}</td>
-              <td class="tit"></td>
-              <td></td>
+              <!-- <td>{{model.constructionPermitNumberUrl}}</td> -->
+              <td>
+                <viewer></viewer>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -94,7 +85,7 @@
           <tbody>
             <tr>
               <td class="tit">专户帐号</td>
-              <td>{{model.salaryBankName}}</td>
+              <td>{{model.workWageBankAccountNo}}</td>
               <td class="tit">银行种类</td>
               <td>{{model.salaryBankAccountNo}}</td>
             </tr>
@@ -112,7 +103,7 @@
             </tr>
             <tr>
               <td class="tit">所属银行编码</td>
-              <td>{{model.endTime}}</td>
+              <td>{{model.bankCode}}</td>
               <td class="tit">每月发薪日期</td>
               <td>{{model.salaryTime}}</td>
             </tr>

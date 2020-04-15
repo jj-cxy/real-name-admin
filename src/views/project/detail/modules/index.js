@@ -13,9 +13,9 @@ var indexMixin = {
         getByIdUrl: '/ida/api/project/get/',
         assetByIdUrl: '/biz/oaAssets/get/'
       },
-      fileList: [],
       model: {},
-      singleFile: true
+      
+      activeKey: '1'
     }
   },
   created() {
@@ -23,6 +23,11 @@ var indexMixin = {
     this.fillForm(params)
   },
   methods: {
+    // tab change
+    handleTabChange(key) {
+      console.log('lalal', key)
+      this.activeKey = key
+    },
     setForm(data) {
       this.model = data
       this.$refs.infoTab.setValue(data)

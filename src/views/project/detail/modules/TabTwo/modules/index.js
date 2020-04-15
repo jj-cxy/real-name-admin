@@ -1,7 +1,6 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
 
 var indexMixin = {
   props: {
@@ -14,43 +13,38 @@ var indexMixin = {
     return {
       // 表头
       columns: [{
-        title: '企业名称',
+        title: '分包项目名称',
         dataIndex: 'enterpriseName'
       }, {
-        title: '企业类型',
+        title: '分包企业类型',
         align: 'center',
         dataIndex: 'roleTypeDesc'
       }, {
-        title: '项目负责人信息',
+        title: '分包类型',
+        align: 'center',
+        dataIndex: 'roleTypeDesc'
+      }, {
+        title: '分包负责人信息',
         dataIndex: 'projectManagerName',
         customRender: (text, record, index) => {
           return `项目负责人：${text}　　手机号：${record.projectManagerPhone}`
         }
       }, {
-        title: '操作',
-        dataIndex: 'action',
+        title: '在场情况',
         align: 'center',
-        width: '70px',
-        scopedSlots: {
-          customRender: 'action'
-        }
+        dataIndex: 'roleTypeDesc'
+      }, {
+        title: '进场时间',
+        align: 'center',
+        dataIndex: 'roleTypeDesc'
+      }, {
+        title: '退出时间',
+        align: 'center',
+        dataIndex: 'roleTypeDesc'
       }],
       Urls: {
-        listUrl: '/biz/oaAssets/page',
-        delUrl: '/biz/oaAssets/remove/',
-        downloadExcelUrl: '/biz/oaAssets/export/ids',
+        listUrl: '/biz/oaAssets/page'
       },
-      assetsStatusList: [{
-        name: '在租',
-        value: 'RENTING'
-      }, {
-        name: '招租中',
-        value: 'IN_RENT'
-      }, {
-        name: '空闲',
-        value: 'FREE'
-      }],
-      downloadFileName: '资产列表',
     }
   },
   filters: {},

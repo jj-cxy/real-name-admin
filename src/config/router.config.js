@@ -84,36 +84,12 @@ export const asyncRouterMap = [{
         ]
       },
 
-      // agree
-      {
-        path: '/agree',
-        name: 'agree',
-        component: () => import('@/views/systemi/agree/temp/index'),
-        meta: {
-          title: '协议模板管理',
-          icon: 'profile',
-          keepAlive: true
-        }
-      },
-
-      // assets
-      {
-        path: '/assets',
-        name: 'assets',
-        component: () => import('@/views/systemi/assets/list/index'),
-        meta: {
-          title: '资产库管理',
-          icon: 'build',
-          keepAlive: true
-        }
-      },
-
       // project
       {
         path: '/project',
         name: 'project',
         redirect: '/project/list',
-        hideChildrenInMenu: true,
+        // hideChildrenInMenu: true,
         component: PageView,
         meta: {
           title: '项目管理',
@@ -144,7 +120,7 @@ export const asyncRouterMap = [{
         path: '/enterprise',
         name: 'enterprise',
         redirect: '/enterprise/list',
-        hideChildrenInMenu: true,
+        // hideChildrenInMenu: true,
         component: PageView,
         meta: {
           title: '单位管理',
@@ -162,7 +138,7 @@ export const asyncRouterMap = [{
         }, {
           path: '/enterprise/detail',
           name: 'EnterpriseDetail',
-          component: () => import('@/views/project/detail/index'),
+          component: () => import('@/views/enterprise/detail/index'),
           meta: {
             title: '单位详情',
             keepAlive: false

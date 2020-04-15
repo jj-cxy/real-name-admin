@@ -8,12 +8,33 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        addUrl: '/biz/oaDisclosure/disclosureInsert',
-        editUrl: '/biz/oaDisclosure/disclosureUpdate/',
-        getByIdUrl: '/ida/api/project/get/',
-        assetByIdUrl: '/biz/oaAssets/get/'
+        addUrl: '/biz/enterprise/disclosureInsert',
+        editUrl: '/biz/enterprise/disclosureUpdate/',
+        getByIdUrl: '/ida/api/enterprise/get/'
       },
-      fileList: [],
+      labelCol: {
+        xl: {
+          span: 3
+        },
+        lg: {
+          span: 5
+        },
+        md: {
+          span: 24
+        }
+      },
+      wrapperCol: {
+        xl: {
+          span: 19
+        },
+
+        lg: {
+          span: 17
+        },
+        md: {
+          span: 24
+        }
+      },
       model: {},
       singleFile: true
     }

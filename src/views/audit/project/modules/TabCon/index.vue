@@ -51,7 +51,7 @@
             <td>存续</td>
             <td class="tit">证书附件</td>
             <td class="attachment-btn">
-              <a-button size="small">附件</a-button>
+              <a-button type="dashed" size="small" icon="search">查看附件</a-button>
             </td>
           </tr>
         </tbody>
