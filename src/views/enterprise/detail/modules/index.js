@@ -34,9 +34,7 @@ var indexMixin = {
         md: {
           span: 24
         }
-      },
-      model: {},
-      singleFile: true
+      }
     }
   },
   created() {
@@ -46,7 +44,6 @@ var indexMixin = {
   methods: {
     setForm(data) {
       this.model = data
-      this.$refs.infoTab.setValue(data)
     },
   }
 }

@@ -8,23 +8,24 @@ var indexMixin = {
       // 表头
       columns: [{
         title: '单位名称',
-        dataIndex: 'projectId'
+        dataIndex: 'unitName'
       }, {
         title: '统一社会信用代码',
-        dataIndex: 'projectName'
+        dataIndex: 'unitCode'
       }, {
         title: '所属地区',
-        dataIndex: 'orgCodeDesc'
+        dataIndex: 'address',
+        customRender:(text,record)=>`${record.province || ""} ${record.city || ""}  ${record.district || ""}`
       }, {
         title: '主要业务类型',
-        dataIndex: 'district'
+        dataIndex: 'industryDesc'
       }, {
         title: '参与项目数量',
-        dataIndex: 'projectType'
+        dataIndex: 'faxNumber'
       }, {
         title: '备案审核状态',
         align: 'center',
-        dataIndex: 'projectStatusDesc'
+        dataIndex: 'status'
       }, {
         title: '创建时间',
         align: 'center',
@@ -72,7 +73,7 @@ var indexMixin = {
   methods: {
     handleDetail(record) {
       this.$router.push({
-        path: "/project/detail",
+        path: "/enterprise/detail",
         query: {
           id: record.id
         }

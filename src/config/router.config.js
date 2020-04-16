@@ -147,7 +147,7 @@ export const asyncRouterMap = [{
       },
 
       // chart
-      {
+      /* {
         path: '/chart',
         name: 'chart',
         component: () => import('@/views/chart/index'),
@@ -156,7 +156,7 @@ export const asyncRouterMap = [{
           icon: 'fund',
           keepAlive: true
         },
-      },
+      }, */
 
       /* {
         path: '/data/statis',

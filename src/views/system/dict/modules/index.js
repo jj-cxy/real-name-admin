@@ -23,13 +23,13 @@ var indexMixin = {
           key: 'name'
         },
         {
-          title: '键名',
+          title: '键值',
           dataIndex: 'key',
           key: 'key',
           align: 'center'
         },
         {
-          title: '键值',
+          title: '键名',
           dataIndex: 'value',
           key: 'value',
           align: 'center'

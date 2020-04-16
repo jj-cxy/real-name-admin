@@ -132,6 +132,7 @@ var modalMixin = {
         if (res.code == 0) {
           this.setForm(res.data)
         } else {
+          this.afterFill()
           this.$notification.error({
             message: res.msg
           })
@@ -140,6 +141,7 @@ var modalMixin = {
         this.confirmLoading = false
       })
     },
+    afterFill() {},
 
     // 提交表单
     handleSubmit(e) {

@@ -7,17 +7,17 @@
           <a-row :gutter="15">
             <a-col :md="8" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="项目名称" />
+                <a-input v-model="listQuery.condition.name" placeholder="单位名称" />
               </a-form-item>
             </a-col>
-            <!-- <a-col :md="6" :sm="24">
+            <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select
                   allowClear
                   showSearch
                   optionFilterProp="children"
                   v-model="listQuery.condition.district"
-                  placeholder="所在地区"
+                  placeholder="所属地区"
                 >
                   <a-select-option
                     v-for="(item,index) in districtList"
@@ -26,10 +26,14 @@
                   >{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>
-            </a-col>-->
+            </a-col>
             <a-col :md="4" :sm="24">
               <a-form-item>
-                <a-select allowClear v-model="listQuery.condition.projectStatus" placeholder="项目节点">
+                <a-select
+                  allowClear
+                  v-model="listQuery.condition.projectStatus"
+                  placeholder="主要业务类型"
+                >
                   <a-select-option
                     v-for="(item,index) in projectStatusList"
                     :key="index"
@@ -38,9 +42,15 @@
                 </a-select>
               </a-form-item>
             </a-col>
-            <a-col :md="9" :sm="24">
-              <a-form-item label="发起时间" class="date-picker-box">
-                <j-date @start="handleStartTime" @end="handleEndTime" v-if="isShowDate"></j-date>
+            <a-col :md="4" :sm="24">
+              <a-form-item>
+                <a-select allowClear v-model="listQuery.condition.projectStatus" placeholder="审核状态">
+                  <a-select-option
+                    v-for="(item,index) in projectStatusList"
+                    :key="index"
+                    :value="item.value"
+                  >{{item.name}}</a-select-option>
+                </a-select>
               </a-form-item>
             </a-col>
             <a-col :md="3 || 24" :sm="24">
@@ -78,14 +88,12 @@
 import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
 import formDrawer from './modules/formDrawer'
-import JDate from '@/components/JDate/index'
 
 export default {
   name: 'enterprise',
   mixins: [baseMixin, indexMixin],
   components: {
-    formDrawer,
-    JDate
+    formDrawer
   }
 }
 </script>

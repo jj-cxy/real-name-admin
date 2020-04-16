@@ -1,7 +1,7 @@
 <template>
   <div class="account-settings-info-view">
     <a-row :gutter="16">
-      <a-col :md="24" :lg="16">
+      <a-col :md="24" :lg="10">
         <a-form @submit="handleSubmit" :form="form" layout="vertical">
           <a-form-item label="人员姓名">
             <a-input placeholder="请输入人员姓名" v-decorator="['name', validatorRules.must]" />

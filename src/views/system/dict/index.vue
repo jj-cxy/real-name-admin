@@ -65,7 +65,6 @@
             <a-divider type="vertical" />
           </template>
           <a-button
-            v-if="record.category=='tree'"
             type="dashed"
             size="small"
             shape="circle"
@@ -100,12 +99,12 @@
           </a-form-item>
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="键名">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="键值">
                 <a-input v-decorator="['key']" />
               </a-form-item>
             </a-col>
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="键值">
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="键名">
                 <a-input v-decorator="['value']" />
               </a-form-item>
             </a-col>
@@ -127,10 +126,7 @@
             </a-col>
             <a-col :md="12" :sm="24">
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="字典类型">
-                <a-input
-                  :disabled="isDisabled"
-                  v-decorator="['type', {rules: [{required: true, message: '此字段为必填'}]}]"
-                />
+                <a-input v-decorator="['type', {rules: [{required: true, message: '此字段为必填'}]}]" />
               </a-form-item>
             </a-col>
           </a-row>

@@ -1,21 +1,66 @@
 <template>
   <a-card :body-style="{padding: '24px'}" :bordered="false">
-    <a-tabs :activeKey="activeKey" class="card-tabs" size="small" @change="handleTabChange">
-      <a-tab-pane tab="项目信息" key="1">
-        <info-tab ref="infoTab"></info-tab>
+    <a-tabs
+      v-if="tabShow"
+      :activeKey="activeKey"
+      class="card-tabs"
+      size="small"
+      @change="handleTabChange"
+    >
+      <a-tab-pane key="1">
+        <span slot="tab">
+          <a-icon type="project" />项目信息
+        </span>
+        <info-tab :data="model"></info-tab>
       </a-tab-pane>
-      <a-tab-pane tab="五方主体" key="2" forceRender>
+      <a-tab-pane key="2" forceRender>
+        <span slot="tab">
+          <a-icon type="home" />五方主体
+        </span>
         <tab-one v-if="activeKey==2" :list="model.five"></tab-one>
       </a-tab-pane>
-      <a-tab-pane tab="分包信息" key="3">
+      <a-tab-pane key="3">
+        <span slot="tab">
+          <a-icon type="hdd" />分包信息
+        </span>
         <tab-two v-if="activeKey==3" :list="model.sub"></tab-two>
       </a-tab-pane>
-      <a-tab-pane tab="班组信息" key="4">Content of Tab Pane 3</a-tab-pane>
-      <a-tab-pane tab="管理人员" key="5">Content of Tab Pane 3</a-tab-pane>
-      <a-tab-pane tab="劳务人员" key="6">Content of Tab Pane 3</a-tab-pane>
-      <a-tab-pane tab="其他人员" key="7">Content of Tab Pane 3</a-tab-pane>
-      <a-tab-pane tab="人员考勤" key="8">Content of Tab Pane 3</a-tab-pane>
-      <a-tab-pane tab="工资发放" key="9">Content of Tab Pane 3</a-tab-pane>
+      <a-tab-pane key="4">
+        <span slot="tab">
+          <a-icon type="team" />班组信息
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
+      <a-tab-pane key="5">
+        <span slot="tab">
+          <a-icon type="cluster" />管理人员
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
+      <a-tab-pane key="6">
+        <span slot="tab">
+          <a-icon type="user" />劳务人员
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
+      <a-tab-pane key="7">
+        <span slot="tab">
+          <a-icon type="solution" />其他人员
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
+      <a-tab-pane key="8">
+        <span slot="tab">
+          <a-icon type="robot" />人员考勤
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
+      <a-tab-pane key="9">
+        <span slot="tab">
+          <a-icon type="money-collect" />工资发放
+        </span>
+        Content of Tab Pane 3
+      </a-tab-pane>
     </a-tabs>
   </a-card>
 </template>

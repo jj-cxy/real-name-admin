@@ -2,7 +2,6 @@ import {
   axios
 } from '@/utils/request'
 import pick from 'lodash.pick'
-import moment from 'moment'
 
 var indexMixin = {
   data() {
@@ -10,15 +9,14 @@ var indexMixin = {
       Urls: {
         addUrl: '/biz/oaDisclosure/disclosureInsert',
         editUrl: '/biz/oaDisclosure/disclosureUpdate/',
-        getByIdUrl: '/ida/api/project/get/',
-        assetByIdUrl: '/biz/oaAssets/get/'
+        getByIdUrl: '/ida/api/project/get/'
       },
       model: {},
-      
-      activeKey: '1'
+      activeKey: '1',
+      tabShow: false
     }
   },
-  created() {
+  mounted() {
     let params = this.$route.query
     this.fillForm(params)
   },
@@ -30,7 +28,10 @@ var indexMixin = {
     },
     setForm(data) {
       this.model = data
-      this.$refs.infoTab.setValue(data)
+      this.tabShow = true
+    },
+    afterFill() {
+      this.tabShow = true
     },
   }
 }

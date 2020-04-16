@@ -6,13 +6,18 @@ import moment from 'moment'
 import BMap from 'BMap'
 
 var indexMixin = {
+  props: {
+    data: {
+      type: Object,
+      default: {}
+    }
+  },
   data() {
     return {
       Urls: {
         addUrl: '/biz/oaDisclosure/disclosureInsert',
         editUrl: '/biz/oaDisclosure/disclosureUpdate/',
-        getByIdUrl: '/biz/oaDisclosure/get/',
-        assetByIdUrl: '/biz/oaAssets/get/'
+        getByIdUrl: '/biz/oaDisclosure/get/'
       },
       labelCol: {
         xl: {
@@ -37,32 +42,19 @@ var indexMixin = {
           span: 24
         }
       },
-      validatorRules: {
-        must: {
-          rules: [{
-            required: true,
-            message: '此字段为必填!'
-          }]
-        }
-      },
-      fileList: [],
       model: {},
-      singleFile: true
     }
   },
   created() {},
+  mounted() {
+    console.log('详细', this.data)
+    this.model = this.data
+    this.initMap()
+  },
   methods: {
-    setValue(data) {
-      this.model = data
-      this.initMap()
-      console.log('详情', this.model)
-    },
     initMap() {
       var map = new BMap.Map("allmap");
       var point = new BMap.Point(106.709177, 26.629907);
-      map.centerAndZoom(point, 16);
-      var marker = new BMap.Marker(point);
-      map.addOverlay(marker);
 
       var city = "贵阳市观山湖区北京西路38号世纪金源购物中心金阳建设大厦26楼"
       var myGeo = new BMap.Geocoder();
@@ -70,8 +62,10 @@ var indexMixin = {
         if (point) {
           map.clearOverlays();
           map.centerAndZoom(point, 16);
-          map.addOverlay(new BMap.Marker(point));
-          map.panTo(point);
+          var marker = new BMap.Marker(point);
+          map.addOverlay(marker);
+          marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+          // map.panTo(point);
         } else {
           alert("您选择地址没有解析到结果!");
         }

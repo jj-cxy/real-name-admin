@@ -44,7 +44,7 @@
             </tr>
             <tr>
               <td class="tit">签约合同价</td>
-              <td>{{model.manufacturingCost}}</td>
+              <td>{{model.constractPrice}}</td>
               <td class="tit">合同签订日期</td>
               <td>{{model.constractDay}}</td>
             </tr>
@@ -97,9 +97,9 @@
             </tr>
             <tr>
               <td class="tit">开户行名称</td>
-              <td>{{model.endTime}}</td>
+              <td>{{model.depositBank}}</td>
               <td class="tit">账户状态</td>
-              <td>{{model.accountStatus}}</td>
+              <td>{{model.accountStateCode}}</td>
             </tr>
             <tr>
               <td class="tit">所属银行编码</td>

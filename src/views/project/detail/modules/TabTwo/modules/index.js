@@ -14,33 +14,33 @@ var indexMixin = {
       // 表头
       columns: [{
         title: '分包项目名称',
-        dataIndex: 'enterpriseName'
+        dataIndex: 'projectName'
       }, {
-        title: '分包企业类型',
+        title: '分包企业名称',
         align: 'center',
-        dataIndex: 'roleTypeDesc'
+        dataIndex: 'enterpriseName'
       }, {
         title: '分包类型',
         align: 'center',
         dataIndex: 'roleTypeDesc'
       }, {
         title: '分包负责人信息',
-        dataIndex: 'projectManagerName',
+        dataIndex: 'subHeadName',
         customRender: (text, record, index) => {
-          return `项目负责人：${text}　　手机号：${record.projectManagerPhone}`
+          return `项目负责人：${text}　　手机号：${record.subHeadTel}`
         }
       }, {
         title: '在场情况',
         align: 'center',
-        dataIndex: 'roleTypeDesc'
+        dataIndex: 'subsituationDesc'
       }, {
         title: '进场时间',
         align: 'center',
-        dataIndex: 'roleTypeDesc'
+        dataIndex: 'subEntryTime'
       }, {
-        title: '退出时间',
+        title: '退场时间',
         align: 'center',
-        dataIndex: 'roleTypeDesc'
+        dataIndex: 'subQuitTime'
       }],
       Urls: {
         listUrl: '/biz/oaAssets/page'

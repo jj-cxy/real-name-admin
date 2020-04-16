@@ -8,7 +8,7 @@ var indexMixin = {
       // 表头
       columns: [{
         title: '项目编码',
-        dataIndex: 'projectId'
+        dataIndex: 'tendersNumber'
       }, {
         title: '项目名称',
         dataIndex: 'projectName'

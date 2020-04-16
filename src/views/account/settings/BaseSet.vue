@@ -2,7 +2,7 @@
   <div class="account-settings-info-view">
     <span style="position: relative; top: -20px">为了保证你的账户安全，请及时更改你的密码</span>
     <a-row :gutter="16">
-      <a-col :md="24" :lg="16">
+      <a-col :md="24" :lg="10">
         <a-form @submit="handleSubmit" :form="form" layout="vertical">
           <a-form-item label="用户名">
             <a-input readonly placeholder v-model="mdl.userName" />
