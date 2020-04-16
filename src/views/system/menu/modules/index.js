@@ -122,7 +122,11 @@ var indexMixin = {
       }, {
         value: 'BUTTON',
         name: '按钮'
-      }]
+      }],
+      mdl: {
+        icon: ''
+      },
+      iconChooseVisible: false
     }
   },
   filters: {},
@@ -136,14 +140,16 @@ var indexMixin = {
     },
     beforeSubmit(form) {
       form.mark = form.mark.join()
+      form.icon = this.mdl.icon
       if (!form.parentId || form.parentId == '') {
         form.parentId = 0
       }
       return form
     },
     setForm(data) {
+      console.log('lala', this.mdl)
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'icon', 'mark', 'sort', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'mark', 'sort', 'remark'))
       })
     },
     getTreeData() {
@@ -169,7 +175,17 @@ var indexMixin = {
         value: item.id,
         children: haveChildren ? item.children.map(i => this.mapTree(i)) : []
       }
-    }
+    },
+    selectIcons() {
+      this.iconChooseVisible = true
+    },
+    handleIconCancel() {
+      this.iconChooseVisible = false
+    },
+    handleIconChoose(value) {
+      this.mdl.icon = value
+      this.iconChooseVisible = false
+    },
   }
 }
 export default indexMixin

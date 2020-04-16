@@ -6,10 +6,6 @@ var baseMixin = {
     return {
       // 高级搜索 展开/关闭
       advanced: false,
-      mustQuery: {
-        name: this.$route.query.name || null,
-        projectName: this.$route.query.name || null
-      },
       listQuery: {
         pageIndex: 1,
         pageSize: 10,
@@ -22,8 +18,10 @@ var baseMixin = {
           orderBy: 'createTime'
         }]
       },
-      columns: [],
-      listData: [],
+      mustQuery: {
+        name: this.$route.query.name || null,
+        projectName: this.$route.query.name || null
+      },
       pagination: {
         total: 0,
         showTotal: total => `共 ${total} 条`,
@@ -32,6 +30,8 @@ var baseMixin = {
         showSizeChanger: true,
         onShowSizeChange: (page, pageSize) => this.onShowSizeChange(page, pageSize)
       },
+      columns: [],
+      listData: [],
       localLoading: false,
       tableShow: false,
       defaultExpandAllRows: false,
@@ -512,6 +512,7 @@ var baseMixin = {
     handleEndTime(date) {
       this.listQuery.condition.endTime = date
     },
+    
     // 表格点击行事件
     rowClick(record, index) {
       return {

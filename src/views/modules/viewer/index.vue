@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="attachment-btn">
-      <a-button type="dashed" size="small" icon="search" @click="handleView('slogan.png')">查看附件</a-button>
+    <div class="attachment-btn" v-for="(item,index) in fileList" :key="index">
+      <a-button type="dashed" size="small" icon="search" @click="handleView(item.url)">查看附件</a-button>
     </div>
     <!-- <ul class="file-list">
       <li v-for="(item,index) in fileList" :key="index">

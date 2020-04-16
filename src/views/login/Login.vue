@@ -58,13 +58,18 @@
           </a-col>
           <a-col :span="10">
             <div class="captcha">
-              <img :src="captchaImg" alt @click="getCaptcha"/>
+              <img :src="captchaImg" alt @click="getCaptcha" />
             </div>
           </a-col>
         </a-row>
 
         <a-form-item>
-          <a-checkbox v-decorator="['rememberMe']">记住账号</a-checkbox>
+          <a-checkbox
+            v-decorator="['rememberMe',{
+            valuePropName: 'checked',
+            initialValue: false
+          }]"
+          >记住账号</a-checkbox>
         </a-form-item>
 
         <a-form-item style="margin-bottom: 0">
@@ -79,7 +84,11 @@
         </a-form-item>
 
         <a-form-item style="margin-bottom: 0">
-          <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">忘记密码？</router-link>
+          <router-link
+            :to="{ name: 'alteration'}"
+            class="forge-password"
+            style="float: right;"
+          >忘记密码？</router-link>
         </a-form-item>
       </a-form>
     </div>
@@ -100,7 +109,10 @@ export default {
       form: this.$form.createForm(this),
       validatorRules: {
         username: { rules: [{ required: true, message: '请输入用户名或者手机号', validator: 'click' }] },
-        password: { rules: [{ required: true, message: '请输入密码', validator: 'click' }] },
+        password: {
+          initialValue: 'Jjsj@123456',
+          rules: [{ required: true, message: '请输入密码', validator: 'click' }]
+        },
         verifyCode: { rule: [{ required: true, message: '请输入验证码' }] }
       },
       state: {
@@ -111,7 +123,7 @@ export default {
         captchaUrl: '/auth/api/captcha/get'
       },
       captchaImg: '',
-      showImg: false
+      captchaHeader: ''
     }
   },
   created() {
@@ -129,6 +141,7 @@ export default {
       getImgCaptcha().then(res => {
         if (res.code == 0) {
           this.captchaImg = res.data.image
+          this.captchaHeader = res.data.hash
         } else {
           this.$notification.error({
             message: res.msg
@@ -151,7 +164,8 @@ export default {
             ...values
           }
           loginParams.scope = 'INSIDE'
-          loginParams.loginType = 'login'
+          loginParams.loginType = 'normal'
+          loginParams.header = this.captchaHeader
           Login(loginParams)
             .then(res => {
               if (values.rememberMe) {

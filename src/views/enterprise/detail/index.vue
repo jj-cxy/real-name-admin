@@ -88,7 +88,10 @@
                 <td class="tit">资质状态</td>
                 <td>{{model.qualifications[0].qualificationStatusDesc}}</td>
                 <td class="tit">证书附件</td>
-                <td>{{model.qualifications[0].qualificationContent}}</td>
+                <td>
+                  <viewer :ids="model.qualifications[0].qualificationContent"></viewer>
+                  <!-- {{model.qualifications[0].qualificationContent}} -->
+                </td>
               </tr>
             </tbody>
           </table>

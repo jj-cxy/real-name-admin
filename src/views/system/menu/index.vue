@@ -141,8 +141,10 @@
               </a-form-item>
             </a-col>
             <a-col :md="12" :sm="24">
-              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="图标class">
-                <a-input placeholder="请输入图标class" v-decorator="['icon']" />
+              <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="菜单图标">
+                <a-input placeholder="点击右侧按钮选择图标" read-only v-model="mdl.icon">
+                  <a-icon slot="addonAfter" type="select" @click="selectIcons" />
+                </a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -185,15 +187,26 @@
         </a-form>
       </a-modal>
     </a-card>
+
+    <!-- 选择图标 -->
+    <icons
+      @choose="handleIconChoose"
+      @close="handleIconCancel"
+      :iconChooseVisible="iconChooseVisible"
+    ></icons>
   </div>
 </template>
 
 <script>
 import baseMixin from '@/components/Mixins/common'
 import indexMixin from './modules/index'
+import Icons from './icon/Icons'
 
 export default {
   name: 'menuList',
-  mixins: [baseMixin, indexMixin]
+  mixins: [baseMixin, indexMixin],
+  components: {
+    Icons
+  }
 }
 </script>

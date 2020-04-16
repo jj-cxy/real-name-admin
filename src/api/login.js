@@ -15,7 +15,10 @@ export function login(parameter) {
   return axios({
     url: '/auth/api/auth/login',
     method: 'post',
-    data: parameter
+    data: parameter,
+    headers: {
+      'base-captcha-key': parameter.header
+    }
   })
 }
 

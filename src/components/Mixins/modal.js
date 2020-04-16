@@ -84,7 +84,6 @@ var modalMixin = {
         }
       },
       fileList: [],
-      projectModel: {},
       uploading: false,
       singleFile: false
     }
@@ -138,6 +137,7 @@ var modalMixin = {
           })
         }
       }).catch(() => {
+        this.afterFill()
         this.confirmLoading = false
       })
     },
@@ -319,22 +319,6 @@ var modalMixin = {
       // Can not select days before today and today
       // return current && current < moment().endOf('day');
       return current && current < moment().subtract(1, "days");
-    },
-
-    // 项目信息
-    getProjectInfo(id) {
-      axios({
-        url: this.Urls.projectByIdUrl + id,
-        method: 'get'
-      }).then(res => {
-        if (res.code == 0) {
-          this.projectModel = res.data
-        } else {
-          this.$notification.error({
-            message: res.msg
-          })
-        }
-      })
     },
   }
 }
