@@ -62,14 +62,14 @@
             </div>
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="单位资质">
-            <div class="detail-table" v-for="(item,index) in model.qualifications" :key="item.id">
+            <div class="detail-table" v-for="item in model.qualifications" :key="item.id">
               <table>
                 <tbody>
                   <tr>
                     <td class="tit">资质资格类型</td>
                     <td>{{item.qualificationCategoryDesc}}</td>
                     <td class="tit">专业类别</td>
-                    <td>{{item.qualificationNo}}</td>
+                    <td>{{item.qualificationProfessionalType}}</td>
                   </tr>
                   <tr>
                     <td class="tit">资质资格等级</td>
@@ -79,7 +79,7 @@
                   </tr>
                   <tr>
                     <td class="tit">首次批准日期</td>
-                    <td>{{item.qualificationAcquireDesc}}</td>
+                    <td>{{item.qualificationDate}}</td>
                     <td class="tit">资质取得方式</td>
                     <td>{{item.qualificationAcquireDesc}}</td>
                   </tr>
@@ -91,7 +91,7 @@
                   </tr>
                   <tr>
                     <td class="tit">批准资质资格内容</td>
-                    <td colspan="3">{{item.qualificationStatusDesc}}</td>
+                    <td colspan="3">{{item.qualificationContent}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -115,11 +115,8 @@
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="9">
         <div class="attachment-box">
           <ul>
-            <li>
-              <img src="timg.jpg" />
-            </li>
-            <li>
-              <img src="timg.jpg" />
+            <li v-for="item in this.fileList" :key="item.uid">
+              <img :src="item.url" />
             </li>
           </ul>
         </div>

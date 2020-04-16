@@ -57,8 +57,14 @@ var indexMixin = {
   },
   methods: {
     setForm(data) {
-      console.log(this.model)
       this.model = data
+      console.log('e', this.model)
+      let ids = []
+      ids.push(data.licenseUrl)
+      this.model.qualifications.map((item, index) => {
+        ids.push(item.qualificationContent)
+      })
+      this.getImg(ids.join())
     },
     handleSubmit(flag, e) {
       e.preventDefault();

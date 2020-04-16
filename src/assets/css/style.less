@@ -499,6 +499,11 @@ li {
   border-right: 1px solid #e8e8e8;
 }
 
+.detail-table table tr td:nth-child(2),
+.detail-table table tr td:nth-child(4) {
+  min-width: 250px;
+}
+
 .detail-table table tr .tit {
   background-color: #fafafa;
   text-align: center;
@@ -567,12 +572,13 @@ li {
 
 .attachment-box ul {
   width: 100%;
+  margin-bottom: 0;
 }
 
 .attachment-box ul li {
   width: 100%;
-  margin-bottom: 24px;
-  // border: 1px solid #ddd;
+  margin-top: 24px;
+  border-bottom: 2px solid #ddd;
 }
 
 .attachment-box ul li:last-child {
@@ -588,7 +594,7 @@ li {
 }
 
 .attachment-btn button {
-  // min-width: 120px;
+  min-width: 120px;
 }
 
 // map
