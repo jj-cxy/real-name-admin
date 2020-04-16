@@ -8,8 +8,6 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        addUrl: '/biz/enterprise/disclosureInsert',
-        editUrl: '/biz/enterprise/disclosureUpdate/',
         getByIdUrl: '/ida/api/enterprise/get/'
       },
       labelCol: {

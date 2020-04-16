@@ -11,6 +11,7 @@ var indexMixin = {
         dataIndex: 'unitName'
       }, {
         title: '统一社会信用代码',
+        align: 'center',
         dataIndex: 'unitCode'
       }, {
         title: '所属地区',
@@ -18,14 +19,15 @@ var indexMixin = {
         customRender:(text,record)=>`${record.province || ""} ${record.city || ""}  ${record.district || ""}`
       }, {
         title: '主要业务类型',
-        dataIndex: 'industryDesc'
+        dataIndex: 'unitTypeDesc'
       }, {
         title: '参与项目数量',
-        dataIndex: 'faxNumber'
+        align: 'center',
+        dataIndex: 'projectCount'
       }, {
         title: '备案审核状态',
         align: 'center',
-        dataIndex: 'status'
+        dataIndex: 'auditStatusDesc'
       }, {
         title: '创建时间',
         align: 'center',

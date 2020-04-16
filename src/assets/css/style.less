@@ -479,11 +479,12 @@ li {
 
 //  详情表格
 .detail-table {
-  margin: 6px 0;
+  margin-bottom: 12px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   overflow-x: auto;
+  position: relative;
 }
 
 .detail-table table {
@@ -496,7 +497,6 @@ li {
   padding: 8px;
   border-bottom: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
-
 }
 
 .detail-table table tr .tit {
@@ -525,10 +525,35 @@ li {
   min-width: 160px;
 }
 
+.detail-form .ant-form-item-children {
+  display: block;
+}
+
+.sign {
+  text-align: center;
+  font-size: 22px;
+  padding: 2px 5px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  position: absolute;
+  z-index: 10000000;
+}
+
+.sign.green {
+  color: #52c41a;
+  border: 2px solid #52c41a;
+}
+
+.sign.red {
+  color: #f5222d;
+  border: 2px solid #f5222d;
+}
+
 // 附件
 
 .detail-left {
   height: 716px;
+  // height: calc(100vh - 220px);
   overflow-y: auto;
 }
 

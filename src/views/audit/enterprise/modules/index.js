@@ -8,10 +8,8 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        addUrl: '/biz/oaDisclosure/disclosureInsert',
-        editUrl: '/biz/oaDisclosure/disclosureUpdate/',
-        getByIdUrl: '/biz/oaDisclosure/get/',
-        assetByIdUrl: '/biz/oaAssets/get/'
+        editUrl: '/ida/oaTask/complete',
+        getByIdUrl: '/ida/api/enterprise/get/'
       },
       labelCol: {
         xl: {
@@ -46,10 +44,63 @@ var indexMixin = {
       },
       fileList: [],
       model: {},
-      singleFile: true
+      singleFile: true,
+      model: {
+        qualifications: []
+      }
     }
   },
   created() {},
-  methods: {}
+  mounted() {
+    let params = this.$route.query;
+    this.fillForm(params)
+  },
+  methods: {
+    setForm(data) {
+      console.log(this.model)
+      this.model = data
+    },
+    handleSubmit(flag, e) {
+      e.preventDefault();
+      const {
+        form: {
+          validateFields
+        }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          let formData = {
+            flag: flag,
+            comment: values.comment,
+            ins: {
+              procInsId: this.$route.query.procInsId
+            }
+          }
+          axios({
+            url: this.Urls.editUrl,
+            method: 'post',
+            data: formData
+          }).then(res => {
+            this.confirmLoading = false
+            if (res.code == 0) {
+              this.$notification.success({
+                message: '审核成功'
+              })
+              this.afterSubmit()
+            } else {
+              this.$notification.error({
+                message: res.msg
+              })
+            }
+          }).catch(() => {
+            this.localLoading = false
+          })
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    }
+  }
 }
 export default indexMixin

@@ -194,7 +194,7 @@ var indexMixin = {
     },
     setForm(data) {
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'name', 'mark', 'remark'))
+        this.form.setFieldsValue(pick(data, 'name', 'mark', 'dataRole', 'remark'))
       })
     }
   }

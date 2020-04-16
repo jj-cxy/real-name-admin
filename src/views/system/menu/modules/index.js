@@ -139,6 +139,8 @@ var indexMixin = {
       this.isDisabled = false
     },
     beforeSubmit(form) {
+      console.log(form)
+      debugger
       form.mark = form.mark.join()
       form.icon = this.mdl.icon
       if (!form.parentId || form.parentId == '') {
@@ -147,9 +149,12 @@ var indexMixin = {
       return form
     },
     setForm(data) {
-      console.log('lala', this.mdl)
+
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'mark', 'sort', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'sort', 'remark'))
+        this.form.setFieldsValue({
+          mark: data.mark.split(',')
+        })
       })
     },
     getTreeData() {

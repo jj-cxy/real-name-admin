@@ -7,7 +7,7 @@
           :headStyle="{marginBottom: 0}"
           :bodyStyle="{padding: 0, height: '310px'}"
         >
-          <a href="#" slot="extra" @click="$router.push('/order/overdue')">查看更多</a>
+          <a href="#" slot="extra" @click="$router.push('/order/todo')">查看更多</a>
           <!-- 表格 -->
           <todo :paging="false"></todo>
         </a-card>

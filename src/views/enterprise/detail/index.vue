@@ -55,14 +55,19 @@
           </table>
         </div>
       </a-form-item>
-      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="单位资质" v-if="model.qualifications && model.qualifications.length > 0">
+      <a-form-item
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+        label="单位资质"
+        v-if="model.qualifications && model.qualifications.length > 0"
+      >
         <div class="detail-table">
           <table>
             <tbody>
               <tr>
                 <td class="tit">资质资格类型</td>
                 <td>{{model.qualifications[0].qualificationCategoryDesc}}</td>
-                <td class="tit">资质证书号 </td>
+                <td class="tit">证书编号</td>
                 <td>{{model.qualifications[0].qualificationNo}}</td>
               </tr>
               <tr>
@@ -70,7 +75,6 @@
                 <td>{{model.qualifications[0].qualificationProfessionalTypeDesc}}</td>
                 <td class="tit">资质资格等级</td>
                 <td>{{model.qualifications[0].qualificationLevelDesc}}</td>
-                
               </tr>
               <tr>
                 <td class="tit">发证机关</td>

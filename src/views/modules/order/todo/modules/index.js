@@ -14,7 +14,7 @@ var indexMixin = {
       // 表头
       columns: [{
         title: '事项名称',
-        dataIndex: 'projectNo'
+        dataIndex: 'projectName'
       }, {
         title: '事项类型',
         align: 'center',
@@ -22,7 +22,7 @@ var indexMixin = {
       }, {
         title: '时间',
         align: 'center',
-        dataIndex: 'completeTime'
+        dataIndex: 'startTime'
       }, {
         title: '操作',
         dataIndex: 'action',
@@ -62,6 +62,15 @@ var indexMixin = {
     },
     handleStartTime(date) {
       this.listQuery.condition.beginTime = date
+    },
+    handleDetail(record) {
+      this.$router.push({
+        path: '/audit/enterprise',
+        query: {
+          id: record.biz.businessId,
+          procInsId: record.ins.procInsId
+        }
+      })
     },
   }
 }

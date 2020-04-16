@@ -38,18 +38,7 @@
         :customRow="rowClick"
       >
         <span slot="action" slot-scope="text, record">
-          <a-tooltip placement="top">
-            <template slot="title">
-              <span>查看项目详情</span>
-            </template>
-            <a-button
-              type="dashed"
-              size="small"
-              shape="circle"
-              icon="eye"
-              @click.native="handleDetail(record)"
-            ></a-button>
-          </a-tooltip>
+          <a href="javascript:;" @click="handleDetail(record)">处理</a>
         </span>
       </a-table>
     </a-card>

@@ -6,9 +6,31 @@
     <a-form-item
       :labelCol="labelCol"
       :wrapperCol="wrapperCol"
-      label="项目信息"
-      style="margin-bottom: 12px"
+      label="施工许可证"
+      style="position: relative"
     >
+      <template v-if="model.constructionPermitNumberUrl">
+        <div class="detail-table">
+          <table>
+            <tbody>
+              <tr>
+                <td class="tit">编号</td>
+                <td>{{model.constructionPermitNumber}}</td>
+                <td class="tit">证件</td>
+                <td>
+                  <viewer :ids="model.constructionPermitNumberUrl"></viewer>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sign green" style="right: 5px; top: 5px">有证</div>
+      </template>
+      <template v-else>
+        <div class="sign red" style="left: 0; top: 0;">无证</div>
+      </template>
+    </a-form-item>
+    <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目信息">
       <div class="detail-table">
         <table>
           <tbody>
@@ -65,15 +87,6 @@
               <td>{{model.area}}</td>
               <td class="tit"></td>
               <td></td>
-            </tr>
-            <tr>
-              <td class="tit">施工许可证号</td>
-              <td>{{model.constructionPermitNumber}}</td>
-              <td class="tit">施工许可证</td>
-              <!-- <td>{{model.constructionPermitNumberUrl}}</td> -->
-              <td>
-                <viewer></viewer>
-              </td>
             </tr>
           </tbody>
         </table>
