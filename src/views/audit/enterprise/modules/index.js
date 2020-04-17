@@ -9,7 +9,8 @@ var indexMixin = {
     return {
       Urls: {
         editUrl: '/ida/oaTask/complete',
-        getByIdUrl: '/ida/api/enterprise/get/'
+        getByIdUrl: '/ida/api/enterprise/get/',
+        typeUserUrl: '/auth/api/account/biz/query'
       },
       labelCol: {
         xl: {
@@ -47,7 +48,8 @@ var indexMixin = {
       singleFile: true,
       model: {
         qualifications: []
-      }
+      },
+      typeUserList: []
     }
   },
   created() {},
@@ -106,6 +108,26 @@ var indexMixin = {
           this.confirmLoading = false
         }
       })
+    },
+    getTypeUser() {
+      axios({
+        url: this.Urls.getTypeUser + record.id,
+        method: 'get',
+        params: {
+          orgId: '',
+          role: 'Supervisor',
+          uniCode: '',
+          areaId: ''
+        }
+      }).then(res => {
+        if (res.code == 0) {
+          this.typeUserList = res.data
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {})
     }
   }
 }

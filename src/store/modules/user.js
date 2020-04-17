@@ -76,16 +76,17 @@ const user = {
       state
     }) {
       return new Promise((resolve) => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        Vue.ls.remove(ACCESS_TOKEN)
-        localStorage.removeItem('trueName');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('mark');
         logout(state.token).then(() => {
           resolve()
         }).catch(() => {
           resolve()
+        }).finally(() => {
+          commit('SET_TOKEN', '')
+          commit('SET_ROLES', [])
+          Vue.ls.remove(ACCESS_TOKEN)
+          localStorage.removeItem('in-trueName');
+          localStorage.removeItem('in-userId');
+          localStorage.removeItem('in-mark');
         })
       })
     }

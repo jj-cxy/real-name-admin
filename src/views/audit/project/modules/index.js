@@ -9,10 +9,9 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        addUrl: '/biz/oaDisclosure/disclosureInsert',
         editUrl: '/biz/oaDisclosure/disclosureUpdate/',
         getByIdUrl: '/biz/oaDisclosure/get/',
-        assetByIdUrl: '/biz/oaAssets/get/'
+        typeUserUrl: '/auth/api/account/biz/query'
       },
       labelCol: {
         xl: {
@@ -29,7 +28,6 @@ var indexMixin = {
         xl: {
           span: 20
         },
-
         lg: {
           span: 19
         },
@@ -47,11 +45,13 @@ var indexMixin = {
       },
       fileList: [],
       model: {},
-      singleFile: true
+      singleFile: true,
+      typeUserList: []
     }
   },
   mounted() {
-    this.initMap()
+    this.initMap();
+    this.getTypeUser();
   },
   created() {},
   methods: {
@@ -74,6 +74,26 @@ var indexMixin = {
           alert("您选择地址没有解析到结果!");
         }
       }, "贵州省");
+    },
+    getTypeUser() {
+      axios({
+        url: this.Urls.getTypeUser + record.id,
+        method: 'get',
+        params: {
+          orgId: '',
+          role: 'Supervisor',
+          uniCode: '',
+          areaId: ''
+        }
+      }).then(res => {
+        if (res.code == 0) {
+          this.typeUserList = res.data
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {})
     },
   }
 }

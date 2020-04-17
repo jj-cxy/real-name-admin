@@ -36,8 +36,8 @@
                     <td colspan="3">{{model.unitRealAddress}}</td>
                   </tr>
                   <tr>
-                    <td class="tit">工商登记有效期限</td>
-                    <td>{{model.enableDate}}至{{model.disableDate}}</td>
+                    <td class="tit">工商登记开始时间</td>
+                    <td>{{model.enableDate}}</td>
                     <td class="tit">到期时间</td>
                     <td>{{model.disableDate}}</td>
                   </tr>
@@ -96,6 +96,26 @@
                 </tbody>
               </table>
             </div>
+          </a-form-item>
+          <a-form-item
+            :labelCol="labelCol"
+            :wrapperCol="wrapperCol"
+            label="分配审核人员"
+            style="margin: 10px 0"
+          >
+            <a-select
+              allowClear
+              v-decorator="['remark',validatorRules.must]"
+              style="width: 360px"
+              placeholder="请选择"
+            >
+              <a-select-option
+                v-for="(item,index) in typeUserList"
+                :key="index"
+                :value="item.value"
+              >{{item.name}}</a-select-option>
+            </a-select>
+            <!-- <span>金朱西路站城市轨道交通综合体项目</span> -->
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
             <a-textarea :rows="3" v-decorator="['comment',validatorRules.must]" placeholder="..." />

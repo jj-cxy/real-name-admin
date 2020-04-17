@@ -84,11 +84,7 @@
         </a-form-item>
 
         <a-form-item style="margin-bottom: 0">
-          <router-link
-            :to="{ name: 'alteration'}"
-            class="forge-password"
-            style="float: right;"
-          >忘记密码？</router-link>
+          <a href="#" style="float: right;">忘记密码？</a>
         </a-form-item>
       </a-form>
     </div>

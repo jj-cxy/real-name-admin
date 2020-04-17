@@ -32,6 +32,9 @@ var indexMixin = {
         md: {
           span: 24
         }
+      },
+      model: {
+        qualifications: []
       }
     }
   },

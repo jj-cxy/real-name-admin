@@ -30,8 +30,8 @@
                 <td colspan="3">{{model.unitRealAddress}}</td>
               </tr>
               <tr>
-                <td class="tit">工商登记有效期限</td>
-                <td>{{model.enableDate}}至{{model.disableDate}}</td>
+                <td class="tit">工商登记开始时间</td>
+                <td>{{model.enableDate}}</td>
                 <td class="tit">到期时间</td>
                 <td>{{model.disableDate}}</td>
               </tr>
@@ -61,40 +61,40 @@
         label="单位资质"
         v-if="model.qualifications && model.qualifications.length > 0"
       >
-        <div class="detail-table">
+        <div class="detail-table" v-for="item in model.qualifications" :key="item.id">
           <table>
             <tbody>
               <tr>
                 <td class="tit">资质资格类型</td>
-                <td>{{model.qualifications[0].qualificationCategoryDesc}}</td>
+                <td>{{item.qualificationCategoryDesc}}</td>
                 <td class="tit">证书编号</td>
-                <td>{{model.qualifications[0].qualificationNo}}</td>
+                <td>{{item.qualificationNo}}</td>
               </tr>
               <tr>
                 <td class="tit">专业类别</td>
-                <td>{{model.qualifications[0].qualificationProfessionalTypeDesc}}</td>
+                <td>{{item.qualificationProfessionalTypeDesc}}</td>
                 <td class="tit">资质资格等级</td>
-                <td>{{model.qualifications[0].qualificationLevelDesc}}</td>
+                <td>{{item.qualificationLevelDesc}}</td>
               </tr>
               <tr>
                 <td class="tit">发证机关</td>
-                <td>{{model.qualifications[0].licensingAuthority}}</td>
+                <td>{{item.licensingAuthority}}</td>
                 <td class="tit">发证时间</td>
-                <td>{{model.qualifications[0].expirationStartTime}}</td>
+                <td>{{item.expirationStartTime}}</td>
               </tr>
               <tr>
                 <td class="tit">有限期</td>
-                <td>{{model.qualifications[0].expirationStartTime}}至{{model.expirationEndTime}}</td>
+                <td>{{item.expirationStartTime}}至{{model.expirationEndTime}}</td>
                 <td class="tit">资质取得方式</td>
-                <td>{{model.qualifications[0].qualificationAcquireDesc}}</td>
+                <td>{{item.qualificationAcquireDesc}}</td>
               </tr>
               <tr>
                 <td class="tit">资质状态</td>
-                <td>{{model.qualifications[0].qualificationStatusDesc}}</td>
+                <td>{{item.qualificationStatusDesc}}</td>
                 <td class="tit">证书附件</td>
                 <td>
-                  <viewer :ids="model.qualifications[0].qualificationContent"></viewer>
-                  <!-- {{model.qualifications[0].qualificationContent}} -->
+                  <viewer :ids="item.qualificationContent"></viewer>
+                  <!-- {{item.qualificationContent}} -->
                 </td>
               </tr>
             </tbody>

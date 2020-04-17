@@ -16,7 +16,7 @@ var indexMixin = {
       }, {
         title: '所属地区',
         dataIndex: 'address',
-        customRender:(text,record)=>`${record.province || ""} ${record.city || ""}  ${record.district || ""}`
+        customRender: (text, record) => `${record.province || ""} ${record.city || ""}  ${record.district || ""}`
       }, {
         title: '主要业务类型',
         dataIndex: 'unitTypeDesc'
@@ -28,10 +28,6 @@ var indexMixin = {
         title: '备案审核状态',
         align: 'center',
         dataIndex: 'auditStatusDesc'
-      }, {
-        title: '创建时间',
-        align: 'center',
-        dataIndex: 'createTime'
       }, {
         title: '操作',
         dataIndex: 'action',

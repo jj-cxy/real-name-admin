@@ -71,8 +71,8 @@
                     <td colspan="3">贵州省贵阳市贵阳国家高新技术产业开发区六盘水路</td>
                   </tr>
                   <tr>
-                    <td class="tit">工商登记有效期限</td>
-                    <td>2014年10月23日--2034年10月22日</td>
+                    <td class="tit">工商登记开始时间</td>
+                    <td>2014年10月23日</td>
                     <td class="tit">到期时间</td>
                     <td>2034年10月22日</td>
                   </tr>
@@ -139,8 +139,20 @@
               <div id="allmap"></div>
             </div>
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分配监督员">
-            <span>金朱西路站城市轨道交通综合体项目</span>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="分配监督员" style="margin: 10px 0">
+            <a-select
+              allowClear
+              v-decorator="['remark',validatorRules.must]"
+              style="width: 360px"
+              placeholder="请选择"
+            >
+              <a-select-option
+                v-for="(item,index) in typeUserList"
+                :key="index"
+                :value="item.value"
+              >{{item.name}}</a-select-option>
+            </a-select>
+            <!-- <span>金朱西路站城市轨道交通综合体项目</span> -->
           </a-form-item>
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
             <a-textarea :rows="3" v-decorator="['remark',validatorRules.must]" placeholder="..." />
