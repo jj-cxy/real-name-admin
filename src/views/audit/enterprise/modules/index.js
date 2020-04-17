@@ -10,7 +10,8 @@ var indexMixin = {
       Urls: {
         editUrl: '/ida/oaTask/complete',
         getByIdUrl: '/ida/api/enterprise/get/',
-        typeUserUrl: '/auth/api/account/biz/query'
+        typeUserUrl: '/auth/api/account/biz/query',
+        assignUserUrl: '/ida/api/enterprise/master/assign'
       },
       labelCol: {
         xl: {
@@ -55,7 +56,8 @@ var indexMixin = {
   created() {},
   mounted() {
     let params = this.$route.query;
-    this.fillForm(params)
+    this.fillForm(params);
+    this.getTypeUser();
   },
   methods: {
     setForm(data) {
@@ -68,6 +70,7 @@ var indexMixin = {
       })
       this.getImg(ids.join())
     },
+    // 审核
     handleSubmit(flag, e) {
       e.preventDefault();
       const {
@@ -109,12 +112,56 @@ var indexMixin = {
         }
       })
     },
+    // 分配人员
+    handleNext(e) {
+      e.preventDefault();
+      const {
+        form: {
+          validateFields
+        }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          console.log('form values...', values)
+          let formData = {
+            id: this.model.id,
+            supervisorId: values.supervisorId ? values.supervisorId.key : null,
+            supervisorName: values.supervisorId ? values.supervisorId.label : null,
+            qualityId: values.qualityId ? values.qualityId.key : null,
+            qualityName: values.qualityId ? values.qualityId.label : null
+          }
+          debugger
+          axios({
+            url: this.Urls.assignUserUrl,
+            method: 'post',
+            data: formData
+          }).then(res => {
+            this.confirmLoading = false
+            if (res.code == 0) {
+              this.$notification.success({
+                message: '审核成功'
+              })
+              this.afterSubmit()
+            } else {
+              this.$notification.error({
+                message: res.msg
+              })
+            }
+          }).catch(() => {
+            this.localLoading = false
+          })
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
     getTypeUser() {
       axios({
-        url: this.Urls.getTypeUser + record.id,
+        url: this.Urls.typeUserUrl,
         method: 'get',
         params: {
-          orgId: '',
+          orgId: localStorage.getItem('in-orgId'),
           role: 'Supervisor',
           uniCode: '',
           areaId: ''
@@ -128,7 +175,8 @@ var indexMixin = {
           })
         }
       }).catch(() => {})
-    }
+    },
+    handleCancel() {},
   }
 }
 export default indexMixin

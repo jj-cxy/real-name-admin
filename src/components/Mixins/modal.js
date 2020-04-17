@@ -85,7 +85,8 @@ var modalMixin = {
       },
       fileList: [],
       uploading: false,
-      singleFile: false
+      singleFile: false,
+      roleMark: localStorage.getItem('in-mark') ? localStorage.getItem('in-mark') : '',
     }
   },
   mounted() {},

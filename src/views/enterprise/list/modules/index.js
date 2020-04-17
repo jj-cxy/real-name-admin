@@ -44,23 +44,69 @@ var indexMixin = {
         downloadExcelUrl: '/ida/api/enterprise/export/ids'
       },
       districtList: [],
-      projectStatusList: [{
-        name: '项目审核阶段',
-        value: 'OA_EXAMINE'
-      }, {
-        name: '项目披露期',
-        value: 'DISCLOSURE'
-      }, {
-        name: '组织交易阶段',
-        value: '3'
-      }, {
-        name: '租赁合同签订阶段',
-        value: '4'
-      }, {
-        name: '项目完成',
-        value: 'FINISH'
-      }],
       downloadFileName: '单位列表',
+      unitTypeList: [{
+        name: '建设单位（房开）',
+        value: 'ROOT_UNIT_FK'
+      }, {
+        name: '建设单位（政府）',
+        value: 'ROOT_UNIT_ZF'
+      }, {
+        name: '建设单位（企业）',
+        value: 'ROOT_UNIT_QY'
+      }, {
+        name: '建设单位（个人）',
+        value: 'ROOT_UNIT_GR'
+      }, {
+        name: '建设单位（其它）',
+        value: 'ROOT_UNIT_QT'
+      }, {
+        name: '设计单位',
+        value: 'DESIGN_UNIT'
+      }, {
+        name: '监理单位',
+        value: 'MANAGE_UNIT'
+      }, {
+        name: '检测单位',
+        value: 'CHECK_UNIT'
+      }, {
+        name: '施工单位',
+        value: 'CONSTRUCTION_UNIT'
+      }, {
+        name: '勘察单位',
+        value: 'SURVEY_UNIT'
+      }, {
+        name: '前端软件',
+        value: 'SOFT_SUPPORT'
+      }, {
+        name: '设备分包',
+        value: 'DEVICE_SUB'
+      }, {
+        name: '材料分包',
+        value: 'MATERIAL_SUB'
+      }, {
+        name: '劳务分包',
+        value: 'LABOR_SUB'
+      }, {
+        name: '专业分包',
+        value: 'PROFESSIONAL_SUB'
+      }, {
+        name: '后勤服务',
+        value: 'LOGISTICS_SERVICES_SUB'
+      }, {
+        name: '其它',
+        value: 'OTHERS'
+      }],
+      auditStatusList: [{
+        name: '待审核',
+        value: 'AUDIT'
+      }, {
+        name: '未通过',
+        value: 'REFUSE'
+      }, {
+        name: '已通过',
+        value: 'PASS'
+      }],
     }
   },
   filters: {},

@@ -100,35 +100,64 @@
           <a-form-item
             :labelCol="labelCol"
             :wrapperCol="wrapperCol"
+            label="审核人员"
+            v-if="model.supervisorId || model.qualityId"
+          >
+            <span>{{model.supervisorName || model.qualityName}}</span>
+          </a-form-item>
+          <a-form-item
+            v-if="!model.supervisorId && !model.qualityId"
+            :labelCol="labelCol"
+            :wrapperCol="wrapperCol"
             label="分配审核人员"
             style="margin: 10px 0"
           >
             <a-select
               allowClear
-              v-decorator="['remark',validatorRules.must]"
+              labelInValue
+              v-if="roleMark=='SupervisorMaster'"
+              v-decorator="['supervisorId',validatorRules.must]"
               style="width: 360px"
               placeholder="请选择"
             >
               <a-select-option
-                v-for="(item,index) in typeUserList"
-                :key="index"
-                :value="item.value"
+                v-for="item in typeUserList"
+                :key="item.id"
+                :value="item.id"
+              >{{item.name}}</a-select-option>
+            </a-select>
+            <a-select
+              allowClear
+              labelInValue
+              v-if="roleMark=='QualityMaster'"
+              v-decorator="['qualityId',validatorRules.must]"
+              style="width: 360px"
+              placeholder="请选择"
+            >
+              <a-select-option
+                v-for="item in typeUserList"
+                :key="item.id"
+                :value="item.id"
               >{{item.name}}</a-select-option>
             </a-select>
             <!-- <span>金朱西路站城市轨道交通综合体项目</span> -->
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见" v-else>
             <a-textarea :rows="3" v-decorator="['comment',validatorRules.must]" placeholder="..." />
           </a-form-item>
 
-          <a-form-item style="text-align: center">
+          <a-form-item style="text-align: center" v-if="model.supervisorId || model.qualityId">
             <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
             <a-button
               :style="{marginRight: '12px'}"
               type="danger"
               @click="handleSubmit('false',$event)"
-            >驳回</a-button>
-            <a-button type="primary" @click="handleSubmit('true',$event)">通过</a-button>
+            >驳 回</a-button>
+            <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
+          </a-form-item>
+          <a-form-item style="text-align: center" v-else>
+            <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
+            <a-button type="primary" @click="handleNext">提 交</a-button>
           </a-form-item>
         </a-form>
       </a-col>

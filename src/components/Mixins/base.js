@@ -47,7 +47,7 @@ var baseMixin = {
         batchFileIdsUrl: '',
         downloadFilelUrl: '/file/api/file/batchDownload',
       },
-      mark: localStorage.getItem('in-mark') ? localStorage.getItem('in-mark') : '',
+      roleMark: localStorage.getItem('in-mark') ? localStorage.getItem('in-mark') : '',
       auth: {},
       /* 菜单权限控制 */
       selectedRowKeys: [],

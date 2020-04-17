@@ -7,7 +7,7 @@
           <a-row :gutter="15">
             <a-col :md="10" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="项目名称" />
+                <a-input v-model="listQuery.condition.projectName" placeholder="项目名称" />
               </a-form-item>
             </a-col>
             <a-col :md="5" :sm="24">
@@ -16,13 +16,13 @@
                   allowClear
                   showSearch
                   optionFilterProp="children"
-                  v-model="listQuery.condition.district"
+                  v-model="listQuery.condition.districtId"
                   placeholder="所在地区"
                 >
                   <a-select-option
                     v-for="(item,index) in districtList"
                     :key="index"
-                    :value="item.name"
+                    :value="item.id"
                   >{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>
