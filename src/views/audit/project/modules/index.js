@@ -9,9 +9,10 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        editUrl: '/biz/oaDisclosure/disclosureUpdate/',
-        getByIdUrl: '/biz/oaDisclosure/get/',
-        typeUserUrl: '/auth/api/account/biz/query'
+        editUrl: '/ida/api/project/master/record/examine',
+        getByIdUrl: '/ida/api/project/get/',
+        typeUserUrl: '/auth/api/account/biz/query',
+        assignUserUrl: '/api/project/master/record/assign'
       },
       labelCol: {
         xl: {
@@ -75,13 +76,104 @@ var indexMixin = {
         }
       }, "贵州省");
     },
+    // 审核
+    handleSubmit(flag, e) {
+      e.preventDefault();
+      const {
+        form: {
+          validateFields
+        }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          let formData = {
+            flow: {
+              flag: flag,
+              comment: values.comment,
+            },
+            procInsId: this.$route.query.procInsId,
+            mark: this.roleMark
+          }
+          axios({
+            url: this.Urls.editUrl,
+            method: 'post',
+            data: formData
+          }).then(res => {
+            this.confirmLoading = false
+            if (res.code == 0) {
+              this.$notification.success({
+                message: '审核成功'
+              })
+              this.afterSubmit()
+            } else {
+              this.$notification.error({
+                message: res.msg
+              })
+            }
+          }).catch(() => {
+            this.localLoading = false
+          })
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    // 分配人员
+    handleNext(e) {
+      e.preventDefault();
+      const {
+        form: {
+          validateFields
+        }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          console.log('form values...', values)
+          let formData = {
+            id: this.model.id,
+            supervisorId: values.supervisorId ? values.supervisorId.key : null,
+            supervisorName: values.supervisorId ? values.supervisorId.label : null,
+            qualityId: values.qualityId ? values.qualityId.key : null,
+            qualityName: values.qualityId ? values.qualityId.label : null
+          }
+          axios({
+            url: this.Urls.assignUserUrl,
+            method: 'post',
+            data: formData
+          }).then(res => {
+            this.confirmLoading = false
+            if (res.code == 0) {
+              this.$notification.success({
+                message: '分配成功'
+              })
+              this.afterSubmit()
+            } else {
+              this.$notification.error({
+                message: res.msg
+              })
+            }
+          }).catch(() => {
+            this.localLoading = false
+          })
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    afterSubmit() {
+      this.$router.push({
+        path: '/workplace/index'
+      })
+    },
     getTypeUser() {
       axios({
-        url: this.Urls.getTypeUser + record.id,
+        url: this.Urls.typeUserUrl,
         method: 'get',
         params: {
-          orgId: '',
-          role: 'Supervisor',
+          orgId: localStorage.getItem('in-orgId'),
+          role: this.roleMak == "SupervisorMaster" ? 'Supervisor' : 'Quality',
           uniCode: '',
           areaId: ''
         }
@@ -94,6 +186,13 @@ var indexMixin = {
           })
         }
       }).catch(() => {})
+    },
+    handleCancel() {
+      this.close()
+    },
+    close() {
+      this.$emit('close');
+      this.afterSubmit()
     },
   }
 }

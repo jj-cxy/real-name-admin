@@ -144,13 +144,13 @@
 <script>
 import modalMixin from '@/components/Mixins/modal'
 import indexMixin from './modules/index'
-import viewer from '@/views/modules/viewer'
+import Viewer from '@/views/modules/Viewer'
 
 export default {
   name: 'info',
   mixins: [modalMixin, indexMixin],
   components: {
-    viewer
+    Viewer
   }
 }
 </script>

@@ -9,9 +9,7 @@
     :visible="visible"
   >
     <a-spin :spinning="confirmLoading">
-      <a-form class="detail-form" :form="form">
-        <project-info @close="visible=false" :mdl="model" v-if="model.assetsId"></project-info>
-      </a-form>
+      <a-form class="detail-form" :form="form"></a-form>
     </a-spin>
   </a-drawer>
 </template>
@@ -19,14 +17,11 @@
 <script>
 import pick from 'lodash.pick'
 import modalMixin from '@/components/Mixins/modal'
-import ProjectInfo from '@/views/modules/ProjectInfo'
 
 export default {
   name: 'formDrawer',
   mixins: [modalMixin],
-  components: {
-    ProjectInfo
-  },
+  components: {},
   data() {
     return {
       Urls: {

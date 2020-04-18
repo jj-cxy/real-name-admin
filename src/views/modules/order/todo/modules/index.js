@@ -64,13 +64,24 @@ var indexMixin = {
       this.listQuery.condition.beginTime = date
     },
     handleDetail(record) {
-      this.$router.push({
-        path: '/audit/enterprise',
-        query: {
-          id: record.biz.businessId,
-          procInsId: record.ins.procInsId
-        }
-      })
+      if (record.taskType == "ENTERPRISE_RECORD") {
+        this.$router.push({
+          path: '/audit/enterprise',
+          query: {
+            id: record.biz.businessId,
+            procInsId: record.ins.procInsId
+          }
+        })
+      } else {
+        this.$router.push({
+          path: '/audit/project',
+          query: {
+            id: record.biz.businessId,
+            procInsId: record.ins.procInsId
+          }
+        })
+      }
+
     },
   }
 }

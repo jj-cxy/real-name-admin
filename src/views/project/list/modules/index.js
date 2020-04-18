@@ -20,7 +20,8 @@ var indexMixin = {
         dataIndex: 'district'
       }, {
         title: '项目类型',
-        dataIndex: 'projectType'
+        align: 'center',
+        dataIndex: 'projectTypeDesc'
       }, {
         title: '项目状态',
         align: 'center',

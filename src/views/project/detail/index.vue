@@ -68,7 +68,7 @@
 <script>
 import modalMixin from '@/components/Mixins/modal'
 import indexMixin from './modules/index'
-import viewer from '@/views/modules/viewer'
+import Viewer from '@/views/modules/Viewer'
 import InfoTab from './modules/InfoTab/index'
 import TabOne from './modules/TabOne/index'
 import TabTwo from './modules/TabTwo/index'
@@ -77,7 +77,7 @@ export default {
   name: 'ProjectDetail',
   mixins: [modalMixin, indexMixin],
   components: {
-    viewer,
+    Viewer,
     InfoTab,
     TabOne,
     TabTwo

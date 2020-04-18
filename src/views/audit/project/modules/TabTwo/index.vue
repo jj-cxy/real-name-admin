@@ -8,7 +8,7 @@
         <li>
           <span>企业名称：</span> 贵阳市金阳建设数据服务有限公司
         </li>
-        <div v-for="(item,index) in personInfoList" :key="index">
+        <template v-for="(item,index) in personInfoList">
           <a-divider />
           <li>
             <span>{{item.title}}姓名：</span>王某某
@@ -19,7 +19,7 @@
           <li>
             <span>身份证号：</span>522xxxxxxxxxxx1258
           </li>
-        </div>
+        </template>
       </ul>
     </div>
     <div class="detail-table" style="margin-top: 0">

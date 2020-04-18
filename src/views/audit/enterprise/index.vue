@@ -58,6 +58,22 @@
                       <td class="tit">联系电话</td>
                       <td>{{model.enterpriseContactPersonTel}}</td>
                     </tr>
+                    <template v-if="model.unitType=='CONSTRUCTION_UNIT'">
+                      <tr>
+                        <td class="tit">安全生产许可证号</td>
+                        <td>{{model.area}}</td>
+                        <td class="tit">有效期</td>
+                        <td>{{model.area}}</td>
+                      </tr>
+                      <tr>
+                        <td class="tit">安全生产许可证号</td>
+                        <td>
+                          <viewer :ids="model.constructionPermitNumberUrl"></viewer>
+                        </td>
+                        <td class="tit"></td>
+                        <td></td>
+                      </tr>
+                    </template>
                   </tbody>
                 </table>
               </div>
@@ -106,6 +122,12 @@
             >
               <span>{{model.supervisorName || model.qualityName}}</span>
             </a-form-item>
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="建管处审核意见" v-if="model.sAuditComment">
+              <span>{{model.sAuditComment}}</span>
+            </a-form-item>
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="质监站审核意见" v-if="model.qAuditComment">
+              <span>{{model.qAuditComment}}</span>
+            </a-form-item>
             <a-form-item
               v-if="!model.supervisorId && !model.qualityId"
               :labelCol="labelCol"
@@ -143,6 +165,7 @@
               </a-select>
               <!-- <span>金朱西路站城市轨道交通综合体项目</span> -->
             </a-form-item>
+
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见" v-else>
               <a-textarea
                 :rows="3"
@@ -183,13 +206,13 @@
 <script>
 import modalMixin from '@/components/Mixins/modal'
 import indexMixin from './modules/index'
-import viewer from '@/views/modules/viewer'
+import Viewer from '@/views/modules/Viewer'
 
 export default {
   name: 'EnterpriseAudit',
   mixins: [modalMixin, indexMixin],
   components: {
-    viewer
+    Viewer
   }
 }
 </script>

@@ -26,7 +26,7 @@
 <script>
 import { axios } from '@/utils/request'
 export default {
-  name: 'viewer',
+  name: 'Viewer',
   props: {
     ids: {
       type: String,

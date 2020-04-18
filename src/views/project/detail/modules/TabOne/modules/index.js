@@ -22,9 +22,9 @@ var indexMixin = {
         dataIndex: 'roleTypeDesc'
       }, {
         title: '项目负责人信息',
-        dataIndex: 'projectManagerName',
+        dataIndex: 'persons',
         customRender: (text, record, index) => {
-          return `项目负责人：${text}　　手机号：${record.projectManagerPhone}`
+          return `项目负责人：${record.persons[0].projectName}　　手机号：${record.persons[0].personPhone}`
         }
       }, {
         title: '操作',
@@ -40,17 +40,7 @@ var indexMixin = {
         delUrl: '/biz/oaAssets/remove/',
         downloadExcelUrl: '/biz/oaAssets/export/ids',
       },
-      assetsStatusList: [{
-        name: '在租',
-        value: 'RENTING'
-      }, {
-        name: '招租中',
-        value: 'IN_RENT'
-      }, {
-        name: '空闲',
-        value: 'FREE'
-      }],
-      downloadFileName: '资产列表',
+      downloadFileName: '五方主体列表',
     }
   },
   filters: {},

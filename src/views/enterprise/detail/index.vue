@@ -51,6 +51,22 @@
                 <td class="tit">联系电话</td>
                 <td>{{model.enterpriseContactPersonTel}}</td>
               </tr>
+              <template v-if="model.unitType=='CONSTRUCTION_UNIT'">
+                <tr>
+                  <td class="tit">安全生产许可证号</td>
+                  <td>{{model.area}}</td>
+                  <td class="tit">有效期</td>
+                  <td>{{model.area}}</td>
+                </tr>
+                <tr>
+                  <td class="tit">安全生产许可证号</td>
+                  <td>
+                    <viewer :ids="model.constructionPermitNumberUrl"></viewer>
+                  </td>
+                  <td class="tit"></td>
+                  <td></td>
+                </tr>
+              </template>
             </tbody>
           </table>
         </div>
@@ -108,13 +124,13 @@
 <script>
 import modalMixin from '@/components/Mixins/modal'
 import indexMixin from './modules/index'
-import viewer from '@/views/modules/viewer'
+import Viewer from '@/views/modules/Viewer'
 
 export default {
   name: 'EnterpriseAudit',
   mixins: [modalMixin, indexMixin],
   components: {
-    viewer
+    Viewer
   }
 }
 </script>

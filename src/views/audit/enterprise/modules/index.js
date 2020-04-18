@@ -8,7 +8,7 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        editUrl: '/ida/oaTask/complete',
+        editUrl: '/ida/api/enterprise/complete',
         getByIdUrl: '/ida/api/enterprise/get/',
         typeUserUrl: '/auth/api/account/biz/query',
         assignUserUrl: '/ida/api/enterprise/master/assign'
@@ -82,11 +82,12 @@ var indexMixin = {
       validateFields((errors, values) => {
         if (!errors) {
           let formData = {
-            flag: flag,
-            comment: values.comment,
-            ins: {
-              procInsId: this.$route.query.procInsId
-            }
+            flow: {
+              flag: flag,
+              comment: values.comment,
+            },
+            procInsId: this.$route.query.procInsId,
+            mark: this.roleMark
           }
           axios({
             url: this.Urls.editUrl,
@@ -166,7 +167,7 @@ var indexMixin = {
         method: 'get',
         params: {
           orgId: localStorage.getItem('in-orgId'),
-          role: 'Supervisor',
+          role: this.roleMak == "SupervisorMaster" ? 'Supervisor' : 'Quality',
           uniCode: '',
           areaId: ''
         }

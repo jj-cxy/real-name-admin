@@ -174,13 +174,13 @@
 <script>
 import pick from 'lodash.pick'
 import modalMixin from '@/components/Mixins/modal'
-import viewer from '@/views/modules/viewer'
+import Viewer from '@/views/modules/Viewer'
 
 export default {
   name: 'formDrawer',
   mixins: [modalMixin],
   components: {
-    viewer
+    Viewer
   },
   data() {
     return {
