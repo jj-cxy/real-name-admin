@@ -131,7 +131,6 @@ var indexMixin = {
             qualityId: values.qualityId ? values.qualityId.key : null,
             qualityName: values.qualityId ? values.qualityId.label : null
           }
-          debugger
           axios({
             url: this.Urls.assignUserUrl,
             method: 'post',
@@ -140,7 +139,7 @@ var indexMixin = {
             this.confirmLoading = false
             if (res.code == 0) {
               this.$notification.success({
-                message: '审核成功'
+                message: '分配成功'
               })
               this.afterSubmit()
             } else {
@@ -154,6 +153,11 @@ var indexMixin = {
         } else {
           this.confirmLoading = false
         }
+      })
+    },
+    afterSubmit() {
+      this.$router.push({
+        path: '/workplace/index'
       })
     },
     getTypeUser() {
@@ -176,7 +180,13 @@ var indexMixin = {
         }
       }).catch(() => {})
     },
-    handleCancel() {},
+    handleCancel() {
+      this.close()
+    },
+    close() {
+      this.$emit('close');
+      this.afterSubmit()
+    },
   }
 }
 export default indexMixin
