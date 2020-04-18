@@ -58,17 +58,19 @@
                       <td class="tit">联系电话</td>
                       <td>{{model.enterpriseContactPersonTel}}</td>
                     </tr>
-                    <template v-if="model.unitType=='CONSTRUCTION_UNIT'">
+                    <template
+                      v-if="model.unitType && model.unitType.split(',').includes('CONSTRUCTION_UNIT')"
+                    >
                       <tr>
                         <td class="tit">安全生产许可证号</td>
-                        <td>{{model.area}}</td>
+                        <td>{{model.safetyNo}}</td>
                         <td class="tit">有效期</td>
-                        <td>{{model.area}}</td>
+                        <td>{{model.safetyNoStartDate}}至{{model.safetyNoValidDate}}</td>
                       </tr>
                       <tr>
-                        <td class="tit">安全生产许可证号</td>
+                        <td class="tit">安全生产许可证</td>
                         <td>
-                          <viewer :ids="model.constructionPermitNumberUrl"></viewer>
+                          <viewer :ids="model.safetyLicenceUrl"></viewer>
                         </td>
                         <td class="tit"></td>
                         <td></td>
@@ -122,10 +124,20 @@
             >
               <span>{{model.supervisorName || model.qualityName}}</span>
             </a-form-item>
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="建管处审核意见" v-if="model.sAuditComment">
+            <a-form-item
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              label="建管处审核意见"
+              v-if="model.sAuditComment"
+            >
               <span>{{model.sAuditComment}}</span>
             </a-form-item>
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="质监站审核意见" v-if="model.qAuditComment">
+            <a-form-item
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              label="质监站审核意见"
+              v-if="model.qAuditComment"
+            >
               <span>{{model.qAuditComment}}</span>
             </a-form-item>
             <a-form-item

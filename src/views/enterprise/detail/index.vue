@@ -51,17 +51,17 @@
                 <td class="tit">联系电话</td>
                 <td>{{model.enterpriseContactPersonTel}}</td>
               </tr>
-              <template v-if="model.unitType=='CONSTRUCTION_UNIT'">
+              <template v-if="model.unitType && model.unitType.split(',').includes('CONSTRUCTION_UNIT')">
                 <tr>
                   <td class="tit">安全生产许可证号</td>
-                  <td>{{model.area}}</td>
+                  <td>{{model.safetyNo}}</td>
                   <td class="tit">有效期</td>
-                  <td>{{model.area}}</td>
+                  <td>{{model.safetyNoStartDate}}至{{model.safetyNoValidDate}}</td>
                 </tr>
                 <tr>
                   <td class="tit">安全生产许可证号</td>
                   <td>
-                    <viewer :ids="model.constructionPermitNumberUrl"></viewer>
+                    <viewer :ids="model.safetyLicenceUrl"></viewer>
                   </td>
                   <td class="tit"></td>
                   <td></td>
