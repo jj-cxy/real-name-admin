@@ -33,7 +33,7 @@
       :columns="columns"
       :dataSource="listData"
       :loading="localLoading"
-      rowKey="id"
+      :rowKey="(text,index)=>index"
       :pagination="pagination"
       size="middle"
     >

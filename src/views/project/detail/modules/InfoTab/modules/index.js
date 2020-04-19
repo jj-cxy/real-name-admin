@@ -42,7 +42,10 @@ var indexMixin = {
           span: 24
         }
       },
-      model: {},
+      model: {
+        units: [],
+        salaryBankAccount: {}
+      },
     }
   },
   created() {},

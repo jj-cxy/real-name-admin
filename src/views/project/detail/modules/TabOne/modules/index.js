@@ -41,6 +41,7 @@ var indexMixin = {
         downloadExcelUrl: '/biz/oaAssets/export/ids',
       },
       downloadFileName: '五方主体列表',
+      assetsStatusList: []
     }
   },
   filters: {},
