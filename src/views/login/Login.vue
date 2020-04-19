@@ -191,11 +191,12 @@ export default {
       this.getCaptcha()
     },
     loginSuccess(res) {
-      if (res.data.user.defaultPwd) {
+      this.$router.push({ path: '/' })
+      /* if (res.data.user.defaultPwd) {
         this.$router.push('/account/set/base')
       } else {
         this.$router.push({ path: '/' })
-      }
+      } */
     }
   }
 }

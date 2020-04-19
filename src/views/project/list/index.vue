@@ -35,7 +35,7 @@
                   :treeData="orgList"
                   placeholder="管理机构"
                   treeDefaultExpandAll
-                  v-model="listQuery.condition.orgId"
+                  v-model="listQuery.condition.managerOrgId"
                 ></a-tree-select>
               </a-form-item>
             </a-col>
@@ -44,13 +44,13 @@
                 <a-form-item>
                   <a-select
                     allowClear
-                    v-model="listQuery.condition.projectStatus"
+                    v-model="listQuery.condition.projectType"
                     placeholder="项目类型"
                   >
                     <a-select-option
-                      v-for="(item,index) in projectStatusList"
+                      v-for="(item,index) in projectTypeList"
                       :key="index"
-                      :value="item.value"
+                      :value="item.key"
                     >{{item.name}}</a-select-option>
                   </a-select>
                 </a-form-item>
@@ -65,7 +65,7 @@
                     <a-select-option
                       v-for="(item,index) in projectStatusList"
                       :key="index"
-                      :value="item.value"
+                      :value="item.key"
                     >{{item.name}}</a-select-option>
                   </a-select>
                 </a-form-item>
@@ -74,14 +74,14 @@
                 <a-form-item>
                   <a-select
                     allowClear
-                    v-model="listQuery.condition.projectStatus"
+                    v-model="listQuery.condition.softEnterpriseId"
                     placeholder="前端软件公司"
                   >
                     <a-select-option
-                      v-for="(item,index) in projectStatusList"
+                      v-for="(item,index) in softList"
                       :key="index"
-                      :value="item.value"
-                    >{{item.name}}</a-select-option>
+                      :value="item.id"
+                    >{{item.unitName}}</a-select-option>
                   </a-select>
                 </a-form-item>
               </a-col>
@@ -116,30 +116,33 @@
       >
         <span slot="action" slot-scope="text, record">
           <a href="javascript:;" @click="handleDetail(record)">查看</a>
-          <a-divider type="vertical" />
-          <a href="javascript:;" @click="handleSetMenu(record)">修改状态</a>
-          <a-divider type="vertical" />
-          <a href="javascript:;" @click="handleSetMenu(record)">发起修改工单</a>
+          <template v-if="roleMark=='Supervisor'">
+            <a-divider type="vertical" />
+            <a href="javascript:;" @click="handleEdit(record)">修改状态</a>
+            <a-divider type="vertical" />
+            <a href="javascript:;" @click="handleAudit(record)">发起修改工单</a>
+          </template>
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>
       </a-table>
     </a-card>
-    <form-drawer ref="detailForm"></form-drawer>
+
+    <form-modal ref="modalForm" @ok="afterSubmit"></form-modal>
   </div>
 </template>
 
 <script>
 import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
-import formDrawer from './modules/formDrawer'
+import formModal from './modules/formModal'
 import JDate from '@/components/JDate/index'
 
 export default {
   name: 'project',
   mixins: [baseMixin, indexMixin],
   components: {
-    formDrawer,
-    JDate
+    JDate,
+    formModal
   }
 }
 </script>

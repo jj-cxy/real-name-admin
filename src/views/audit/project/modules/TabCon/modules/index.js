@@ -5,6 +5,12 @@ import pick from 'lodash.pick'
 import moment from 'moment'
 
 var indexMixin = {
+  props: {
+    unitData: {
+      type: Object,
+      default: {}
+    }
+  },
   data() {
     return {
       Urls: {

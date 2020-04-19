@@ -24,7 +24,7 @@
                   :key="index"
                   :tab="item.roleTypeDesc"
                 >
-                  <TabCon :data="model.units" />
+                  <TabCon :unitData="item" />
                 </a-tab-pane>
                 <!-- <a-tab-pane tab="施工单位" key="2" forceRender>
                   <TabCon />
@@ -40,11 +40,12 @@
                 </a-tab-pane>-->
               </a-tabs>
             </a-form-item>
+
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               label="施工许可证"
-              style="position: relative"
+              style="position: relative;margin-top: 12px"
             >
               <template v-if="model.constructionPermitNumberUrl">
                 <div class="detail-table">
@@ -72,40 +73,58 @@
                 <table>
                   <tbody>
                     <tr>
-                      <td class="tit">所属地区</td>
-                      <td>贵州省 贵阳市 云岩区</td>
-                      <td class="tit">邮政编码</td>
-                      <td>550300</td>
+                      <td class="tit">项目类型</td>
+                      <td>{{model.projectTypeDesc}}</td>
+                      <td class="tit">项目状态</td>
+                      <td>{{model.projectTypeDesc}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">注册地址</td>
-                      <td colspan="3">贵阳国家高新技术产业开发区行政审批局</td>
+                      <td class="tit">所属省</td>
+                      <td>{{model.province}}</td>
+                      <td class="tit">所属市</td>
+                      <td>{{model.city}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">营业地址</td>
-                      <td colspan="3">贵州省贵阳市贵阳国家高新技术产业开发区六盘水路</td>
+                      <td class="tit">所属区县</td>
+                      <td>{{model.district}}</td>
+                      <td class="tit">详细地址</td>
+                      <td>{{model.address}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">工商登记开始时间</td>
-                      <td>2014年10月23日</td>
-                      <td class="tit">到期时间</td>
-                      <td>2034年10月22日</td>
+                      <td class="tit">计划总工期</td>
+                      <td>{{model.startTime}}</td>
+                      <td class="tit">施工状态</td>
+                      <td>{{model.insuranceDesc}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">法人姓名</td>
-                      <td>周康</td>
-                      <td class="tit">法人手机号</td>
-                      <td>1888888888</td>
+                      <td class="tit">计划开工时间</td>
+                      <td>{{model.startTime}}</td>
+                      <td class="tit">计划竣工时间</td>
+                      <td>{{model.endTime}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">法人身份证号</td>
-                      <td colspan="3">520115000212582</td>
+                      <td class="tit">签约合同价</td>
+                      <td>{{model.constractPrice}}</td>
+                      <td class="tit">合同签订日期</td>
+                      <td>{{model.constractDay}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">联系人姓名</td>
-                      <td>2020-03-26</td>
-                      <td class="tit">联系电话</td>
-                      <td>是</td>
+                      <td class="tit">是否参加工伤保险</td>
+                      <td>{{model.insuranceDesc}}</td>
+                      <td class="tit">所属管理机构</td>
+                      <td>{{model.orgCodeDesc}}</td>
+                    </tr>
+                    <tr>
+                      <td class="tit">造价</td>
+                      <td>{{model.manufacturingCost}}</td>
+                      <td class="tit">项目规模</td>
+                      <td>{{model.scale}}</td>
+                    </tr>
+                    <tr>
+                      <td class="tit">面积</td>
+                      <td>{{model.area}}</td>
+                      <td class="tit"></td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </table>
@@ -117,37 +136,37 @@
                   <tbody>
                     <tr>
                       <td class="tit">专户帐号</td>
-                      <td>5435643654654654</td>
+                      <td>{{model.salaryBankAccount.bankAccount || '-'}}</td>
                       <td class="tit">银行种类</td>
-                      <td>招商银行</td>
+                      <td>{{model.salaryBankAccount.bankTypeDesc || '-'}}</td>
                     </tr>
                     <tr>
                       <td class="tit">专户帐号名称</td>
-                      <td>某某某专户</td>
+                      <td>{{model.salaryBankAccount.bankAccountName || '-'}}</td>
                       <td class="tit">账户余额</td>
-                      <td>812,343.24元</td>
+                      <td>{{model.salaryBankAccount.bankBalances || '-'}}</td>
                     </tr>
                     <tr>
                       <td class="tit">开户行名称</td>
-                      <td>贵阳银行支行</td>
+                      <td>{{model.salaryBankAccount.bankName || '-'}}</td>
                       <td class="tit">账户状态</td>
-                      <td>已备案</td>
+                      <td>{{model.salaryBankAccount.accountStatusDesc || '-'}}</td>
                     </tr>
                     <tr>
                       <td class="tit">所属银行编码</td>
-                      <td>5435643654654654</td>
+                      <td>{{model.salaryBankAccount.bankAffiliated || '-'}}</td>
                       <td class="tit">每月发薪日期</td>
-                      <td>15号</td>
+                      <td>{{model.salaryTime || '-'}}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </a-form-item>
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
-              <span>贵阳市金阳建设数据服务有限公司</span>
+              <span>{{model.softNames}}</span>
             </a-form-item>
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目简介">
-              <span>贵阳经济技术开发区建设管理局</span>
+              <span>{{model.projectDesc}}</span>
             </a-form-item>
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
               <div class="map-box">
@@ -199,19 +218,26 @@
               />
             </a-form-item>
 
-            <a-form-item style="text-align: center" v-if="model.supervisorId">
+            <a-form-item style="text-align: center" v-if="bizType=='PROJECT_MODIFY'">
               <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-              <a-button
-                :style="{marginRight: '12px'}"
-                type="danger"
-                @click="handleSubmit('false',$event)"
-              >驳 回</a-button>
-              <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
+              <a-button type="primary" @click="handleForm">提 交</a-button>
             </a-form-item>
-            <a-form-item style="text-align: center" v-else>
-              <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-              <a-button type="primary" @click="handleNext">提 交</a-button>
-            </a-form-item>
+
+            <template v-else>
+              <a-form-item style="text-align: center" v-if="model.supervisorId">
+                <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
+                <a-button
+                  :style="{marginRight: '12px'}"
+                  type="danger"
+                  @click="handleSubmit('false',$event)"
+                >驳 回</a-button>
+                <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
+              </a-form-item>
+              <a-form-item style="text-align: center" v-else>
+                <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
+                <a-button type="primary" @click="handleNext">提 交</a-button>
+              </a-form-item>
+            </template>
           </a-form>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="9">

@@ -45,7 +45,8 @@ var modalMixin = {
         imgListUrl: '/file/api/file/batchSelect',
         uploadFileUrl: '/file/api/file/upload',
         delFileUrl: '/file/api/file/delete/',
-        projectByIdUrl: '/biz/oaProject/get/'
+        projectByIdUrl: '/biz/oaProject/get/',
+        dictTypeUrl: '/ida/api/dict/typeList',
       },
       form: this.$form.createForm(this),
       visible: false,
@@ -191,6 +192,24 @@ var modalMixin = {
     },
     handleCancel() {
       this.close()
+    },
+    // 获取字典数据
+    getDictData(type, data) {
+      axios({
+        url: this.Urls.dictTypeUrl,
+        method: 'get',
+        params: {
+          type: type
+        }
+      }).then(res => {
+        if (res.code == 0) {
+          this[data] = res.data.records
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      })
     },
     // 格式化树结构
     mapTree(item) {

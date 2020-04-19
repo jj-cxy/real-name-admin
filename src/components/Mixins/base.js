@@ -38,6 +38,7 @@ var baseMixin = {
       Urls: {
         listUrl: '',
         delUrl: '',
+        dictTypeUrl: '/ida/api/dict/typeList',
         batchDelUrl: '',
         downloadExcelUrl: '',
         outputTempUrl: '',
@@ -145,8 +146,11 @@ var baseMixin = {
     // 获取字典数据
     getDictData(type, data) {
       axios({
-        url: this.Urls.dictTypeUrl + type,
-        method: 'get'
+        url: this.Urls.dictTypeUrl,
+        method: 'get',
+        params: {
+          type: type
+        }
       }).then(res => {
         if (res.code == 0) {
           this[data] = res.data.records
@@ -512,7 +516,7 @@ var baseMixin = {
     handleEndTime(date) {
       this.listQuery.condition.endTime = date
     },
-    
+
     // 表格点击行事件
     rowClick(record, index) {
       return {

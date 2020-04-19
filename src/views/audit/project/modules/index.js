@@ -9,10 +9,11 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        editUrl: '/ida/api/project/master/record/examine',
+        auditUrl: '/ida/api/project/examine/',
+        editUrl: '/ida/api/project/supervisor/modify/',
         getByIdUrl: '/ida/api/project/get/',
         typeUserUrl: '/auth/api/account/biz/query',
-        assignUserUrl: '/api/project/master/record/assign'
+        assignUserUrl: '/ida/api/project/master/record/assign'
       },
       labelCol: {
         xl: {
@@ -45,29 +46,34 @@ var indexMixin = {
         }
       },
       fileList: [],
-      model: {},
+      model: {
+        units: [],
+        salaryBankAccount: {}
+      },
       singleFile: true,
-      typeUserList: []
+      typeUserList: [],
+      bizType: this.$route.query.bizType ? this.$route.query.bizType : '',
     }
   },
   mounted() {
     let params = this.$route.query;
     this.fillForm(params);
 
-    this.initMap();
     this.getTypeUser();
+
+    this.initMap();
   },
   created() {},
   methods: {
     setForm(data) {
       this.model = data
       console.log('e', this.model)
-      let ids = []
+      /* let ids = []
       ids.push(data.licenseUrl)
       this.model.qualifications.map((item, index) => {
         ids.push(item.qualificationContent)
       })
-      this.getImg(ids.join())
+      this.getImg(ids.join()) */
     },
     initMap() {
       var map = new BMap.Map("allmap");
@@ -101,17 +107,53 @@ var indexMixin = {
       validateFields((errors, values) => {
         if (!errors) {
           let formData = {
-            flow: {
-              flag: flag,
-              comment: values.comment,
-            },
-            procInsId: this.$route.query.procInsId,
-            mark: this.roleMark
+            bizType: this.bizType || 'PROJECT_RECORD',
+            pass: flag,
+            suggestion: values.comment,
+            roleType: this.roleMark
           }
           axios({
-            url: this.Urls.editUrl,
-            method: 'post',
-            data: formData
+            url: this.Urls.auditUrl + this.model.id,
+            method: 'get',
+            params: formData
+          }).then(res => {
+            this.confirmLoading = false
+            if (res.code == 0) {
+              this.$notification.success({
+                message: '审核成功'
+              })
+              this.afterSubmit()
+            } else {
+              this.$notification.error({
+                message: res.msg
+              })
+            }
+          }).catch(() => {
+            this.localLoading = false
+          })
+        } else {
+          this.confirmLoading = false
+        }
+      })
+    },
+    // 修改发起
+    handleForm(e) {
+      e.preventDefault();
+      const {
+        form: {
+          validateFields
+        }
+      } = this
+      this.confirmLoading = true
+      validateFields((errors, values) => {
+        if (!errors) {
+          let formData = {
+            suggestion: values.comment
+          }
+          axios({
+            url: this.Urls.editUrl + this.model.id,
+            method: 'get',
+            params: formData
           }).then(res => {
             this.confirmLoading = false
             if (res.code == 0) {
@@ -143,18 +185,12 @@ var indexMixin = {
       this.confirmLoading = true
       validateFields((errors, values) => {
         if (!errors) {
-          console.log('form values...', values)
-          let formData = {
-            id: this.model.id,
-            supervisorId: values.supervisorId ? values.supervisorId.key : null,
-            supervisorName: values.supervisorId ? values.supervisorId.label : null,
-            qualityId: values.qualityId ? values.qualityId.key : null,
-            qualityName: values.qualityId ? values.qualityId.label : null
-          }
           axios({
-            url: this.Urls.assignUserUrl,
-            method: 'post',
-            data: formData
+            url: this.Urls.assignUserUrl + "/" + this.model.id + "/" + (values.supervisorId ? values.supervisorId.key : null),
+            method: 'get',
+            params: {
+              supervisorName: values.supervisorId ? values.supervisorId.label : null
+            }
           }).then(res => {
             this.confirmLoading = false
             if (res.code == 0) {
@@ -186,7 +222,7 @@ var indexMixin = {
         method: 'get',
         params: {
           orgId: localStorage.getItem('in-orgId'),
-          role: this.roleMak == "SupervisorMaster" ? 'Supervisor' : 'Quality',
+          role: this.roleMark == "SupervisorMaster" ? 'Supervisor' : 'Quality',
           uniCode: '',
           areaId: ''
         }

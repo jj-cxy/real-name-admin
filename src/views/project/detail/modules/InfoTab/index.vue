@@ -98,25 +98,25 @@
           <tbody>
             <tr>
               <td class="tit">专户帐号</td>
-              <td>{{model.workWageBankAccountNo}}</td>
+              <td>{{model.salaryBankAccount.bankAccount}}</td>
               <td class="tit">银行种类</td>
-              <td>{{model.salaryBankAccountNo}}</td>
+              <td>{{model.salaryBankAccount.bankTypeDesc}}</td>
             </tr>
             <tr>
               <td class="tit">专户帐号名称</td>
-              <td>{{model.salaryBankName}}</td>
+              <td>{{model.salaryBankAccount.bankAccountName}}</td>
               <td class="tit">账户余额</td>
-              <td>{{model.accountBalances}}</td>
+              <td>{{model.salaryBankAccount.bankBalances}}</td>
             </tr>
             <tr>
               <td class="tit">开户行名称</td>
-              <td>{{model.depositBank}}</td>
+              <td>{{model.salaryBankAccount.bankName}}</td>
               <td class="tit">账户状态</td>
-              <td>{{model.accountStateCode}}</td>
+              <td>{{model.salaryBankAccount.accountStatusDesc}}</td>
             </tr>
             <tr>
               <td class="tit">所属银行编码</td>
-              <td>{{model.bankCode}}</td>
+              <td>{{model.salaryBankAccount.bankAffiliated}}</td>
               <td class="tit">每月发薪日期</td>
               <td>{{model.salaryTime}}</td>
             </tr>

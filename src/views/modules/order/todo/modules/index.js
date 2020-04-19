@@ -77,7 +77,8 @@ var indexMixin = {
           path: '/audit/project',
           query: {
             id: record.biz.businessId,
-            procInsId: record.ins.procInsId
+            procInsId: record.ins.procInsId,
+            bizType: record.taskType
           }
         })
       }

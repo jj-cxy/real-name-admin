@@ -8,13 +8,14 @@ var indexMixin = {
       // 表头
       columns: [{
         title: '项目编码',
-        dataIndex: 'tendersNumber'
+        dataIndex: 'id'
       }, {
         title: '项目名称',
         dataIndex: 'projectName'
       }, {
         title: '管理机构',
-        dataIndex: 'orgCodeDesc'
+        align: 'center',
+        dataIndex: 'managerOrgName'
       }, {
         title: '项目地区',
         dataIndex: 'district'
@@ -45,26 +46,14 @@ var indexMixin = {
         delUrl: '/ida/api/project/remove/',
         downloadExcelUrl: '/ida/api/project/export/ids',
         orgListurl: '/auth/api/org/tree',
+        softEnterpriseUrl: '/ida/api/enterprise/page'
       },
-      districtList: [],
-      projectStatusList: [{
-        name: '项目审核阶段',
-        value: 'OA_EXAMINE'
-      }, {
-        name: '项目披露期',
-        value: 'DISCLOSURE'
-      }, {
-        name: '组织交易阶段',
-        value: '3'
-      }, {
-        name: '租赁合同签订阶段',
-        value: '4'
-      }, {
-        name: '项目完成',
-        value: 'FINISH'
-      }],
       downloadFileName: '项目列表',
-      orgList: []
+      orgList: [],
+      districtList: [],
+      projectTypeList: [],
+      projectStatusList: [],
+      softList: []
     }
   },
   filters: {},
@@ -72,6 +61,9 @@ var indexMixin = {
     this.getList()
     this.getArea('520100', 'districtList')
     this.getOrgList();
+    this.getDictData('project_type', 'projectTypeList')
+    this.getDictData('project_status', 'projectStatusList')
+    this.getSoftEnterprise()
   },
   methods: {
     handleDetail(record) {
@@ -80,6 +72,21 @@ var indexMixin = {
         query: {
           id: record.id
         }
+      })
+    },
+    getSoftEnterprise() {
+      axios({
+        url: this.Urls.softEnterpriseUrl,
+        method: 'post',
+        data: {
+          condition: {
+            unitType: 'SOFT_SUPPORT'
+          },
+          pageIndex: '1',
+          pageSize: '100'
+        }
+      }).then(res => {
+        // this.softList = res.data
       })
     },
     // 机构列表
@@ -92,6 +99,16 @@ var indexMixin = {
         this.orgList = resData.map(item => this.mapTree(item))
       })
     },
+    // 发起修改
+    handleAudit(record) {
+      this.$router.push({
+        path: "/audit/project",
+        query: {
+          id: record.id,
+          bizType: 'PROJECT_MODIFY'
+        }
+      })
+    }
   }
 }
 export default indexMixin
