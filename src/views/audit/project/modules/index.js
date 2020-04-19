@@ -51,11 +51,24 @@ var indexMixin = {
     }
   },
   mounted() {
+    let params = this.$route.query;
+    this.fillForm(params);
+
     this.initMap();
     this.getTypeUser();
   },
   created() {},
   methods: {
+    setForm(data) {
+      this.model = data
+      console.log('e', this.model)
+      let ids = []
+      ids.push(data.licenseUrl)
+      this.model.qualifications.map((item, index) => {
+        ids.push(item.qualificationContent)
+      })
+      this.getImg(ids.join())
+    },
     initMap() {
       var map = new BMap.Map("allmap");
       var point = new BMap.Point(106.709177, 26.629907);

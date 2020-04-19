@@ -28,11 +28,13 @@ router.beforeEach((to, from, next) => {
       })
       NProgress.done()
     } else {
-      if (store.getters.roles.length === 0) {
+      /* if (store.getters.roles.length === 0) {
         const redirect = decodeURIComponent(from.query.redirect || to.path)
         if (to.path === redirect) {
+          console.log(1)
           next()
         } else {
+          console.log(2)
           // 跳转到目的路由
           next({
             path: redirect
@@ -40,7 +42,8 @@ router.beforeEach((to, from, next) => {
         }
       } else {
         next()
-      }
+      } */
+      next()
     }
   } else {
     if (whiteList.includes(to.name)) {

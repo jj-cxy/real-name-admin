@@ -167,7 +167,7 @@ var indexMixin = {
         method: 'get',
         params: {
           orgId: localStorage.getItem('in-orgId'),
-          role: this.roleMak == "SupervisorMaster" ? 'Supervisor' : 'Quality',
+          role: this.roleMark == "SupervisorMaster" ? 'Supervisor' : 'Quality',
           uniCode: '',
           areaId: ''
         }

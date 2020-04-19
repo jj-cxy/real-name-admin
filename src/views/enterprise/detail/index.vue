@@ -11,6 +11,9 @@
       <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="统一社会信用代码">
         <span>{{model.unitCode}}</span>
       </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="主要业务类型">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
       <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="单位信息">
         <div class="detail-table">
           <table>
@@ -43,7 +46,11 @@
               </tr>
               <tr>
                 <td class="tit">法人身份证号</td>
-                <td colspan="3">{{model.legalPersonIdCard}}</td>
+                <td>{{model.legalPersonIdCard}}</td>
+                <td class="tit">营业执照</td>
+                <td>
+                  <viewer :ids="model.licenseUrl"></viewer>
+                </td>
               </tr>
               <tr>
                 <td class="tit">联系人姓名</td>
@@ -51,7 +58,9 @@
                 <td class="tit">联系电话</td>
                 <td>{{model.enterpriseContactPersonTel}}</td>
               </tr>
-              <template v-if="model.unitType && model.unitType.split(',').includes('CONSTRUCTION_UNIT')">
+              <template
+                v-if="model.unitType && model.unitType.split(',').includes('CONSTRUCTION_UNIT')"
+              >
                 <tr>
                   <td class="tit">安全生产许可证号</td>
                   <td>{{model.safetyNo}}</td>
@@ -82,7 +91,7 @@
             <tbody>
               <tr>
                 <td class="tit">资质资格类型</td>
-                <td>{{item.qualificationCategoryDesc}}</td>
+                <td>{{item.qualificationTypeDesc}}</td>
                 <td class="tit">证书编号</td>
                 <td>{{item.qualificationNo}}</td>
               </tr>

@@ -10,7 +10,7 @@
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="15">
           <a-form :form="form" class="detail-form detail-left">
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目名称">
-              <span>金朱西路站城市轨道交通综合体项目</span>
+              <span>{{model.projectName}}</span>
             </a-form-item>
             <a-form-item
               :labelCol="labelCol"
@@ -19,10 +19,14 @@
               style="margin-top: 8px"
             >
               <a-tabs defaultActiveKey="1" type="card" class="card-tabs" size="small">
-                <a-tab-pane tab="建设单位" key="1">
-                  <TabCon />
+                <a-tab-pane
+                  v-for="(item,index) in model.units"
+                  :key="index"
+                  :tab="item.roleTypeDesc"
+                >
+                  <TabCon :data="model.units" />
                 </a-tab-pane>
-                <a-tab-pane tab="施工单位" key="2" forceRender>
+                <!-- <a-tab-pane tab="施工单位" key="2" forceRender>
                   <TabCon />
                 </a-tab-pane>
                 <a-tab-pane tab="监理单位" key="3">
@@ -33,7 +37,7 @@
                 </a-tab-pane>
                 <a-tab-pane tab="勘察单位" key="5">
                   <TabCon />
-                </a-tab-pane>
+                </a-tab-pane>-->
               </a-tabs>
             </a-form-item>
             <a-form-item

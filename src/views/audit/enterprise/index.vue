@@ -86,9 +86,9 @@
                   <tbody>
                     <tr>
                       <td class="tit">资质资格类型</td>
-                      <td>{{item.qualificationCategoryDesc}}</td>
+                      <td>{{item.qualificationTypeDesc}}</td>
                       <td class="tit">专业类别</td>
-                      <td>{{item.qualificationProfessionalType}}</td>
+                      <td>{{item.qualificationProfessionalTypeDesc}}</td>
                     </tr>
                     <tr>
                       <td class="tit">资质资格等级</td>
@@ -127,18 +127,18 @@
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="建管处审核意见"
-              v-if="model.sAuditComment"
+              label="监督员审核意见"
+              v-if="model.sauditComment"
             >
-              <span>{{model.sAuditComment}}</span>
+              <span>{{model.sauditComment}}</span>
             </a-form-item>
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="质监站审核意见"
-              v-if="model.qAuditComment"
+              label="质监员审核意见"
+              v-if="model.qauditComment"
             >
-              <span>{{model.qAuditComment}}</span>
+              <span>{{model.qauditComment}}</span>
             </a-form-item>
             <a-form-item
               v-if="!model.supervisorId && !model.qualityId"
