@@ -162,12 +162,22 @@ var indexMixin = {
       })
     },
     getTypeUser() {
+      let role = ""
+      if (this.roleMark.split(',').includes('SupervisorMaster')) {
+        if (!this.model.supervisorId) {
+          role = 'Supervisor'
+        }
+      } else if (this.roleMark.split(',').includes('QualityMaster')) {
+        if (!this.model.qualityId) {
+          role = 'Quality'
+        }
+      }
       axios({
         url: this.Urls.typeUserUrl,
         method: 'get',
         params: {
           orgId: localStorage.getItem('in-orgId'),
-          role: this.roleMark == "SupervisorMaster" ? 'Supervisor' : 'Quality',
+          role: role,
           uniCode: '',
           areaId: ''
         }

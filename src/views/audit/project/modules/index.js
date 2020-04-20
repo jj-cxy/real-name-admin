@@ -118,7 +118,7 @@ var indexMixin = {
             bizType: this.bizType || 'PROJECT_RECORD',
             pass: flag,
             suggestion: values.comment,
-            roleType: this.roleMark
+            roleType: this.model.supervisorId ? 'Supervisor' : 'SupervisorMaster'
           }
           axios({
             url: this.Urls.auditUrl + this.model.id,
@@ -166,7 +166,7 @@ var indexMixin = {
             this.confirmLoading = false
             if (res.code == 0) {
               this.$notification.success({
-                message: '审核成功'
+                message: '发起成功'
               })
               this.afterSubmit()
             } else {

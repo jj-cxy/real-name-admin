@@ -60,7 +60,7 @@ const user = {
             localStorage.setItem('in-areaId', result.user.areaId)
             localStorage.setItem('in-orgId', result.user.orgId)
             if (result.user.roles && result.user.roles.length > 0) {
-              localStorage.setItem('in-mark', result.user.roles[0].mark)
+              localStorage.setItem('in-mark', result.user.roleMarks)
             }
             resolve(res);
           } else {
