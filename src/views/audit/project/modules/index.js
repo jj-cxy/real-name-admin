@@ -58,29 +58,22 @@ var indexMixin = {
   mounted() {
     let params = this.$route.query;
     this.fillForm(params);
-
     this.getTypeUser();
-
-    this.initMap();
   },
   created() {},
   methods: {
     setForm(data) {
       this.model = data
-      console.log('e', this.model)
-      /* let ids = []
-      ids.push(data.licenseUrl)
-      this.model.qualifications.map((item, index) => {
-        ids.push(item.qualificationContent)
-      })
-      this.getImg(ids.join()) */
+      console.log('detail', this.model)
+      let ids = []
+      ids.push(data.constructionPermitNumberUrl)
+      this.getImg(ids.join())
+      // 加载地图
+      this.initMap();
     },
     initMap() {
       var map = new BMap.Map("allmap");
       var point = new BMap.Point(106.709177, 26.629907);
-      map.centerAndZoom(point, 16);
-      var marker = new BMap.Marker(point);
-      map.addOverlay(marker);
 
       var city = "贵阳市观山湖区北京西路38号世纪金源购物中心金阳建设大厦26楼"
       var myGeo = new BMap.Geocoder();
@@ -88,8 +81,10 @@ var indexMixin = {
         if (point) {
           map.clearOverlays();
           map.centerAndZoom(point, 16);
-          map.addOverlay(new BMap.Marker(point));
-          map.panTo(point);
+          var marker = new BMap.Marker(point);
+          map.addOverlay(marker);
+          marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+          // map.panTo(point);
         } else {
           alert("您选择地址没有解析到结果!");
         }

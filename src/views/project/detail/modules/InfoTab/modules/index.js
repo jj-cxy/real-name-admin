@@ -2,7 +2,6 @@ import {
   axios
 } from '@/utils/request'
 import pick from 'lodash.pick'
-import moment from 'moment'
 import BMap from 'BMap'
 
 var indexMixin = {
@@ -64,11 +63,24 @@ var indexMixin = {
       myGeo.getPoint(city, function (point) {
         if (point) {
           map.clearOverlays();
-          map.centerAndZoom(point, 16);
+          map.centerAndZoom(point, 11);
           var marker = new BMap.Marker(point);
           map.addOverlay(marker);
+          // map.enableScrollWheelZoom(false);
+          map.panTo(point);
           marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-          // map.panTo(point);
+
+          // 添加带有定位的导航控件
+          var navigationControl = new BMap.NavigationControl({
+            // 靠左上角位置
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            // LARGE类型
+            type: BMAP_NAVIGATION_CONTROL_LARGE,
+            // 启用显示定位
+            enableGeolocation: true
+          });
+          map.addControl(navigationControl);
+
         } else {
           alert("您选择地址没有解析到结果!");
         }

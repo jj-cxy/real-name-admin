@@ -26,18 +26,6 @@
                 >
                   <TabCon :unitData="item" />
                 </a-tab-pane>
-                <!-- <a-tab-pane tab="施工单位" key="2" forceRender>
-                  <TabCon />
-                </a-tab-pane>
-                <a-tab-pane tab="监理单位" key="3">
-                  <TabCon />
-                </a-tab-pane>
-                <a-tab-pane tab="设计单位" key="4">
-                  <TabCon />
-                </a-tab-pane>
-                <a-tab-pane tab="勘察单位" key="5">
-                  <TabCon />
-                </a-tab-pane>-->
               </a-tabs>
             </a-form-item>
 
@@ -76,7 +64,7 @@
                       <td class="tit">项目类型</td>
                       <td>{{model.projectTypeDesc}}</td>
                       <td class="tit">项目状态</td>
-                      <td>{{model.projectTypeDesc}}</td>
+                      <td>{{model.projectStatusDesc}}</td>
                     </tr>
                     <tr>
                       <td class="tit">所属省</td>
@@ -92,9 +80,9 @@
                     </tr>
                     <tr>
                       <td class="tit">计划总工期</td>
-                      <td>{{model.startTime}}</td>
+                      <td>{{model.totalProjectSchedule}}天</td>
                       <td class="tit">施工状态</td>
-                      <td>{{model.insuranceDesc}}</td>
+                      <td>{{model.constructionStatusDesc}}</td>
                     </tr>
                     <tr>
                       <td class="tit">计划开工时间</td>
@@ -104,7 +92,7 @@
                     </tr>
                     <tr>
                       <td class="tit">签约合同价</td>
-                      <td>{{model.constractPrice}}</td>
+                      <td>{{model.constractPrice}}元</td>
                       <td class="tit">合同签订日期</td>
                       <td>{{model.constractDay}}</td>
                     </tr>
@@ -112,17 +100,17 @@
                       <td class="tit">是否参加工伤保险</td>
                       <td>{{model.insuranceDesc}}</td>
                       <td class="tit">所属管理机构</td>
-                      <td>{{model.orgCodeDesc}}</td>
+                      <td>{{model.managerOrgName}}</td>
                     </tr>
                     <tr>
                       <td class="tit">造价</td>
-                      <td>{{model.manufacturingCost}}</td>
+                      <td>{{model.manufacturingCost}}元</td>
                       <td class="tit">项目规模</td>
                       <td>{{model.scale}}</td>
                     </tr>
                     <tr>
                       <td class="tit">面积</td>
-                      <td>{{model.area}}</td>
+                      <td>{{model.area}}㎡</td>
                       <td class="tit"></td>
                       <td></td>
                     </tr>
@@ -137,12 +125,12 @@
                     <tr>
                       <td class="tit">专户帐号</td>
                       <td>{{model.salaryBankAccount.bankAccount || '-'}}</td>
-                      <td class="tit">银行种类</td>
-                      <td>{{model.salaryBankAccount.bankTypeDesc || '-'}}</td>
-                    </tr>
-                    <tr>
                       <td class="tit">专户帐号名称</td>
                       <td>{{model.salaryBankAccount.bankAccountName || '-'}}</td>
+                    </tr>
+                    <tr>
+                      <td class="tit">银行种类</td>
+                      <td>{{model.salaryBankAccount.bankTypeDesc || '-'}}</td>
                       <td class="tit">账户余额</td>
                       <td>{{model.salaryBankAccount.bankBalances || '-'}}</td>
                     </tr>
@@ -243,11 +231,8 @@
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="9">
           <div class="attachment-box">
             <ul>
-              <li>
-                <img src="timg.jpg" />
-              </li>
-              <li>
-                <img src="timg.jpg" />
+              <li v-for="item in this.fileList" :key="item.uid">
+                <img :src="item.url" />
               </li>
             </ul>
           </div>

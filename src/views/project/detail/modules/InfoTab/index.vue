@@ -38,7 +38,7 @@
               <td class="tit">项目类型</td>
               <td>{{model.projectTypeDesc}}</td>
               <td class="tit">项目状态</td>
-              <td>{{model.projectTypeDesc}}</td>
+              <td>{{model.projectStatusDesc}}</td>
             </tr>
             <tr>
               <td class="tit">所属省</td>
@@ -54,9 +54,9 @@
             </tr>
             <tr>
               <td class="tit">计划总工期</td>
-              <td>{{model.startTime}}</td>
+              <td>{{model.totalProjectSchedule}}</td>
               <td class="tit">施工状态</td>
-              <td>{{model.insuranceDesc}}</td>
+              <td>{{model.constructionStatusDesc}}</td>
             </tr>
             <tr>
               <td class="tit">计划开工时间</td>
@@ -74,17 +74,17 @@
               <td class="tit">是否参加工伤保险</td>
               <td>{{model.insuranceDesc}}</td>
               <td class="tit">所属管理机构</td>
-              <td>{{model.orgCodeDesc}}</td>
+              <td>{{model.managerOrgName}}</td>
             </tr>
             <tr>
               <td class="tit">造价</td>
-              <td>{{model.manufacturingCost}}</td>
+              <td>{{model.manufacturingCost}}元</td>
               <td class="tit">项目规模</td>
               <td>{{model.scale}}</td>
             </tr>
             <tr>
               <td class="tit">面积</td>
-              <td>{{model.area}}</td>
+              <td>{{model.area}}㎡</td>
               <td class="tit"></td>
               <td></td>
             </tr>
@@ -128,10 +128,10 @@
       <span>{{model.supervisorName}}</span>
     </a-form-item>
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
-      <span>{{model.salaryTime}}</span>
+      <span>{{model.softNames}}</span>
     </a-form-item>
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目简介">
-      <span>{{model.salaryTime}}</span>
+      <span>{{model.projectDesc}}</span>
     </a-form-item>
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
       <div class="map-box">
