@@ -157,11 +157,11 @@ var modalMixin = {
       validateFields((errors, values) => {
         if (!errors) {
           this.beforeSubmit(values)
-          let formData = Object.assign(this.model, values);
+          // let formData = Object.assign(this.model, values);
           axios({
             url: this.model.id ? (this.Urls.editUrl + this.model.id) : this.Urls.addUrl,
             method: 'post',
-            data: formData
+            data: values
           }).then(res => {
             this.confirmLoading = false
             if (res.code == 0) {

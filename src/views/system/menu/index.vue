@@ -6,7 +6,7 @@
           <a-row :gutter="15">
             <a-col :md="8" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="菜单名称" />
+                <a-input v-model="listQuery.condition.title" placeholder="菜单名称" />
               </a-form-item>
             </a-col>
             <a-col :md="4" :sm="24">

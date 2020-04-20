@@ -28,10 +28,13 @@
                   showSearch
                   placeholder="账号状态"
                   optionFilterProp="children"
-                  v-model="listQuery.condition.userStatus"
+                  v-model="listQuery.condition.status"
                 >
-                  <a-select-option value="ENABLED">启用</a-select-option>
-                  <a-select-option value="DISABLE">停用</a-select-option>
+                  <a-select-option
+                    v-for="(item,index) in statusList"
+                    :key="index"
+                    :value="item.value"
+                  >{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -87,7 +90,7 @@
           <a-divider type="vertical" />
           <a-tooltip placement="top">
             <template slot="title">
-              <span>{{record.accountStatus=='DISABLE'?'启用':'禁用'}}</span>
+              <span>{{record.status=='DISABLE'?'启用':'禁用'}}</span>
             </template>
             <a-button
               type="dashed"

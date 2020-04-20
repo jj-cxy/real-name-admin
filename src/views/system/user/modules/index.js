@@ -35,7 +35,7 @@ var indexMixin = {
         },
         {
           title: '状态',
-          dataIndex: 'userStatusDesc',
+          dataIndex: 'statusDesc',
           align: 'center'
         },
         {
@@ -54,7 +54,6 @@ var indexMixin = {
           }
         }
       ],
-      orgTree: [],
       selectedRowKeys: [],
       selectedRows: [],
       Urls: {
@@ -75,7 +74,14 @@ var indexMixin = {
       roleList: [],
       orgList: [],
       downloadFileName: '用户列表',
-      defaultPass: '123456'
+      defaultPass: '123456',
+      statusList: [{
+        value: 'NORMAL',
+        name: '启用'
+      },{
+        value: 'DELETED',
+        name: '停用'
+      }]
     }
   },
   filters: {},

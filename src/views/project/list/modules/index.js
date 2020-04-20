@@ -74,6 +74,7 @@ var indexMixin = {
         }
       })
     },
+    // 前调公司
     getSoftEnterprise() {
       axios({
         url: this.Urls.softEnterpriseUrl,
@@ -86,7 +87,7 @@ var indexMixin = {
           pageSize: '100'
         }
       }).then(res => {
-        // this.softList = res.data
+        this.softList = res.data.list
       })
     },
     // 机构列表
