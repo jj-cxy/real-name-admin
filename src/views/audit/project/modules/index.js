@@ -64,12 +64,16 @@ var indexMixin = {
   methods: {
     setForm(data) {
       this.model = data
-      console.log('detail', this.model)
       let ids = []
       ids.push(data.constructionPermitNumberUrl)
       this.getImg(ids.join())
       // 加载地图
       this.initMap();
+    },
+    afterGetImg() {
+      this.fileList.map((item, index) => {
+        item.title = '施工许可证'
+      })
     },
     initMap() {
       var map = new BMap.Map("allmap");

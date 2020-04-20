@@ -62,13 +62,21 @@ var indexMixin = {
   methods: {
     setForm(data) {
       this.model = data
-      console.log('e', this.model)
       let ids = []
       ids.push(data.licenseUrl)
+      ids.push(data.safetyLicenceUrl)
       this.model.qualifications.map((item, index) => {
         ids.push(item.qualificationContent)
       })
       this.getImg(ids.join())
+
+    },
+    afterGetImg() {
+      this.fileList.map((item, index) => {
+        item.title = '资质证书'
+      })
+      this.fileList[0]['title'] = '营业执照'
+      this.fileList[1]['title'] = '安全生产许可证'
     },
     // 审核
     handleSubmit(flag, e) {

@@ -67,14 +67,14 @@
                         <td class="tit">有效期</td>
                         <td>{{model.safetyNoStartDate}}至{{model.safetyNoValidDate}}</td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <td class="tit">安全生产许可证</td>
                         <td>
                           <viewer :ids="model.safetyLicenceUrl"></viewer>
                         </td>
                         <td class="tit"></td>
                         <td></td>
-                      </tr>
+                      </tr> -->
                     </template>
                   </tbody>
                 </table>

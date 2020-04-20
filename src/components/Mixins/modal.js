@@ -242,9 +242,10 @@ var modalMixin = {
           }
         }
         this.fileList = resData
+        this.afterGetImg()
       })
     },
-
+    afterGetImg() {},
     // 文件上传
     beforeUpload(file) {
       const isXLSX = file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
