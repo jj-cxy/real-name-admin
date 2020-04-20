@@ -74,7 +74,7 @@
                         </td>
                         <td class="tit"></td>
                         <td></td>
-                      </tr> -->
+                      </tr>-->
                     </template>
                   </tbody>
                 </table>
@@ -246,6 +246,7 @@
           <div class="attachment-box">
             <ul>
               <li v-for="item in this.fileList" :key="item.uid">
+                <!-- <div>{{item.title}}</div> -->
                 <img :src="item.url" />
               </li>
             </ul>

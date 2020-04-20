@@ -161,13 +161,15 @@
                 <div id="allmap"></div>
               </div>
             </a-form-item>
+
+            <!-- 意见 -->
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="审核意见"
-              v-if="model.sauditComment"
+              label="修改意见"
+              v-if="model.suggestion"
             >
-              <span>{{model.sauditComment}}</span>
+              <span>{{model.suggestion}}</span>
             </a-form-item>
             <!-- 建管处 -->
             <template
@@ -207,7 +209,10 @@
                     placeholder="..."
                   />
                 </a-form-item>
-                <a-form-item style="text-align: center">
+                <a-form-item
+                  style="text-align: center"
+                  v-if="((bizType=='PROJECT_RECORD') || (bizType=='PROJECT_MODIFY')) && taskDefKey"
+                >
                   <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
                   <a-button
                     :style="{marginRight: '12px'}"
@@ -216,7 +221,10 @@
                   >驳 回</a-button>
                   <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
                 </a-form-item>
-                <a-form-item style="text-align: center" v-if="bizType=='PROJECT_MODIFY'">
+                <a-form-item
+                  style="text-align: center"
+                  v-if="bizType=='PROJECT_MODIFY' && !taskDefKey"
+                >
                   <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
                   <a-button type="primary" @click="handleForm">提 交</a-button>
                 </a-form-item>
@@ -228,6 +236,7 @@
           <div class="attachment-box">
             <ul>
               <li v-for="item in this.fileList" :key="item.uid">
+                <div>{{item.title}}</div>
                 <img :src="item.url" />
               </li>
             </ul>

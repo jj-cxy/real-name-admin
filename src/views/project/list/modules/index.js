@@ -18,7 +18,8 @@ var indexMixin = {
         dataIndex: 'managerOrgName'
       }, {
         title: '项目地区',
-        dataIndex: 'district'
+        dataIndex: 'district',
+        customRender: (text, record) => `${record.province}${record.city}${record.district}`
       }, {
         title: '项目类型',
         align: 'center',
@@ -27,6 +28,10 @@ var indexMixin = {
         title: '项目状态',
         align: 'center',
         dataIndex: 'projectStatusDesc'
+      }, {
+        title: '审核状态',
+        align: 'center',
+        dataIndex: 'examineStatus'
       }, {
         title: '项目开始时间',
         align: 'center',

@@ -78,7 +78,8 @@ var indexMixin = {
           query: {
             id: record.biz.businessId,
             procInsId: record.ins.procInsId,
-            bizType: record.taskType
+            bizType: record.taskType,
+            taskDefKey: record.task.taskDefKey
           }
         })
       }

@@ -53,6 +53,7 @@ var indexMixin = {
       singleFile: true,
       typeUserList: [],
       bizType: this.$route.query.bizType ? this.$route.query.bizType : '',
+      taskDefKey: this.$route.query.taskDefKey ? this.$route.query.taskDefKey : '',
     }
   },
   mounted() {
@@ -122,7 +123,7 @@ var indexMixin = {
             bizType: this.bizType || 'PROJECT_RECORD',
             pass: flag,
             suggestion: values.comment,
-            roleType: this.model.supervisorId ? 'Supervisor' : 'SupervisorMaster'
+            roleType: this.taskDefKey == 'masterConfirm' ? 'SupervisorMaster' : 'Supervisor'
           }
           axios({
             url: this.Urls.auditUrl + this.model.id,
