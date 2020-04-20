@@ -29,6 +29,11 @@ var indexMixin = {
         dataIndex: 'areaName',
         align: 'center'
       }, {
+        title: '机构类型',
+        dataIndex: 'orgType',
+        align: 'center',
+        customRender: (text, record) => `${text=='SupervisorStation'?'建管处':'质监站'}`
+      }, {
         title: '操作',
         dataIndex: 'action',
         align: 'center',
@@ -68,6 +73,13 @@ var indexMixin = {
         key: '0',
         value: '0',
         children: []
+      }],
+      orgTypeList: [{
+        value: 'SupervisorStation',
+        name: '建管处'
+      }, {
+        value: 'QualityStation',
+        name: '质监站'
       }]
     }
   },
@@ -101,7 +113,7 @@ var indexMixin = {
       this.getArea(data.provinceId, 'cityList')
       this.getArea(data.cityId, 'districtList')
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'provinceId', 'cityId', 'areaId', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'orgType', 'provinceId', 'cityId', 'areaId', 'remark'))
       })
     },
     beforeSubmit(form) {

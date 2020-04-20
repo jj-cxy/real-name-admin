@@ -115,6 +115,18 @@
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构名称">
             <a-input v-decorator="['name', {rules: [{required: true, message: '请输入机构名称'}]}]" />
           </a-form-item>
+          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构类型">
+            <a-select
+              placeholder="请选择"
+              v-decorator="['orgType', {rules: [{required: true, message: '请选择机构类型'}]}]"
+            >
+              <a-select-option
+                v-for="item in orgTypeList"
+                :key="item.value"
+                :value="item.value"
+              >{{item.name}}</a-select-option>
+            </a-select>
+          </a-form-item>
           <a-form-item
             :labelCol="labelCol"
             :wrapperCol="wrapperCol"
@@ -130,7 +142,7 @@
                     optionFilterProp="children"
                     placeholder="选择省"
                     @change="handleProvinceChange"
-                    v-decorator="['provinceId', {rules: [{required: true, message: '请选择'}]}]"
+                    v-decorator="['provinceId', {rules: [{required: true, message: '请选择省份'}]}]"
                   >
                     <a-select-option
                       v-for="item in provinceList"
