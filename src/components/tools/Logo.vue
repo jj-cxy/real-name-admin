@@ -18,7 +18,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '实名制管理系统',
+      default: '数字监管服务平台',
       required: false
     },
     showTitle: {

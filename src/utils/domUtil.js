@@ -16,4 +16,4 @@ export const setDocumentTitle = function (title) {
   }
 }
 
-export const domTitle = '贵阳市建筑工程从业人员 | 实名制管理系统'
+export const domTitle = '贵阳市建筑工程施工现场数字监管服务平台'

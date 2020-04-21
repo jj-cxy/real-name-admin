@@ -3,7 +3,7 @@
     <div class="top">
       <div class="header">
         <!-- <img src="~@/assets/logo.png" class="logo" alt="logo" /> -->
-        <span class="title">贵阳市建筑工程从业人员 | 实名制管理系统</span>
+        <span class="title">贵阳市建筑工程施工现场 | 数字监管服务平台</span>
         <!-- <span class="title">贵阳市建筑工程从业人员</span> -->
         <!-- <div class="childTitle">实名制管理系统</div> -->
       </div>

@@ -2,7 +2,7 @@
   <div class="main">
     <div class="top">
       <div class="header">
-        <span class="title">贵阳市建筑工程从业人员 | 实名制管理系统</span>
+        <span class="title">贵阳市建筑工程施工现场数字监管服务平台</span>
       </div>
     </div>
     <div class="wrapper">

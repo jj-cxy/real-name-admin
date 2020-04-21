@@ -9,7 +9,7 @@
           <a-icon v-if="device==='mobile'" class="trigger" :type="collapsed ? 'menu-fold' : 'menu-unfold'"
                   @click="toggle"/>
           <a-icon v-else class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggle"/>
-          <div class="header-title">贵阳市建筑工程从业人员 | 实名制管理系统</div>
+          <div class="header-title">贵阳市建筑工程施工现场数字监管服务平台</div>
           <user-menu></user-menu>
         </div>
         <div v-else :class="['top-nav-header-index', theme]">
@@ -128,6 +128,6 @@
 
   .header-title {
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
   }
 </style>
