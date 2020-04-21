@@ -42,11 +42,7 @@
             <template v-if="advanced">
               <a-col :md="4" :sm="24">
                 <a-form-item>
-                  <a-select
-                    allowClear
-                    v-model="listQuery.condition.projectType"
-                    placeholder="项目类型"
-                  >
+                  <a-select allowClear v-model="listQuery.condition.projectType" placeholder="项目类型">
                     <a-select-option
                       v-for="(item,index) in projectTypeList"
                       :key="index"
@@ -120,7 +116,11 @@
             <a-divider type="vertical" />
             <a href="javascript:;" @click="handleEdit(record)">修改状态</a>
             <a-divider type="vertical" />
-            <a href="javascript:;" @click="handleAudit(record)">发起修改工单</a>
+            <a
+              href="javascript:;"
+              @click="handleAudit(record)"
+              v-if="record.examineStatus=='PASS'"
+            >发起修改工单</a>
           </template>
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>

@@ -31,7 +31,8 @@ var indexMixin = {
       }, {
         title: '审核状态',
         align: 'center',
-        dataIndex: 'examineStatus'
+        dataIndex: 'examineStatus',
+        customRender: (text, record) => `${text=='PASS'?'通过':text=='REJECT'?'驳回':text=='EXAMINE'?'待审':''}`
       }, {
         title: '项目开始时间',
         align: 'center',
