@@ -51,16 +51,17 @@ var indexMixin = {
   mounted() {
     console.log('详细', this.data)
     this.model = this.data
-    this.initMap()
+    let province = `${this.data.province}`
+    let city = `${this.data.city}${this.data.district}${this.data.address}`
+    this.initMap(province, city)
   },
   methods: {
-    initMap() {
+    initMap(p, c) {
       var map = new BMap.Map("allmap");
       var point = new BMap.Point(106.709177, 26.629907);
 
-      var city = "贵阳市观山湖区北京西路38号世纪金源购物中心金阳建设大厦26楼"
       var myGeo = new BMap.Geocoder();
-      myGeo.getPoint(city, function (point) {
+      myGeo.getPoint(c, function (point) {
         if (point) {
           map.clearOverlays();
           map.centerAndZoom(point, 11);
@@ -84,7 +85,7 @@ var indexMixin = {
         } else {
           alert("您选择地址没有解析到结果!");
         }
-      }, "贵州省");
+      }, p);
     }
   }
 }
