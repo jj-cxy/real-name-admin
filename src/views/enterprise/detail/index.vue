@@ -109,7 +109,7 @@
               </tr>
               <tr>
                 <td class="tit">有限期</td>
-                <td>{{item.expirationStartTime}}至{{model.expirationEndTime}}</td>
+                <td>{{item.expirationStartTime}}至{{item.expirationEndTime}}</td>
                 <td class="tit">资质取得方式</td>
                 <td>{{item.qualificationAcquireDesc}}</td>
               </tr>

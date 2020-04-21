@@ -22,26 +22,20 @@
       :columns="columns"
       :dataSource="listData"
       :loading="localLoading"
-      rowKey="id"
+      :rowKey="(text,index)=>index"
       :pagination="pagination"
       size="middle"
     ></a-table>
-
-    <!-- 表单 -->
-    <form-drawer ref="detailForm"></form-drawer>
   </div>
 </template>
 
 <script>
 import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
-import formDrawer from './modules/formDrawer'
 
 export default {
-  name: 'sub',
+  name: 'SubList',
   mixins: [baseMixin, indexMixin],
-  components: {
-    formDrawer
-  }
+  components: {}
 }
 </script>

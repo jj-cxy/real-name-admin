@@ -1,7 +1,6 @@
 import {
   axios
 } from '@/utils/request'
-import moment from 'moment'
 
 var indexMixin = {
   props: {
@@ -36,9 +35,7 @@ var indexMixin = {
         }
       }],
       Urls: {
-        listUrl: '/biz/oaAssets/page',
-        delUrl: '/biz/oaAssets/remove/',
-        downloadExcelUrl: '/biz/oaAssets/export/ids',
+        listUrl: '',
       },
       downloadFileName: '五方主体列表',
       assetsStatusList: []
@@ -46,10 +43,7 @@ var indexMixin = {
   },
   filters: {},
   created() {
-    console.log('表格数据', this.list)
     this.listData = this.list
-    /* this.getList()
-    this.getArea("100000", 'proviceList') */
   },
   methods: {}
 }

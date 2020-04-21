@@ -161,6 +161,15 @@
                 <div id="allmap"></div>
               </div>
             </a-form-item>
+            <!-- 审核人员 -->
+            <a-form-item
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              label="审核人员"
+              v-if="model.supervisorId"
+            >
+              <span>{{model.supervisorName}}</span>
+            </a-form-item>
 
             <!-- 意见 -->
             <a-form-item
@@ -171,6 +180,7 @@
             >
               <span>{{model.suggestion}}</span>
             </a-form-item>
+
             <!-- 建管处 -->
             <template
               v-if="(roleMark.split(',').includes('SupervisorMaster')) || (roleMark.split(',').includes('Supervisor'))"

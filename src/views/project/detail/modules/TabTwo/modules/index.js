@@ -25,34 +25,32 @@ var indexMixin = {
         dataIndex: 'roleTypeDesc'
       }, {
         title: '分包负责人信息',
-        dataIndex: 'subHeadName',
+        dataIndex: 'persons',
         customRender: (text, record, index) => {
-          return `项目负责人：${text}　　手机号：${record.subHeadTel}`
+          return `项目负责人：${text[0].personName}　　手机号：${text[0].personPhone}`
         }
       }, {
         title: '在场情况',
         align: 'center',
-        dataIndex: 'subsituationDesc'
+        dataIndex: 'statusDesc'
       }, {
         title: '进场时间',
         align: 'center',
-        dataIndex: 'subEntryTime'
+        dataIndex: 'createTime'
       }, {
         title: '退场时间',
         align: 'center',
-        dataIndex: 'subQuitTime'
+        dataIndex: 'modifyTime'
       }],
       Urls: {
-        listUrl: '/biz/oaAssets/page'
+        listUrl: ''
       },
     }
   },
   filters: {},
   created() {
-    console.log('表格数据', this.list)
     this.listData = this.list
-    /* this.getList()
-    this.getArea("100000", 'proviceList') */
+    /* this.getList() */
   },
   methods: {}
 }

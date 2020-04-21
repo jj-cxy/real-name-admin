@@ -147,7 +147,7 @@ import indexMixin from './modules/index'
 import Viewer from '@/views/modules/Viewer'
 
 export default {
-  name: 'info',
+  name: 'InfoTab',
   mixins: [modalMixin, indexMixin],
   components: {
     Viewer

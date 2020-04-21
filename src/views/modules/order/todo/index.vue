@@ -7,7 +7,7 @@
           <a-row :gutter="15">
             <a-col :md="10" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="事项名称" />
+                <a-input v-model="listQuery.condition.projectName" placeholder="事项名称" />
               </a-form-item>
             </a-col>
             <a-col :md="9" :sm="24">
@@ -35,7 +35,6 @@
         :rowKey="(text,index)=>index"
         :pagination="paging?pagination:false"
         size="middle"
-        :customRow="rowClick"
       >
         <span slot="action" slot-scope="text, record">
           <a href="javascript:;" @click="handleDetail(record)">处理</a>

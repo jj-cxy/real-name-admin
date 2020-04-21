@@ -5,7 +5,7 @@
         <a-card
           title="待办事项"
           :headStyle="{marginBottom: 0}"
-          :bodyStyle="{padding: 0, height: '310px'}"
+          :bodyStyle="{padding: 0, height: '312px', 'overflow-y':'auto'}"
         >
           <a href="#" slot="extra" @click="$router.push('/order/todo')">查看更多</a>
           <!-- 表格 -->
@@ -19,7 +19,7 @@
               <div class="grid-list">
                 <router-link :to="{path:'/home'}">
                   <a-badge :count="3" :offset="[-5,10]">
-                    <a-icon type="android" class="gridIcon" style="color: #92a1fe" />
+                    <a-icon type="alert" theme="filled" class="gridIcon" style="color: #92a1fe" />
                   </a-badge>
                 </router-link>
                 <div class="gridSpan">前端设备预警</div>
@@ -28,7 +28,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="0" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #b579cc" />
+                  <a-icon type="contacts" theme="filled" class="gridIcon" style="color: #b579cc" />
                 </a-badge>
                 <div class="gridSpan">管理人员数据异常</div>
               </div>
@@ -36,7 +36,12 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #45dec5" />
+                  <a-icon
+                    type="reddit-circle"
+                    theme="filled"
+                    class="gridIcon"
+                    style="color: #45dec5"
+                  />
                 </a-badge>
                 <div class="gridSpan">劳务人员数据异常</div>
               </div>
@@ -44,7 +49,12 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #7fea8b" />
+                  <a-icon
+                    type="dingtalk-circle"
+                    theme="filled"
+                    class="gridIcon"
+                    style="color: #1890FF"
+                  />
                 </a-badge>
                 <div class="gridSpan">考勤数据异常</div>
               </div>
@@ -52,7 +62,12 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #fb8775" />
+                  <a-icon
+                    type="property-safety"
+                    theme="filled"
+                    class="gridIcon"
+                    style="color: #fb8775"
+                  />
                 </a-badge>
                 <div class="gridSpan">工资数据异常</div>
               </div>
@@ -60,7 +75,7 @@
             <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="audit" class="gridIcon" style="color: #64b1f9" />
+                  <a-icon type="rocket" theme="filled" class="gridIcon" style="color: #64b1f9" />
                 </a-badge>
                 <div class="gridSpan">项目备案</div>
               </div>

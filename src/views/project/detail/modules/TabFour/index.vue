@@ -4,9 +4,25 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="15">
-          <a-col :md="8" :sm="24">
+          <a-col :md="6" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="企业名称" />
+              <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="24">
+            <a-form-item>
+              <a-input allowClear v-model="listQuery.condition.name" placeholder="手机号" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="4" :sm="24">
+            <a-form-item>
+              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="职务">
+                <a-select-option
+                  v-for="(item,index) in roleTypeList"
+                  :key="index"
+                  :value="item.value"
+                >{{item.name}}</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
@@ -22,14 +38,10 @@
       :columns="columns"
       :dataSource="listData"
       :loading="localLoading"
-      :rowKey="(text,index)=>index"
+      rowKey="id"
       :pagination="pagination"
       size="middle"
-    >
-      <span slot="action" slot-scope="text, record">
-        <a href="javascript:;" @click="handleDetail(record)">查看</a>
-      </span>
-    </a-table>
+    ></a-table>
   </div>
 </template>
 
@@ -38,7 +50,7 @@ import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
 
 export default {
-  name: 'FiveList',
+  name: 'ManagerList',
   mixins: [baseMixin, indexMixin],
   components: {}
 }

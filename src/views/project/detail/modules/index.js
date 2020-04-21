@@ -1,18 +1,15 @@
 import {
   axios
 } from '@/utils/request'
-import pick from 'lodash.pick'
 
 var indexMixin = {
   data() {
     return {
       Urls: {
-        addUrl: '/biz/oaDisclosure/disclosureInsert',
-        editUrl: '/biz/oaDisclosure/disclosureUpdate/',
         getByIdUrl: '/ida/api/project/get/'
       },
       model: {},
-      activeKey: '1',
+      activeKey: '0',
       tabShow: false
     }
   },
@@ -23,7 +20,6 @@ var indexMixin = {
   methods: {
     // tab change
     handleTabChange(key) {
-      console.log('lalal', key)
       this.activeKey = key
     },
     setForm(data) {
