@@ -146,6 +146,37 @@ export const asyncRouterMap = [{
         }]
       },
 
+      // warning
+      {
+        path: '/warning',
+        name: 'warning',
+        redirect: '/warning/history',
+        // hideChildrenInMenu: true,
+        component: PageView,
+        meta: {
+          title: '预警管理',
+          icon: 'solution',
+          keepAlive: true
+        },
+        children: [{
+          path: '/warning/history',
+          name: 'WarningHistory',
+          component: () => import('@/views/warning/history/index'),
+          meta: {
+            title: '预警历史',
+            keepAlive: false
+          }
+        }, {
+          path: '/warning/break',
+          name: 'WarningBreakF',
+          component: () => import('@/views/enterprise/detail/index'),
+          meta: {
+            title: '断线预警',
+            keepAlive: false
+          }
+        }]
+      },
+
       // chart
       /* {
         path: '/chart',
@@ -153,17 +184,6 @@ export const asyncRouterMap = [{
         component: () => import('@/views/chart/index'),
         meta: {
           title: '数据统计',
-          icon: 'fund',
-          keepAlive: true
-        },
-      }, */
-
-      /* {
-        path: '/data/statis',
-        name: 'dataStatis',
-        component: () => import('@/views/dataStatis/index'),
-        meta: {
-          title: '对外-数据统计',
           icon: 'fund',
           keepAlive: true
         },

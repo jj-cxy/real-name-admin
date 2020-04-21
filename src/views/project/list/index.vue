@@ -115,12 +115,10 @@
           <template v-if="roleMark=='Supervisor'">
             <a-divider type="vertical" />
             <a href="javascript:;" @click="handleEdit(record)">修改状态</a>
-            <a-divider type="vertical" />
-            <a
-              href="javascript:;"
-              @click="handleAudit(record)"
-              v-if="record.examineStatus=='PASS'"
-            >发起修改工单</a>
+            <template v-if="record.examineStatus=='PASS'">
+              <a-divider type="vertical" />
+              <a href="javascript:;" @click="handleAudit(record)">发起修改工单</a>
+            </template>
           </template>
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>
