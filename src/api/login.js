@@ -22,10 +22,14 @@ export function login(parameter) {
   })
 }
 
-export function getSmsCaptcha() {
+export function getSmsCaptcha(parameter) {
   return axios({
-    url: '/auth/api/sms/send',
-    method: 'get'
+    url: '/auth/api/sms/verifyCode',
+    method: 'get',
+    params: parameter,
+    headers: {
+      'base-captcha-key': parameter.header
+    }
   })
 }
 
@@ -33,6 +37,14 @@ export function getImgCaptcha() {
   return axios({
     url: '/auth/api/captcha/get',
     method: 'get'
+  })
+}
+
+export function getResetPwd(parameter) {
+  return axios({
+    url: '/auth/api/account/forgetPwd',
+    method: 'get',
+    params: parameter
   })
 }
 

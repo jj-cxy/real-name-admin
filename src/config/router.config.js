@@ -318,6 +318,11 @@ export const constantRouterMap = [{
         path: 'register-result',
         name: 'registerResult',
         component: () => import('@/views/login/RegisterResult')
+      },
+      {
+        path: 'reset-password',
+        name: 'resetPassword',
+        component: () => import('@/views/login/ResetPwd')
       }
     ]
   },

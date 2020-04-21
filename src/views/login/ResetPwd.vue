@@ -2,10 +2,7 @@
   <div class="main">
     <div class="top">
       <div class="header">
-        <!-- <img src="~@/assets/logo.png" class="logo" alt="logo" /> -->
         <span class="title">贵阳市建筑工程从业人员 | 实名制管理系统</span>
-        <!-- <span class="title">贵阳市建筑工程从业人员</span> -->
-        <!-- <div class="childTitle">实名制管理系统</div> -->
       </div>
     </div>
     <div class="wrapper">
@@ -19,35 +16,23 @@
         :form="form"
         @submit="handleSubmit"
       >
-        <h2>欢迎登录</h2>
+        <h2>重置密码</h2>
         <a-form-item>
           <a-input
             size="large"
             type="text"
-            placeholder="用户名/手机号"
-            v-decorator="['username',validatorRules.username]"
+            placeholder="手机号"
+            v-decorator="['phone',validatorRules.phone]"
           >
             <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
           </a-input>
         </a-form-item>
 
-        <a-form-item>
-          <a-input
-            size="large"
-            type="password"
-            autocomplete="false"
-            placeholder="登录密码"
-            v-decorator="['password',validatorRules.password]"
-          >
-            <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }" />
-          </a-input>
-        </a-form-item>
-
         <a-row :gutter="12">
           <a-col :span="14">
-            <a-form-item style="margin-bottom: 6px">
+            <a-form-item>
               <a-input
-                v-decorator="['verifyCode',validatorRules.verifyCode]"
+                v-decorator="['code',validatorRules.code]"
                 size="large"
                 type="text"
                 placeholder="验证码"
@@ -63,14 +48,28 @@
           </a-col>
         </a-row>
 
-        <a-form-item>
-          <a-checkbox
-            v-decorator="['rememberMe',{
-            valuePropName: 'checked',
-            initialValue: false
-          }]"
-          >记住账号</a-checkbox>
-        </a-form-item>
+        <a-row :gutter="16">
+          <a-col class="gutter-row" :span="16">
+            <a-form-item>
+              <a-input
+                v-decorator="['phoneCode',validatorRules.phoneCode]"
+                size="large"
+                type="text"
+                placeholder="短信验证码"
+              >
+                <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }" />
+              </a-input>
+            </a-form-item>
+          </a-col>
+          <a-col class="gutter-row" :span="8">
+            <a-button
+              size="large"
+              :disabled="state.smsSendBtn"
+              @click.stop.prevent="getSmgCaptcha"
+              v-text="!state.smsSendBtn && '获取验证码'||(state.time+' s')"
+            ></a-button>
+          </a-col>
+        </a-row>
 
         <a-form-item style="margin-bottom: 0">
           <a-button
@@ -80,11 +79,7 @@
             class="login-button"
             :loading="loginBtn"
             :disabled="loginBtn"
-          >登 录</a-button>
-        </a-form-item>
-
-        <a-form-item style="margin-bottom: 0">
-          <a href="javascript:;" @click="resetPwd" style="float: right;">忘记密码？</a>
+          >确 认</a-button>
         </a-form-item>
       </a-form>
     </div>
@@ -92,11 +87,9 @@
 </template>
 
 <script>
-import md5 from 'md5'
-import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
 import { axios } from '@/utils/request'
-import { getImgCaptcha } from '@/api/login'
+import { getImgCaptcha, getSmsCaptcha, getResetPwd } from '@/api/login'
 
 export default {
   data() {
@@ -104,16 +97,13 @@ export default {
       loginBtn: false,
       form: this.$form.createForm(this),
       validatorRules: {
-        username: { rules: [{ required: true, message: '请输入用户名或者手机号', validator: 'click' }] },
-        password: {
-          initialValue: 'Jjsj@123456',
-          rules: [{ required: true, message: '请输入密码', validator: 'click' }]
-        },
-        verifyCode: { rules: [{ required: true, message: '请输入验证码' }] }
+        phone: { rules: [{ required: true, message: '请输入手机号', validator: 'click' }] },
+        code: { rules: [{ required: true, message: '请输入密码', validator: 'click' }] },
+        phoneCode: { rules: [{ required: true, message: '请输短信验证码' }], validateTrigger: 'blur' }
       },
       state: {
         time: 60,
-        loginBtn: false
+        smsSendBtn: false
       },
       Urls: {},
       captchaImg: '',
@@ -130,7 +120,6 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['Login', 'Logout']),
     getCaptcha() {
       getImgCaptcha().then(res => {
         if (res.code == 0) {
@@ -143,11 +132,60 @@ export default {
         }
       })
     },
-    handleSubmit(e) {
+    getSmgCaptcha(e) {
       e.preventDefault()
       const {
         form: { validateFields },
-        Login
+        state
+      } = this
+
+      validateFields((err, values) => {
+        if (!err) {
+          state.smsSendBtn = true
+          const interval = window.setInterval(() => {
+            if (state.time-- <= 0) {
+              state.time = 60
+              state.smsSendBtn = false
+              window.clearInterval(interval)
+            }
+          }, 1000)
+
+          const hide = this.$message.loading('验证码发送中..', 0)
+          let params = {
+            phone: values.phone,
+            code: values.verifyCode,
+            header: this.captchaHeader
+          }
+          getSmsCaptcha(params)
+            .then(res => {
+              setTimeout(hide, 2500)
+              if (res.code == 0) {
+                this.$notification['success']({
+                  message: '提示',
+                  description: '验证码获取成功',
+                  duration: 8
+                })
+              } else {
+                this.$notification['error']({
+                  message: '错误',
+                  description: err.msg,
+                  duration: 4
+                })
+              }
+            })
+            .catch(err => {
+              setTimeout(hide, 1)
+              clearInterval(interval)
+              state.time = 60
+              state.smsSendBtn = false
+            })
+        }
+      })
+    },
+    handleSubmit(e) {
+      e.preventDefault()
+      const {
+        form: { validateFields }
       } = this
 
       this.loginBtn = true
@@ -156,47 +194,32 @@ export default {
           const loginParams = {
             ...values
           }
-          loginParams.scope = 'INSIDE'
-          loginParams.loginType = 'normal'
-          loginParams.header = this.captchaHeader
-          Login(loginParams)
+          getResetPwd(loginParams)
             .then(res => {
               this.loginBtn = false
-              if (values.rememberMe) {
-                localStorage.setItem('in-username', values.username)
+              if (res.code == 0) {
+                this.$notification['success']({
+                  message: '提示',
+                  description: '密码重置成功，重置密码将发于手机短信，请注意查收',
+                  duration: 4
+                })
               } else {
-                localStorage.removeItem('in-username')
+                this.$notification['error']({
+                  message: '错误',
+                  description: err.msg || '请求出现错误，请稍后再试',
+                  duration: 4
+                })
               }
-              this.loginSuccess(res)
             })
             .catch(err => this.requestFailed(err))
+            .finally(() => {
+              this.loginBtn = false
+            })
         } else {
           setTimeout(() => {
             this.loginBtn = false
           }, 600)
         }
-      })
-    },
-    requestFailed(err) {
-      this.loginBtn = false
-      this.$notification['error']({
-        message: '错误',
-        description: err.msg || '请求出现错误，请稍后再试',
-        duration: 4
-      })
-      this.getCaptcha()
-    },
-    loginSuccess(res) {
-      this.$router.push({ path: '/' })
-      /* if (res.data.user.defaultPwd) {
-        this.$router.push('/account/set/base')
-      } else {
-        this.$router.push({ path: '/' })
-      } */
-    },
-    resetPwd() {
-      this.$router.push({
-        path: '/login/reset-password'
       })
     }
   }
