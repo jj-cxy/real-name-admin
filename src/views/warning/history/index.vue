@@ -67,14 +67,6 @@
       >
         <span slot="action" slot-scope="text, record">
           <a href="javascript:;" @click="handleDetail(record)">查看</a>
-          <template v-if="roleMark=='Supervisor'">
-            <a-divider type="vertical" />
-            <a href="javascript:;" @click="handleEdit(record)">修改状态</a>
-            <template v-if="record.examineStatus=='PASS'">
-              <a-divider type="vertical" />
-              <a href="javascript:;" @click="handleAudit(record)">发起修改工单</a>
-            </template>
-          </template>
         </span>
         <span slot="addr" slot-scope="text, record">{{record.areaName}} {{record.address}}</span>
       </a-table>

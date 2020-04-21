@@ -17,24 +17,15 @@ var indexMixin = {
         align: 'center',
         dataIndex: 'managerOrgName'
       }, {
-        title: '项目地区',
-        dataIndex: 'district',
-        customRender: (text, record) => `${record.province}${record.city}${record.district}`
-      }, {
         title: '项目类型',
         align: 'center',
         dataIndex: 'projectTypeDesc'
       }, {
-        title: '项目状态',
+        title: '异常类型',
         align: 'center',
         dataIndex: 'projectStatusDesc'
-      }, {
-        title: '审核状态',
-        align: 'center',
-        dataIndex: 'examineStatus',
-        customRender: (text, record) => `${text=='PASS'?'通过':text=='REJECT'?'驳回':text=='EXAMINE'?'待审':''}`
-      }, {
-        title: '项目开始时间',
+      },{
+        title: '预警时间',
         align: 'center',
         dataIndex: 'createTime'
       }, {
@@ -42,7 +33,7 @@ var indexMixin = {
         dataIndex: 'action',
         align: 'center',
         fixed: 'right',
-        width: '230px',
+        width: '70px',
         scopedSlots: {
           customRender: 'action'
         }
@@ -54,7 +45,7 @@ var indexMixin = {
         orgListurl: '/auth/api/org/tree',
         softEnterpriseUrl: '/ida/api/enterprise/page'
       },
-      downloadFileName: '项目列表',
+      downloadFileName: '预警列表',
       orgList: [],
       districtList: [],
       projectTypeList: [],

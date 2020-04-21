@@ -29,6 +29,10 @@ var indexMixin = {
         align: 'center',
         dataIndex: 'auditStatusDesc'
       }, {
+        title: '创建时间',
+        align: 'center',
+        dataIndex: 'createTime'
+      }, {
         title: '操作',
         dataIndex: 'action',
         align: 'center',
