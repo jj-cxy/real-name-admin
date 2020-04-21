@@ -176,9 +176,18 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               label="修改意见"
-              v-if="model.suggestion"
+              v-if="model.modifyComment"
             >
-              <span>{{model.suggestion}}</span>
+              <span>{{model.modifyComment}}</span>
+            </a-form-item>
+
+            <a-form-item
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              label="修改意见"
+              v-if="model.recordComment"
+            >
+              <span>{{model.recordComment}}</span>
             </a-form-item>
 
             <!-- 建管处 -->
