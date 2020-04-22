@@ -43,6 +43,15 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           },
+          {
+            path: '/form/test',
+            name: 'test',
+            component: () => import('@/views/test/index'),
+            meta: {
+              title: '测试表单',
+              keepAlive: true
+            }
+          },
           /* {
             path: '/order/overdue',
             name: 'OrderOverdue',

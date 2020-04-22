@@ -66,7 +66,7 @@
             </tr>
             <tr>
               <td class="tit">签约合同价</td>
-              <td>{{model.constractPrice}}</td>
+              <td>{{model.contractPrice}}元</td>
               <td class="tit">合同签订日期</td>
               <td>{{model.constractDay}}</td>
             </tr>
@@ -80,7 +80,7 @@
               <td class="tit">造价</td>
               <td>{{model.manufacturingCost}}元</td>
               <td class="tit">项目规模</td>
-              <td>{{model.scale}}</td>
+              <td>{{model.scaleDesc}}</td>
             </tr>
             <tr>
               <td class="tit">面积</td>

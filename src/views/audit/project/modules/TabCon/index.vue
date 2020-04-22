@@ -13,7 +13,7 @@
         <div v-for="(item,index) in unitData.persons" :key="index">
           <a-divider />
           <li>
-            <span>{{item.personTypeDesc}}姓名：</span>王某某
+            <span>{{item.personTypeDesc}}姓名：</span>{{item.personName}}
           </li>
           <li>
             <span>手机号：</span>
