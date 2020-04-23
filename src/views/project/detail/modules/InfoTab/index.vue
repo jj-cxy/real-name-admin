@@ -127,7 +127,7 @@
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="监督员">
       <span>{{model.supervisorName}}</span>
     </a-form-item>
-    <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
+    <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="数据收集公司">
       <span>{{model.softNames}}</span>
     </a-form-item>
     <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目简介">
