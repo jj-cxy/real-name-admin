@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '220px'
+      default: '580px'
     },
     autoResize: {
       type: Boolean,
@@ -71,107 +71,302 @@ export default {
   },
   methods: {
     setOptions({ legendData, seriesData } = {}) {
-      let bgColor = '#fff'
-      let title = '总量'
-      let color = ['#0E7CE2', '#FF8352', '#E271DE', '#F8456B', '#00FFFF', '#4AEAB0']
-      let echartData = [
-        {
-          name: 'A类',
-          value: '3720'
-        },
-        {
-          name: 'B类',
-          value: '2920'
-        },
-        {
-          name: 'C类',
-          value: '2200'
-        },
-        {
-          name: 'D类',
-          value: '1420'
-        }
-      ]
-
-      let formatNumber = function(num) {
-        let reg = /(?=(\B)(\d{3})+$)/g
-        return num.toString().replace(reg, ',')
-      }
-      let total = echartData.reduce((a, b) => {
-        return a + b.value * 1
-      }, 0)
-      this.chart.setOption({
-        backgroundColor: bgColor,
-        color: color,
-        tooltip: {
-            trigger: 'item'
-        },
-        title: [
-          {
-            text: '{name|' + title + '}\n{val|' + formatNumber(total) + '}',
-            top: 'center',
-            left: 'center',
-            textStyle: {
-              rich: {
-                name: {
-                  fontSize: 16,
-                  fontWeight: 'normal',
-                  color: '#666666',
-                  padding: [10, 0]
-                },
-                val: {
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  color: '#333333'
-                }
-              }
+      var dataMap = {}
+      function dataFormatter(obj) {
+        var pList = ['在建', '停工', '完工', '竣工']
+        var temp
+        for (var year = 1; year <= 5; year++) {
+          var max = 0
+          var sum = 0
+          temp = obj[year]
+          for (var i = 0, l = temp.length; i < l; i++) {
+            max = Math.max(max, temp[i])
+            sum += temp[i]
+            obj[year][i] = {
+              name: pList[i],
+              value: temp[i]
             }
           }
-        ],
-        series: [
-          {
-            type: 'pie',
-            radius: ['75%', '90%'],
-            center: ['50%', '50%'],
-            data: echartData,
-            hoverAnimation: false,
-            itemStyle: {
-              normal: {
-                borderColor: bgColor,
-                borderWidth: 2
-              }
+          obj[year + 'max'] = Math.floor(max / 100) * 100
+          obj[year + 'sum'] = sum
+        }
+        return obj
+      }
+      dataMap.data = dataFormatter({
+        1: [55, 25, 15, 30],
+        2: [30, 55, 25, 15],
+        3: [15, 30, 55, 25],
+        4: [25, 15, 30, 55],
+        5: [25, 30, 55, 15]
+      })
+      dataMap.dataGD = dataFormatter({
+        1: [55],
+        2: [30],
+        3: [15],
+        4: [25],
+        5: [25]
+      })
+      dataMap.dataHN = dataFormatter({
+        1: [25],
+        2: [55],
+        3: [30],
+        4: [15],
+        5: [30]
+      })
+      dataMap.dataHB = dataFormatter({
+        1: [15],
+        2: [25],
+        3: [55],
+        4: [30],
+        5: [55]
+      })
+      dataMap.dataSX = dataFormatter({
+        1: [30],
+        2: [15],
+        3: [25],
+        4: [55],
+        5: [15]
+      })
+      this.chart.setOption({
+        baseOption: {
+          timeline: {
+            axisType: 'category',
+            // realtime: false,
+            // loop: false,
+            autoPlay: true,
+            // currentIndex: 2,
+            playInterval: 1000,
+            controlStyle: {
+              position: 'left'
             },
-            labelLine: {
-              normal: {
-                length: 10,
-                length2: 20,
-                lineStyle: {
-                  color: '#e6e6e6'
-                }
+            bottom: 0,
+            left: 20,
+            right: 20,
+            data: [
+              '贵阳市',
+              '云岩区',
+              '南明区',
+              '观山湖',
+              '白云区',
+              '乌当区',
+              '花溪区',
+              '双龙镇',
+              '经开区',
+              '综保区',
+              '高新区',
+              '清镇市',
+              '息烽县',
+              '开阳县',
+              '修文县'
+            ]
+          },
+          title: [
+            {
+              text: '本地区项目进度',
+              left: 'center',
+              top: '16%',
+              padding: [24, 0],
+              textStyle: {
+                fontSize: 14 * 1,
+                align: 'center'
               }
-            },
-            label: {
-              normal: {
-                formatter: params => {
-                  return '{icon|●}{name|' + params.name + '}{value|' + formatNumber(params.value) + '}'
-                },
-                rich: {
-                  icon: {
-                    fontSize: 16
-                  },
-                  name: {
-                    fontSize: 14,
-                    padding: [0, 10, 0, 4],
-                    color: '#666666'
-                  },
-                  value: {
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                    color: '#333333'
-                  }
+            }
+          ],
+          calculable: true,
+          grid: {
+            top: '50%',
+            bottom: 40,
+            left: 20,
+            right: 20,
+            containLabel: true
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+          xAxis: [
+            {
+              type: 'value',
+              boundaryGap: [0, 0.01],
+              axisLabel: {
+                //	formatter: '{value}%',
+                textStyle: {
+                  //color: '#fff',
+                  fontWeight: '80'
                 }
               }
             }
+          ],
+          yAxis: [
+            {
+              type: 'category',
+              data: ['在建', '停工', '完工', '竣工']
+            }
+          ],
+          series: [
+            {
+              name: '项目',
+              type: 'bar'
+            },
+            {
+              type: 'pie',
+              label: {
+                normal: {
+                  show: true,
+                  position: 'outside',
+                  formatter: '{b} : {c} ({d}%)'
+                },
+                emphasis: {
+                  show: true,
+                  textStyle: {
+                    fontSize: '15',
+                    fontWeight: 'normal'
+                  }
+                }
+              },
+              radius: ['30%', '35%'],
+              center: ['50%', '25%']
+            }
+          ]
+        },
+        options: [
+          {
+            series: [
+              {
+                data: dataMap.data['1']
+              },
+              {
+                data: [
+                  {
+                    name: '在建',
+                    value: dataMap.dataGD['1sum']
+                  },
+                  {
+                    name: '停工',
+                    value: dataMap.dataHN['1sum']
+                  },
+                  {
+                    name: '完工',
+                    value: dataMap.dataHB['1sum']
+                  },
+                  {
+                    name: '竣工',
+                    value: dataMap.dataSX['1sum']
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            series: [
+              {
+                data: dataMap.data['2']
+              },
+              {
+                data: [
+                  {
+                    name: '在建',
+                    value: dataMap.dataGD['2sum']
+                  },
+                  {
+                    name: '停工',
+                    value: dataMap.dataHN['2sum']
+                  },
+                  {
+                    name: '完工',
+                    value: dataMap.dataHB['2sum']
+                  },
+                  {
+                    name: '竣工',
+                    value: dataMap.dataSX['2sum']
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            series: [
+              {
+                data: dataMap.data['3']
+              },
+              {
+                data: [
+                  {
+                    name: '在建',
+                    value: dataMap.dataGD['3sum']
+                  },
+                  {
+                    name: '停工',
+                    value: dataMap.dataHN['3sum']
+                  },
+                  {
+                    name: '完工',
+                    value: dataMap.dataHB['3sum']
+                  },
+                  {
+                    name: '竣工',
+                    value: dataMap.dataSX['3sum']
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            series: [
+              {
+                data: dataMap.data['4']
+              },
+              {
+                data: [
+                  {
+                    name: '在建',
+                    value: dataMap.dataGD['4sum']
+                  },
+                  {
+                    name: '停工',
+                    value: dataMap.dataHN['4sum']
+                  },
+                  {
+                    name: '完工',
+                    value: dataMap.dataHB['4sum']
+                  },
+                  {
+                    name: '竣工',
+                    value: dataMap.dataSX['4sum']
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            series: [
+              {
+                data: dataMap.data['5']
+              },
+              {
+                data: [
+                  {
+                    name: '在建',
+                    value: dataMap.dataGD['5sum']
+                  },
+                  {
+                    name: '停工',
+                    value: dataMap.dataHN['5sum']
+                  },
+                  {
+                    name: '完工',
+                    value: dataMap.dataHB['5sum']
+                  },
+                  {
+                    name: '竣工',
+                    value: dataMap.dataSX['5sum']
+                  }
+                ]
+              }
+            ]
           }
         ]
       })

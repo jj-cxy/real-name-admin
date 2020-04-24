@@ -81,6 +81,19 @@
             </a-col>
           </a-row>
         </a-card>
+
+        <!-- 从业人员、流出情况 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="本市从业人员新增、流出情况统计"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <OutRadio />
+          <OutNum style="margin-top: 48px" />
+        </a-card>
       </a-col>
       <a-col :xl="8" :lg="12" :sm="24">
         <a-card
@@ -103,6 +116,83 @@
           <ProjectPace />
         </a-card>
       </a-col>
+      <a-col :xl="8" :lg="12" :sm="24">
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="各区项目占比"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+        >
+          <ProjectRadio />
+        </a-card>
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="各区预警情况"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+        </a-card>
+      </a-col>
+    </a-row>
+    <a-row :gutter="24">
+      <a-col :xl="8" :lg="12" :sm="24">
+        <!-- 企业类型分布 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="企业类型分布"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <UnitType />
+        </a-card>
+      </a-col>
+      <a-col :xl="16" :lg="24" :sm="24">
+        <!-- 各区监督站得分排名 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="各区监督站得分排名"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <ScoreRank />
+        </a-card>
+      </a-col>
+    </a-row>
+    <a-row :gutter="24">
+      <a-col :xl="8" :lg="12" :sm="24">
+        <!-- 工种占比 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="工种占比"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <WorkTypeRadio />
+        </a-card>
+      </a-col>
+      <a-col :xl="8" :lg="24" :sm="24">
+        <!-- 手续办理情况 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="手续办理情况"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <CertificateHold />
+          <!-- <CertificateHold /> -->
+        </a-card>
+      </a-col>
     </a-row>
   </div>
 </template>
@@ -116,6 +206,19 @@ import RightBarChart from './modules/RightBarChart'
 
 import ProjectType from './components/ProjectType'
 import ProjectPace from './components/ProjectPace'
+// 流出人口
+import OutRadio from './components/OutRadio'
+import OutNum from './components/OutNum'
+
+import UnitType from './components/UnitType'
+import ProjectRadio from './components/ProjectRadio'
+import ScoreRank from './components/ScoreRank'
+
+import WorkTypeRadio from './components/WorkTypeRadio'
+
+import CertificateHold from './components/CertificateHold'
+// import WorkTypeRadio from './components/WorkTypeRadio'
+
 import { mixinDevice } from '@/utils/mixin'
 
 export default {
@@ -127,7 +230,15 @@ export default {
     RightBarChart,
 
     ProjectType,
-    ProjectPace
+    ProjectPace,
+    OutRadio,
+    OutNum,
+    UnitType,
+    ProjectRadio,
+    ScoreRank,
+    WorkTypeRadio,
+
+    CertificateHold
   }
 }
 </script>
