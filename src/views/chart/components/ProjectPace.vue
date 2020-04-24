@@ -164,18 +164,19 @@ export default {
             {
               text: '本地区项目进度',
               left: 'center',
-              top: '16%',
+              top: '20%',
               padding: [24, 0],
               textStyle: {
-                fontSize: 14 * 1,
-                align: 'center'
+                fontSize: 16,
+                align: 'center',
+                color: '#222'
               }
             }
           ],
           calculable: true,
           grid: {
             top: '50%',
-            bottom: 40,
+            bottom: 60,
             left: 20,
             right: 20,
             containLabel: true
@@ -187,6 +188,7 @@ export default {
               type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
             }
           },
+          color: ['#975fe5', '#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff'],
           xAxis: [
             {
               type: 'value',
@@ -203,13 +205,41 @@ export default {
           yAxis: [
             {
               type: 'category',
-              data: ['在建', '停工', '完工', '竣工']
+              data: ['在建', '停工', '完工', '竣工'],
             }
           ],
           series: [
             {
               name: '项目',
-              type: 'bar'
+              type: 'bar',
+              barMaxWidth: 15,
+              barGap: 0,
+              itemStyle: {
+                normal: {
+                  color: function(params) {
+                    //展示正值的柱子，负数设为透明
+                    let colorArr = params.value > 0 ? ['#FFD119', '#FFAC4C'] : ['rgba(0,0,0,0)', 'rgba(0,0,0,0)']
+                    return new echarts.graphic.LinearGradient(
+                      0,
+                      0,
+                      0,
+                      1,
+                      [
+                        {
+                          offset: 0,
+                          color: colorArr[0] // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: colorArr[1] // 100% 处的颜色
+                        }
+                      ],
+                      false
+                    )
+                  },
+                  barBorderRadius: 30
+                }
+              }
             },
             {
               type: 'pie',
@@ -227,7 +257,7 @@ export default {
                   }
                 }
               },
-              radius: ['30%', '35%'],
+              radius: ['30%', '40%'],
               center: ['50%', '25%']
             }
           ]

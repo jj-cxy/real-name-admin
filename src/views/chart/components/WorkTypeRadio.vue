@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '250px'
+      default: '300px'
     },
     autoResize: {
       type: Boolean,
@@ -128,16 +128,21 @@ export default {
           value: 123,
           name: '修文县'
         }
-      ];
+      ]
       this.chart.setOption({
         title: {
-          text: '实名项目总数',
-          subtext: '590个项目',
+          text: '项目总数',
+          subtext: '590个',
           x: 'center',
-          y: '37%',
+          y: '40%',
           textStyle: {
-            fontWeight: 'normal',
-            fontSize: 12
+            fontSize: 14,
+            color: '#777',
+            lineHeight: 18
+          },
+          subtextStyle: {
+            fontSize: 22,
+            color: '#222'
           }
         },
         tooltip: {
@@ -145,11 +150,31 @@ export default {
           trigger: 'item',
           formatter: '{b}: {c} ({d}%)'
         },
+        color: [
+          '#37a2da',
+          '#32c5e9',
+          '#9fe6b8',
+          '#ffdb5c',
+          '#ff9f7f',
+          '#fb7293',
+          '#e7bcf3',
+          '#8378ea',
+          '#8d7fec',
+          '#5085f2',
+          '#e75fc3',
+          '#f87be2',
+          '#f2719a',
+          '#fca4bb',
+          '#f59a8f',
+          '#fdb301',
+          '#57e7ec',
+          '#cf9ef1'
+        ],
         series: [
           {
             type: 'pie',
             selectedMode: 'single',
-            radius: ['40%', '75%'],
+            radius: ['50%', '85%'],
 
             label: {
               normal: {
@@ -164,29 +189,6 @@ export default {
             labelLine: {
               normal: {
                 show: false
-              }
-            },
-            data: data
-          },
-          {
-            type: 'pie',
-            radius: ['75%', '100%'],
-            itemStyle: {
-              normal: {
-                color: '#eeeeee'
-              },
-              emphasis: {
-                color: '#f9f9f9'
-              }
-            },
-            label: {
-              normal: {
-                position: 'inner',
-                formatter: '{c}个',
-                textStyle: {
-                  color: '#46aaf7',
-                  fontSize: 10
-                }
               }
             },
             data: data

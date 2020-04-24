@@ -70,62 +70,29 @@ export default {
     }
   },
   methods: {
-    setOptions({} = {}) {
+    setOptions({ innerData, outerData } = {}) {
       let innerFontColor = '#FFFFFF'
       let outerFontColor = '#666666'
       let scale = 1
       let echartData = {
-        inner: [
-          {
-            value: 100,
-            unit: '个',
-            name: '行业大类1'
-          },
-          {
-            value: 100,
-            unit: '个',
-            name: '行业大类2'
-          },
-          {
-            value: 250,
-            unit: '个',
-            name: '行业大类3'
-          },
-          {
-            value: 250,
-            unit: '个',
-            name: '行业大类4'
-          }
-        ],
-        outer: [
-          {
-            value: 200,
-            unit: '个',
-            name: '谷歌'
-          },
-          {
-            value: 500,
-            unit: '个',
-            name: '必应'
-          }
-        ]
+        inner: innerData,
+        outer: outerData
       }
 
       let legend1 = echartData.inner.map(v => v.name)
       let legend2 = echartData.outer.map(v => v.name)
       let legendData = [...legend1, ...legend2]
       this.chart.setOption({
-        backgroundColor: '#fff',
-        color: ['#975fe5', '#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff'],
+        color: ['#ff9f7f', '#fb7293', '#5085f2', '#32c5e9', '#ef5656', '#1890FF'],
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         series: [
           {
-            name: '访问来源',
+            name: '从业人员',
             type: 'pie',
-            radius: [0, '62%'],
+            radius: [0, '65%'],
             itemStyle: {
               normal: {
                 borderColor: '#fff',
@@ -148,9 +115,9 @@ export default {
             data: echartData.inner
           },
           {
-            name: '访问来源',
+            name: '从业人员',
             type: 'pie',
-            radius: ['75%', '92%'],
+            radius: ['75%', '90%'],
             data: echartData.outer,
             labelLine: {
               normal: {

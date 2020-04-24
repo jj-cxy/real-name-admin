@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '215px'
+      default: '316px'
     },
     autoResize: {
       type: Boolean,
@@ -71,52 +71,60 @@ export default {
   },
   methods: {
     setOptions({ legendData, seriesData } = {}) {
+      let colorList = ['#975fe5', '#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff']
+      // let colorList = ['#FF8700', '#ffc300', '#00e473', '#009DFF']
+      let labelSereies = []
+      seriesData.map((item, index) => {
+        labelSereies[index] = {
+          value: item.value,
+          itemStyle: {
+            normal: {
+              color: colorList[index]
+            }
+          }
+        }
+      })
       this.chart.setOption({
-        color: ['#975fe5', '#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff'],
-        grid: {
-          left: 0,
-          top: 0,
-          bottom: 0,
-          right: 0,
-          containLabel: true
-        },
         tooltip: {
+          show: true,
           trigger: 'item',
-          formatter: '{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b} : {c}%'
         },
-        legend: {
-          type: 'scroll',
-          orient: 'vartical',
-          top: 'center',
-          right: '20',
-          itemWidth: 16,
-          itemHeight: 8,
-          itemGap: 16,
-          data: ['IDS', 'VPN', '交换机', '防火墙', 'WAF', '堡垒机']
-        },
-        polar: {},
         angleAxis: {
-          interval: 1,
-          type: 'category',
-          data: [],
-          z: 10,
+          data: legendData,
           axisLine: {
-            show: false
+            show: true,
+            lineStyle: {
+              color: '#ddd',
+              width: 1,
+              type: 'solid'
+            }
           },
           axisLabel: {
-            show: false
+            interval: 0,
+            show: true,
+            color: '#333',
+            fontSize: 14
           }
         },
         radiusAxis: {
-          min: 40,
-          max: 120,
+          min: 0,
+          max: 100,
           interval: 20,
           axisLine: {
-            show: false
+            show: true,
+            lineStyle: {
+              color: '#e8e8e8',
+              width: 1,
+              type: 'solid'
+            }
           },
           axisLabel: {
             formatter: '{value} %',
-            show: false
+            show: true,
+            padding: [0, 0, 20, 0],
+            color: '#333',
+            fontSize: 12
           },
           splitLine: {
             lineStyle: {
@@ -126,79 +134,13 @@ export default {
             }
           }
         },
-        calculable: true,
+        polar: {},
         series: [
           {
-            type: 'pie',
-            radius: ['90%', '91%'],
-            hoverAnimation: false,
-            labelLine: {
-              normal: {
-                show: false
-              },
-              emphasis: {
-                show: true
-              }
-            },
-            data: [
-              {
-                value: 0,
-                itemStyle: {
-                  normal: {
-                    color: '#e8e8e8'
-                  }
-                }
-              }
-            ]
-          },
-          {
-            type: 'pie',
-            roseType: 'area',
-            zlevel: 10,
-            label: {
-              normal: {
-                show: true,
-                formatter: '{c}',
-                textStyle: {
-                  fontSize: 12
-                },
-                position: 'outside'
-              },
-              emphasis: {
-                show: true
-              }
-            },
-            labelLine: {
-              normal: {
-                show: true
-              }
-            },
-            data: [
-              {
-                value: 10,
-                name: 'IDS'
-              },
-              {
-                value: 5,
-                name: 'VPN'
-              },
-              {
-                value: 15,
-                name: '交换机'
-              },
-              {
-                value: 25,
-                name: '防火墙'
-              },
-              {
-                value: 20,
-                name: 'WAF'
-              },
-              {
-                value: 35,
-                name: '堡垒机'
-              }
-            ]
+            name: '项目类型分布',
+            type: 'bar',
+            data: labelSereies,
+            coordinateSystem: 'polar'
           }
         ]
       })

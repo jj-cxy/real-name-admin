@@ -11,10 +11,30 @@
         >
           <ul class="data-statis-top">
             <li>
+              <span class="ico">
+                <i class="iconfont">&#xe613;</i>
+              </span>
               <h1 class="num">376</h1>
               <span class="tit">项目总数（个）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <span class="ico">
+                <i class="iconfont">&#xe62a;</i>
+              </span>
+              <h1 class="num">376</h1>
+              <span class="tit">在建项目（个）</span>
+            </li>
+            <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <span class="ico">
+                <i class="iconfont">&#xe688;</i>
+              </span>
+              <h1 class="num">376</h1>
+              <span class="tit">竣工项目（个）</span>
+            </li>
+          </ul>
+          <ul class="data-statis-top">
             <li>
               <h1 class="num">1100</h1>
               <span class="tit">从业总人数（人）</span>
@@ -24,6 +44,7 @@
               <h1 class="num">100</h1>
               <span class="tit">管理人员（人）</span>
             </li>
+            <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">2000</h1>
               <span class="tit">劳务人员（人）</span>
@@ -31,7 +52,7 @@
             <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">20000</h1>
-              <span class="tit">昨日打卡（人）</span>
+              <span class="tit">昨日打卡（次）</span>
             </li>
           </ul>
           <a-row :gutter="12" class="data-statis-bot">
@@ -49,7 +70,7 @@
             <a-col :xl="12" :lg="12" :sm="24">
               <div class="item">
                 <div class="tit">无证管理人员</div>
-                <div class="num">
+                <div class="num" style="color: red">
                   60
                   <span class="unit">人</span>
                   <span class="per">占</span>60
@@ -71,7 +92,7 @@
             <a-col :xl="12" :lg="12" :sm="24">
               <div class="item">
                 <div class="tit">无证劳务人员</div>
-                <div class="num">
+                <div class="num" style="color: red">
                   600
                   <span class="unit">人</span>
                   <span class="per">占</span>60
@@ -91,7 +112,7 @@
           :bodyStyle="{padding: '24px 0'}"
           style="margin-top: 24px"
         >
-          <OutRadio />
+          <OutRadio :chartData="inOutRadioList" />
           <OutNum style="margin-top: 48px" />
         </a-card>
       </a-col>
@@ -101,9 +122,9 @@
           :bordered="false"
           title="项目类型分布"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: 0}"
         >
-          <ProjectType />
+          <ProjectType :chartData="projectTypeList" />
         </a-card>
         <a-card
           :loading="loading"
@@ -124,7 +145,7 @@
           class="card-chart"
           :bodyStyle="{padding: '24px 0'}"
         >
-          <ProjectRadio />
+          <ProjectRadio :chartData="projectRadioList" />
         </a-card>
         <a-card
           :loading="loading"
@@ -133,8 +154,7 @@
           class="card-chart"
           :bodyStyle="{padding: '24px 0'}"
           style="margin-top: 24px"
-        >
-        </a-card>
+        ></a-card>
       </a-col>
     </a-row>
     <a-row :gutter="24">
@@ -173,7 +193,7 @@
           :bordered="false"
           title="工种占比"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: '0'}"
           style="margin-top: 24px"
         >
           <WorkTypeRadio />
@@ -200,9 +220,6 @@
 <script>
 import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
-import LineChart from './modules/LineChart'
-import LeftBarChart from './modules/LeftBarChart'
-import RightBarChart from './modules/RightBarChart'
 
 import ProjectType from './components/ProjectType'
 import ProjectPace from './components/ProjectPace'
@@ -225,10 +242,6 @@ export default {
   name: 'userList',
   mixins: [baseMixin, indexMixin, mixinDevice],
   components: {
-    LineChart,
-    LeftBarChart,
-    RightBarChart,
-
     ProjectType,
     ProjectPace,
     OutRadio,

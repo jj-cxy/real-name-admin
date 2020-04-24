@@ -76,78 +76,69 @@ export default {
           trigger: 'axis',
           axisPointer: {
             lineStyle: {
-              color: '#ddd'
+              color: '#e8e8e8'
             }
           },
           backgroundColor: 'rgba(255,255,255,1)',
           padding: [5, 10],
           textStyle: {
-            color: '#7588E4'
+            color: '#555'
           },
           extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
         },
         legend: {
-          // right: 20,
-          // orient: 'vertical',
-          data: ['2018', '2019', '2020']
+          data: ['本市从业人员', '新增从业人员', '流出从业人员']
         },
         xAxis: {
           type: 'category',
-          data: ['00:00', '2:00', '4:00', '6:00'],
+          data: ['2017', '2018', '2019', '2020'],
           boundaryGap: false,
           splitLine: {
-            show: false,
-            interval: 'auto',
-            lineStyle: {
-              color: ['#D4DFF5']
-            }
+            show: false
           },
           axisTick: {
-            show: true
+            show: false
           },
           axisLine: {
             show: true,
             lineStyle: {
-              color: '#609ee9'
+              color: '#e8e8e8'
             }
           },
           axisLabel: {
             margin: 10,
             textStyle: {
-              fontSize: 14
+              color: '#222'
             }
           }
         },
         yAxis: {
           type: 'value',
           splitLine: {
-            show: false,
-            lineStyle: {
-              color: ['#D4DFF5']
-            }
+            show: false
           },
           axisTick: {
-            show: true
+            show: false
           },
           axisLine: {
             show: true,
             lineStyle: {
-              color: '#609ee9'
+              color: '#e8e8e8'
             }
           },
           axisLabel: {
             margin: 10,
             textStyle: {
-              fontSize: 14
+              color: '#222'
             }
           }
         },
         series: [
           {
-            name: '2018',
+            name: '本市从业人员',
             type: 'line',
-            smooth: true,
-            showSymbol: false,
+            smooth: false,
+            showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
             data: ['1200', '1400', '1008', '1411'],
@@ -158,15 +149,15 @@ export default {
             },
             lineStyle: {
               normal: {
-                width: 1
+                width: 2
               }
             }
           },
           {
-            name: '2019',
+            name: '新增从业人员',
             type: 'line',
-            smooth: true,
-            showSymbol: false,
+            smooth: false,
+            showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
             data: ['1200', '1400', '808', '811'],
@@ -177,15 +168,15 @@ export default {
             },
             lineStyle: {
               normal: {
-                width: 1
+                width: 2
               }
             }
           },
           {
-            name: '2020',
+            name: '流出从业人员',
             type: 'line',
-            smooth: true,
-            showSymbol: false,
+            smooth: false,
+            showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
             data: ['980', '500', '608', '811'],
@@ -196,7 +187,7 @@ export default {
             },
             lineStyle: {
               normal: {
-                width: 1
+                width: 2
               }
             }
           }

@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '215px'
+      default: '320px'
     },
     autoResize: {
       type: Boolean,
@@ -70,76 +70,43 @@ export default {
     }
   },
   methods: {
-    setOptions({} = {}) {
-      var data = [
-        {
-          value: 101,
-          name: '云岩区'
-        },
-        {
-          value: 79,
-          name: '南明区'
-        },
-        {
-          value: 136,
-          name: '观山湖'
-        },
-        {
-          value: 123,
-          name: '白云区'
-        },
-        {
-          value: 99,
-          name: '乌当区'
-        },
-        {
-          value: 101,
-          name: '花溪区'
-        },
-        {
-          value: 79,
-          name: '双龙镇'
-        },
-        {
-          value: 136,
-          name: '经开区'
-        },
-        {
-          value: 123,
-          name: '综保区'
-        },
-        {
-          value: 99,
-          name: '高新区'
-        },
-        {
-          value: 101,
-          name: '清镇市'
-        },
-        {
-          value: 79,
-          name: '息烽县'
-        },
-        {
-          value: 136,
-          name: '开阳县'
-        },
-        {
-          value: 123,
-          name: '修文县'
-        }
-      ];
+    setOptions({ seriesData } = {}) {
       this.chart.setOption({
         title: {
-          text: '实名项目总数',
-          subtext: '590个项目',
+          text: '项目总数',
+          subtext: '590个',
           x: 'center',
-          y: '37%',
+          y: '40%',
           textStyle: {
-            fontWeight: 'normal',
-            fontSize: 12
+            fontSize: 14,
+            color: '#777',
+            lineHeight: 18
+          },
+          subtextStyle: {
+            fontSize: 22,
+            color: '#222'
           }
         },
+        color: [
+          '#37a2da',
+          '#32c5e9',
+          '#9fe6b8',
+          '#ffdb5c',
+          '#ff9f7f',
+          '#fb7293',
+          '#e7bcf3',
+          '#8378ea',
+          '#8d7fec',
+          '#5085f2',
+          '#e75fc3',
+          '#f87be2',
+          '#f2719a',
+          '#fca4bb',
+          '#f59a8f',
+          '#fdb301',
+          '#57e7ec',
+          '#cf9ef1'
+        ],
         tooltip: {
           show: true,
           trigger: 'item',
@@ -150,7 +117,6 @@ export default {
             type: 'pie',
             selectedMode: 'single',
             radius: ['40%', '75%'],
-
             label: {
               normal: {
                 position: 'inner',
@@ -166,17 +132,17 @@ export default {
                 show: false
               }
             },
-            data: data
+            data: seriesData
           },
           {
             type: 'pie',
             radius: ['75%', '100%'],
             itemStyle: {
               normal: {
-                color: '#eeeeee'
+                color: '#f7fbff'
               },
               emphasis: {
-                color: '#f9f9f9'
+                color: '#e9f1f9'
               }
             },
             label: {
@@ -184,12 +150,12 @@ export default {
                 position: 'inner',
                 formatter: '{c}个',
                 textStyle: {
-                  color: '#46aaf7',
-                  fontSize: 10
+                  color: '#222',
+                  fontSize: 12
                 }
               }
             },
-            data: data
+            data: seriesData
           }
         ]
       })
