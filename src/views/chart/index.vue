@@ -1,82 +1,109 @@
 <template>
-  <div class="page-header-index-wide" style="margin-top: -24px;">
+  <div class="page-header-index-wide">
     <a-row :gutter="24">
-      <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
+      <a-col :xl="8" :lg="12" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
-          title="项目交易统计"
-          :style="{ marginTop: '24px', minHeight: '350px' }"
+          title="本市数据概况"
+          class="card-chart data-statis"
+          :bodyStyle="{padding: 0}"
         >
-          <a-row>
-            <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
-              <div class="chart-digit">
-                <h4>累计交易项目(个)</h4>
-                <div class="circle green">
-                  <div>
-                    <a-icon type="deployment-unit" class="icon" />
-                    <p>{{perject.count}}</p>
-                  </div>
+          <ul class="data-statis-top">
+            <li>
+              <h1 class="num">376</h1>
+              <span class="tit">项目总数（个）</span>
+            </li>
+            <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <h1 class="num">1100</h1>
+              <span class="tit">从业总人数（人）</span>
+            </li>
+            <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <h1 class="num">100</h1>
+              <span class="tit">管理人员（人）</span>
+            </li>
+            <li>
+              <h1 class="num">2000</h1>
+              <span class="tit">劳务人员（人）</span>
+            </li>
+            <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <h1 class="num">20000</h1>
+              <span class="tit">昨日打卡（人）</span>
+            </li>
+          </ul>
+          <a-row :gutter="12" class="data-statis-bot">
+            <a-col :xl="12" :lg="12" :sm="24">
+              <div class="item">
+                <div class="tit">持证管理人员</div>
+                <div class="num">
+                  600
+                  <span class="unit">人</span>
+                  <span class="per">占</span>60
+                  <span class="unit">%</span>
                 </div>
               </div>
             </a-col>
-            <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
-              <div class="chart-digit">
-                <h4>累计交易金额(万)</h4>
-                <div class="circle red">
-                  <div>
-                    <a-icon type="money-collect" class="icon" />
-                    <p>{{perject.amount | totalFilter}}</p>
-                  </div>
+            <a-col :xl="12" :lg="12" :sm="24">
+              <div class="item">
+                <div class="tit">无证管理人员</div>
+                <div class="num">
+                  60
+                  <span class="unit">人</span>
+                  <span class="per">占</span>60
+                  <span class="unit">%</span>
                 </div>
               </div>
             </a-col>
-            <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
-              <div class="chart-digit" style="border: none">
-                <h4>成交与评估均价比</h4>
-                <div class="circle blue">
-                  <div>
-                    <a-icon :type="Number(perject.percent)>0?'rise':'fall'" class="icon" />
-                    <p>
-                      {{Number(perject.percent)>0?'+':""}}{{perject.percent}}
-                      <span
-                        class="unit"
-                      >%</span>
-                    </p>
-                  </div>
+            <a-col :xl="12" :lg="12" :sm="24">
+              <div class="item">
+                <div class="tit">持证劳务人员</div>
+                <div class="num">
+                  60
+                  <span class="unit">人</span>
+                  <span class="per">占</span>60
+                  <span class="unit">%</span>
+                </div>
+              </div>
+            </a-col>
+            <a-col :xl="12" :lg="12" :sm="24">
+              <div class="item">
+                <div class="tit">无证劳务人员</div>
+                <div class="num">
+                  600
+                  <span class="unit">人</span>
+                  <span class="per">占</span>60
+                  <span class="unit">%</span>
                 </div>
               </div>
             </a-col>
           </a-row>
         </a-card>
       </a-col>
-      <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
+      <a-col :xl="8" :lg="12" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
-          title="近4个季度交易趋势"
-          :style="{ marginTop: '24px', minHeight: '350px' }"
+          title="项目类型分布"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
         >
-          <line-chart :chart-data="lineChartData"></line-chart>
+          <ProjectType />
+        </a-card>
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="项目进度分布"
+          class="card-chart"
+          :bodyStyle="{padding: '24px 0'}"
+          style="margin-top: 24px"
+        >
+          <ProjectPace />
         </a-card>
       </a-col>
     </a-row>
-
-    <a-card
-      :loading="loading"
-      :bordered="false"
-      title="项目出租情况"
-      :style="{ marginTop: '24px', minHeight: '440px' }"
-    >
-      <a-row>
-        <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
-          <left-bar-chart :chart-data="leftBarChartData"></left-bar-chart>
-        </a-col>
-        <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
-          <right-bar-chart :chart-data="rightBarChartData"></right-bar-chart>
-        </a-col>
-      </a-row>
-    </a-card>
   </div>
 </template>
 
@@ -86,6 +113,9 @@ import indexMixin from './modules/index'
 import LineChart from './modules/LineChart'
 import LeftBarChart from './modules/LeftBarChart'
 import RightBarChart from './modules/RightBarChart'
+
+import ProjectType from './components/ProjectType'
+import ProjectPace from './components/ProjectPace'
 import { mixinDevice } from '@/utils/mixin'
 
 export default {
@@ -94,7 +124,10 @@ export default {
   components: {
     LineChart,
     LeftBarChart,
-    RightBarChart
+    RightBarChart,
+
+    ProjectType,
+    ProjectPace
   }
 }
 </script>

@@ -405,63 +405,6 @@ li {
   max-height: 100%;
 }
 
-// 数据统计
-.chart-digit {
-  margin-top: 36px;
-  text-align: center;
-  border-right: 1px solid #e8e8e8;
-}
-
-.chart-digit .circle {
-  margin: 0 auto;
-  margin-top: 12px;
-  width: 135px;
-  height: 135px;
-  border-radius: 200%;
-  background-color: #999;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.chart-digit .circle.red {
-  background-color: @primary-color;
-}
-
-.chart-digit .circle.red {
-  background-color: #f2637b;
-}
-
-.chart-digit .circle.green {
-  background-color: #3fd6cd;
-}
-
-.chart-digit .circle.blue {
-  background-color: #659cf7;
-}
-
-.chart-digit .icon {
-  font-size: 36px;
-}
-
-.chart-digit h4 {
-  color: #222;
-  font-size: 16px;
-}
-
-.chart-digit p {
-  font-size: 30px;
-  margin-bottom: 0;
-  margin-top: -5px;
-}
-
-.chart-digit p .unit {
-  font-size: 20px;
-  display: inline-block;
-  margin-left: -5px;
-}
-
 // 页签样式
 .card-tabs {}
 
@@ -619,4 +562,84 @@ li {
 
 .anchorBL {
   display: none;
+}
+
+// chart
+.card-chart {
+  .ant-card-head {
+    padding: 0 12px;
+  }
+
+  .ant-card-head-title {
+    padding: 0;
+    line-height: 48px;
+  }
+}
+
+.data-statis {
+  .data-statis-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px 0;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 0;
+
+    li {
+      text-align: center;
+      width: 31%;
+      padding: 8px 0;
+
+      .num {
+        font-size: 22px;
+        color: @primary-color;
+        margin-bottom: 0;
+      }
+
+      .tit {
+        color: #888;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.data-statis-bot {
+  padding: 0 12px 12px;
+
+  .item {
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+
+    .tit {
+      font-size: 14px;
+      border-right: 1px solid #e8e8e8;
+      padding: 6px 10px;
+      font-size: 15px;
+    }
+
+    .num {
+      font-size: 20px;
+      color: @primary-color;
+      margin-left: 10px;
+    }
+
+    .per {
+      font-size: 15px;
+      font-weight: normal;
+      margin-left: 12px;
+      color: #333;
+      margin-right: 5px;
+    }
+
+    .unit {
+      font-size: 10px;
+      color: #333;
+    }
+  }
+
+
+
 }

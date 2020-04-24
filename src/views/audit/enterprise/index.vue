@@ -119,15 +119,23 @@
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="审核人员"
-              v-if="model.supervisorId || model.qualityId"
+              label="监督员"
+              v-if="model.supervisorId"
             >
-              <span>{{model.supervisorName || model.qualityName}}</span>
+              <span>{{model.supervisorName}}</span>
             </a-form-item>
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="建管处审核意见"
+              label="质监员"
+              v-if="model.qualityId"
+            >
+              <span>{{model.qualityName}}</span>
+            </a-form-item>
+            <a-form-item
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              label="监督员审核意见"
               v-if="model.sauditComment"
             >
               <span>{{model.sauditComment}}</span>
@@ -135,111 +143,29 @@
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="质监处审核意见"
+              label="质监员审核意见"
               v-if="model.qauditComment"
             >
               <span>{{model.qauditComment}}</span>
             </a-form-item>
 
-            <!-- 建管处 -->
-            <template
-              v-if="(roleMark.split(',').includes('SupervisorMaster')) || (roleMark.split(',').includes('Supervisor'))"
-            >
-              <template v-if="!model.supervisorId">
-                <a-form-item
-                  :labelCol="labelCol"
-                  :wrapperCol="wrapperCol"
-                  label="分配审核人员"
-                  style="margin: 10px 0"
-                >
-                  <a-select
-                    allowClear
-                    labelInValue
-                    v-decorator="['supervisorId',validatorRules.must]"
-                    style="width: 360px"
-                    placeholder="请选择"
-                  >
-                    <a-select-option
-                      v-for="item in typeUserList"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</a-select-option>
-                  </a-select>
-                </a-form-item>
-                <a-form-item style="text-align: center">
-                  <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-                  <a-button type="primary" @click="handleNext">提 交</a-button>
-                </a-form-item>
-              </template>
-              <template v-else>
-                <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
-                  <a-textarea
-                    :rows="3"
-                    v-decorator="['comment',validatorRules.must]"
-                    placeholder="..."
-                  />
-                </a-form-item>
-                <a-form-item style="text-align: center">
-                  <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-                  <a-button
-                    :style="{marginRight: '12px'}"
-                    type="danger"
-                    @click="handleSubmit('false',$event)"
-                  >驳 回</a-button>
-                  <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
-                </a-form-item>
-              </template>
-            </template>
-
-            <!-- 质监站 -->
-            <template
-              v-if="(roleMark.split(',').includes('QualityMaster')) || (roleMark.split(',').includes('Quality'))"
-            >
-              <template v-if="!model.qualityId">
-                <a-form-item
-                  :labelCol="labelCol"
-                  :wrapperCol="wrapperCol"
-                  label="分配审核人员"
-                  style="margin: 10px 0"
-                >
-                  <a-select
-                    allowClear
-                    labelInValue
-                    v-decorator="['qualityId',validatorRules.must]"
-                    style="width: 360px"
-                    placeholder="请选择"
-                  >
-                    <a-select-option
-                      v-for="item in typeUserList"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</a-select-option>
-                  </a-select>
-                </a-form-item>
-                <a-form-item style="text-align: center">
-                  <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-                  <a-button type="primary" @click="handleNext">提 交</a-button>
-                </a-form-item>
-              </template>
-              <template v-else>
-                <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
-                  <a-textarea
-                    :rows="3"
-                    v-decorator="['comment',validatorRules.must]"
-                    placeholder="..."
-                  />
-                </a-form-item>
-                <a-form-item style="text-align: center">
-                  <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
-                  <a-button
-                    :style="{marginRight: '12px'}"
-                    type="danger"
-                    @click="handleSubmit('false',$event)"
-                  >驳 回</a-button>
-                  <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
-                </a-form-item>
-              </template>
-            </template>
+            <!-- 建管处 质监站-->
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
+              <a-textarea
+                :rows="3"
+                v-decorator="['comment',validatorRules.must]"
+                placeholder="..."
+              />
+            </a-form-item>
+            <a-form-item style="text-align: center">
+              <a-button :style="{marginRight: '12px'}" @click="handleCancel">稍后处理</a-button>
+              <a-button
+                :style="{marginRight: '12px'}"
+                type="danger"
+                @click="handleSubmit('false',$event)"
+              >驳 回</a-button>
+              <a-button type="primary" @click="handleSubmit('true',$event)">通 过</a-button>
+            </a-form-item>
           </a-form>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="9">

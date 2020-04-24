@@ -69,7 +69,8 @@ var indexMixin = {
           path: '/audit/enterprise',
           query: {
             id: record.biz.businessId,
-            procInsId: record.ins.procInsId
+            procInsId: record.ins.procInsId,
+            taskDefKey: record.task.taskDefKey
           }
         })
       } else {
