@@ -29,11 +29,6 @@ var indexMixin = {
         dataIndex: 'areaName',
         align: 'center'
       }, {
-        title: '机构类型',
-        dataIndex: 'orgType',
-        align: 'center',
-        customRender: (text, record) => `${text=='SupervisorStation'?'建管处':'质监站'}`
-      }, {
         title: '操作',
         dataIndex: 'action',
         align: 'center',
@@ -113,8 +108,19 @@ var indexMixin = {
       this.getArea(data.provinceId, 'cityList')
       this.getArea(data.cityId, 'districtList')
       this.$nextTick(() => {
-        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'orgType', 'provinceId', 'cityId', 'areaId', 'remark'))
+        this.form.setFieldsValue(pick(data, 'parentId', 'name', 'provinceId', 'cityId', 'areaId', 'remark'))
       })
+      if (data.cityId && (data.cityId == data.areaId)) {
+        this.$nextTick(() => {
+          this.form.setFieldsValue({
+            areaId: undefined
+          })
+        })
+      } else {
+        this.form.setFieldsValue({
+          areaId: data.areaId
+        })
+      }
     },
     beforeSubmit(form) {
       if (!form.parentId || form.parentId == '') {

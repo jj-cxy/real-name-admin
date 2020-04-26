@@ -244,7 +244,7 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           },
-          {
+          /* {
             path: '/system/open/auth',
             name: 'auth',
             component: () => import('@/views/system/open/index'),
@@ -252,7 +252,7 @@ export const asyncRouterMap = [{
               title: '第三方授权管理',
               keepAlive: true
             }
-          },
+          }, */
           {
             path: '/system/dict',
             name: 'dict',

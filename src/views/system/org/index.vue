@@ -115,7 +115,7 @@
           <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构名称">
             <a-input v-decorator="['name', {rules: [{required: true, message: '请输入机构名称'}]}]" />
           </a-form-item>
-          <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构类型">
+          <!-- <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="机构类型">
             <a-select
               placeholder="请选择"
               v-decorator="['orgType', {rules: [{required: true, message: '请选择机构类型'}]}]"
@@ -126,7 +126,7 @@
                 :value="item.value"
               >{{item.name}}</a-select-option>
             </a-select>
-          </a-form-item>
+          </a-form-item> -->
           <a-form-item
             :labelCol="labelCol"
             :wrapperCol="wrapperCol"
