@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"></div>
+  <div :class="className" :style="{height:height,width:width,float:'left'}"></div>
 </template>
 
 <script>
@@ -16,11 +16,11 @@ export default {
     },
     width: {
       type: String,
-      default: '100%'
+      default: '50%'
     },
     height: {
       type: String,
-      default: '250px'
+      default: '350px'
     },
     autoResize: {
       type: Boolean,
@@ -73,16 +73,26 @@ export default {
   methods: {
     setOptions({} = {}) {
       this.chart.setOption({
+        title: {
+          text: '本地企业',
+          left: 'center',
+          top: '90%',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16,
+            color: '#222'
+          }
+        },
         series: [
           {
             type: 'liquidFill',
-            radius: '95%',
-            data: [0.55, 0.4, 0.3, 0.2],
+            radius: '80%',
+            data: [0.45, 0.45, 0.45, 0.45],
             label: {
               normal: {
                 color: '#41b7f9',
                 insideColor: '#ffffff',
-                fontSize: 60
+                fontSize: 50
               }
             }
           }

@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '580px'
+      default: '576px'
     },
     autoResize: {
       type: Boolean,
@@ -139,6 +139,10 @@ export default {
             controlStyle: {
               position: 'left'
             },
+            symbolSize: 8,
+            lineStyle: {
+              color: '#666'
+            },
             bottom: 0,
             left: 20,
             right: 20,
@@ -192,12 +196,21 @@ export default {
           xAxis: [
             {
               type: 'value',
-              boundaryGap: [0, 0.01],
+              splitLine: {
+                show: false
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: '#e8e8e8'
+                }
+              },
               axisLabel: {
-                //	formatter: '{value}%',
                 textStyle: {
-                  //color: '#fff',
-                  fontWeight: '80'
+                  color: '#222'
                 }
               }
             }
@@ -206,6 +219,23 @@ export default {
             {
               type: 'category',
               data: ['在建', '停工', '完工', '竣工'],
+              splitLine: {
+                show: false
+              },
+              axisTick: {
+                show: false
+              },
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  color: '#e8e8e8'
+                }
+              },
+              axisLabel: {
+                textStyle: {
+                  color: '#222'
+                }
+              }
             }
           ],
           series: [

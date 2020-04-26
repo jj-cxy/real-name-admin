@@ -156,7 +156,7 @@ export const asyncRouterMap = [{
       },
 
       // warning
-      /* {
+      {
         path: '/warning',
         name: 'warning',
         redirect: '/warning/history',
@@ -184,10 +184,10 @@ export const asyncRouterMap = [{
             keepAlive: false
           }
         }]
-      }, */
+      },
 
       // chart
-      /* {
+      {
         path: '/chart',
         name: 'chart',
         component: () => import('@/views/chart/index'),
@@ -196,7 +196,7 @@ export const asyncRouterMap = [{
           icon: 'fund',
           keepAlive: true
         },
-      }, */
+      },
 
       // system
       {

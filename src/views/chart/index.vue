@@ -49,10 +49,21 @@
               <h1 class="num">2000</h1>
               <span class="tit">劳务人员（人）</span>
             </li>
+          </ul>
+          <ul class="data-statis-top">
+            <li>
+              <h1 class="num">1100</h1>
+              <span class="tit">今日入场（人）</span>
+            </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
-              <h1 class="num">20000</h1>
-              <span class="tit">昨日打卡（次）</span>
+              <h1 class="num">100</h1>
+              <span class="tit">今日出场（人）</span>
+            </li>
+            <a-divider type="vertical" style="height: 30px" />
+            <li>
+              <h1 class="num">2000</h1>
+              <span class="tit">今日在场（人）</span>
             </li>
           </ul>
           <a-row :gutter="12" class="data-statis-bot">
@@ -206,12 +217,23 @@
           :bordered="false"
           title="手续办理情况"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: '0'}"
           style="margin-top: 24px"
         >
-          <CertificateHold />
-          <!-- <CertificateHold /> -->
+          <HoldLeft />
+          <HoldRight />
         </a-card>
+      </a-col>
+      <a-col :xl="8" :lg="24" :sm="24">
+        <!-- 保障履约 -->
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="保障履约"
+          class="card-chart"
+          :bodyStyle="{padding: '0'}"
+          style="margin-top: 24px"
+        ></a-card>
       </a-col>
     </a-row>
   </div>
@@ -233,8 +255,8 @@ import ScoreRank from './components/ScoreRank'
 
 import WorkTypeRadio from './components/WorkTypeRadio'
 
-import CertificateHold from './components/CertificateHold'
-// import WorkTypeRadio from './components/WorkTypeRadio'
+import HoldLeft from './components/HoldLeft'
+import HoldRight from './components/HoldRight'
 
 import { mixinDevice } from '@/utils/mixin'
 
@@ -251,7 +273,8 @@ export default {
     ScoreRank,
     WorkTypeRadio,
 
-    CertificateHold
+    HoldLeft,
+    HoldRight
   }
 }
 </script>
