@@ -1,7 +1,7 @@
 <template>
   <div class="page-header-index-wide">
     <a-row :gutter="24">
-      <a-col :xl="8" :lg="12" :sm="24">
+      <a-col :xl="8" :lg="12" :md="24" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
@@ -67,7 +67,7 @@
             </li>
           </ul>
           <a-row :gutter="12" class="data-statis-bot">
-            <a-col :xl="12" :lg="12" :sm="24">
+            <a-col :xl="12" :lg="24" :sm="24">
               <div class="item">
                 <div class="tit">持证管理人员</div>
                 <div class="num">
@@ -78,7 +78,7 @@
                 </div>
               </div>
             </a-col>
-            <a-col :xl="12" :lg="12" :sm="24">
+            <a-col :xl="12" :lg="24" :sm="24">
               <div class="item">
                 <div class="tit">无证管理人员</div>
                 <div class="num" style="color: red">
@@ -89,7 +89,7 @@
                 </div>
               </div>
             </a-col>
-            <a-col :xl="12" :lg="12" :sm="24">
+            <a-col :xl="12" :lg="24" :sm="24">
               <div class="item">
                 <div class="tit">持证劳务人员</div>
                 <div class="num">
@@ -100,7 +100,7 @@
                 </div>
               </div>
             </a-col>
-            <a-col :xl="12" :lg="12" :sm="24">
+            <a-col :xl="12" :lg="24" :sm="24">
               <div class="item">
                 <div class="tit">无证劳务人员</div>
                 <div class="num" style="color: red">
@@ -113,7 +113,32 @@
             </a-col>
           </a-row>
         </a-card>
-
+      </a-col>
+      <a-col :xl="8" :lg="12" :md="24" :sm="24">
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="项目类型分布"
+          class="card-chart"
+          :bodyStyle="{padding: 0}"
+        >
+          <ProjectType :chart-data="projectTypeList" />
+        </a-card>
+      </a-col>
+      <a-col :xl="8" :lg="12" :md="24" :sm="24">
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="各区项目占比"
+          class="card-chart"
+          :bodyStyle="{padding: 0}"
+        >
+          <ProjectRadio :chartData="projectRadioList" />
+        </a-card>
+      </a-col>
+    </a-row>
+    <a-row :gutter="24">
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 从业人员、流出情况 -->
         <a-card
           :loading="loading"
@@ -127,16 +152,7 @@
           <OutNum style="margin-top: 48px" />
         </a-card>
       </a-col>
-      <a-col :xl="8" :lg="12" :sm="24">
-        <a-card
-          :loading="loading"
-          :bordered="false"
-          title="项目类型分布"
-          class="card-chart"
-          :bodyStyle="{padding: 0}"
-        >
-          <ProjectType :chartData="projectTypeList" />
-        </a-card>
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
@@ -148,28 +164,32 @@
           <ProjectPace />
         </a-card>
       </a-col>
-      <a-col :xl="8" :lg="12" :sm="24">
-        <a-card
-          :loading="loading"
-          :bordered="false"
-          title="各区项目占比"
-          class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
-        >
-          <ProjectRadio :chartData="projectRadioList" />
-        </a-card>
+      <a-col :xl="8" :lg="12" :md="24" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
           title="各区预警情况"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: '12px', height: '620px', 'overflow-y':'auto'}"
           style="margin-top: 24px"
-        ></a-card>
+        >
+          <span slot="extra">
+            当前预警总数：
+            <b style="color: red; font-size: 16px">9</b>
+          </span>
+          <a-table
+            :columns="warnColumns"
+            :dataSource="warnData"
+            bordered
+            :rowKey="(text,index)=>index"
+            :pagination="false"
+            size="small"
+          ></a-table>
+        </a-card>
       </a-col>
     </a-row>
     <a-row :gutter="24">
-      <a-col :xl="8" :lg="12" :sm="24">
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 企业类型分布 -->
         <a-card
           :loading="loading"
@@ -182,7 +202,7 @@
           <UnitType />
         </a-card>
       </a-col>
-      <a-col :xl="16" :lg="24" :sm="24">
+      <a-col :xl="16" :lg="24" :md="24" :sm="24">
         <!-- 各区监督站得分排名 -->
         <a-card
           :loading="loading"
@@ -197,20 +217,20 @@
       </a-col>
     </a-row>
     <a-row :gutter="24">
-      <a-col :xl="8" :lg="12" :sm="24">
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 工种占比 -->
         <a-card
           :loading="loading"
           :bordered="false"
           title="工种占比"
           class="card-chart"
-          :bodyStyle="{padding: '0'}"
+          :bodyStyle="{padding: 0}"
           style="margin-top: 24px"
         >
           <WorkTypeRadio />
         </a-card>
       </a-col>
-      <a-col :xl="8" :lg="24" :sm="24">
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 手续办理情况 -->
         <a-card
           :loading="loading"
@@ -224,16 +244,34 @@
           <HoldRight />
         </a-card>
       </a-col>
-      <a-col :xl="8" :lg="24" :sm="24">
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 保障履约 -->
         <a-card
           :loading="loading"
           :bordered="false"
           title="保障履约"
           class="card-chart"
-          :bodyStyle="{padding: '0'}"
+          :bodyStyle="{padding: '12px'}"
           style="margin-top: 24px"
-        ></a-card>
+        >
+          <a-table
+            :columns="contractColumns"
+            :dataSource="contractData"
+            bordered
+            :rowKey="(text,index)=>index"
+            :pagination="false"
+            size="small"
+          ></a-table>
+          <a-table
+            :columns="wagesColumns"
+            :dataSource="wagesData"
+            bordered
+            :rowKey="(text,index)=>index"
+            :pagination="false"
+            size="small"
+            style="margin-top: 12px"
+          ></a-table>
+        </a-card>
       </a-col>
     </a-row>
   </div>

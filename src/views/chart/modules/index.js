@@ -123,12 +123,91 @@ var indexMixin = {
             name: '必应'
           }
         ]
-      }
+      },
+      warnColumns: [{
+        title: '预警区县',
+        dataIndex: 'district',
+        align: 'center'
+      }, {
+        title: '最新预警',
+        dataIndex: 'newWarn',
+        align: 'center'
+      }, {
+        title: '超期预警',
+        dataIndex: 'overWarn',
+        align: 'center'
+      }, {
+        title: '预警总计',
+        dataIndex: 'totalWarn',
+        align: 'center'
+      }],
+      warnData: [{
+        district: '观山湖区',
+        newWarn: '2',
+        overWarn: 32,
+        totalWarn: '4',
+      }],
+
+      contractColumns: [{
+        title: '劳务合同',
+        dataIndex: 'name',
+        align: 'center'
+      }, {
+        title: '完成项目',
+        dataIndex: 'finish',
+        align: 'center'
+      }, {
+        title: '未完成项目',
+        dataIndex: 'unFinish',
+        align: 'center'
+      }, {
+        title: '已签人数',
+        dataIndex: 'signed',
+        align: 'center'
+      }, {
+        title: '未签人数',
+        dataIndex: 'unSign',
+        align: 'center'
+      }],
+      contractData: [{
+        name: '合同情况',
+        finish: '200',
+        unFinish: '76',
+        signed: '3471',
+        unSign: '221'
+      }],
+
+      wagesColumns: [{
+        title: '工资表',
+        dataIndex: 'month',
+        align: 'center'
+      }, {
+        title: '完成项目',
+        dataIndex: 'finish',
+        align: 'center'
+      }, {
+        title: '未完成项目',
+        dataIndex: 'unFinish',
+        align: 'center'
+      }],
+      wagesData: [{
+        month: '1月份',
+        newWarn: '2',
+        overWarn: '5'
+      }]
     }
   },
   filters: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.loading = true
+    setTimeout(() => {
+      this.loading = false
+    }, 1500)
+    /* this.$nextTick(() => {
+      this.loading = false
+    }) */
+  },
   methods: {
     // 项目类型
   }

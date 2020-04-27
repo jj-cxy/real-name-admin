@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row :gutter="24">
-      <a-col :xs="2" :sm="24" :md="24" :lg="12" :xl="14">
+      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="14">
         <a-card
           title="待办事项"
           :headStyle="{marginBottom: 0}"
@@ -12,72 +12,69 @@
           <todo :paging="false"></todo>
         </a-card>
       </a-col>
-      <a-col :xs="20" :sm="24" :md="24" :lg="12" :xl="10">
+      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="10">
         <a-card title="预警事项" :bodyStyle="{padding: '0',margin: '-1px 0 0 -1px'}">
           <a-row>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
                 <router-link :to="{path:'/home'}">
-                  <a-badge :count="3" :offset="[-5,10]">
-                    <a-icon type="alert" theme="filled" class="gridIcon" style="color: #92a1fe" />
+                  <a-badge :count="count.DEVICE" :offset="[-5,10]">
+                    <div class="gridIcon">
+                      <i class="iconfont" style="color: #92a1fe">&#xe624;</i>
+                    </div>
                   </a-badge>
                 </router-link>
                 <div class="gridSpan">前端设备预警</div>
               </div>
             </a-col>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="0" :offset="[-5,10]">
-                  <a-icon type="contacts" theme="filled" class="gridIcon" style="color: #b579cc" />
+                <a-badge :count="count.MANAGER" :offset="[-5,10]">
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: #b579cc">&#xe60d;</i>
+                  </div>
                 </a-badge>
                 <div class="gridSpan">管理人员数据异常</div>
               </div>
             </a-col>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon
-                    type="reddit-circle"
-                    theme="filled"
-                    class="gridIcon"
-                    style="color: #45dec5"
-                  />
+                <a-badge :count="count.LABOR" :offset="[-5,10]">
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: #45dec5">&#xe68c;</i>
+                  </div>
                 </a-badge>
                 <div class="gridSpan">劳务人员数据异常</div>
               </div>
             </a-col>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon
-                    type="dingtalk-circle"
-                    theme="filled"
-                    class="gridIcon"
-                    style="color: #1890FF"
-                  />
+                <a-badge :count="count.PUNCH" :offset="[-5,10]">
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: #1890FF">&#xe647;</i>
+                  </div>
                 </a-badge>
                 <div class="gridSpan">考勤数据异常</div>
               </div>
             </a-col>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon
-                    type="property-safety"
-                    theme="filled"
-                    class="gridIcon"
-                    style="color: #fb8775"
-                  />
+                <a-badge :count="count.SALARY" :offset="[-5,10]">
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: red">&#xe655;</i>
+                  </div>
                 </a-badge>
                 <div class="gridSpan">工资数据异常</div>
               </div>
             </a-col>
-            <a-col :xs="2" :sm="24" :md="12" :lg="12" :xl="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="2" :offset="[-5,10]">
-                  <a-icon type="rocket" theme="filled" class="gridIcon" style="color: #64b1f9" />
+                <a-badge :count="count.CONTRACT" :offset="[-5,10]">
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: #4ecb73">&#xe617;</i>
+                  </div>
                 </a-badge>
-                <div class="gridSpan">项目备案</div>
+                <div class="gridSpan">劳务合同异常</div>
               </div>
             </a-col>
           </a-row>
@@ -95,7 +92,7 @@
       <a href="javascript:;" slot="extra" @click="$router.push('/order/history')">查看更多</a>
       <!-- list -->
       <a-list itemLayout="horizontal" :dataSource="noticeData">
-        <a-list-item slot="renderItem" slot-scope="item, index">
+        <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta>
             <a slot="title" href="https://www.antdv.com/">{{ item.title }}</a>
           </a-list-item-meta>

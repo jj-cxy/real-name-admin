@@ -43,15 +43,6 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           },
-          {
-            path: '/form/test',
-            name: 'test',
-            component: () => import('@/views/test/index'),
-            meta: {
-              title: '测试表单',
-              keepAlive: true
-            }
-          },
           /* {
             path: '/order/overdue',
             name: 'OrderOverdue',
@@ -70,9 +61,42 @@ export const asyncRouterMap = [{
               keepAlive: true
             }
           }, */
+
+
+          // warning
+          {
+            path: '/warning',
+            name: 'warning',
+            redirect: '/warning/history',
+            hideChildrenInMenu: true,
+            component: PageView,
+            meta: {
+              title: '预警历史',
+              icon: 'solution',
+              keepAlive: true
+            },
+            children: [{
+              path: '/warning/history',
+              name: 'WarningHistory',
+              component: () => import('@/views/warning/history/index'),
+              meta: {
+                title: '预警历史',
+                keepAlive: false
+              }
+            }, {
+              path: '/warning/break',
+              name: 'WarningBreakF',
+              component: () => import('@/views/enterprise/detail/index'),
+              meta: {
+                title: '断线预警',
+                keepAlive: false
+              }
+            }]
+          },
           {
             path: '/audit/enterprise',
             name: 'AuditEnterprise',
+            hidden: true,
             component: () => import('@/views/audit/enterprise/index'),
             meta: {
               title: '单位备案审核',
@@ -83,6 +107,7 @@ export const asyncRouterMap = [{
           {
             path: '/audit/project',
             name: 'AuditProject',
+            hidden: true,
             component: () => import('@/views/audit/project/index'),
             meta: {
               title: '项目备案审核',
@@ -98,7 +123,7 @@ export const asyncRouterMap = [{
         path: '/project',
         name: 'project',
         redirect: '/project/list',
-        // hideChildrenInMenu: true,
+        hideChildrenInMenu: true,
         component: PageView,
         meta: {
           title: '项目管理',
@@ -129,7 +154,7 @@ export const asyncRouterMap = [{
         path: '/enterprise',
         name: 'enterprise',
         redirect: '/enterprise/list',
-        // hideChildrenInMenu: true,
+        hideChildrenInMenu: true,
         component: PageView,
         meta: {
           title: '单位管理',
@@ -150,37 +175,6 @@ export const asyncRouterMap = [{
           component: () => import('@/views/enterprise/detail/index'),
           meta: {
             title: '单位详情',
-            keepAlive: false
-          }
-        }]
-      },
-
-      // warning
-      {
-        path: '/warning',
-        name: 'warning',
-        redirect: '/warning/history',
-        // hideChildrenInMenu: true,
-        component: PageView,
-        meta: {
-          title: '预警管理',
-          icon: 'solution',
-          keepAlive: true
-        },
-        children: [{
-          path: '/warning/history',
-          name: 'WarningHistory',
-          component: () => import('@/views/warning/history/index'),
-          meta: {
-            title: '预警历史',
-            keepAlive: false
-          }
-        }, {
-          path: '/warning/break',
-          name: 'WarningBreakF',
-          component: () => import('@/views/enterprise/detail/index'),
-          meta: {
-            title: '断线预警',
             keepAlive: false
           }
         }]

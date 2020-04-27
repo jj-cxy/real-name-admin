@@ -6,7 +6,7 @@ var indexMixin = {
   data() {
     return {
       Urls: {
-        noticeCountUrl: '/biz/oaTask/noticeCount'
+        noticeCountUrl: '/ida/api/warning/history/count'
       },
       count: {},
       noticeData: [{
@@ -26,7 +26,7 @@ var indexMixin = {
   },
   filters: {},
   created() {
-    // this.getNoticeCount();
+    this.getNoticeCount();
   },
   methods: {
     // 获取角标数

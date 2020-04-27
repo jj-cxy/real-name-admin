@@ -5,9 +5,10 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
-import { debounce } from '@/utils/debounce.js'
+import resize from './mixins/resize'
 
 export default {
+  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -19,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '405px'
+      default: '400px'
     },
     autoResize: {
       type: Boolean,
@@ -31,43 +32,22 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      timer: null,
+      dataIndex: 0
     }
   },
   mounted() {
-    this.initChart()
-    if (this.autoResize) {
-      this.__resizeHanlder = debounce(() => {
-        if (this.chart) {
-          this.chart.resize()
-        }
-      }, 100)
-      window.addEventListener('resize', this.__resizeHanlder)
-
-      // 监听侧边栏的变化
-      const sidebarElm = document.getElementsByClassName('sider')[0]
-      sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
-    }
+    this.$nextTick(() => {
+      this.initChart()
+    })
   },
   beforeDestroy() {
     if (!this.chart) {
       return
     }
-    if (this.autoResize) {
-      window.removeEventListener('resize', this.__resizeHanlder)
-    }
-    const sidebarElm = document.getElementsByClassName('sider')[0]
-    sidebarElm.removeEventListener('transitionend', this.__resizeHanlder)
     this.chart.dispose()
     this.chart = null
-  },
-  watch: {
-    chartData: {
-      deep: true,
-      handler(val) {
-        this.setOptions(val)
-      }
-    }
   },
   methods: {
     setOptions({ legendData, seriesData } = {}) {

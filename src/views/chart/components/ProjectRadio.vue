@@ -5,9 +5,10 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
-import { debounce } from '@/utils/debounce.js'
+import resize from './mixins/resize'
 
 export default {
+  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -19,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '355px'
+      default: '400px'
     },
     autoResize: {
       type: Boolean,
@@ -35,40 +36,18 @@ export default {
     }
   },
   mounted() {
-    this.initChart()
-    if (this.autoResize) {
-      this.__resizeHanlder = debounce(() => {
-        if (this.chart) {
-          this.chart.resize()
-        }
-      }, 100)
-      window.addEventListener('resize', this.__resizeHanlder)
-
-      // 监听侧边栏的变化
-      const sidebarElm = document.getElementsByClassName('sider')[0]
-      sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
-    }
+    this.$nextTick(() => {
+      this.initChart()
+    })
   },
   beforeDestroy() {
     if (!this.chart) {
       return
     }
-    if (this.autoResize) {
-      window.removeEventListener('resize', this.__resizeHanlder)
-    }
-    const sidebarElm = document.getElementsByClassName('sider')[0]
-    sidebarElm.removeEventListener('transitionend', this.__resizeHanlder)
     this.chart.dispose()
     this.chart = null
   },
-  watch: {
-    chartData: {
-      deep: true,
-      handler(val) {
-        this.setOptions(val)
-      }
-    }
-  },
+  watch: {},
   methods: {
     setOptions({ seriesData } = {}) {
       this.chart.setOption({
@@ -76,7 +55,7 @@ export default {
           text: '项目总数',
           subtext: '590个',
           x: 'center',
-          y: '40%',
+          y: '44%',
           textStyle: {
             fontSize: 14,
             color: '#777',
@@ -116,7 +95,7 @@ export default {
           {
             type: 'pie',
             selectedMode: 'single',
-            radius: ['40%', '75%'],
+            radius: ['35%', '65%'],
             label: {
               normal: {
                 position: 'inner',
@@ -136,7 +115,7 @@ export default {
           },
           {
             type: 'pie',
-            radius: ['75%', '100%'],
+            radius: ['65%', '90%'],
             itemStyle: {
               normal: {
                 color: '#f7fbff'
@@ -159,10 +138,29 @@ export default {
           }
         ]
       })
+
+      // 自动高亮切换
+      // this.timerAuto()
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
+      console.log('数据', this.chart)
+    },
+    timerAuto() {
+      this.timer = setInterval(() => {
+        console.log('定时')
+        this.chart.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0
+        })
+
+        this.chart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: this.dataIndex++ % 10
+        })
+      }, 2000)
     }
   }
 }

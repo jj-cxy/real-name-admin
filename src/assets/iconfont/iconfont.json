@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6291834",
+      "name": "工资",
+      "font_class": "gongzi",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "10543560",
+      "name": "安全管理人员",
+      "font_class": "anquanguanlirenyuan",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "1295802",
+      "name": "劳务合同",
+      "font_class": "laowuhetong",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "3124720",
+      "name": "预警",
+      "font_class": "yujing",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "7374709",
+      "name": "打卡",
+      "font_class": "daqia1",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "7369737",
+      "name": "工资 ",
+      "font_class": "gongzi1",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
       "icon_id": "3084468",
       "name": "建筑",
       "font_class": "icon-test",
@@ -34,13 +76,6 @@
       "unicode_decimal": 58880
     },
     {
-      "icon_id": "7423025",
-      "name": "打卡",
-      "font_class": "daqia",
-      "unicode": "e656",
-      "unicode_decimal": 58966
-    },
-    {
       "icon_id": "7606944",
       "name": "施工",
       "font_class": "shigong1",
@@ -53,13 +88,6 @@
       "font_class": "shigong2",
       "unicode": "e62a",
       "unicode_decimal": 58922
-    },
-    {
-      "icon_id": "9347432",
-      "name": "打卡",
-      "font_class": "daka",
-      "unicode": "e624",
-      "unicode_decimal": 58916
     },
     {
       "icon_id": "9668425",
