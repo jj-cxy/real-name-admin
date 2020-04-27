@@ -17,19 +17,25 @@
           <a-row>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <router-link :to="{path:'/home'}">
-                  <a-badge :count="count.DEVICE" :offset="[-5,10]">
-                    <div class="gridIcon">
-                      <i class="iconfont" style="color: #92a1fe">&#xe624;</i>
-                    </div>
-                  </a-badge>
-                </router-link>
+                <a-badge
+                  :count="count.DEVICE"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'DEVICE'}})"
+                >
+                  <div class="gridIcon">
+                    <i class="iconfont" style="color: #92a1fe">&#xe624;</i>
+                  </div>
+                </a-badge>
                 <div class="gridSpan">前端设备预警</div>
               </div>
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="count.MANAGER" :offset="[-5,10]">
+                <a-badge
+                  :count="count.MANAGER"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'MANAGER'}})"
+                >
                   <div class="gridIcon">
                     <i class="iconfont" style="color: #b579cc">&#xe60d;</i>
                   </div>
@@ -39,7 +45,11 @@
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="count.LABOR" :offset="[-5,10]">
+                <a-badge
+                  :count="count.LABOR"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'LABOR'}})"
+                >
                   <div class="gridIcon">
                     <i class="iconfont" style="color: #45dec5">&#xe68c;</i>
                   </div>
@@ -49,7 +59,11 @@
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="count.PUNCH" :offset="[-5,10]">
+                <a-badge
+                  :count="count.PUNCH"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'PUNCH'}})"
+                >
                   <div class="gridIcon">
                     <i class="iconfont" style="color: #1890FF">&#xe647;</i>
                   </div>
@@ -59,7 +73,11 @@
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="count.SALARY" :offset="[-5,10]">
+                <a-badge
+                  :count="count.SALARY"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'SALARY'}})"
+                >
                   <div class="gridIcon">
                     <i class="iconfont" style="color: red">&#xe655;</i>
                   </div>
@@ -69,7 +87,11 @@
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="8">
               <div class="grid-list">
-                <a-badge :count="count.CONTRACT" :offset="[-5,10]">
+                <a-badge
+                  :count="count.CONTRACT"
+                  :offset="[-5,10]"
+                  @click="$router.push({path:'/warning/history',query:{warningType:'CONTRACT'}})"
+                >
                   <div class="gridIcon">
                     <i class="iconfont" style="color: #4ecb73">&#xe617;</i>
                   </div>

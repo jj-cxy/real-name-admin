@@ -1,0 +1,49 @@
+<template>
+  <a-card
+    :body-style="{'padding': '12px 24px 24px'}"
+    :bordered="false"
+    :headStyle="{'textAlign':'center'}"
+  >
+    <a-form :form="form" class="detail-form">
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="预警类型">
+        <span>{{model.warningTypeDesc}}</span>
+        <p>{{model.warningContent}}</p>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目名称">
+        <span>{{model.projectName}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="施工单位">
+        <span>{{model.enterpriseName}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目经理">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="手机号">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目地址">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
+        <span>{{model.unitTypeDesc}}</span>
+      </a-form-item>
+    </a-form>
+  </a-card>
+</template>
+
+<script>
+import modalMixin from '@/components/Mixins/modal'
+import indexMixin from './modules/index'
+import Viewer from '@/views/modules/Viewer'
+
+export default {
+  name: 'EnterpriseAudit',
+  mixins: [modalMixin, indexMixin],
+  components: {
+    Viewer
+  }
+}
+</script>

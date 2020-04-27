@@ -32,15 +32,15 @@ var indexMixin = {
       }, {
         title: '在场情况',
         align: 'center',
-        dataIndex: 'statusDesc'
+        dataIndex: 'subsituationDesc'
       }, {
         title: '进场时间',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'subEntryTime'
       }, {
         title: '退场时间',
         align: 'center',
-        dataIndex: 'modifyTime'
+        dataIndex: 'subQuitTime'
       }],
       Urls: {
         listUrl: ''

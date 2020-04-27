@@ -35,11 +35,11 @@
             </a-col>
             <a-col :md="4" :sm="24">
               <a-form-item>
-                <a-select allowClear v-model="listQuery.condition.projectStatus" placeholder="异常类型">
+                <a-select allowClear v-model="listQuery.condition.warningType" placeholder="异常类型">
                   <a-select-option
-                    v-for="(item,index) in projectStatusList"
+                    v-for="(item,index) in warningTypeList"
                     :key="index"
-                    :value="item.key"
+                    :value="item.value"
                   >{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>

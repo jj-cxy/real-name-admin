@@ -7,9 +7,6 @@ var indexMixin = {
     return {
       // 表头
       columns: [{
-        title: '项目编码',
-        dataIndex: 'id'
-      }, {
         title: '项目名称',
         dataIndex: 'projectName'
       }, {
@@ -23,8 +20,8 @@ var indexMixin = {
       }, {
         title: '异常类型',
         align: 'center',
-        dataIndex: 'projectStatusDesc'
-      },{
+        dataIndex: 'warningTypeDesc'
+      }, {
         title: '预警时间',
         align: 'center',
         dataIndex: 'createTime'
@@ -39,18 +36,35 @@ var indexMixin = {
         }
       }],
       Urls: {
-        listUrl: '/ida/api/project/page',
-        delUrl: '/ida/api/project/remove/',
-        downloadExcelUrl: '/ida/api/project/export/ids',
-        orgListurl: '/auth/api/org/tree',
-        softEnterpriseUrl: '/ida/api/enterprise/page'
+        listUrl: '/ida/api/warning/history/page',
+        orgListurl: '/auth/api/org/tree'
       },
-      downloadFileName: '预警列表',
+      listQuery: {
+        condition: {
+          warningType: this.$route.query.warningType ? this.$route.query.warningType : undefined
+        }
+      },
       orgList: [],
-      districtList: [],
       projectTypeList: [],
-      projectStatusList: [],
-      softList: []
+      warningTypeList: [{
+        name: '前端设备',
+        value: 'DEVICE'
+      }, {
+        name: '管理人员',
+        value: 'MANAGER'
+      }, {
+        name: '劳务人员',
+        value: 'LABOR'
+      }, {
+        name: '考勤数据',
+        value: 'PUNCH'
+      }, {
+        name: '工资数据',
+        value: 'SALARY'
+      }, {
+        name: '劳务合同',
+        value: 'CONTRACT'
+      }]
     }
   },
   filters: {},
@@ -60,31 +74,14 @@ var indexMixin = {
     this.getOrgList();
     this.getDictData('project_type', 'projectTypeList')
     this.getDictData('project_status', 'projectStatusList')
-    this.getSoftEnterprise()
   },
   methods: {
     handleDetail(record) {
       this.$router.push({
-        path: "/project/detail",
+        path: "/warning/detail",
         query: {
           id: record.id
         }
-      })
-    },
-    // 前调公司
-    getSoftEnterprise() {
-      axios({
-        url: this.Urls.softEnterpriseUrl,
-        method: 'post',
-        data: {
-          condition: {
-            unitType: 'SOFT_SUPPORT'
-          },
-          pageIndex: '1',
-          pageSize: '100'
-        }
-      }).then(res => {
-        this.softList = res.data.list
       })
     },
     // 机构列表
@@ -95,16 +92,6 @@ var indexMixin = {
       }).then(res => {
         let resData = res.data.records
         this.orgList = resData.map(item => this.mapTree(item))
-      })
-    },
-    // 发起修改
-    handleAudit(record) {
-      this.$router.push({
-        path: "/audit/project",
-        query: {
-          id: record.id,
-          bizType: 'PROJECT_MODIFY'
-        }
       })
     }
   }

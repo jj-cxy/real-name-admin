@@ -121,6 +121,10 @@ export default {
             lineStyle: {
               color: '#666'
             },
+            checkpointStyle: {
+              borderColor: '#777',
+              borderWidth: 2
+            },
             bottom: 0,
             left: 20,
             right: 20,

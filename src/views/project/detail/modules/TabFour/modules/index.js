@@ -3,7 +3,12 @@ import {
 } from '@/utils/request'
 
 var indexMixin = {
-  props: {},
+  props: {
+    projectId: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       // 表头
@@ -32,9 +37,14 @@ var indexMixin = {
         dataIndex: 'modifyTime'
       }],
       Urls: {
-        listUrl: '/ida/api/projectPerson/page'
+        listUrl: '/ida/api/project/person/page'
       },
-      roleTypeList: []
+      roleTypeList: [],
+      listQuery: {
+        condition: {
+          projectId: this.projectId
+        }
+      }
     }
   },
   filters: {},

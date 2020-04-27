@@ -35,7 +35,7 @@
         <span slot="tab">
           <a-icon type="cluster" />管理人员
         </span>
-        <tab-four v-if="activeKey==4"></tab-four>
+        <tab-four v-if="activeKey==4" :projectId="model.id"></tab-four>
       </a-tab-pane>
       <a-tab-pane key="5">
         <span slot="tab">
