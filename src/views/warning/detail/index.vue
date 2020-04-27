@@ -22,13 +22,13 @@
         <span>{{model.unitTypeDesc}}</span>
       </a-form-item>
       <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目地址">
-        <span>{{model.unitTypeDesc}}</span>
+        <span>{{model.province}}{{model.city}}{{model.district}}{{model.address}}</span>
       </a-form-item>
       <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="具体定位地址">
         <span>{{model.unitTypeDesc}}</span>
       </a-form-item>
       <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
-        <span>{{model.unitTypeDesc}}</span>
+        <span>{{model.softNames}}</span>
       </a-form-item>
     </a-form>
   </a-card>
