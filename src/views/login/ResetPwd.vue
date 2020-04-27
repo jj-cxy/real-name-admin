@@ -2,7 +2,7 @@
   <div class="main">
     <div class="top">
       <div class="header">
-        <span class="title">贵阳市建筑工程施工现场数字监管服务平台</span>
+        <span class="title">贵阳&贵安建筑工程施工现场数字监管服务平台</span>
       </div>
     </div>
     <div class="wrapper">

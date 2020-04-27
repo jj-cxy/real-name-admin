@@ -16,4 +16,4 @@ export const setDocumentTitle = function (title) {
   }
 }
 
-export const domTitle = '贵阳市建筑工程施工现场数字监管服务平台'
+export const domTitle = '贵阳&贵安建筑工程施工现场数字监管服务平台'
