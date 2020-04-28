@@ -139,8 +139,6 @@ var indexMixin = {
       this.isDisabled = false
     },
     beforeSubmit(form) {
-      console.log(form)
-      debugger
       form.mark = form.mark.join()
       form.icon = this.mdl.icon
       if (!form.parentId || form.parentId == '') {

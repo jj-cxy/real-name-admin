@@ -43,7 +43,10 @@ var indexMixin = {
           })
         }
       })
-    }
+    },
+    handleMoreLink() {
+      this.$refs.modalForm.edit()
+    },
   }
 };
 export default indexMixin;

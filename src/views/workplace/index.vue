@@ -93,7 +93,7 @@
                   @click="$router.push({path:'/warning/history',query:{warningType:'CONTRACT'}})"
                 >
                   <div class="gridIcon">
-                    <i class="iconfont" style="color: #4ecb73">&#xe617;</i>
+                    <i class="iconfont" style="color: #1cc8e4">&#xe617;</i>
                   </div>
                 </a-badge>
                 <div class="gridSpan">劳务合同异常</div>
@@ -124,7 +124,7 @@
     </a-card>
     <a-card title="常用业务" :headStyle="{'background-color': '#fff'}" style="margin-top: 24px">
       <a href="#" slot="extra">
-        <a-button type="primary" icon="plus">添加更多</a-button>
+        <a-button type="primary" icon="plus" @click.prevent="handleMoreLink">添加更多</a-button>
       </a>
       <a-card-grid style="width:25%;">
         <a-icon type="audit" class="bsIcon" />
@@ -159,6 +159,8 @@
         <span class="bsSpan">前端考核情况</span>
       </a-card-grid>
     </a-card>
+
+    <form-modal ref="modalForm" @ok="afterSubmit"></form-modal>
   </div>
 </template>
 
@@ -168,6 +170,7 @@ import indexMixin from './modules/index'
 import overdue from '@/views/modules/Order/overdue'
 import history from '@/views/modules/Order/history'
 import todo from '@/views/modules/Order/todo'
+import formModal from './modules/formModal'
 
 export default {
   name: 'Workplace',
@@ -175,7 +178,8 @@ export default {
   components: {
     overdue,
     history,
-    todo
+    todo,
+    formModal
   }
 }
 </script>
