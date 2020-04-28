@@ -88,7 +88,7 @@ export const asyncRouterMap = [{
               name: 'WarningDetail',
               component: () => import('@/views/warning/detail/index'),
               meta: {
-                title: '断线预警',
+                title: '预警详情',
                 keepAlive: false
               }
             }]
