@@ -122,8 +122,20 @@ export default {
               color: '#666'
             },
             checkpointStyle: {
-              borderColor: '#777',
-              borderWidth: 2
+              borderColor: '#fff',
+              borderWidth: 1
+            },
+            controlStyle: {
+              showNextBtn: true,
+              showPrevBtn: true,
+              normal: {
+                color: '#666',
+                borderColor: '#666'
+              },
+              emphasis: {
+                color: '#aaa',
+                borderColor: '#aaa'
+              }
             },
             bottom: 0,
             left: 20,

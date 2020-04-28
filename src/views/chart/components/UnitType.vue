@@ -75,12 +75,46 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['建设单位', '施工单位', '监理单位', '设计单位', '勘察单位']
+            data: ['建设单位', '施工单位', '监理单位', '设计单位', '勘察单位'],
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false,
+              lineStyle: {
+                color: '#e8e8e8'
+              }
+            },
+            axisLabel: {
+              textStyle: {
+                color: '#222'
+              }
+            }
           }
         ],
         yAxis: [
           {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false,
+              lineStyle: {
+                color: '#e8e8e8'
+              }
+            },
+            axisLabel: {
+              textStyle: {
+                color: '#222'
+              }
+            }
           }
         ],
 
@@ -119,7 +153,7 @@ export default {
             name: '总数',
             type: 'line',
             stack: '总量',
-            symbolSize: 10,
+            symbolSize: 6,
             symbol: 'circle',
             itemStyle: {
               normal: {

@@ -66,6 +66,13 @@ export default {
             type: 'liquidFill',
             radius: '80%',
             data: [0.55, 0.55, 0.55, 0.55],
+            outline: {
+              // show: false
+              borderDistance: 5,
+              itemStyle: {
+                borderWidth: 8
+              }
+            },
             label: {
               normal: {
                 color: '#41b7f9',

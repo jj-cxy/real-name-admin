@@ -170,7 +170,7 @@
           :bordered="false"
           title="各区预警情况"
           class="card-chart"
-          :bodyStyle="{padding: '12px', height: '620px', 'overflow-y':'auto'}"
+          :bodyStyle="{padding: '12px', height: '615px', 'overflow-y':'auto'}"
           style="margin-top: 24px"
         >
           <span slot="extra">

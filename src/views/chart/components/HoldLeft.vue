@@ -9,7 +9,7 @@ import echartsLiquidfill from 'echarts-liquidfill'
 import resize from './mixins/resize'
 
 export default {
-   mixins: [resize],
+  mixins: [resize],
   props: {
     className: {
       type: String,
@@ -66,10 +66,17 @@ export default {
             type: 'liquidFill',
             radius: '80%',
             data: [0.45, 0.45, 0.45, 0.45],
+            outline: {
+              // show: false
+              borderDistance: 5,
+              itemStyle: {
+                borderWidth: 8
+              }
+            },
             label: {
               normal: {
                 color: '#41b7f9',
-                insideColor: '#ffffff',
+                insideColor: '#fff',
                 fontSize: 50
               }
             }

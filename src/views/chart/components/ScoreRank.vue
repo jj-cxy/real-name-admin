@@ -96,7 +96,7 @@ export default {
               show: true,
               splitNumber: 15,
               textStyle: {
-                fontSize: 10,
+                fontSize: 12,
                 color: '#000'
               }
             },
