@@ -6,6 +6,7 @@
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
+import { axios } from '@/utils/request'
 
 export default {
   mixins: [resize],
@@ -20,7 +21,7 @@ export default {
     },
     height: {
       type: String,
-      default: '576px'
+      default: '625px'
     },
     autoResize: {
       type: Boolean,
@@ -32,7 +33,10 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      Urls: {
+        byIdUrl: '/ida/api/project/progressStatistics/'
+      }
     }
   },
   mounted() {
@@ -48,64 +52,17 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({ legendData, seriesData } = {}) {
-      var dataMap = {}
-      function dataFormatter(obj) {
-        var pList = ['在建', '停工', '完工', '竣工']
-        var temp
-        for (var year = 1; year <= 5; year++) {
-          var max = 0
-          var sum = 0
-          temp = obj[year]
-          for (var i = 0, l = temp.length; i < l; i++) {
-            max = Math.max(max, temp[i])
-            sum += temp[i]
-            obj[year][i] = {
-              name: pList[i],
-              value: temp[i]
-            }
-          }
-          obj[year + 'max'] = Math.floor(max / 100) * 100
-          obj[year + 'sum'] = sum
+    setOptions({ districtNames, districtIds } = {}) {
+      let optionsData = [],
+        pieAxisData = [],
+        pieSeriesData = [],
+        barSeriesData = []
+      districtIds.map((item, index) => {
+        optionsData[index] = {
+          series: [{ data: pieSeriesData }, { data: barSeriesData }]
         }
-        return obj
-      }
-      dataMap.data = dataFormatter({
-        1: [55, 25, 15, 30],
-        2: [30, 55, 25, 15],
-        3: [15, 30, 55, 25],
-        4: [25, 15, 30, 55],
-        5: [25, 30, 55, 15]
       })
-      dataMap.dataGD = dataFormatter({
-        1: [55],
-        2: [30],
-        3: [15],
-        4: [25],
-        5: [25]
-      })
-      dataMap.dataHN = dataFormatter({
-        1: [25],
-        2: [55],
-        3: [30],
-        4: [15],
-        5: [30]
-      })
-      dataMap.dataHB = dataFormatter({
-        1: [15],
-        2: [25],
-        3: [55],
-        4: [30],
-        5: [55]
-      })
-      dataMap.dataSX = dataFormatter({
-        1: [30],
-        2: [15],
-        3: [25],
-        4: [55],
-        5: [15]
-      })
-      this.chart.setOption({
+      let option = {
         baseOption: {
           timeline: {
             axisType: 'category',
@@ -113,7 +70,7 @@ export default {
             // loop: false,
             autoPlay: true,
             // currentIndex: 2,
-            playInterval: 1000,
+            playInterval: 6000,
             controlStyle: {
               position: 'left'
             },
@@ -137,30 +94,17 @@ export default {
                 borderColor: '#aaa'
               }
             },
-            bottom: 0,
+            bottom: 20,
             left: 20,
             right: 20,
-            data: [
-              '贵阳市',
-              '云岩区',
-              '南明区',
-              '观山湖',
-              '白云区',
-              '乌当区',
-              '花溪区',
-              '双龙镇',
-              '经开区',
-              '综保区',
-              '高新区',
-              '清镇市',
-              '息烽县',
-              '开阳县',
-              '修文县'
-            ]
+            data: districtNames,
+            label: {
+              interval: 0
+            }
           },
           title: [
             {
-              text: '本地区项目进度',
+              text: `本地区项目进度`,
               left: 'center',
               top: '20%',
               padding: [24, 0],
@@ -174,7 +118,7 @@ export default {
           calculable: true,
           grid: {
             top: '50%',
-            bottom: 60,
+            bottom: 80,
             left: 20,
             right: 20,
             containLabel: true
@@ -212,7 +156,7 @@ export default {
           yAxis: [
             {
               type: 'category',
-              data: ['在建', '停工', '完工', '竣工'],
+              data: pieAxisData,
               splitLine: {
                 show: false
               },
@@ -286,143 +230,42 @@ export default {
             }
           ]
         },
-        options: [
-          {
-            series: [
-              {
-                data: dataMap.data['1']
-              },
-              {
-                data: [
-                  {
-                    name: '在建',
-                    value: dataMap.dataGD['1sum']
-                  },
-                  {
-                    name: '停工',
-                    value: dataMap.dataHN['1sum']
-                  },
-                  {
-                    name: '完工',
-                    value: dataMap.dataHB['1sum']
-                  },
-                  {
-                    name: '竣工',
-                    value: dataMap.dataSX['1sum']
+        options: optionsData
+      }
+
+      let _this = this
+      function getTimeLineData(index) {
+        option.baseOption.title[0].text = districtNames[index] + '项目进度'
+        axios({
+          url: _this.Urls.byIdUrl + districtIds[index],
+          method: 'get'
+        })
+          .then(res => {
+            if (res.code == 0) {
+              let resData = res.data
+              if (resData.length > 0) {
+                resData.map((item, index) => {
+                  pieAxisData[index] = item.name
+                  pieSeriesData[index] = item.num
+                  barSeriesData[index] = {
+                    name: item.name,
+                    value: item.num
                   }
-                ]
+                })
               }
-            ]
-          },
-          {
-            series: [
-              {
-                data: dataMap.data['2']
-              },
-              {
-                data: [
-                  {
-                    name: '在建',
-                    value: dataMap.dataGD['2sum']
-                  },
-                  {
-                    name: '停工',
-                    value: dataMap.dataHN['2sum']
-                  },
-                  {
-                    name: '完工',
-                    value: dataMap.dataHB['2sum']
-                  },
-                  {
-                    name: '竣工',
-                    value: dataMap.dataSX['2sum']
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            series: [
-              {
-                data: dataMap.data['3']
-              },
-              {
-                data: [
-                  {
-                    name: '在建',
-                    value: dataMap.dataGD['3sum']
-                  },
-                  {
-                    name: '停工',
-                    value: dataMap.dataHN['3sum']
-                  },
-                  {
-                    name: '完工',
-                    value: dataMap.dataHB['3sum']
-                  },
-                  {
-                    name: '竣工',
-                    value: dataMap.dataSX['3sum']
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            series: [
-              {
-                data: dataMap.data['4']
-              },
-              {
-                data: [
-                  {
-                    name: '在建',
-                    value: dataMap.dataGD['4sum']
-                  },
-                  {
-                    name: '停工',
-                    value: dataMap.dataHN['4sum']
-                  },
-                  {
-                    name: '完工',
-                    value: dataMap.dataHB['4sum']
-                  },
-                  {
-                    name: '竣工',
-                    value: dataMap.dataSX['4sum']
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            series: [
-              {
-                data: dataMap.data['5']
-              },
-              {
-                data: [
-                  {
-                    name: '在建',
-                    value: dataMap.dataGD['5sum']
-                  },
-                  {
-                    name: '停工',
-                    value: dataMap.dataHN['5sum']
-                  },
-                  {
-                    name: '完工',
-                    value: dataMap.dataHB['5sum']
-                  },
-                  {
-                    name: '竣工',
-                    value: dataMap.dataSX['5sum']
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+              _this.chart.setOption(option)
+            } else {
+              _this.$notification.error({
+                message: res.msg
+              })
+            }
+          })
+          .catch(() => {})
+      }
+
+      getTimeLineData(0)
+      this.chart.on('timelinechanged', (params, param) => {
+        getTimeLineData(params.currentIndex)
       })
     },
     initChart() {

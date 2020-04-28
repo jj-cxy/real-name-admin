@@ -50,7 +50,7 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({ legendData, seriesData } = {}) {
+    setOptions({ angleData, seriesData } = {}) {
       let colorList = ['#975fe5', '#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff']
       // let colorList = ['#FF8700', '#ffc300', '#00e473', '#009DFF']
       let labelSereies = []
@@ -71,7 +71,7 @@ export default {
           formatter: '{a} <br/>{b} : {c}%'
         },
         angleAxis: {
-          data: legendData,
+          data: angleData,
           axisLine: {
             show: true,
             lineStyle: {

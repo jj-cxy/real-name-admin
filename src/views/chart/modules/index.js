@@ -9,86 +9,39 @@ var indexMixin = {
     return {
       loading: false,
       Urls: {
-        listUrl: ''
+        listUrl: '',
+        projectTotalUrl: '/ida/api/project/cityStatistics/',
+        projectPaceUrl: '/ida/api/project/progressStatistics/',
+        areaWarningUrl: '/ida/api/warning/history/statistics/'
       },
       projectTypeList: {
-        legendData: ['公建项目', '市政项目', '民建项目', '其他工程'],
-        seriesData: [{
-            name: '公建项目',
-            value: 80
-          },
-          {
-            name: '市政项目',
-            value: 80
-          },
-          {
-            name: '民建项目',
-            value: 80
-          },
-          {
-            name: '其他工程',
-            value: 80
-          }
-        ]
+        angleData: [],
+        seriesData: []
       },
       projectRadioList: {
-        seriesData: [{
-            value: 101,
-            name: '云岩区'
-          },
-          {
-            value: 79,
-            name: '南明区'
-          },
-          {
-            value: 136,
-            name: '观山湖'
-          },
-          {
-            value: 123,
-            name: '白云区'
-          },
-          {
-            value: 99,
-            name: '乌当区'
-          },
-          {
-            value: 101,
-            name: '花溪区'
-          },
-          {
-            value: 79,
-            name: '双龙镇'
-          },
-          {
-            value: 136,
-            name: '经开区'
-          },
-          {
-            value: 123,
-            name: '综保区'
-          },
-          {
-            value: 99,
-            name: '高新区'
-          },
-          {
-            value: 101,
-            name: '清镇市'
-          },
-          {
-            value: 79,
-            name: '息烽县'
-          },
-          {
-            value: 136,
-            name: '开阳县'
-          },
-          {
-            value: 123,
-            name: '修文县'
-          }
-        ]
+        totalNum: 0,
+        seriesData: []
+      },
+      unitTypeList: {
+        xAxisData: [],
+        inSeriesData: [],
+        outSeriesData: [],
+        totalSeriesData: []
+      },
+      handleData: {
+        seriesData: 0
+      },
+      nohandleData: {
+        seriesData: 0
+      },
+      paceDistrictNames: [],
+      paceDistrictIds: [],
+      projectPaceList: {
+        districtNames: [],
+        districtIds: [],
+        pieAxisData: [],
+        pieSeriesData: [],
+        barSeriesData: []
       },
       inOutRadioList: {
         innerData: [{
@@ -126,27 +79,22 @@ var indexMixin = {
       },
       warnColumns: [{
         title: '预警区县',
-        dataIndex: 'district',
+        dataIndex: 'name',
         align: 'center'
       }, {
         title: '最新预警',
-        dataIndex: 'newWarn',
+        dataIndex: 'today',
         align: 'center'
       }, {
         title: '超期预警',
-        dataIndex: 'overWarn',
+        dataIndex: 'delay',
         align: 'center'
       }, {
         title: '预警总计',
-        dataIndex: 'totalWarn',
+        dataIndex: 'all',
         align: 'center'
       }],
-      warnData: [{
-        district: '观山湖区',
-        newWarn: '2',
-        overWarn: 32,
-        totalWarn: '4',
-      }],
+      warnData: [],
 
       contractColumns: [{
         title: '劳务合同',
@@ -198,18 +146,104 @@ var indexMixin = {
     }
   },
   filters: {},
-  created() {},
+  created() {
+    this.getArea('520100', 'districtList')
+    this.getAreaWarning('520100')
+  },
   mounted() {
-    this.loading = true
-    setTimeout(() => {
-      this.loading = false
-    }, 1500)
-    /* this.$nextTick(() => {
-      this.loading = false
-    }) */
+    this.$nextTick(() => {
+      this.getProjectTotal('520100');
+    })
   },
   methods: {
-    // 项目类型
+    afterGetArea() {
+      this.projectPaceList.districtNames = this.districtList.map((item, index) => {
+        this.projectPaceList.districtIds[index] = item.id
+        return item.name
+      })
+      console.log('...', this.projectPaceList.districtNames, this.projectPaceList.districtIds)
+    },
+    getProjectTotal(cityId) {
+      this.loading = true
+      axios({
+        url: this.Urls.projectTotalUrl + cityId,
+        method: 'get'
+      }).then(res => {
+        this.loading = false
+        if (res.code == 0) {
+          // 项目类型分布
+          let projectTypeData = res.data.typeList
+          if (projectTypeData.length > 0) {
+            let total = projectTypeData.reduce((sum, item, index) => {
+              return sum + item.num
+            }, 0)
+            if (total > 0) {
+              projectTypeData.map((item, index) => {
+                this.projectTypeList.angleData[index] = item.name
+                this.projectTypeList.seriesData[index] = {
+                  name: item.name,
+                  value: ((item.num) / total) * 100
+                }
+              })
+            }
+          }
+          // 项目占比
+          let projectRadioData = res.data.districtList
+          if (projectRadioData.length > 0) {
+            this.projectRadioList.totalNum = res.data.projectCount
+            projectRadioData.map((item, index) => {
+              this.projectRadioList.seriesData[index] = {
+                name: item.name,
+                value: item.num
+              }
+            })
+          }
+          // 企业类型分布
+          let inUnitTypeData = res.data.inEnterpriseList
+          let outUnitTypeData = res.data.outEnterpriseList
+          if (inUnitTypeData.length > 0) {
+            if (inUnitTypeData.length == outUnitTypeData.length) {
+              inUnitTypeData.map((item, index) => {
+                this.unitTypeList.xAxisData[index] = item.name
+                this.unitTypeList.inSeriesData[index] = item.value
+                this.unitTypeList.totalSeriesData[index] = item.value + outUnitTypeData[index].value
+              })
+            }
+            outUnitTypeData.map((item, index) => {
+              this.unitTypeList.outSeriesData[index] = item.value
+            })
+          }
+
+          // 手续办理情况
+          if (res.data.projectCount > 0) {
+            this.handleData.seriesData = (res.data.handled) / (res.data.projectCount)
+            this.nohandleData.seriesData = 1 - (this.handleData.seriesData)
+          }
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {
+        this.loading = false
+      })
+    },
+
+    // 各区预警情况
+    getAreaWarning(cityId) {
+      axios({
+        url: this.Urls.areaWarningUrl + cityId,
+        method: 'get'
+      }).then(res => {
+        if (res.code == 0) {
+          this.warnData = res.data
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {})
+    },
   }
 };
 export default indexMixin;

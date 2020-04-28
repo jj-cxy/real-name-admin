@@ -48,7 +48,7 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({} = {}) {
+    setOptions({ xAxisData, inSeriesData, outSeriesData, totalSeriesData } = {}) {
       this.chart.setOption({
         backgroundColor: '#ffffff',
         tooltip: {
@@ -70,12 +70,11 @@ export default {
         legend: {
           data: ['本省企业', '外省企业']
         },
-
         calculable: true,
         xAxis: [
           {
             type: 'category',
-            data: ['建设单位', '施工单位', '监理单位', '设计单位', '勘察单位'],
+            data: xAxisData,
             splitLine: {
               show: false
             },
@@ -117,7 +116,6 @@ export default {
             }
           }
         ],
-
         series: [
           {
             name: '本省企业',
@@ -132,7 +130,7 @@ export default {
                 color: '#05BFF1'
               }
             },
-            data: [127, 73, 70, 22, 17]
+            data: inSeriesData
           },
           {
             name: '外省企业',
@@ -147,7 +145,7 @@ export default {
                 color: '#FF6347'
               }
             },
-            data: [85, 67, 84, 30, 30]
+            data: outSeriesData
           },
           {
             name: '总数',
@@ -164,7 +162,7 @@ export default {
                 }
               }
             },
-            data: [212, 140, 154, 52, 47]
+            data: totalSeriesData
           }
         ]
       })

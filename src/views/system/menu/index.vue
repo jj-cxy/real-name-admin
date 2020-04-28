@@ -126,6 +126,11 @@
             <a-radio-group v-decorator="['type', {initialValue: 'MENU'}]">
               <a-radio value="MENU">菜单</a-radio>
               <a-radio value="BUTTON">按钮</a-radio>
+              <a-radio value="PATH">访问路径</a-radio>
+              <a-radio value="TAB">标签页</a-radio>
+              <a-radio value="PAGE">页面</a-radio>
+              <a-radio value="FUNCTION">功能</a-radio>
+              <a-radio value="SERVER">服务</a-radio>
             </a-radio-group>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="名称">
@@ -154,10 +159,7 @@
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">
               <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="后端路径">
-                <a-input
-                  placeholder="请输入后端路径"
-                  v-decorator="['path', {rules: [{required: true, message: '此字段为必填'}],initialValue:'/**'}]"
-                />
+                <a-input placeholder="请输入后端路径" v-decorator="['path', {initialValue:'/**'}]" />
               </a-form-item>
             </a-col>
             <a-col :md="12" :sm="24">
@@ -174,11 +176,14 @@
               v-decorator="['mark', {rules: [{required: true, message: '此字段为必填'}]}]"
               placeholder="请选择，此处为多选"
             >
-              <a-select-option value="NONE">无需认证</a-select-option>
-              <a-select-option value="LOGIN">登录</a-select-option>
+              <a-select-option value="NONE">所有用户</a-select-option>
+              <a-select-option value="TEMP">临时用户</a-select-option>
+              <a-select-option value="LOGIN">登录用户</a-select-option>
               <a-select-option value="USER">平台用户</a-select-option>
-              <a-select-option value="AUTH">第三方</a-select-option>
-              <a-select-option value="ADMIN">管理员</a-select-option>
+              <a-select-option value="INSIDE">内部用户</a-select-option>
+              <a-select-option value="OUTSIDE">外部用户</a-select-option>
+              <a-select-option value="AUTH">第三方用户</a-select-option>
+              <a-select-option value="ADMIN">管理员用户</a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="备注">

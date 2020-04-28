@@ -497,10 +497,15 @@ var baseMixin = {
         url: this.Urls.areaListUrl + id,
         method: 'get'
       }).then(res => {
-        this[data] = res.data.records
+        if (res.code == 0) {
+          this[data] = res.data.records
+          this.afterGetArea()
+        } else {
+
+        }
       })
     },
-
+    afterGetArea() {},
     handleProviceChange(val) {
       this.getArea(val, 'cityList')
     },

@@ -158,10 +158,10 @@
           :bordered="false"
           title="项目进度分布"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: '0',}"
           style="margin-top: 24px"
         >
-          <ProjectPace />
+          <ProjectPace :chart-data="projectPaceList"/>
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="12" :md="24" :sm="24">
@@ -199,7 +199,7 @@
           :bodyStyle="{padding: '24px 0'}"
           style="margin-top: 24px"
         >
-          <UnitType />
+          <UnitType :chart-data="unitTypeList" />
         </a-card>
       </a-col>
       <a-col :xl="16" :lg="24" :md="24" :sm="24">
@@ -240,8 +240,8 @@
           :bodyStyle="{padding: '0'}"
           style="margin-top: 24px"
         >
-          <HoldLeft />
-          <HoldRight />
+          <HoldLeft :chart-data="handleData" />
+          <HoldRight :chart-data="nohandleData" />
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="24" :md="24" :sm="24">

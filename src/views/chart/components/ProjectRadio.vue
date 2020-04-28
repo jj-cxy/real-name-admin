@@ -49,11 +49,11 @@ export default {
   },
   watch: {},
   methods: {
-    setOptions({ seriesData } = {}) {
+    setOptions({ totalNum, seriesData } = {}) {
       this.chart.setOption({
         title: {
           text: '项目总数',
-          subtext: '590个',
+          subtext: `${totalNum}个`,
           x: 'center',
           y: '44%',
           textStyle: {
@@ -145,7 +145,6 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
-      console.log('数据', this.chart)
     },
     timerAuto() {
       this.timer = setInterval(() => {

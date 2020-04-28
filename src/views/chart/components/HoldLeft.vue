@@ -49,7 +49,8 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({} = {}) {
+    setOptions({ seriesData } = {}) {
+      let data = [seriesData, seriesData, seriesData, seriesData]
       this.chart.setOption({
         title: {
           text: '本地企业',
@@ -65,7 +66,7 @@ export default {
           {
             type: 'liquidFill',
             radius: '80%',
-            data: [0.45, 0.45, 0.45, 0.45],
+            data: data,
             outline: {
               // show: false
               borderDistance: 5,
