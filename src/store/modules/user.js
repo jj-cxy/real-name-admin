@@ -59,6 +59,7 @@ const user = {
             localStorage.setItem('in-userId', result.user.userId)
             localStorage.setItem('in-areaId', result.user.areaId)
             localStorage.setItem('in-orgId', result.user.orgId)
+            localStorage.setItem('in-areaId', result.user.areaId)
             if (result.user.roles && result.user.roles.length > 0) {
               localStorage.setItem('in-mark', result.user.roleMarks)
             }
