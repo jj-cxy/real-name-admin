@@ -255,7 +255,7 @@
           <div class="attachment-box">
             <ul>
               <li v-for="item in this.fileList" :key="item.uid">
-                <div>{{item.title}}</div>
+                <div style="margin: 5px 0; text-align: center">{{item.title}}</div>
                 <img :src="item.url" />
               </li>
             </ul>

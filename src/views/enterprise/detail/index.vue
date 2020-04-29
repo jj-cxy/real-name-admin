@@ -58,6 +58,14 @@
                 <td class="tit">联系电话</td>
                 <td>{{model.enterpriseContactPersonTel}}</td>
               </tr>
+              <tr>
+                <td class="tit">授权委托书</td>
+                <td>
+                  <viewer :ids="model.unitAdminLetterOfAttorney"></viewer>
+                </td>
+                <td class="tit"></td>
+                <td></td>
+              </tr>
               <template
                 v-if="model.unitType && model.unitType.split(',').includes('CONSTRUCTION_UNIT')"
               >

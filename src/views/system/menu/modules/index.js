@@ -25,7 +25,9 @@ var indexMixin = {
           title: '类型',
           dataIndex: 'type',
           align: 'center',
-          customRender: (text, record) => `${text=="MENU"?"菜单":""}`
+          scopedSlots: {
+            customRender: 'type'
+          }
         },
         {
           title: '菜单路径',
@@ -41,8 +43,8 @@ var indexMixin = {
           title: '权限标识',
           dataIndex: 'mark',
           align: 'center',
-          customRender(mark) {
-            return mark == 'NONE' ? '无需认证' : mark == 'LOGIN' ? '登录' : mark == 'USER' ? '平台用户' : mark == 'AUTH' ? '第三方' : mark == 'ADMIN' ? '管理员' : ''
+          scopedSlots: {
+            customRender: 'mark'
           }
         },
         {
@@ -116,17 +118,57 @@ var indexMixin = {
         value: '0',
         children: []
       }],
-      typeArr: [{
-        value: 'MENU',
-        name: '菜单'
-      }, {
-        value: 'BUTTON',
-        name: '按钮'
-      }],
       mdl: {
         icon: ''
       },
-      iconChooseVisible: false
+      iconChooseVisible: false,
+      typeList: [{
+        name: '菜单',
+        value: 'MENU'
+      }, {
+        name: '按钮',
+        value: 'BUTTON'
+      }, {
+        name: '访问路径',
+        value: 'PATH'
+      }, {
+        name: '标签页',
+        value: 'TAB'
+      }, {
+        name: '页面',
+        value: 'PAGE'
+      }, {
+        name: '功能',
+        value: 'FUNCTION'
+      }, {
+        name: '服务',
+        value: 'SERVER'
+      }],
+      markList: [{
+        name: '所有用户',
+        value: 'NONE'
+      }, {
+        name: '临时用户',
+        value: 'TEMP'
+      }, {
+        name: '登录用户',
+        value: 'LOGIN'
+      }, {
+        name: '平台用户',
+        value: 'USER'
+      }, {
+        name: '内部用户',
+        value: 'INSIDE'
+      }, {
+        name: '外部用户',
+        value: 'OUTSIDE'
+      }, {
+        name: '第三方用户',
+        value: 'AUTH'
+      }, {
+        name: '管理员用户',
+        value: 'ADMIN'
+      }],
     }
   },
   filters: {},
@@ -147,7 +189,6 @@ var indexMixin = {
       return form
     },
     setForm(data) {
-
       this.$nextTick(() => {
         this.form.setFieldsValue(pick(data, 'parentId', 'title', 'type', 'name', 'path', 'url', 'sort', 'remark'))
         this.form.setFieldsValue({
@@ -188,6 +229,14 @@ var indexMixin = {
     handleIconChoose(value) {
       this.mdl.icon = value
       this.iconChooseVisible = false
+    },
+    filterName(array, text) {
+      let obj = array.find((item, index) => {
+        if (item.value == text) {
+          return item.name
+        }
+      })
+      return obj.name
     },
   }
 }

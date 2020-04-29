@@ -140,26 +140,44 @@ export default {
       })
 
       // 自动高亮切换
-      // this.timerAuto()
+      let seriesLength = seriesData.length
+      this.timerAuto(this.chart, seriesLength)
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     },
-    timerAuto() {
-      this.timer = setInterval(() => {
-        console.log('定时')
-        this.chart.dispatchAction({
+    timerAuto(chart, length) {
+      let _this = this
+      let index = 0
+      chart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: 0
+      })
+      chart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: 0
+      })
+      _this.timer = setInterval(() => {
+        chart.dispatchAction({
           type: 'downplay',
-          seriesIndex: 0
+          seriesIndex: 0,
+          dataIndex: index
         })
-
-        this.chart.dispatchAction({
+        index = (index + 1) % length
+        chart.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        chart.dispatchAction({
           type: 'highlight',
           seriesIndex: 0,
-          dataIndex: this.dataIndex++ % 10
+          dataIndex: index
         })
-      }, 2000)
+      }, 6000)
     }
   }
 }

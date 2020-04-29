@@ -64,21 +64,28 @@ var indexMixin = {
       this.model = data
       let ids = []
       ids.push(data.licenseUrl)
+      ids.push(data.unitAdminLetterOfAttorney)
       if (data.safetyLicenceUrl) {
         ids.push(data.safetyLicenceUrl)
       }
-      this.model.qualifications.map((item, index) => {
-        ids.push(item.qualificationContent)
-      })
-      this.getImg(ids.join())
-
+      if (data.qualifications || data.qualifications.length > 0) {
+        data.qualifications.map((item, index) => {
+          ids.push(item.qualificationContent)
+        })
+      }
+      if (ids.length > 0) {
+        this.getImg(ids.join())
+      }
     },
     afterGetImg() {
-      /* this.fileList.map((item, index) => {
+      this.fileList.map((item, index) => {
         item.title = '资质证书'
       })
       this.fileList[0]['title'] = '营业执照'
-      this.fileList[1]['title'] = '安全生产许可证' */
+      this.fileList[1]['title'] = '授权委托书'
+      if (this.model.safetyLicenceUrl) {
+        this.fileList[2]['title'] = '安全生产许可证'
+      }
     },
     // 审核
     handleSubmit(flag, e) {

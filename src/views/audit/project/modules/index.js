@@ -66,8 +66,12 @@ var indexMixin = {
     setForm(data) {
       this.model = data
       let ids = []
-      ids.push(data.constructionPermitNumberUrl)
-      this.getImg(ids.join())
+      if (data.constructionPermitNumberUrl) {
+        ids.push(data.constructionPermitNumberUrl)
+      }
+      if (ids.length > 0) {
+        this.getImg(ids.join())
+      }
       // 加载地图
       let province = `${data.province}`
       let city = `${data.city}${data.district}${data.address}`

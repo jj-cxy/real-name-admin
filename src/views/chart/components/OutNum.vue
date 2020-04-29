@@ -48,7 +48,7 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({ legendData, seriesData } = {}) {
+    setOptions({ axiosData, localData, increaseData, descreaseData } = {}) {
       this.chart.setOption({
         tooltip: {
           trigger: 'axis',
@@ -119,7 +119,7 @@ export default {
             showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
-            data: ['1200', '1400', '1008', '1411'],
+            data: localData,
             itemStyle: {
               normal: {
                 color: '#3aa1ff'
@@ -138,7 +138,7 @@ export default {
             showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
-            data: ['1200', '1400', '808', '811'],
+            data: increaseData,
             itemStyle: {
               normal: {
                 color: '#f2637b'
@@ -157,7 +157,7 @@ export default {
             showSymbol: true,
             symbol: 'circle',
             symbolSize: 6,
-            data: ['980', '500', '608', '811'],
+            data: descreaseData,
             itemStyle: {
               normal: {
                 color: '#975fe5'

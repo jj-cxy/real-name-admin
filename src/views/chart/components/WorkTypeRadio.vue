@@ -48,69 +48,11 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({} = {}) {
-      var data = [
-        {
-          value: 101,
-          name: '云岩区'
-        },
-        {
-          value: 79,
-          name: '南明区'
-        },
-        {
-          value: 136,
-          name: '观山湖'
-        },
-        {
-          value: 123,
-          name: '白云区'
-        },
-        {
-          value: 99,
-          name: '乌当区'
-        },
-        {
-          value: 101,
-          name: '花溪区'
-        },
-        {
-          value: 79,
-          name: '双龙镇'
-        },
-        {
-          value: 136,
-          name: '经开区'
-        },
-        {
-          value: 123,
-          name: '综保区'
-        },
-        {
-          value: 99,
-          name: '高新区'
-        },
-        {
-          value: 101,
-          name: '清镇市'
-        },
-        {
-          value: 79,
-          name: '息烽县'
-        },
-        {
-          value: 136,
-          name: '开阳县'
-        },
-        {
-          value: 123,
-          name: '修文县'
-        }
-      ]
+    setOptions({ total, seriesData } = {}) {
       this.chart.setOption({
         title: {
-          text: '项目总数',
-          subtext: '590个',
+          text: '工种',
+          subtext: `共${total}个`,
           x: 'center',
           y: '40%',
           textStyle: {
@@ -169,14 +111,50 @@ export default {
                 show: false
               }
             },
-            data: data
+            data: seriesData
           }
         ]
       })
+
+      // 自动高亮切换
+      let seriesLength = seriesData.length
+      this.timerAuto(this.chart, seriesLength)
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
+    },
+    timerAuto(chart, length) {
+      let _this = this
+      let index = 0
+      chart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: 0
+      })
+      chart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: 0
+      })
+      _this.timer = setInterval(() => {
+        chart.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        index = (index + 1) % length
+        chart.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        chart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+      }, 6000)
     }
   }
 }

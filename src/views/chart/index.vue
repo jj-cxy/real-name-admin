@@ -14,7 +14,7 @@
               <span class="ico">
                 <i class="iconfont">&#xe613;</i>
               </span>
-              <h1 class="num">376</h1>
+              <h1 class="num">{{projectCount.total}}</h1>
               <span class="tit">项目总数（个）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
@@ -22,7 +22,7 @@
               <span class="ico">
                 <i class="iconfont">&#xe62a;</i>
               </span>
-              <h1 class="num">376</h1>
+              <h1 class="num">{{projectCount.construct}}</h1>
               <span class="tit">在建项目（个）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
@@ -30,39 +30,51 @@
               <span class="ico">
                 <i class="iconfont">&#xe688;</i>
               </span>
-              <h1 class="num">376</h1>
+              <h1 class="num">{{projectCount.complete}}</h1>
               <span class="tit">竣工项目（个）</span>
             </li>
           </ul>
           <ul class="data-statis-top">
             <li>
-              <h1 class="num">1100</h1>
+              <h1 class="num">
+                <a-statistic :value="personCount.total" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">从业总人数（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
-              <h1 class="num">100</h1>
+              <h1 class="num">
+                <a-statistic :value="personCount.manager" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">管理人员（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
-              <h1 class="num">2000</h1>
+              <h1 class="num">
+                <a-statistic :value="personCount.worker" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">劳务人员（人）</span>
             </li>
           </ul>
           <ul class="data-statis-top">
             <li>
-              <h1 class="num">1100</h1>
+              <h1 class="num">
+                <a-statistic :value="112893" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">今日入场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
-              <h1 class="num">100</h1>
+              <h1 class="num">
+                <a-statistic :value="2000" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">今日出场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
-              <h1 class="num">2000</h1>
+              <h1 class="num">
+                <a-statistic :value="10000" :valueStyle="{ color: '#1890FF' }" />
+              </h1>
               <span class="tit">今日在场（人）</span>
             </li>
           </ul>
@@ -71,10 +83,13 @@
               <div class="item">
                 <div class="tit">持证管理人员</div>
                 <div class="num">
-                  600
+                  {{qaCount.handleManager}}
                   <span class="unit">人</span>
-                  <span class="per">占</span>60
-                  <span class="unit">%</span>
+                  <span class="per">占</span>
+                  {{qaCount.handleManager | percentFilter(personCount.manager)}}
+                  <span
+                    class="unit"
+                  >%</span>
                 </div>
               </div>
             </a-col>
@@ -82,10 +97,13 @@
               <div class="item">
                 <div class="tit">无证管理人员</div>
                 <div class="num" style="color: red">
-                  60
+                  {{qaCount.noHandleManager}}
                   <span class="unit">人</span>
-                  <span class="per">占</span>60
-                  <span class="unit">%</span>
+                  <span class="per">占</span>
+                  {{qaCount.noHandleManager | percentFilter(personCount.manager)}}
+                  <span
+                    class="unit"
+                  >%</span>
                 </div>
               </div>
             </a-col>
@@ -93,10 +111,13 @@
               <div class="item">
                 <div class="tit">持证劳务人员</div>
                 <div class="num">
-                  60
+                  {{qaCount.handleWorker}}
                   <span class="unit">人</span>
-                  <span class="per">占</span>60
-                  <span class="unit">%</span>
+                  <span class="per">占</span>
+                  {{qaCount.handleWorker | percentFilter(personCount.worker)}}
+                  <span
+                    class="unit"
+                  >%</span>
                 </div>
               </div>
             </a-col>
@@ -104,10 +125,13 @@
               <div class="item">
                 <div class="tit">无证劳务人员</div>
                 <div class="num" style="color: red">
-                  600
+                  {{qaCount.noHandleWorker}}
                   <span class="unit">人</span>
-                  <span class="per">占</span>60
-                  <span class="unit">%</span>
+                  <span class="per">占</span>
+                  {{qaCount.noHandleWorker | percentFilter(personCount.worker)}}
+                  <span
+                    class="unit"
+                  >%</span>
                 </div>
               </div>
             </a-col>
@@ -148,8 +172,8 @@
           :bodyStyle="{padding: '24px 0'}"
           style="margin-top: 24px"
         >
-          <OutRadio :chartData="inOutRadioList" />
-          <OutNum style="margin-top: 48px" />
+          <OutRadio :chart-data="inOutRadioList" />
+          <OutNum :chart-data="outNumData" style="margin-top: 48px" />
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="24" :md="24" :sm="24">
@@ -161,7 +185,7 @@
           :bodyStyle="{padding: '0',}"
           style="margin-top: 24px"
         >
-          <ProjectPace :chart-data="projectPaceList"/>
+          <ProjectPace :chart-data="projectPaceList" />
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="12" :md="24" :sm="24">
@@ -175,7 +199,7 @@
         >
           <span slot="extra">
             当前预警总数：
-            <b style="color: red; font-size: 16px">9</b>
+            <b style="color: red; font-size: 16px">{{warnTotal}}</b>
           </span>
           <a-table
             :columns="warnColumns"
@@ -184,7 +208,17 @@
             :rowKey="(text,index)=>index"
             :pagination="false"
             size="small"
-          ></a-table>
+          >
+            <span slot="today" slot-scope="text, record">
+              <a href="javascript:;" @click="handleWarnModal(record,'最新预警',text)">{{text}}</a>
+            </span>
+            <span slot="delay" slot-scope="text, record">
+              <a href="javascript:;" @click="handleWarnModal(record,'超期预警',text)">{{text}}</a>
+            </span>
+            <span slot="all" slot-scope="text, record">
+              <a href="javascript:;" @click="handleWarnModal(record,'预警总计',text)">{{text}}</a>
+            </span>
+          </a-table>
         </a-card>
       </a-col>
     </a-row>
@@ -227,7 +261,7 @@
           :bodyStyle="{padding: 0}"
           style="margin-top: 24px"
         >
-          <WorkTypeRadio />
+          <WorkTypeRadio :chart-data="workerTypeList" />
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="24" :md="24" :sm="24">
@@ -274,6 +308,26 @@
         </a-card>
       </a-col>
     </a-row>
+    <a-drawer
+      width="640"
+      :title="warnTitle"
+      placement="right"
+      :maskClosable="false"
+      :mask="false"
+      @close="onWarnClose"
+      :visible="warnVisible"
+    >
+      <a-descriptions :column="2" v-for="item in warnModal" :key="item.id">
+        <a-descriptions-item label="项目名称" span="2">{{item.projectName}}</a-descriptions-item>
+        <a-descriptions-item label="预警类型">{{item.warningTypeDesc}}</a-descriptions-item>
+        <a-descriptions-item label="预警时间">{{item.createTime}}</a-descriptions-item>
+        <a-descriptions-item label="预警说明" span="2">{{item.warningContent}}</a-descriptions-item>
+        <a-descriptions-item label="预警原因" span="2" style="color: red">{{item.warningReason}}</a-descriptions-item>
+        <a-descriptions-item label="管理机构">{{item.managerOrgName}}</a-descriptions-item>
+        <a-descriptions-item label="监督员">{{item.personName}}</a-descriptions-item>
+        <a-divider />
+      </a-descriptions>
+    </a-drawer>
   </div>
 </template>
 

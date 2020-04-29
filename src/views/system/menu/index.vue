@@ -12,7 +12,7 @@
             <a-col :md="4" :sm="24">
               <a-form-item>
                 <a-select allowClear v-model="listQuery.condition.type" placeholder="菜单类型">
-                  <a-select-option v-for="item in typeArr" :key="item.value">{{item.name}}</a-select-option>
+                  <a-select-option v-for="item in typeList" :key="item.value">{{item.name}}</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -50,6 +50,12 @@
         size="middle"
         @change="handleTableChange"
       >
+        <span slot="type" slot-scope="text">
+          <span>{{filterName(typeList,text)}}</span>
+        </span>
+        <span slot="mark" slot-scope="text">
+          <span>{{filterName(markList,text)}}</span>
+        </span>
         <span slot="iconBox" slot-scope="text">
           <a-icon :type="text || 'smile'" />
         </span>
@@ -124,13 +130,7 @@
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="类型">
             <a-radio-group v-decorator="['type', {initialValue: 'MENU'}]">
-              <a-radio value="MENU">菜单</a-radio>
-              <a-radio value="BUTTON">按钮</a-radio>
-              <a-radio value="PATH">访问路径</a-radio>
-              <a-radio value="TAB">标签页</a-radio>
-              <a-radio value="PAGE">页面</a-radio>
-              <a-radio value="FUNCTION">功能</a-radio>
-              <a-radio value="SERVER">服务</a-radio>
+              <a-radio v-for="item in typeList" :value="item.value" :key="item.value">{{item.name}}</a-radio>
             </a-radio-group>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="名称">
@@ -176,14 +176,11 @@
               v-decorator="['mark', {rules: [{required: true, message: '此字段为必填'}]}]"
               placeholder="请选择，此处为多选"
             >
-              <a-select-option value="NONE">所有用户</a-select-option>
-              <a-select-option value="TEMP">临时用户</a-select-option>
-              <a-select-option value="LOGIN">登录用户</a-select-option>
-              <a-select-option value="USER">平台用户</a-select-option>
-              <a-select-option value="INSIDE">内部用户</a-select-option>
-              <a-select-option value="OUTSIDE">外部用户</a-select-option>
-              <a-select-option value="AUTH">第三方用户</a-select-option>
-              <a-select-option value="ADMIN">管理员用户</a-select-option>
+              <a-select-option
+                v-for="item in markList"
+                :value="item.value"
+                :key="item.value"
+              >{{item.name}}</a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="备注">

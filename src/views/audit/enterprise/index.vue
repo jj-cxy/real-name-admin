@@ -103,14 +103,16 @@
                       <td>{{item.qualificationAcquireDesc}}</td>
                     </tr>
                     <tr>
-                      <td class="tit">资格状态</td>
+                      <td class="tit">资质状态</td>
                       <td>{{item.qualificationStatusDesc}}</td>
                       <td class="tit"></td>
                       <td></td>
                     </tr>
                     <tr>
                       <td class="tit">批准资质资格内容</td>
-                      <td colspan="3">{{item.qualificationContent}}</td>
+                      <td
+                        colspan="3"
+                      >{{item.qualificationTypeDesc}}，{{item.qualificationProfessionalTypeDesc}}，{{item.qualificationLevelDesc}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -172,7 +174,7 @@
           <div class="attachment-box">
             <ul>
               <li v-for="item in this.fileList" :key="item.uid">
-                <!-- <div>{{item.title}}</div> -->
+                <div style="margin: 5px 0; text-align: center">{{item.title}}</div>
                 <img :src="item.url" />
               </li>
             </ul>

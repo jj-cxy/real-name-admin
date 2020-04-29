@@ -68,7 +68,7 @@ export default {
             axisType: 'category',
             // realtime: false,
             // loop: false,
-            autoPlay: true,
+            autoPlay: false,
             // currentIndex: 2,
             playInterval: 6000,
             controlStyle: {
