@@ -18,7 +18,7 @@
               label="关联单位信息"
               style="margin-top: 8px"
             >
-              <a-tabs defaultActiveKey="1" type="card" class="card-tabs" size="small">
+              <a-tabs defaultActiveKey="1" type="card" class="card-tabs">
                 <a-tab-pane
                   v-for="(item,index) in model.units"
                   :key="index"
@@ -92,7 +92,13 @@
                     </tr>
                     <tr>
                       <td class="tit">签约合同价</td>
-                      <td>{{model.contractPrice}}元</td>
+                      <td>
+                        <a-statistic
+                          :value="model.contractPrice"
+                          :valueStyle="{ fontSize: '16px' }"
+                          suffix="元"
+                        />
+                      </td>
                       <td class="tit">合同签订日期</td>
                       <td>{{model.constractDay}}</td>
                     </tr>
@@ -104,7 +110,13 @@
                     </tr>
                     <tr>
                       <td class="tit">造价</td>
-                      <td>{{model.manufacturingCost}}元</td>
+                      <td>
+                        <a-statistic
+                          :value="model.manufacturingCost"
+                          :valueStyle="{ fontSize: '16px' }"
+                          suffix="元"
+                        />
+                      </td>
                       <td class="tit">项目规模</td>
                       <td>{{model.scaleDesc}}</td>
                     </tr>
@@ -132,7 +144,14 @@
                       <td class="tit">银行种类</td>
                       <td>{{model.salaryBankAccount.bankTypeDesc || '-'}}</td>
                       <td class="tit">账户余额</td>
-                      <td>{{model.salaryBankAccount.bankBalances || '-'}}</td>
+                      <td>
+                        <a-statistic
+                          :precision="2"
+                          :valueStyle="{ fontSize: '18px' }"
+                          :value="model.salaryBankAccount.bankBalances"
+                          suffix="元"
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td class="tit">开户行名称</td>

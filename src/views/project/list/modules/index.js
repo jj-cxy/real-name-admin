@@ -11,7 +11,9 @@ var indexMixin = {
         dataIndex: 'id'
       }, {
         title: '项目名称',
-        dataIndex: 'projectName'
+        dataIndex: 'projectName',
+        width: 250,
+        ellipsis: true
       }, {
         title: '管理机构',
         align: 'center',

@@ -48,42 +48,75 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({} = {}) {
-      var data1 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30]
-      var data2 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20]
-      var data3 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30]
-      var data4 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20]
-      var datacity = ['济南市', '青岛市', '淄博市', '枣庄', '东营', '烟台市', '潍坊市', '济宁市', '威海市', '泰安市']
+    setOptions({ xAxisData, scoreData, totalData, todayData, delayData } = {}) {
       this.chart.setOption({
-        color: ['#388BFF', '#05C3FA', '#F6931C', '#FFD52E'],
+        color: ['#f2637b', '#fbd437', '#4ecb73', '#36cbcb', '#3aa1ff'],
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            lineStyle: {
+              color: '#e8e8e8'
+            }
+          }
         },
         legend: {
           top: '8%',
-          data: ['存量', '新增', '拆除', '整改']
+          data: ['得分', '预警总计', '最新预警', '超期预警']
         },
         grid: {
           //图表的位置
-          top: '20%',
+          top: '30%',
           left: '3%',
           right: '4%',
-          bottom: '5%',
+          bottom: 0,
           containLabel: true
         },
         yAxis: [
           {
             type: 'value',
-            axisLabel: {
-              show: true,
-              interval: 'auto',
-              formatter: '{value} '
+            position: 'right',
+            name: '数量',
+            nameTextStyle: {
+              color: '#222'
             },
             splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false
+            },
+            axisLabel: {
               show: true,
-              lineStyle: {
-                type: 'dashed'
+              formatter: '{value}',
+              textStyle: {
+                color: '#222'
               }
+            }
+          },
+          {
+            type: 'value',
+            name: '分数',
+            nameTextStyle: {
+              color: '#222'
+            },
+            axisLabel: {
+              show: true,
+              formatter: '{value}%',
+              textStyle: {
+                color: '#222'
+              }
+            },
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false
             },
             show: true
           }
@@ -91,48 +124,66 @@ export default {
         xAxis: [
           {
             type: 'category',
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#e8e8e8'
+              }
+            },
             axisLabel: {
               interval: 0,
               show: true,
               splitNumber: 15,
               textStyle: {
                 fontSize: 12,
-                color: '#000'
+                color: '#222'
               }
             },
-            data: datacity
+            data: xAxisData
           }
         ],
         series: [
           {
-            name: '存量',
+            name: '得分',
+            type: 'line',
+            yAxisIndex: 1,
+            smooth: true,
+            showAllSymbol: true,
+            symbol: 'circle',
+            symbolSize: 6,
+            itemStyle: {
+              color: '#975fe5'
+            },
+            lineStyle: {
+              color: '#975fe5'
+            },
+            data: scoreData
+          },
+          {
+            name: '预警总计',
+            type: 'bar',
+            barWidth: 15,
+            data: totalData
+          },
+          {
+            name: '最新预警',
             type: 'bar',
             stack: 'sum',
-            barWidth: '20px',
-            data: data1
+            barWidth: 15,
+            data: todayData
           },
           {
-            name: '新增',
+            name: '超期预警',
             type: 'bar',
-            barWidth: '20px',
             stack: 'sum',
-            data: data2
-          },
-          {
-            name: '拆除',
-            type: 'bar',
-            color: '#F6931C',
-            stack: 'sum1',
-            barWidth: '20px',
-            data: data3
-          },
-          {
-            name: '整改',
-            type: 'bar',
-            color: '#FFD52E',
-            stack: 'sum1',
-            barWidth: '20px',
-            data: data3
+            barWidth: 15,
+            data: delayData
           }
         ]
       })

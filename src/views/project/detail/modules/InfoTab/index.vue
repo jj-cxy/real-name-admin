@@ -66,7 +66,13 @@
             </tr>
             <tr>
               <td class="tit">签约合同价</td>
-              <td>{{model.contractPrice}}元</td>
+              <td>
+                <a-statistic
+                  :value="model.contractPrice"
+                  :valueStyle="{ fontSize: '16px' }"
+                  suffix="元"
+                />
+              </td>
               <td class="tit">合同签订日期</td>
               <td>{{model.constractDay}}</td>
             </tr>
@@ -78,7 +84,13 @@
             </tr>
             <tr>
               <td class="tit">造价</td>
-              <td>{{model.manufacturingCost}}元</td>
+              <td>
+                <a-statistic
+                  :value="model.manufacturingCost"
+                  :valueStyle="{ fontSize: '16px' }"
+                  suffix="元"
+                />
+              </td>
               <td class="tit">项目规模</td>
               <td>{{model.scaleDesc}}</td>
             </tr>
@@ -106,7 +118,14 @@
               <td class="tit">专户帐号名称</td>
               <td>{{model.salaryBankAccount.bankAccountName}}</td>
               <td class="tit">账户余额</td>
-              <td>{{model.salaryBankAccount.bankBalances}}</td>
+              <td>
+                <a-statistic
+                  :precision="2"
+                  :valueStyle="{ fontSize: '18px' }"
+                  :value="model.salaryBankAccount.bankBalances"
+                  suffix="元"
+                />
+              </td>
             </tr>
             <tr>
               <td class="tit">开户行名称</td>

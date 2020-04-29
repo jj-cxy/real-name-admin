@@ -59,7 +59,7 @@
           <ul class="data-statis-top">
             <li>
               <h1 class="num">
-                <a-statistic :value="112893" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="12000" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日入场（人）</span>
             </li>
@@ -243,10 +243,10 @@
           :bordered="false"
           title="各区监督站得分排名"
           class="card-chart"
-          :bodyStyle="{padding: '24px 0'}"
+          :bodyStyle="{padding: '0 0 24px 0'}"
           style="margin-top: 24px"
         >
-          <ScoreRank />
+          <ScoreRank :chart-data="warnScoreData"/>
         </a-card>
       </a-col>
     </a-row>

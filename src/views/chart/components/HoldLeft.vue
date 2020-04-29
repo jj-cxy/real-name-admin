@@ -53,7 +53,7 @@ export default {
       let data = [seriesData, seriesData, seriesData, seriesData]
       this.chart.setOption({
         title: {
-          text: '本地企业',
+          text: '已办理',
           left: 'center',
           top: '85%',
           textStyle: {

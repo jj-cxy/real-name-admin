@@ -78,6 +78,13 @@ var indexMixin = {
       warnVisible: false,
       warnModal: [],
       warnTitle: '',
+      warnScoreData: {
+        xAxisData: [],
+        scoreData: [],
+        totalData: [],
+        todayData: [],
+        delayData: []
+      },
       contractColumns: [{
         title: '劳务合同',
         dataIndex: 'name',
@@ -286,6 +293,19 @@ var indexMixin = {
             this.warnTotal = res.data.reduce((pre, cur, index) => {
               return pre + cur.all
             }, 0)
+
+            // 得分排名
+            let scoreArr = res.data
+            scoreArr.sort(function (a, b) {
+              return a.score - b.score;
+            })
+            scoreArr.map((item, index) => {
+              this.warnScoreData.xAxisData[index] = item.name
+              this.warnScoreData.scoreData[index] = item.score
+              this.warnScoreData.totalData[index] = item.all
+              this.warnScoreData.todayData[index] = item.today
+              this.warnScoreData.delayData[index] = item.delay
+            })
           }
         } else {
           this.$notification.error({
