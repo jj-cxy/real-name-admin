@@ -182,9 +182,19 @@ export const asyncRouterMap = [{
 
       // chart
       {
-        path: '/chart',
-        name: 'chart',
-        component: () => import('@/views/chart/index'),
+        path: '/chart/city',
+        name: 'ChartCity',
+        component: () => import('@/views/chart/city/index'),
+        meta: {
+          title: '数据统计',
+          icon: 'fund',
+          keepAlive: true
+        },
+      },
+      {
+        path: '/chart/district',
+        name: 'ChartDistrict',
+        component: () => import('@/views/chart/district/index'),
         meta: {
           title: '数据统计',
           icon: 'fund',
