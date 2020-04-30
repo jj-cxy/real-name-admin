@@ -28,8 +28,20 @@ router.beforeEach((to, from, next) => {
       })
       NProgress.done()
     } else {
-      /* if (store.getters.roles.length === 0) {
-        const redirect = decodeURIComponent(from.query.redirect || to.path)
+      if (store.getters.roles.length === 0) {
+        const roles = {
+          permissionList: ['city']
+        }
+        let orgType = localStorage.getItem('orgType')
+        if (orgType && orgType == 'city') {
+          roles.permissionList = ['city']
+        } else if (orgType && orgType == 'area') {
+          roles.permissionList = ['district']
+        }
+        store.dispatch('GenerateRoutes', {
+          roles
+        }).then(() => {})
+        /* const redirect = decodeURIComponent(from.query.redirect || to.path)
         if (to.path === redirect) {
           console.log(1)
           next()
@@ -39,11 +51,11 @@ router.beforeEach((to, from, next) => {
           next({
             path: redirect
           })
-        }
+        } */
+        next()
       } else {
         next()
-      } */
-      next()
+      }
     }
   } else {
     if (whiteList.includes(to.name)) {

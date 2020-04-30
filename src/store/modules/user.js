@@ -57,9 +57,11 @@ const user = {
             commit('SET_TOKEN', result.token);
             localStorage.setItem('in-trueName', result.user.name || "未知")
             localStorage.setItem('in-userId', result.user.userId)
-            localStorage.setItem('in-areaId', result.user.areaId)
             localStorage.setItem('in-orgId', result.user.orgId)
             localStorage.setItem('in-areaId', result.user.areaId)
+            if (result.user.area) {
+              localStorage.setItem('orgType', result.user.area.type || 'city')
+            }
             if (result.user.roles && result.user.roles.length > 0) {
               localStorage.setItem('in-mark', result.user.roleMarks)
             }
@@ -92,6 +94,7 @@ const user = {
           localStorage.removeItem('in-mark');
           localStorage.removeItem('in-areaId')
           localStorage.removeItem('in-orgId')
+          localStorage.removeItem('orgType')
         })
       })
     }

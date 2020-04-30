@@ -188,7 +188,8 @@ export const asyncRouterMap = [{
         meta: {
           title: '数据统计-市级',
           icon: 'fund',
-          keepAlive: true
+          keepAlive: true,
+          permission: ['city']
         },
       },
       {
@@ -198,7 +199,8 @@ export const asyncRouterMap = [{
         meta: {
           title: '数据统计-区县级',
           icon: 'fund',
-          keepAlive: true
+          keepAlive: true,
+          permission: ['district']
         },
       },
 
