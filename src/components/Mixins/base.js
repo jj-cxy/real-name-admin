@@ -4,6 +4,7 @@ import {
 var baseMixin = {
   data() {
     return {
+      wsHost: 'ws://221.13.13.133:27000',
       // 高级搜索 展开/关闭
       advanced: false,
       listQuery: {
@@ -49,7 +50,7 @@ var baseMixin = {
         downloadFilelUrl: '/file/api/file/batchDownload',
       },
       roleMark: localStorage.getItem('in-mark') ? localStorage.getItem('in-mark') : '',
-      areaId: localStorage.getItem('in-areaId') ? localStorage.getItem('in-areaId') : '',
+      areaId: localStorage.getItem('in-areaId') ? localStorage.getItem('in-areaId') : '520100',
       userId: localStorage.getItem('in-userId') ? localStorage.getItem('in-userId') : '',
       auth: {},
       /* 菜单权限控制 */

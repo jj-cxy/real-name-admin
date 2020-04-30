@@ -197,12 +197,12 @@ var indexMixin = {
   },
   created() {
     console.log('区域', this.areaId)
-    this.getArea('520100', 'districtList')
-    this.getAreaWarning('520100')
+    this.getArea(this.areaId, 'districtList')
+    this.getAreaWarning(this.areaId)
 
-    this.getProjectTotal('520100');
-    this.getPersonTotal('520100');
-    this.getProjectContract('520100');
+    this.getProjectTotal(this.areaId);
+    this.getPersonTotal(this.areaId);
+    this.getProjectContract(this.areaId);
     this.initPunchSocket();
   },
   mounted() {},
@@ -433,7 +433,7 @@ var indexMixin = {
     },
     // 考勤数据 websocket
     initPunchSocket() {
-      const wsuri = "ws://221.13.13.133:27000/ida/ws/punch/" + this.userId;
+      const wsuri = this.wsHost + "/ida/ws/punch/" + this.userId;
       this.websock = new WebSocket(wsuri);
 
       this.websock.onmessage = this.websocketonmessage;

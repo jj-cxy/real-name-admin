@@ -339,7 +339,7 @@ var indexMixin = {
     },
     // 考勤数据 websocket
     initPunchSocket() {
-      const wsuri = "ws://221.13.13.133:27000/ida/ws/punch/" + this.userId;
+      const wsuri = this.wsHost + "/ida/ws/punch/" + this.userId;
       this.websock = new WebSocket(wsuri);
 
       this.websock.onmessage = this.websocketonmessage;
