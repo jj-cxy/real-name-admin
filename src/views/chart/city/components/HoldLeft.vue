@@ -66,6 +66,7 @@ export default {
           {
             type: 'liquidFill',
             radius: '80%',
+            center: ['50%','45%'],
             data: data,
             outline: {
               // show: false

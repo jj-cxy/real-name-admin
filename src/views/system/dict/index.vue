@@ -7,7 +7,7 @@
           <a-row :gutter="15">
             <a-col :md="10" :sm="24">
               <a-form-item>
-                <a-input v-model="listQuery.condition.name" placeholder="字典名称" />
+                <a-input v-model="listQuery.condition.keyWord" placeholder="字典名称" />
               </a-form-item>
             </a-col>
             <a-col :md="!advanced && 5 || 24" :sm="24">

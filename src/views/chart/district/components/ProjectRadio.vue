@@ -141,7 +141,9 @@ export default {
 
       // 自动高亮切换
       let seriesLength = seriesData.length
-      this.timerAuto(this.chart, seriesLength)
+      if (seriesLength > 0) {
+        this.timerAuto(this.chart, seriesLength)
+      }
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')

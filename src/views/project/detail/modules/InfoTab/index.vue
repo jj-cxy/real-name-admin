@@ -86,7 +86,7 @@
               <td class="tit">造价</td>
               <td>
                 <a-statistic
-                  :value="model.manufacturingCost"
+                  :value="model.manufacturingCost || ''"
                   :valueStyle="{ fontSize: '16px' }"
                   suffix="元"
                 />

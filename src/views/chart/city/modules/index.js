@@ -9,17 +9,21 @@ var indexMixin = {
     return {
       loading: false,
       Urls: {
-        listUrl: '',
         projectTotalUrl: '/ida/api/project/cityStatistics/',
-        projectPaceUrl: '/ida/api/project/progressStatistics/',
         areaWarningUrl: '/ida/api/warning/history/statistics/',
         personTotalUrl: '/ida/api/person/city/statistics/',
-        warnNumModalUrl: '/ida/api/warning/history/query'
+        warnNumModalUrl: '/ida/api/warning/history/query',
+        projectContractUrl: '/ida/api/person/city/statistics/contract/'
       },
       projectCount: {
         total: 0,
         construct: 0,
         complete: 0
+      },
+      punchCount: {
+        today: 0,
+        out: 0,
+        in: 0
       },
       projectTypeList: {
         angleData: [],
@@ -88,14 +92,15 @@ var indexMixin = {
       contractColumns: [{
         title: '劳务合同',
         dataIndex: 'name',
-        align: 'center'
+        align: 'center',
+        customRender: (text, record, index) => `合同情况`
       }, {
         title: '完成项目',
-        dataIndex: 'finish',
+        dataIndex: 'complete',
         align: 'center'
       }, {
         title: '未完成项目',
-        dataIndex: 'unFinish',
+        dataIndex: 'Uncomplete',
         align: 'center'
       }, {
         title: '已签人数',
@@ -103,15 +108,15 @@ var indexMixin = {
         align: 'center'
       }, {
         title: '未签人数',
-        dataIndex: 'unSign',
+        dataIndex: 'noSigned',
         align: 'center'
       }],
       contractData: [{
         name: '合同情况',
-        finish: '200',
-        unFinish: '76',
-        signed: '3471',
-        unSign: '221'
+        complete: '0',
+        Uncomplete: '0',
+        signed: '0',
+        noSigned: '0'
       }],
 
       // person
@@ -164,8 +169,8 @@ var indexMixin = {
         descreaseData: []
       },
       workerTypeList: {
-        seriesData: [],
-        total: 0
+        total: 0,
+        seriesData: []
       },
       wagesColumns: [{
         title: '工资表',
@@ -173,18 +178,15 @@ var indexMixin = {
         align: 'center'
       }, {
         title: '完成项目',
-        dataIndex: 'finish',
+        dataIndex: 'complete',
         align: 'center'
       }, {
         title: '未完成项目',
-        dataIndex: 'unFinish',
+        dataIndex: 'Uncomplete',
         align: 'center'
       }],
-      wagesData: [{
-        month: '1月份',
-        newWarn: '2',
-        overWarn: '5'
-      }]
+      wagesData: [],
+      websock: null
     }
   },
   filters: {
@@ -194,13 +196,19 @@ var indexMixin = {
     }
   },
   created() {
+    console.log('区域', this.areaId)
     this.getArea('520100', 'districtList')
     this.getAreaWarning('520100')
 
     this.getProjectTotal('520100');
-    this.getPersonTotal('520100')
+    this.getPersonTotal('520100');
+    this.getProjectContract('520100');
+    this.initPunchSocket();
   },
   mounted() {},
+  destroyed() {
+    this.websock.close() //离开路由之后断开websocket连接
+  },
   methods: {
     afterGetArea() {
       this.projectPaceList.districtNames = this.districtList.map((item, index) => {
@@ -315,7 +323,7 @@ var indexMixin = {
       }).catch(() => {})
     },
 
-    // 人员合同数据
+    // 人员数据
     getPersonTotal(cityId) {
       axios({
         url: this.Urls.personTotalUrl + cityId,
@@ -368,8 +376,22 @@ var indexMixin = {
               this.outNumData.descreaseData[index] = item.count
             })
           }
-          // 劳务合同
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {})
+    },
 
+    // 劳务合同
+    getProjectContract(cityId) {
+      axios({
+        url: this.Urls.projectContractUrl + cityId,
+        method: 'post'
+      }).then(res => {
+        if (res.code == 0) {
+          this.contractData = res.data
         } else {
           this.$notification.error({
             message: res.msg
@@ -408,6 +430,40 @@ var indexMixin = {
       }).catch(() => {
         this.warnVisible = true
       })
+    },
+    // 考勤数据 websocket
+    initPunchSocket() {
+      const wsuri = "ws://221.13.13.133:27000/ida/ws/punch/" + this.userId;
+      this.websock = new WebSocket(wsuri);
+
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen() { //连接建立之后执行send方法发送数据
+      console.log('连接完成')
+      let actions = {
+        "areaId": this.areaId
+      };
+      this.websocketsend(JSON.stringify(actions));
+    },
+    websocketonerror() { //连接建立失败重连
+      this.initPunchSocket();
+    },
+    websocketonmessage(e) { //数据接收
+      const resData = JSON.parse(e.data);
+      this.punchCount = {
+        today: resData[0].present,
+        out: resData[0].exit,
+        in: resData[0].entry
+      }
+    },
+    websocketsend(Data) { //数据发送
+      this.websock.send(Data);
+    },
+    websocketclose(e) { //关闭
+      console.log('断开连接');
     },
   }
 };

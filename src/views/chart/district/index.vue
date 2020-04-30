@@ -5,7 +5,7 @@
         <a-card
           :loading="loading"
           :bordered="false"
-          title="本市数据概况"
+          title="本区数据概况"
           class="card-chart data-statis"
           :bodyStyle="{padding: 0}"
         >
@@ -59,21 +59,21 @@
           <ul class="data-statis-top">
             <li>
               <h1 class="num">
-                <a-statistic :value="12000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.in" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日入场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">
-                <a-statistic :value="2000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.out" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日出场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">
-                <a-statistic :value="10000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.today" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日在场（人）</span>
             </li>
@@ -138,6 +138,7 @@
           </a-row>
         </a-card>
       </a-col>
+
       <a-col :xl="8" :lg="12" :md="24" :sm="24">
         <a-card
           :loading="loading"
@@ -149,14 +150,14 @@
           <ProjectType :chart-data="projectTypeList" />
         </a-card>
       </a-col>
+
       <a-col :xl="8" :lg="12" :md="24" :sm="24">
         <a-card
           :loading="loading"
           :bordered="false"
-          title="当前预警情况"
+          title="预警情况"
           class="card-chart"
-          :bodyStyle="{padding: '12px', height: '615px', 'overflow-y':'auto'}"
-          style="margin-top: 24px"
+          :bodyStyle="{padding: '12px', height: '390px', 'overflow-y':'auto'}"
         >
           <span slot="extra">
             当前预警总数：
@@ -185,33 +186,17 @@
     </a-row>
     <a-row :gutter="24">
       <a-col :xl="8" :lg="24" :md="24" :sm="24">
-        <a-card
-          :loading="loading"
-          :bordered="false"
-          title="项目进度分布"
-          class="card-chart"
-          :bodyStyle="{padding: '0',}"
-          style="margin-top: 24px"
-        >
-          <ProjectPace :chart-data="projectPaceList" />
-        </a-card>
-      </a-col>
-    </a-row>
-    <a-row :gutter="24">
-      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 工种占比 -->
         <a-card
           :loading="loading"
           :bordered="false"
-          title="工种占比"
+          title="工种占比情况"
           class="card-chart"
           :bodyStyle="{padding: 0}"
           style="margin-top: 24px"
         >
-          <WorkTypeRadio :chart-data="workerTypeList" />
+          <WorkTypeRadio :chart-data="workerTypeList" v-if="workerTypeShow" />
         </a-card>
-      </a-col>
-      <a-col :xl="8" :lg="24" :md="24" :sm="24">
         <!-- 手续办理情况 -->
         <a-card
           :loading="loading"
@@ -223,6 +208,18 @@
         >
           <HoldLeft :chart-data="handleData" />
           <HoldRight :chart-data="nohandleData" />
+        </a-card>
+      </a-col>
+      <a-col :xl="8" :lg="24" :md="24" :sm="24">
+        <a-card
+          :loading="loading"
+          :bordered="false"
+          title="项目进度分布"
+          class="card-chart"
+          :bodyStyle="{padding: '0',}"
+          style="margin-top: 24px"
+        >
+          <ProjectPace :chart-data="projectPaceList" />
         </a-card>
       </a-col>
       <a-col :xl="8" :lg="24" :md="24" :sm="24">
@@ -284,13 +281,7 @@ import indexMixin from './modules/index'
 
 import ProjectType from './components/ProjectType'
 import ProjectPace from './components/ProjectPace'
-// 流出人口
-import OutRadio from './components/OutRadio'
-import OutNum from './components/OutNum'
-
-import UnitType from './components/UnitType'
 import ProjectRadio from './components/ProjectRadio'
-import ScoreRank from './components/ScoreRank'
 
 import WorkTypeRadio from './components/WorkTypeRadio'
 
@@ -305,13 +296,9 @@ export default {
   components: {
     ProjectType,
     ProjectPace,
-    OutRadio,
-    OutNum,
-    UnitType,
     ProjectRadio,
-    ScoreRank,
-    WorkTypeRadio,
 
+    WorkTypeRadio,
     HoldLeft,
     HoldRight
   }

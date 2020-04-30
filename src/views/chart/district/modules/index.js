@@ -9,17 +9,21 @@ var indexMixin = {
     return {
       loading: false,
       Urls: {
-        listUrl: '',
-        projectTotalUrl: '/ida/api/project/cityStatistics/',
-        projectPaceUrl: '/ida/api/project/progressStatistics/',
+        projectTotalUrl: '/ida/api/project/districtStatistics/',
         areaWarningUrl: '/ida/api/warning/history/statistics/',
-        personTotalUrl: '/ida/api/person/city/statistics/',
-        warnNumModalUrl: '/ida/api/warning/history/query'
+        personTotalUrl: '/ida/api/person/district/statistics/',
+        warnNumModalUrl: '/ida/api/warning/history/query',
+        projectContractUrl: '/ida/api/person/district/statistics/contract/'
       },
       projectCount: {
         total: 0,
         construct: 0,
         complete: 0
+      },
+      punchCount: {
+        today: 0,
+        out: 0,
+        in: 0
       },
       projectTypeList: {
         angleData: [],
@@ -28,12 +32,6 @@ var indexMixin = {
       projectRadioList: {
         totalNum: 0,
         seriesData: []
-      },
-      unitTypeList: {
-        xAxisData: [],
-        inSeriesData: [],
-        outSeriesData: [],
-        totalSeriesData: []
       },
       handleData: {
         seriesData: 0
@@ -44,8 +42,7 @@ var indexMixin = {
       paceDistrictNames: [],
       paceDistrictIds: [],
       projectPaceList: {
-        districtNames: [],
-        districtIds: []
+        districtId: ""
       },
       warnColumns: [{
         title: '预警区县',
@@ -126,43 +123,6 @@ var indexMixin = {
         handleWorker: 0,
         noHandleWorker: 0
       },
-
-      inOutRadioList: {
-        innerData: [{
-            value: 0,
-            name: '流出劳务人员'
-          },
-          {
-            value: 0,
-            name: '流出管理人员'
-          },
-          {
-            value: 0,
-            name: '稳定劳务人员'
-          },
-          {
-            value: 0,
-            name: '稳定管理人员'
-          }
-        ],
-        outerData: [{
-            value: 0,
-            unit: '人',
-            name: '流出'
-          },
-          {
-            value: 0,
-            unit: '人',
-            name: '稳定'
-          }
-        ]
-      },
-      outNumData: {
-        axiosData: [],
-        localData: [],
-        increaseData: [],
-        descreaseData: []
-      },
       workerTypeList: {
         seriesData: [],
         total: 0
@@ -173,18 +133,16 @@ var indexMixin = {
         align: 'center'
       }, {
         title: '完成项目',
-        dataIndex: 'finish',
+        dataIndex: 'complete',
         align: 'center'
       }, {
         title: '未完成项目',
-        dataIndex: 'unFinish',
+        dataIndex: 'Uncomplete',
         align: 'center'
       }],
-      wagesData: [{
-        month: '1月份',
-        newWarn: '2',
-        overWarn: '5'
-      }]
+      wagesData: [],
+      workerTypeShow: false,
+      websock: null
     }
   },
   filters: {
@@ -194,20 +152,19 @@ var indexMixin = {
     }
   },
   created() {
-    this.getArea('520100', 'districtList')
     this.getAreaWarning('520100')
-
-    this.getProjectTotal('520100');
-    this.getPersonTotal('520100')
+    this.projectPaceList.districtId = this.areaId
+    this.getProjectTotal(this.areaId);
+    this.getPersonTotal(this.areaId)
+    this.initPunchSocket();
+    this.getProjectContract(this.areaId);
+    console.log('区域', this.areaId)
   },
   mounted() {},
+  destroyed() {
+    this.websock.close() //离开路由之后断开websocket连接
+  },
   methods: {
-    afterGetArea() {
-      this.projectPaceList.districtNames = this.districtList.map((item, index) => {
-        this.projectPaceList.districtIds[index] = item.id
-        return item.name
-      })
-    },
     // 项目数据
     getProjectTotal(cityId) {
       this.loading = true
@@ -220,11 +177,11 @@ var indexMixin = {
           // 项目统计
           this.projectCount = {
             total: res.data.projectCount,
-            construct: res.data.constructCount,
-            complete: res.data.completeCount,
+            construct: res.data.constructCount || 0,
+            complete: res.data.completeCount || 0,
           }
           // 项目类型分布
-          let projectTypeData = res.data.typeList
+          let projectTypeData = res.data.typeList || []
           if (projectTypeData.length > 0) {
             let total = projectTypeData.reduce((sum, item, index) => {
               return sum + item.num
@@ -239,35 +196,8 @@ var indexMixin = {
               })
             }
           }
-          // 项目占比
-          let projectRadioData = res.data.districtList
-          if (projectRadioData.length > 0) {
-            this.projectRadioList.totalNum = res.data.projectCount
-            projectRadioData.map((item, index) => {
-              this.projectRadioList.seriesData[index] = {
-                name: item.name,
-                value: item.num
-              }
-            })
-          }
-          // 企业类型分布
-          let inUnitTypeData = res.data.inEnterpriseList
-          let outUnitTypeData = res.data.outEnterpriseList
-          if (inUnitTypeData.length > 0) {
-            if (inUnitTypeData.length == outUnitTypeData.length) {
-              inUnitTypeData.map((item, index) => {
-                this.unitTypeList.xAxisData[index] = item.name
-                this.unitTypeList.inSeriesData[index] = item.value
-                this.unitTypeList.totalSeriesData[index] = item.value + outUnitTypeData[index].value
-              })
-            }
-            outUnitTypeData.map((item, index) => {
-              this.unitTypeList.outSeriesData[index] = item.value
-            })
-          }
-
           // 手续办理情况
-          if (res.data.projectCount > 0) {
+          if (res.data.projectCount && res.data.projectCount > 0) {
             this.handleData.seriesData = (res.data.handled) / (res.data.projectCount)
             this.nohandleData.seriesData = 1 - (this.handleData.seriesData)
           }
@@ -315,7 +245,7 @@ var indexMixin = {
       }).catch(() => {})
     },
 
-    // 人员合同数据
+    // 人员数据
     getPersonTotal(cityId) {
       axios({
         url: this.Urls.personTotalUrl + cityId,
@@ -329,6 +259,7 @@ var indexMixin = {
             manager: resData.managerCount,
             worker: resData.workerCount
           }
+          // 持证
           this.qaCount = {
             handleManager: resData.managerQaCount,
             noHandleManager: resData.managerNoneQaCount,
@@ -336,8 +267,8 @@ var indexMixin = {
             noHandleWorker: resData.workerNoneQaCount
           }
           // 工种
-          this.workerTypeList.total = resData.workTypeCount
-          let workTypeData = res.data.workTypeCounts
+          this.workerTypeList.total = resData.workTypeCount || 0
+          let workTypeData = res.data.workTypeCounts || []
           if (workTypeData.length > 0) {
             workTypeData.map((item, index) => {
               this.workerTypeList.seriesData[index] = {
@@ -345,27 +276,9 @@ var indexMixin = {
                 value: item.count
               }
             })
-          }
-
-          // 从业人员流动占比
-          this.inOutRadioList.innerData[0].value = resData.workerMigrantCount
-          this.inOutRadioList.innerData[1].value = resData.managerMigrantCount
-          this.inOutRadioList.innerData[2].value = resData.workerLocalCount
-          this.inOutRadioList.innerData[3].value = resData.managerLocalCount
-          this.inOutRadioList.outerData[0].value = resData.workerMigrantCount + resData.managerMigrantCount
-          this.inOutRadioList.outerData[1].value = resData.workerLocalCount + resData.managerLocalCount
-
-          // 从业人员数量
-          if (resData.personByYearCounts.length > 0) {
-            resData.personByYearCounts.map((item, index) => {
-              this.outNumData.axiosData[index] = item.year
-              this.outNumData.localData[index] = item.count
-            })
-            resData.personIncreasedCounts.map((item, index) => {
-              this.outNumData.increaseData[index] = item.count
-            })
-            resData.personDecreasedCounts.map((item, index) => {
-              this.outNumData.descreaseData[index] = item.count
+            this.workerTypeShow = false
+            this.$nextTick(() => {
+              this.workerTypeShow = true
             })
           }
           // 劳务合同
@@ -377,9 +290,24 @@ var indexMixin = {
         }
       }).catch(() => {})
     },
+    // 劳务合同
+    getProjectContract(cityId) {
+      axios({
+        url: this.Urls.projectContractUrl + cityId,
+        method: 'post'
+      }).then(res => {
+        if (res.code == 0) {
+          this.contractData = res.data
+        } else {
+          this.$notification.error({
+            message: res.msg
+          })
+        }
+      }).catch(() => {})
+    },
+
     // 警告弹框
     handleWarnModal(record, title, cur) {
-      console.log(title, cur)
       if (!cur) {
         return
       }
@@ -408,6 +336,40 @@ var indexMixin = {
       }).catch(() => {
         this.warnVisible = true
       })
+    },
+    // 考勤数据 websocket
+    initPunchSocket() {
+      const wsuri = "ws://221.13.13.133:27000/ida/ws/punch/" + this.userId;
+      this.websock = new WebSocket(wsuri);
+
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen() { //连接建立之后执行send方法发送数据
+      console.log('连接完成')
+      let actions = {
+        "areaId": this.areaId
+      };
+      this.websocketsend(JSON.stringify(actions));
+    },
+    websocketonerror() { //连接建立失败重连
+      this.initPunchSocket();
+    },
+    websocketonmessage(e) { //数据接收
+      const resData = JSON.parse(e.data);
+      this.punchCount = {
+        today: resData[0].present,
+        out: resData[0].exit,
+        in: resData[0].entry
+      }
+    },
+    websocketsend(Data) { //数据发送
+      this.websock.send(Data);
+    },
+    websocketclose(e) { //关闭
+      console.log('断开连接');
     },
   }
 };

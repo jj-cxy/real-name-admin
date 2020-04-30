@@ -59,21 +59,21 @@
           <ul class="data-statis-top">
             <li>
               <h1 class="num">
-                <a-statistic :value="12000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.in" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日入场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">
-                <a-statistic :value="2000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.out" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日出场（人）</span>
             </li>
             <a-divider type="vertical" style="height: 30px" />
             <li>
               <h1 class="num">
-                <a-statistic :value="10000" :valueStyle="{ color: '#1890FF' }" />
+                <a-statistic :value="punchCount.today" :valueStyle="{ color: '#1890FF' }" />
               </h1>
               <span class="tit">今日在场（人）</span>
             </li>

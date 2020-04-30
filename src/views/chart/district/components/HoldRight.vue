@@ -21,7 +21,7 @@ export default {
     },
     height: {
       type: String,
-      default: '350px'
+      default: '300px'
     },
     autoResize: {
       type: Boolean,
@@ -55,7 +55,7 @@ export default {
         title: {
           text: '未办理',
           left: 'center',
-          top: '85%',
+          top: '86%',
           textStyle: {
             fontWeight: 'normal',
             fontSize: 16,
@@ -65,20 +65,21 @@ export default {
         series: [
           {
             type: 'liquidFill',
-            radius: '80%',
+            radius: '75%',
+            center: ['50%','45%'],
             data: data,
             outline: {
               // show: false
-              borderDistance: 5,
+              borderDistance: 4,
               itemStyle: {
-                borderWidth: 8
+                borderWidth: 6
               }
             },
             label: {
               normal: {
                 color: '#41b7f9',
                 insideColor: '#ffffff',
-                fontSize: 50
+                fontSize: 45
               }
             }
           }

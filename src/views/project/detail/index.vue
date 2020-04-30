@@ -29,7 +29,7 @@
         <span slot="tab">
           <a-icon type="team" />班组信息
         </span>
-        Content of Tab Pane 3
+        <TabThree v-if="activeKey==3" :projectId="model.id" />
       </a-tab-pane>
       <a-tab-pane key="4">
         <span slot="tab">
@@ -41,25 +41,19 @@
         <span slot="tab">
           <a-icon type="user" />劳务人员
         </span>
-        Content of Tab Pane 5
+        <TabFive v-if="activeKey==5" :projectId="model.id" />
       </a-tab-pane>
       <a-tab-pane key="6">
         <span slot="tab">
-          <a-icon type="solution" />其他人员
+          <a-icon type="robot" />人员考勤
         </span>
-        Content of Tab Pane 6
+        <TabSix v-if="activeKey==6" :projectId="model.id" />
       </a-tab-pane>
       <a-tab-pane key="7">
         <span slot="tab">
-          <a-icon type="robot" />人员考勤
-        </span>
-        Content of Tab Pane 7
-      </a-tab-pane>
-      <a-tab-pane key="8">
-        <span slot="tab">
           <a-icon type="money-collect" />工资发放
         </span>
-        Content of Tab Pane 8
+        <TabSeven v-if="activeKey==7" :projectId="model.id" />
       </a-tab-pane>
     </a-tabs>
   </a-card>
@@ -72,8 +66,12 @@ import Viewer from '@/views/modules/Viewer'
 import InfoTab from './modules/InfoTab/index'
 import TabOne from './modules/TabOne/index'
 import TabTwo from './modules/TabTwo/index'
+import TabThree from './modules/TabThree/index'
 
 import TabFour from './modules/TabFour/index'
+import TabFive from './modules/TabFive/index'
+import TabSix from './modules/TabSix/index'
+import TabSeven from './modules/TabSeven/index'
 
 export default {
   name: 'ProjectDetail',
@@ -83,7 +81,11 @@ export default {
     InfoTab,
     TabOne,
     TabTwo,
-    TabFour
+    TabThree,
+    TabFour,
+    TabFive,
+    TabSix,
+    TabSeven
   }
 }
 </script>

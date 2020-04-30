@@ -186,7 +186,7 @@ export const asyncRouterMap = [{
         name: 'ChartCity',
         component: () => import('@/views/chart/city/index'),
         meta: {
-          title: '数据统计',
+          title: '数据统计-市级',
           icon: 'fund',
           keepAlive: true
         },
@@ -196,7 +196,7 @@ export const asyncRouterMap = [{
         name: 'ChartDistrict',
         component: () => import('@/views/chart/district/index'),
         meta: {
-          title: '数据统计',
+          title: '数据统计-区县级',
           icon: 'fund',
           keepAlive: true
         },

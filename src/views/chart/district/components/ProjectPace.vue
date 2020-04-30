@@ -52,19 +52,15 @@ export default {
     this.chart = null
   },
   methods: {
-    setOptions({ districtNames, districtIds } = {}) {
-      let optionsData = [],
-        pieAxisData = [],
+    setOptions({ districtId } = {}) {
+      let pieAxisData = [],
         pieSeriesData = [],
-        barSeriesData = []
-      districtIds.map((item, index) => {
-        optionsData[index] = {
-          series: [{ data: pieSeriesData }, { data: barSeriesData }]
-        }
-      })
+        barSeriesData = [],
+        optionsData = [{ series: [{ data: pieSeriesData }, { data: barSeriesData }] }]
       let option = {
         baseOption: {
           timeline: {
+            show: false,
             axisType: 'category',
             // realtime: false,
             // loop: false,
@@ -97,14 +93,14 @@ export default {
             bottom: 20,
             left: 20,
             right: 20,
-            data: districtNames,
+            data: [],
             label: {
               interval: 0
             }
           },
           title: [
             {
-              text: `本地区项目进度`,
+              text: `项目进度占比`,
               left: 'center',
               top: '20%',
               padding: [24, 0],
@@ -118,7 +114,7 @@ export default {
           calculable: true,
           grid: {
             top: '50%',
-            bottom: 80,
+            bottom: 20,
             left: 20,
             right: 20,
             containLabel: true
@@ -190,8 +186,8 @@ export default {
                     return new echarts.graphic.LinearGradient(
                       0,
                       0,
-                      0,
                       1,
+                      0,
                       [
                         {
                           offset: 0,
@@ -205,7 +201,7 @@ export default {
                       false
                     )
                   },
-                  barBorderRadius: 30
+                  barBorderRadius: [0, 30, 30, 0]
                 }
               }
             },
@@ -234,10 +230,9 @@ export default {
       }
 
       let _this = this
-      function getTimeLineData(index) {
-        option.baseOption.title[0].text = districtNames[index] + '项目进度'
+      function getTimeLineData(id) {
         axios({
-          url: _this.Urls.byIdUrl + districtIds[index],
+          url: _this.Urls.byIdUrl + id,
           method: 'get'
         })
           .then(res => {
@@ -262,11 +257,7 @@ export default {
           })
           .catch(() => {})
       }
-
-      getTimeLineData(0)
-      this.chart.on('timelinechanged', (params, param) => {
-        getTimeLineData(params.currentIndex)
-      })
+      getTimeLineData(districtId)
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')

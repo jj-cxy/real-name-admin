@@ -50,6 +50,7 @@ var baseMixin = {
       },
       roleMark: localStorage.getItem('in-mark') ? localStorage.getItem('in-mark') : '',
       areaId: localStorage.getItem('in-areaId') ? localStorage.getItem('in-areaId') : '',
+      userId: localStorage.getItem('in-userId') ? localStorage.getItem('in-userId') : '',
       auth: {},
       /* 菜单权限控制 */
       selectedRowKeys: [],
