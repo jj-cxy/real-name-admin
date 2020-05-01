@@ -36,7 +36,7 @@
         <span>{{model.softNames}}</span>
       </a-form-item>
       <a-form-item style="text-align: center; margin-top: 24px">
-        <a-button @click.prevent="$router.push('/warning/history')">已知晓</a-button>
+        <a-button @click.prevent="$router.go(-1)">已知晓</a-button>
       </a-form-item>
     </a-form>
   </a-card>
