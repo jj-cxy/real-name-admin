@@ -13,9 +13,9 @@
             <a-form-item>
               <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="班组类型">
                 <a-select-option
-                  v-for="(item,index) in roleTypeList"
+                  v-for="(item,index) in teamTypeList"
                   :key="index"
-                  :value="item.value"
+                  :value="item.key"
                 >{{item.name}}</a-select-option>
               </a-select>
             </a-form-item>

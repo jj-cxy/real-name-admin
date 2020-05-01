@@ -31,17 +31,18 @@ var indexMixin = {
       Urls: {
         listUrl: '/ida/api/team/page'
       },
-      roleTypeList: [],
       listQuery: {
         condition: {
           projectId: this.projectId
         }
-      }
+      },
+      teamTypeList: [],
     }
   },
   filters: {},
   created() {
-    this.getList()
+    this.getList();
+    this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}
 }

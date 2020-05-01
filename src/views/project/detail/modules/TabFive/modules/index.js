@@ -22,7 +22,7 @@ var indexMixin = {
       }, {
         title: '职务',
         align: 'center',
-        dataIndex: 'personTypeDesc'
+        dataIndex: 'position'
       }, {
         title: '工种',
         align: 'center',
@@ -30,11 +30,11 @@ var indexMixin = {
       }, {
         title: '所属分包项目',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'projectName'
       }, {
         title: '班组',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'workType'
       }, {
         title: '进入项目时间',
         align: 'center',
@@ -51,20 +51,19 @@ var indexMixin = {
       Urls: {
         listUrl: '/ida/api/project/person/page'
       },
-      roleTypeList: [],
       listQuery: {
         condition: {
           projectId: this.projectId
         }
       },
       teamTypeList: [],
-      
+      roleTypeList: [],
     }
   },
   filters: {},
   created() {
     // this.getList()
-    this.getArea('work_type', 'teamTypeList')
+    this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}
 }

@@ -104,7 +104,7 @@
         </table>
       </div>
     </a-form-item>
-    <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="工资专户信息">
+    <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="工资专户信息" v-if="model.salaryBankAccount">
       <div class="detail-table">
         <table>
           <tbody>

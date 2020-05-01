@@ -9,9 +9,9 @@
               <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="24">
+          <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-date-picker placeholder="时间" />
+              <a-date-picker placeholder="时间" style="width: 100%" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">

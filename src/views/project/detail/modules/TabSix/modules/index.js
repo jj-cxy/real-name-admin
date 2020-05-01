@@ -18,7 +18,7 @@ var indexMixin = {
       }, {
         title: '职务',
         align: 'center',
-        dataIndex: 'personTypeDesc'
+        dataIndex: 'position'
       }, {
         title: '工种',
         align: 'center',
@@ -26,11 +26,11 @@ var indexMixin = {
       }, {
         title: '所属分包项目',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'projectName'
       }, {
         title: '当月出勤天数',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'punchDay'
       }, {
         title: '进入项目时间',
         align: 'center',
@@ -59,7 +59,7 @@ var indexMixin = {
   filters: {},
   created() {
     // this.getList()
-    this.getArea('work_type', 'teamTypeList')
+    this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}
 }

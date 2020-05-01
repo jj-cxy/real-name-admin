@@ -26,11 +26,11 @@ var indexMixin = {
       }, {
         title: '所属分包项目',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'projectName'
       }, {
         title: '讨薪方式',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'salaryMethod'
       }, {
         title: '发放年月',
         align: 'center',
@@ -59,7 +59,7 @@ var indexMixin = {
   filters: {},
   created() {
     // this.getList()
-    this.getArea('work_type', 'teamTypeList')
+    this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}
 }

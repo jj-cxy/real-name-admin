@@ -9,7 +9,9 @@
           <a-button style="margin-left: 8px">薪资导入</a-button>
         </span>
       </a>
-      <div>暂无数据</div>
+      <div style="height: 250px;display: flex;align-items: center;justify-content: center;">
+        <a-empty />
+      </div>
     </a-card>
     <!-- 搜索 -->
     <div class="table-page-search-wrapper">
@@ -20,9 +22,9 @@
               <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
             </a-form-item>
           </a-col>
-          <a-col :md="6" :sm="24">
+          <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-date-picker placeholder="时间" />
+              <a-date-picker placeholder="时间" style="width: 100%"/>
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">

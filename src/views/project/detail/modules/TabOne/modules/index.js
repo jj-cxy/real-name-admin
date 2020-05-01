@@ -23,7 +23,11 @@ var indexMixin = {
         title: '项目负责人信息',
         dataIndex: 'persons',
         customRender: (text, record, index) => {
-          return `项目负责人：${record.persons[0].projectName}　　手机号：${record.persons[0].personPhone}`
+          if (text.persons && text.persons.length > 0) {
+            return `项目负责人：${text[0].projectName || ''}　　手机号：${text[0].personPhone || ''}`
+          } else {
+            return ''
+          }
         }
       }, {
         title: '操作',
@@ -45,6 +49,15 @@ var indexMixin = {
   created() {
     this.listData = this.list
   },
-  methods: {}
+  methods: {
+    handleDetail(record) {
+      this.$router.push({
+        path: '/enterprise/detail',
+        query: {
+          id: record.enterpriseId
+        }
+      })
+    },
+  }
 }
 export default indexMixin

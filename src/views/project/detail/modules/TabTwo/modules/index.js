@@ -27,7 +27,11 @@ var indexMixin = {
         title: '分包负责人信息',
         dataIndex: 'persons',
         customRender: (text, record, index) => {
-          return `项目负责人：${text[0].personName}　　手机号：${text[0].personPhone}`
+          if (text.persons && text.persons.length > 0) {
+            return `项目负责人：${text[0].projectName || ''}　　手机号：${text[0].personPhone || ''}`
+          } else {
+            return ''
+          }
         }
       }, {
         title: '在场情况',
