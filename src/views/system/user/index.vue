@@ -90,13 +90,13 @@
           <a-divider type="vertical" />
           <a-tooltip placement="top">
             <template slot="title">
-              <span>{{record.status=='DISABLE'?'启用':'禁用'}}</span>
+              <span>{{record.status=='DELETED'?'启用':'禁用'}}</span>
             </template>
             <a-button
               type="dashed"
               size="small"
               shape="circle"
-              :icon="record.accountStatus=='DISABLE'?'unlock':'lock'"
+              :icon="record.accountStatus=='DELETED'?'unlock':'lock'"
               @click.native="handleLock(record)"
             ></a-button>
           </a-tooltip>

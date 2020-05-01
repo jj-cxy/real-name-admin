@@ -285,7 +285,7 @@
           :bordered="false"
           title="保障履约"
           class="card-chart"
-          :bodyStyle="{padding: '12px'}"
+          :bodyStyle="{padding: '12px', height: '350px', 'overflow-y':'auto'}"
           style="margin-top: 24px"
         >
           <a-table

@@ -94,7 +94,7 @@ export default {
           {
             type: 'pie',
             selectedMode: 'single',
-            radius: ['50%', '85%'],
+            radius: ['50%', '80%'],
 
             label: {
               normal: {

@@ -77,10 +77,10 @@ var indexMixin = {
       defaultPass: '123456',
       statusList: [{
         value: 'NORMAL',
-        name: '启用'
+        name: '正常'
       },{
         value: 'DELETED',
-        name: '停用'
+        name: '删除'
       }]
     }
   },
@@ -123,7 +123,7 @@ var indexMixin = {
     // 禁启用户
     handleLock(record) {
       var _this = this;
-      let tip = record.accountStatus == 'DISABLE' ? "启用" : '禁用'
+      let tip = record.status == 'DELETED' ? "启用" : '禁用'
       this.$confirm({
         title: "确定要" + tip + record.name + "么",
         centered: true,
