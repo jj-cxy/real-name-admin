@@ -128,7 +128,7 @@ var indexMixin = {
             bizType: this.bizType || 'PROJECT_RECORD',
             pass: flag,
             suggestion: values.comment,
-            roleType: this.taskDefKey == 'masterConfirm' ? 'SupervisorMaster' : 'Supervisor'
+            roleType: this.taskDefKey == 'masterConfirm' ? 'SupervisorMaster' : (this.taskDefKey == 'supervisorExamin' ? 'Supervisor' : 'SupervisorMaster')
           }
           axios({
             url: this.Urls.auditUrl + this.model.id,
