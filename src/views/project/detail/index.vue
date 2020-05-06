@@ -55,6 +55,12 @@
         </span>
         <TabSeven v-if="activeKey==7" :projectId="model.id" />
       </a-tab-pane>
+      <a-tab-pane key="8">
+        <span slot="tab">
+          <a-icon type="money-collect" />劳动维权告示牌
+        </span>
+        <TabEight v-if="activeKey==8" :projectId="model.id" />
+      </a-tab-pane>
     </a-tabs>
   </a-card>
 </template>
@@ -72,6 +78,7 @@ import TabFour from './modules/TabFour/index'
 import TabFive from './modules/TabFive/index'
 import TabSix from './modules/TabSix/index'
 import TabSeven from './modules/TabSeven/index'
+import TabEight from './modules/TabEight/index'
 
 export default {
   name: 'ProjectDetail',
@@ -85,7 +92,8 @@ export default {
     TabFour,
     TabFive,
     TabSix,
-    TabSeven
+    TabSeven,
+    TabEight
   }
 }
 </script>

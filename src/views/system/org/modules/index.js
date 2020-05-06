@@ -29,6 +29,10 @@ var indexMixin = {
         dataIndex: 'areaName',
         align: 'center'
       }, {
+        title: '创建时间',
+        dataIndex: 'createTime',
+        align: 'center'
+      }, {
         title: '操作',
         dataIndex: 'action',
         align: 'center',
