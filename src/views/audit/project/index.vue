@@ -243,7 +243,7 @@
                 <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="处理意见">
                   <a-textarea
                     :rows="3"
-                    v-decorator="['comment',validatorRules.must]"
+                    v-decorator="['comment',validatorRules.comment]"
                     placeholder="..."
                   />
                 </a-form-item>

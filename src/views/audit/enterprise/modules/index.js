@@ -37,7 +37,8 @@ var indexMixin = {
         }
       },
       validatorRules: {
-        must: {
+        comment: {
+          initialValue: '同意',
           rules: [{
             required: true,
             message: '此字段为必填!'
