@@ -61,7 +61,7 @@ export default {
         },
         legend: {
           top: '8%',
-          data: ['得分', '预警总计', '最新预警', '超期预警']
+          data: ['预警总计', '最新预警', '超期预警']
         },
         grid: {
           //图表的位置
@@ -95,30 +95,6 @@ export default {
                 color: '#222'
               }
             }
-          },
-          {
-            type: 'value',
-            name: '分数',
-            nameTextStyle: {
-              color: '#222'
-            },
-            axisLabel: {
-              show: true,
-              formatter: '{value}%',
-              textStyle: {
-                color: '#222'
-              }
-            },
-            splitLine: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            axisLine: {
-              show: false
-            },
-            show: true
           }
         ],
         xAxis: [
@@ -149,22 +125,6 @@ export default {
           }
         ],
         series: [
-          {
-            name: '得分',
-            type: 'line',
-            yAxisIndex: 1,
-            smooth: true,
-            showAllSymbol: true,
-            symbol: 'circle',
-            symbolSize: 6,
-            itemStyle: {
-              color: '#975fe5'
-            },
-            lineStyle: {
-              color: '#975fe5'
-            },
-            data: scoreData
-          },
           {
             name: '预警总计',
             type: 'bar',

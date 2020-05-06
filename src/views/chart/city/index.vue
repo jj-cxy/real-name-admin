@@ -241,7 +241,7 @@
         <a-card
           :loading="loading"
           :bordered="false"
-          title="各区监督站得分排名"
+          title="各区监督站预警排名"
           class="card-chart"
           :bodyStyle="{padding: '0 0 24px 0'}"
           style="margin-top: 24px"
