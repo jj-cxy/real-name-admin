@@ -19,7 +19,7 @@ var indexMixin = {
       // 表头
       columns: [{
           title: '菜单名称',
-          dataIndex: 'title'
+          dataIndex: 'name'
         },
         {
           title: '类型',

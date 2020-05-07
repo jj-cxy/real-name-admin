@@ -32,7 +32,7 @@
           <div id="allmap"></div>
         </div>
       </a-form-item>
-      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="前端软件公司">
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="实名制数据采集公司">
         <span>{{model.softNames}}</span>
       </a-form-item>
       <a-form-item style="text-align: center; margin-top: 24px">

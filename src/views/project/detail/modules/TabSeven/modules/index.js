@@ -18,11 +18,11 @@ var indexMixin = {
       }, {
         title: '所属班组',
         align: 'center',
-        dataIndex: 'personPhone'
+        dataIndex: 'teamName'
       }, {
         title: '工种',
         align: 'center',
-        dataIndex: 'personTypeDesc'
+        dataIndex: 'workTypeDesc'
       }, {
         title: '所属分包项目',
         align: 'center',
@@ -34,18 +34,18 @@ var indexMixin = {
       }, {
         title: '发放年月',
         align: 'center',
-        dataIndex: 'createTime'
+        dataIndex: 'salaryNo'
       }, {
-        title: '应发工资',
+        title: '应发工资（元）',
         align: 'center',
-        dataIndex: 'statusDesc'
+        dataIndex: 'payAbleAmount'
       }, {
-        title: '实发工资',
+        title: '实发工资（元）',
         align: 'center',
-        dataIndex: 'modifyTime'
+        dataIndex: 'actualAmount'
       }],
       Urls: {
-        listUrl: '/ida/api/project/person/page'
+        listUrl: '/ida/api/salary/page'
       },
       roleTypeList: [],
       listQuery: {
@@ -58,7 +58,7 @@ var indexMixin = {
   },
   filters: {},
   created() {
-    // this.getList()
+    this.getList()
     this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}

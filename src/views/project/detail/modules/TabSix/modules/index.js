@@ -41,8 +41,12 @@ var indexMixin = {
         dataIndex: 'postTypeDesc'
       }, {
         title: '考勤详情',
+        dataIndex: 'action',
         align: 'center',
-        dataIndex: 'modifyTime'
+        width: '90px',
+        scopedSlots: {
+          customRender: 'action'
+        }
       }],
       Urls: {
         listUrl: '/ida/api/punch/page'

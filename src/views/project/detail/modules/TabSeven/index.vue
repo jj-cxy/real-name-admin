@@ -3,7 +3,7 @@
     <!-- 柱状图 -->
     <a-card size="small" title="薪资概况" style="margin-bottom: 24px">
       <a href="#" slot="extra">
-        <a-date-picker style="margin-right: 8px;" />
+        <a-date-picker style="margin-right: 36px;" />
         <span class="table-page-search-submitButtons">
           <a-button type="primary">薪资模板下载</a-button>
           <a-button style="margin-left: 8px">薪资导入</a-button>
@@ -19,7 +19,7 @@
         <a-row :gutter="15">
           <a-col :md="6" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
+              <a-input allowClear v-model="listQuery.condition.personName" placeholder="姓名" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
@@ -29,7 +29,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="工种">
+              <a-select allowClear v-model="listQuery.condition.workType" placeholder="工种">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"
@@ -40,7 +40,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="班组">
+              <a-select allowClear v-model="listQuery.condition.teamId" placeholder="班组">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"

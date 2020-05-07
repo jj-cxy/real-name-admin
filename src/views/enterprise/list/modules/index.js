@@ -80,7 +80,7 @@ var indexMixin = {
         name: '勘察单位',
         value: 'SURVEY_UNIT'
       }, {
-        name: '数据收集单位',
+        name: '实名制数据采集公司',
         value: 'SOFT_SUPPORT'
       }, {
         name: '设备分包',

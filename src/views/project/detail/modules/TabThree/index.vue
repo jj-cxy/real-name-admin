@@ -6,12 +6,12 @@
         <a-row :gutter="15">
           <a-col :md="8" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="班组名称" />
+              <a-input allowClear v-model="listQuery.condition.teamName" placeholder="班组名称" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="班组类型">
+              <a-select allowClear v-model="listQuery.condition.teamType" placeholder="班组类型">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"

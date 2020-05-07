@@ -112,17 +112,17 @@
                       <td class="tit">造价</td>
                       <td>
                         <a-statistic
-                          :value="model.manufacturingCost || ''"
+                          :value="model.manufacturingCost || '-'"
                           :valueStyle="{ fontSize: '16px' }"
                           suffix="元"
                         />
                       </td>
                       <td class="tit">项目规模</td>
-                      <td>{{model.scaleDesc}}</td>
+                      <td>{{model.scaleDesc || '-'}}</td>
                     </tr>
                     <tr>
                       <td class="tit">面积</td>
-                      <td>{{model.area}}㎡</td>
+                      <td>{{model.area || '-'}}㎡</td>
                       <td class="tit"></td>
                       <td></td>
                     </tr>
@@ -163,13 +163,13 @@
                       <td class="tit">所属银行编码</td>
                       <td>{{model.salaryBankAccount.bankAffiliated || '-'}}</td>
                       <td class="tit">每月发薪日期</td>
-                      <td>{{model.salaryTime || '-'}}</td>
+                      <td>{{model.salaryTime || '-'}}号</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </a-form-item>
-            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="数据收集公司">
+            <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="实名制数据采集公司">
               <span>{{model.softNames}}</span>
             </a-form-item>
             <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="项目简介">

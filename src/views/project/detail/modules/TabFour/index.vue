@@ -6,19 +6,19 @@
         <a-row :gutter="15">
           <a-col :md="6" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
+              <a-input allowClear v-model="listQuery.condition.personName" placeholder="姓名" />
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="手机号" />
+              <a-input allowClear v-model="listQuery.condition.personPhone" placeholder="手机号" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="职务">
+              <a-select allowClear v-model="listQuery.condition.personType" placeholder="职务">
                 <a-select-option
-                  v-for="(item,index) in roleTypeList"
+                  v-for="(item,index) in personTypeList"
                   :key="index"
                   :value="item.value"
                 >{{item.name}}</a-select-option>

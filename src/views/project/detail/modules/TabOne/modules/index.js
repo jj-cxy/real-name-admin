@@ -40,14 +40,21 @@ var indexMixin = {
       }],
       Urls: {
         listUrl: '',
-      },
-      downloadFileName: '五方主体列表',
-      assetsStatusList: []
+      }
     }
   },
   filters: {},
   created() {
     this.listData = this.list
+  },
+  computed: {
+    keyWord: function () {
+      var _this = this
+      console.log(_this.listData)
+      return _this.listData.filter(function (item, index) {
+        return item.enterpriseName.indexOf(_this.keyWord) > -1
+      })
+    }
   },
   methods: {
     handleDetail(record) {
@@ -57,7 +64,7 @@ var indexMixin = {
           id: record.enterpriseId
         }
       })
-    },
+    }
   }
 }
 export default indexMixin

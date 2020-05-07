@@ -136,7 +136,7 @@
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="名称">
             <a-input
               placeholder="请输入名称"
-              v-decorator="['title', {rules: [{required: true, message: '此字段为必填'}]}]"
+              v-decorator="['name', {rules: [{required: true, message: '此字段为必填'}]}]"
             />
           </a-form-item>
           <a-row :gutter="15">
@@ -154,7 +154,7 @@
             </a-col>
           </a-row>
           <a-form-item :labelCol="labelRowCol" :wrapperCol="wrapperRowCol" label="菜单标识">
-            <a-input placeholder="请输入菜单标识" v-decorator="['name']" />
+            <a-input placeholder="请输入菜单标识" v-decorator="['title']" />
           </a-form-item>
           <a-row :gutter="15">
             <a-col :md="12" :sm="24">

@@ -54,8 +54,13 @@ var indexMixin = {
   filters: {},
   created() {
     this.listData = this.list
-    /* this.getList() */
   },
-  methods: {}
+  methods: {
+    handleSearch() {
+      this.listData.filter((item, index) => {
+        return item.name.indexOf(this.listQuery.condition.name) != '-1'
+      })
+    }
+  }
 }
 export default indexMixin

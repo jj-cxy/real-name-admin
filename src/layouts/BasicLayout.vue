@@ -163,9 +163,9 @@ export default {
       return {
         id: item.id,
         path: item.url,
-        meta: { title: item.title, icon: item.icon || 'smile' },
+        meta: { title: item.name, icon: item.icon || 'smile' },
         children: haveChildren ? item.children.map(i => this.mapTree(i)) : null,
-        name: item.name
+        name: item.title
       }
     },
     paddingCalc() {

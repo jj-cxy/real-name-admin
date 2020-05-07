@@ -17,7 +17,7 @@
         <a-row :gutter="15">
           <a-col :md="6" :sm="24">
             <a-form-item>
-              <a-input allowClear v-model="listQuery.condition.name" placeholder="姓名" />
+              <a-input allowClear v-model="listQuery.condition.personName" placeholder="姓名" />
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
@@ -27,7 +27,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="工种">
+              <a-select allowClear v-model="listQuery.condition.workType" placeholder="工种">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"
@@ -38,7 +38,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="班组">
+              <a-select allowClear v-model="listQuery.condition.teamId" placeholder="班组">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"
@@ -63,18 +63,27 @@
       rowKey="id"
       :pagination="pagination"
       size="middle"
-    ></a-table>
+    >
+      <span slot="action" slot-scope="text, record">
+        <a href="javascript:;" @click="handleDetail(record)">查看</a>
+      </span>
+    </a-table>
+
+    <form-drawer ref="detailForm"></form-drawer>
   </div>
 </template>
 
 <script>
 import baseMixin from '@/components/Mixins/base'
 import indexMixin from './modules/index'
+import formDrawer from './modules/formDrawer'
 
 export default {
   name: 'punchList',
   mixins: [baseMixin, indexMixin],
-  components: {}
+  components: {
+    formDrawer
+  }
 }
 </script>
 <style scoped>

@@ -71,7 +71,7 @@
                   <a-select
                     allowClear
                     v-model="listQuery.condition.softEnterpriseId"
-                    placeholder="数据收集公司"
+                    placeholder="实名制数据采集公司"
                   >
                     <a-select-option
                       v-for="(item,index) in softList"
