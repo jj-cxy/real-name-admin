@@ -11,7 +11,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="工种">
+              <a-select allowClear v-model="listQuery.condition.workType" placeholder="工种">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"
@@ -22,7 +22,7 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="班组">
+              <a-select allowClear v-model="listQuery.condition.teamId" placeholder="班组">
                 <a-select-option
                   v-for="(item,index) in teamTypeList"
                   :key="index"
@@ -33,9 +33,9 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.assetsStatus" placeholder="在职状态">
+              <a-select allowClear v-model="listQuery.condition.postType" placeholder="在职状态">
                 <a-select-option
-                  v-for="(item,index) in roleTypeList"
+                  v-for="(item,index) in postTypeList"
                   :key="index"
                   :value="item.value"
                 >{{item.name}}</a-select-option>

@@ -2,6 +2,17 @@
   <div>
     <!-- 搜索 -->
     <div class="table-page-search-wrapper">
+      <ul class="digit">
+        <li>
+          <a-statistic title="今日在场" :value="112893" style="margin-right: 50px" />
+        </li>
+        <li>
+          <a-statistic title="今日入场" :value="112893" style="margin-right: 50px" />
+        </li>
+        <li>
+          <a-statistic title="今日出场" :value="112893" style="margin-right: 50px" />
+        </li>
+      </ul>
       <a-form layout="inline">
         <a-row :gutter="15">
           <a-col :md="6" :sm="24">
@@ -66,3 +77,8 @@ export default {
   components: {}
 }
 </script>
+<style scoped>
+.digit {
+  display: flex;
+}
+</style>

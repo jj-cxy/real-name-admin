@@ -18,11 +18,11 @@ var indexMixin = {
       }, {
         title: '职务',
         align: 'center',
-        dataIndex: 'position'
+        dataIndex: 'workerTypeDesc'
       }, {
         title: '工种',
         align: 'center',
-        dataIndex: 'personTypeDesc'
+        dataIndex: 'workTypeDesc'
       }, {
         title: '所属分包项目',
         align: 'center',
@@ -38,14 +38,14 @@ var indexMixin = {
       }, {
         title: '在职状态',
         align: 'center',
-        dataIndex: 'statusDesc'
+        dataIndex: 'postTypeDesc'
       }, {
         title: '考勤详情',
         align: 'center',
         dataIndex: 'modifyTime'
       }],
       Urls: {
-        listUrl: '/ida/api/project/person/page'
+        listUrl: '/ida/api/punch/page'
       },
       roleTypeList: [],
       listQuery: {
@@ -58,7 +58,7 @@ var indexMixin = {
   },
   filters: {},
   created() {
-    // this.getList()
+    this.getList()
     this.getDictData('work_type', 'teamTypeList')
   },
   methods: {}
