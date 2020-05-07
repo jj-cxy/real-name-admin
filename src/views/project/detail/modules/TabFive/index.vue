@@ -22,17 +22,6 @@
           </a-col>
           <a-col :md="4" :sm="24">
             <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.teamId" placeholder="班组">
-                <a-select-option
-                  v-for="(item,index) in teamTypeList"
-                  :key="index"
-                  :value="item.key"
-                >{{item.value}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="4" :sm="24">
-            <a-form-item>
               <a-select allowClear v-model="listQuery.condition.postType" placeholder="在职状态">
                 <a-select-option
                   v-for="(item,index) in postTypeList"

@@ -37,17 +37,6 @@
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="24">
-            <a-form-item>
-              <a-select allowClear v-model="listQuery.condition.teamId" placeholder="班组">
-                <a-select-option
-                  v-for="(item,index) in teamTypeList"
-                  :key="index"
-                  :value="item.value"
-                >{{item.name}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="4" :sm="24">
             <span class="table-page-search-submitButtons">
               <a-button type="primary" @click="handleSearch">查询</a-button>
               <a-button style="margin-left: 8px" @click="searchReset">重置</a-button>
