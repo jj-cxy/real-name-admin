@@ -214,7 +214,7 @@ var indexMixin = {
     mapTree(item) {
       const haveChildren = Array.isArray(item.children) && item.children.length > 0
       return {
-        title: item.title,
+        title: item.name,
         key: item.id,
         value: item.id,
         children: haveChildren ? item.children.map(i => this.mapTree(i)) : []
