@@ -200,7 +200,7 @@ export const asyncRouterMap = [{
           title: '数据统计-区县级',
           icon: 'fund',
           keepAlive: true,
-          permission: ['district']
+          permission: ['area']
         },
       },
 

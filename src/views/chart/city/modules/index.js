@@ -192,7 +192,7 @@ var indexMixin = {
   filters: {
     percentFilter: function (value, total) {
       if (!total) return 0
-      return (value / total) * 100
+      return ((value / total) * 100).toFixed(1)
     }
   },
   created() {

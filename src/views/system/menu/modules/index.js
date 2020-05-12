@@ -231,12 +231,16 @@ var indexMixin = {
       this.iconChooseVisible = false
     },
     filterName(array, text) {
-      let obj = array.find((item, index) => {
-        if (item.value == text) {
-          return item.name
-        }
-      })
-      return obj.name
+      if (!text) {
+        return ""
+      } else {
+        let obj = array.find((item, index) => {
+          if (item.value == text) {
+            return item.name
+          }
+        })
+        return obj.name
+      }
     },
   }
 }

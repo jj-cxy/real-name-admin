@@ -29,15 +29,16 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
-        const roles = {
+        let roles = {
           permissionList: ['city']
         }
         let orgType = localStorage.getItem('orgType')
         if (orgType && orgType == 'city') {
           roles.permissionList = ['city']
         } else if (orgType && orgType == 'area') {
-          roles.permissionList = ['district']
+          roles.permissionList = ['area']
         }
+        console.log(roles)
         store.dispatch('GenerateRoutes', {
           roles
         }).then(() => {})
