@@ -84,7 +84,7 @@
         </a-form-item>
 
         <a-form-item style="margin-bottom: 0">
-          <a href="javascript:;" @click="handleDownload">“操作手册”下载</a>
+          <a href="javascript:;" @click="handleDownload">《操作手册》下载</a>
           <a href="javascript:;" @click="resetPwd" style="float: right;">忘记密码？</a>
         </a-form-item>
       </a-form>
@@ -202,8 +202,8 @@ export default {
     },
     handleDownload() {
       let link = document.createElement('a')
-      link.download = '操作手册.pdf'
-      link.href = process.env.VUE_APP_BASE_API + '@/views/manual/manualFile.pdf'
+      link.download = '操作手册' + '.pdf'
+      link.href = 'manual/manualFile.pdf'
       link.style.display = 'none'
       document.body.appendChild(link)
       link.click()
