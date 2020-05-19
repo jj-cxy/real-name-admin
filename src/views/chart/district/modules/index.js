@@ -141,7 +141,7 @@ var indexMixin = {
         align: 'center'
       }],
       wagesData: [],
-      workerTypeShow: false,
+      workerTypeShow: true,
       websock: null
     }
   },

@@ -196,7 +196,6 @@ var indexMixin = {
     }
   },
   created() {
-    console.log('区域', this.areaId)
     this.getArea(this.areaId, 'districtList')
     this.getAreaWarning(this.areaId)
 

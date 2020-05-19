@@ -145,12 +145,17 @@ export default {
         if (res.code == 0) {
           if (res.data.records && res.data.records.length > 0) {
             this.menus = res.data.records.map(item => this.mapTree(item))
+            console.log(this.menus)
             let orgType = localStorage.getItem('orgType')
             for (let index = 0; index < this.menus.length; index++) {
               if (orgType && orgType == 'city') {
-                this.menus.splice(4, 1)
+                if (this.menus[index].name == 'ChartDistrict') {
+                  this.menus.splice(index, 1)
+                }
               } else if (orgType && orgType == 'area') {
-                this.menus.splice(3, 1)
+                if (this.menus[index].name == 'ChartCity') {
+                  this.menus.splice(index, 1)
+                }
               }
             }
           }

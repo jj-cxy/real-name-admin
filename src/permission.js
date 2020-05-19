@@ -38,7 +38,6 @@ router.beforeEach((to, from, next) => {
         } else if (orgType && orgType == 'area') {
           roles.permissionList = ['area']
         }
-        console.log(roles)
         store.dispatch('GenerateRoutes', {
           roles
         }).then(() => {})
