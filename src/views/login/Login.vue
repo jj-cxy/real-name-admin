@@ -107,7 +107,7 @@ export default {
       validatorRules: {
         username: { rules: [{ required: true, message: '请输入用户名或者手机号', validator: 'click' }] },
         password: {
-          initialValue: 'Jjsj@123456',
+          initialValue: '',
           rules: [{ required: true, message: '请输入密码', validator: 'click' }]
         },
         verifyCode: { rules: [{ required: true, message: '请输入验证码' }] }

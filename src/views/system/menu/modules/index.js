@@ -232,7 +232,7 @@ var indexMixin = {
     },
     filterName(array, text) {
       if (!text) {
-        return ""
+        return "无"
       } else {
         let obj = array.find((item, index) => {
           if (item.value == text) {
